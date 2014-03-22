@@ -4,16 +4,23 @@ var myApp = angular.module('myApp', ['ui.router', 'myControllers', 'myServices']
 
 myApp.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise("/");
-        $stateProvider.state('index', {
-            url: "/",
+        var templateUrl = function(stateParams) {
+            console.log(stateParams);
+            return 'partials/' + stateParams.page + '.html';
+        };
+        $urlRouterProvider.otherwise("/web");
+        $stateProvider.state('home', {
+            url: "/web",
             templateUrl: 'partials/principal.html'
-        }).state('state2', {
+        }).state('web', {
+            url: "/web/:page",
+            templateUrl: templateUrl
+        }).state('panel', {
+            url: "/panel",
+            templateUrl: 'partials/panel.html'
+        }).state('panel.views', {
             url: "/:page",
-            templateUrl: function(stateParams) {
-                console.log(stateParams);
-                return 'partials/' + stateParams.page + '.html';
-            }
+            templateUrl: templateUrl
         });
 //        $locationProvider.html5Mode(true);
     }
