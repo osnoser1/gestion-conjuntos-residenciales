@@ -1,1 +1,126 @@
+<link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
+ <script type="text/javascript">
+         $(function() {
+            $('.summernote').summernote({
+                height: 200,
+                lang: 'es-ES'
+              });  
+         });        
+</script>
+
 <h1>Crear mensaje</h1>
+
+<div ng-controller="crearmensajeCtrl">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Conjunto Residencial
+    </label>
+  </div>
+
+ <div class="checkbox">
+    <label>
+      <input type="checkbox"> Torre Especifica
+    </label>
+  </div>
+
+  <div id="torres"  style="position:absolute; left:5%;">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Torre A
+      </label>
+      </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Torre B
+      </label>
+      </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Torre C
+      </label>
+      </div>
+  </div>
+<br>
+<br>
+<br>
+<br>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Piso Especifico
+    </label>
+
+      <div id="torres"  style="position:absolute; left:5%;">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Piso 1
+      </label>
+      </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Piso 2
+      </label>
+      </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Piso 3
+      </label>
+      </div>
+  </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+  </div>
+
+ <div class="checkbox">
+    <label>
+      <input type="checkbox"> Apartamento
+    </label>
+
+
+     <div id="torres"  style="position:absolute; left:5%;">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Apartamento 1
+      </label>
+      </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Apartamento 2
+      </label>
+      </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Apartamento 3
+      </label>
+      </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Apartamento 3
+    </label>
+  </div>
+
+  </div>
+ </div>
+  
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<form role="form">
+  <label>Para</label><input ng-model="datos.para" type="text" id="para" class="form-control" placeholder="Para">
+  <label>Titulo</label><input ng-model="datos.titulo" type="text" id="Titulo" class="form-control" placeholder="Asunto del Mensaje">
+  <label>Adjuntar</label><button class="btn">+</button>
+  <textarea  ng-model="mensaje" class="summernote form-control" rows="10" cols="50" placeholder="Descripcion" class=".">
+    
+  </textarea>
+  <button class="btn btn-primary" ng-click="CrearMensaje(datos)">Enviar</button>
+  <button class="btn">Guardar Borrador</button>
+<form>
+  </div>

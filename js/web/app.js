@@ -6,6 +6,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
         var templateUrl = function(stateParams) {
             console.log(stateParams);
+            console.log("Hola aqui estoy");
             return 'partials/' + stateParams.page + '.html';
         };
         $urlRouterProvider.otherwise("/web");

@@ -19,11 +19,21 @@
         <script src="js/web/app.js"></script>
         <script src="js/web/controllers.js"></script>
         <script src="js/web/services.js"></script>
+        <script src="js/web/editor/summernote.js"></script>
+        <script src="js/web/editor/summernote-es-ES.js"></script>
     </head>
     <body ng-controller="PrincipalCtrl">
         <section ui-view>
             <i>Some content will load here!</i>
         </section>
         <div class="notifications bottom-right"></div>
+        <script type="text/javascript">
+         $(function() {
+            $('.summernote').summernote({
+                height: 200,
+                lang: 'es-ES'
+              });  
+         });        
+        </script>
     </body>
 </html>

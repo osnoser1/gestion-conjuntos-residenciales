@@ -20,6 +20,18 @@ pruebaControllers.controller('PanelHeaderCtrl', function($scope, $http) {
     $scope.header = "partials/panel-header.html";
 });
 
+pruebaControllers.controller('crearmensajeCtrl', function($scope, $http) {
+    $scope.header = "partials/panel-header.html";
+    $scope.CrearMensaje=function(datos){
+    	console.log("click en el boton enviar");
+    	console.log(datos);
+    	$http.post("archivo_php", {datos: datos, funcion:'nombreFuncionPhp'}, function(data){
+    		
+    	});
+    };
+});
+
+
 
 function show(params) {
     $('.bottom-right').notify(params).show();
