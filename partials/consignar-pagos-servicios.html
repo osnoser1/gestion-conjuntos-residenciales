@@ -1,1 +1,84 @@
 <h1>Consignar Pagos</h1>
+<div>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="select_tipo_de_pago" class="col-lg-2 control-label">Tipo de pago</label>
+            <div class="col-lg-10">
+                <select id="select_tipo_de_pago" class="selectpicker form-control" data-style="form-control">
+                    <option value ="0">Deposito</option>
+                    <option value ="1">Transferencia</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input_nro_referencia" class="col-lg-2 control-label">Nro referencia</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="input_nro_referencia" placeholder="">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input_monto" class="col-lg-2 control-label">Monto</label>
+            <div class="col-lg-10">
+                <div class="input-group">
+                    <span class="input-group-addon">Bs.</span>
+                    <input type="text" class="form-control" id="input_monto" placeholder="">
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="select_banco" class="col-lg-2 control-label">Banco</label>
+            <div class="col-lg-10">
+                <select id="select_banco" class="selectpicker form-control" data-live-search="true" data-style="form-control">
+                    <option value ="2">Banco Canarias de Venezuela</option>
+                    <option value ="3">Banco Caroní</option>
+                    <option value ="4">Banco Confederado</option>
+                    <option value ="5">Banco Do Brasil</option>
+                    <option value ="6">Banco Exterior</option>
+                    <option value ="7">Banco Federal</option>
+                    <option value ="8">Banco Fondo Común</option>
+                    <option value ="9">Banco Guayana</option>
+                    <option value ="10">Banco Industrial de Venezuela</option>
+                    <option value ="11">Banco Mercantil</option>
+                    <option value ="12">Banco Occidental de Descuento</option>
+                    <option value ="13">Banco Plaza</option>
+                    <option value ="14">Banco Provincial</option>
+                    <option value ="15">Banco Sofitasa</option>
+                    <option value ="16">Banco Tequendama</option>
+                    <option value ="17">Banco Venezolano de Crédito</option>
+                    <option value ="18">Banco de Crédito de Colombia</option>
+                    <option value ="19">Banco de Venezuela</option>
+                    <option value ="20">Banco del Caribe</option>
+                    <option value ="21">Bancoro</option>
+                    <option value ="22">Banesco</option>
+                    <option value ="23">Banfoandes</option>
+                    <option value ="24">Banpro</option>
+                    <option value ="25">Bolívar Banco</option>
+                    <option value ="26">Casa Propia</option>
+                    <option value ="27">Central</option>
+                    <option value ="28">Citibank</option>
+                    <option value ="29">Corp Banca</option>
+                    <option value ="30">Del Sur</option>
+                    <option value ="31">Instituto Municipal de Crédito Popular</option>
+                    <option value ="32">Merenap</option>
+                    <option value ="33">Mi Casa</option>
+                    <option value ="34">Nuevo Mundo</option>
+                    <option value ="35">Stanford Bank</option>
+                    <option value ="36">Total Bank</option>
+                    <option value ="1">Otro</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input_fecha" class="col-lg-2 control-label">Fecha</label>
+            <div class="col-lg-10">
+                <input type="date" id="input_fecha" class="form-control">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary pull-right">Consignar Pago</button>
+    </form>
+</div>
+<script src="js/bootstrap-select.min.js"></script>
+<script>$('.selectpicker').selectpicker();</script>
+
