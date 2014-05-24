@@ -1,1 +1,34 @@
 <h1>Crear usuario</h1>
+<form>
+    Correo: <input type="text" name="correo" value=""/><br>
+    Contraseña: <input type="password" name="clave"/><br><br>
+
+    <table>
+        <tr>
+            <td>
+                <form>
+                    Edificio: <input list="edificio">
+                    <datalist id="edificio">
+
+                    </datalist>
+            </td>
+            <td>
+                Apartamento: <input list="apartamento">
+                <datalist id="apartamento">
+
+                </datalist>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <td>
+                <input type="submit" value="Aceptar"/>
+            </td>
+            <td>
+                <input type="submit" value="Cancelar"/>
+            </td>
+        </tr>
+    </table>
+</form>
