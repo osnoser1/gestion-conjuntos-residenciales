@@ -8,11 +8,15 @@
 
 var myApp = angular.module('myApp');
 
-myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, $q, $filter) {
+myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, $q, $filter, $timeout) {
     console.log('GastosActualesCtrl');
     $scope.desactivado = false;
     $scope.tags = [];
     $scope.sitios = [];
+    $scope.nuevo = [];
+    $http.get('pruebas/gastos.json').success(function(data) {
+        $scope.gastos = data;
+    });
     $http.get('pruebas/sitios.json').success(function(data) {
         $scope.sitios = data;
     });
@@ -34,6 +38,17 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
         _p.resolve(array);
 //        return $http.get('/tags?query=' + query);
         return _p.promise;
+    };
+    $scope.getIdGasto = function(gasto) {
+        console.log(gasto);
+        if (typeof gasto.Nombre === "undefined" || gasto.Nombre === "") {
+            gasto.idGasto = "";
+            return;
+        }
+        var obj = $filter('filter')($scope.gastos, {Nombre: gasto.Nombre}, true);
+        gasto.idGasto = obj.length === 0 ? "Nuevo" : obj[0].idGasto;
+        console.log(obj);
+        console.log(gasto);
     };
     $scope.check = function() {
         var salida = false;
@@ -60,5 +75,11 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
         } else if ($scope.textAnterior !== element[campo]) {
 
         }
+    };
+    $scope.addGasto = function(gasto) {
+        $scope.loading = true;
+        $timeout(function() {
+            $scope.loading = false;
+        }, 3000);
     };
 });
