@@ -1,12 +1,12 @@
 'use strict';
 
-var myApp = angular.module('myApp', ['ui.router', 'myControllers', 'myServices']);
+var myApp = angular.module('myApp', ['ui.router', 'myControllers', 'myServices', 'ngTagsInput', 'ngResource']);
 
-myApp.config(['$stateProvider', '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider) {
+myApp.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider',
+    function($stateProvider, $urlRouterProvider, $controllerProvider) {
+        myApp.controllerProvider = $controllerProvider;
         var templateUrl = function(stateParams) {
             console.log(stateParams);
-            console.log("Hola aqui estoy");
             return 'partials/' + stateParams.page + '.html';
         };
         $urlRouterProvider.otherwise("/web");
