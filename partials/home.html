@@ -1,1 +1,46 @@
-<h1>Home</h1>
+<h1>Cartelera</h1>
+<div class="col-md-3" ng-homeapp="mymodule">
+        <div ng-controller="AccordionDemoCtrl">
+           
+                <accordion-group is-open="isopen">
+                    <accordion-heading>
+                       Publicar un anuncio <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+                    </accordion-heading>
+                    <div class="row"> 
+                        <form>
+                          <fieldset>
+                            <div class="row">
+                              <div Align="center">
+                                <textarea required ng-model="post.content" placeholder="Haga un anuncio aqui" rows="3" ></textarea>
+                              </div>
+                            </div>
+                              <!----Modal-->
+                            <button class="btn btn-info" data-toggle="modal" data-target="#myModal">Restringir Publicacion</button>
+                              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ariad-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4>Seleccionar restricciones de mensaje</h4>
+                                            <div class="modal-body">
+                                                
+                                            </div>
+                                            <div class "modal-footer">
+                                            <button type="button" class"btn btn-primary">Edificio</button>
+                                            <button type="button" class"btn btn-primary">Piso</button>
+                                            <button type="button" class"btn btn-primary">Apartamento</button>
+                                            <button type="button" class"btn btn-info">Aceptar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+
+                              </div>
+                            <!--Boton aceptar con verificacion de texto escrito-->
+                            <button type="submit" class="button large-12" ng-click="addPost(post)">Aceptar</button>
+                          </fieldset>
+                        </form>
+                      </div>
+                </accordion-group>
+        </div>
+    </div>
