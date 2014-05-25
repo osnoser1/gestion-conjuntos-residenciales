@@ -41,11 +41,9 @@
             <tags-input class="col-xs-5" ng-model="element.sitios" placeholder="Agrega un sitio" add-from-autocomplete-only="true" replace-spaces-with-dashes="false">
                 <auto-complete source="loadTags($query)" max-results-to-show="100"></auto-complete>
             </tags-input>
-            <!--<a href="" id="w" ng-click="addGasto(nuevo)" class="btn btn-primary col-xs-2" data-style="expand-left" ladda data-ng-model="loading"><span class="ladda-label">Agregar</span><span class="spinner"></span></a>-->
-            <button ng-click="addGasto(nuevo)" class="col-xs-2 btn btn-primary ladda-button" data-style="zoom-in" data-ui-ladda="loading">
-                <span class="ladda-label">Submit</span>
-                <!--<span class="spinner"></span>-->
-            </button>
+            <a ng-click="addGasto(nuevo)" class="col-xs-2 btn btn-primary ladda-button" data-style="zoom-in" data-ui-ladda="loading">
+                <span class="ladda-label">Agregar</span>
+            </a>
         </div>
     </div>
 </div>
