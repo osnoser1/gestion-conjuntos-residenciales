@@ -1,12 +1,17 @@
 <h1>Cartelera</h1>
-<div class="col-md-6" ng-homeapp="mymodule">
-        <div ng-controller="AccordionDemoCtrl">
-           
-                <accordion-group is-open="isopen">
-                    <accordion-heading>
-                       Publicar un anuncio <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
-                    </accordion-heading>
-                    <div class="row"> 
+<!--Division entre crear el mensaje y los mensajes publicados-->
+   <div class="col-md-6">
+     <div class="accordion" id="accordion2">
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                  Publicar un nuevo Anuncio
+                </a>
+              </div>
+              <div id="collapseOne" class="accordion-body collapse">
+                <div class="accordion-inner">
+                   
+                      <div class="row"> 
                         <form>
                           <fieldset>
                             <div class="row">
@@ -16,7 +21,7 @@
                             </div>
                               <!----Modal-->
                             <button class="btn btn-info" data-toggle="modal" data-target="#myModal">Restringir Publicacion</button>
-                              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ariad-hidden="true">
+                              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -41,6 +46,11 @@
                           </fieldset>
                         </form>
                       </div>
-                </accordion-group>
-        </div>
+                  </div>
+                
+              </div>
+            </div>
+          
+        
+          </div>
     </div>
