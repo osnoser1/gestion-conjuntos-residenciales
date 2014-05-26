@@ -8,7 +8,7 @@
 
 var myApp = angular.module('myApp');
 
-myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, $q, $filter, $timeout) {
+myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
     console.log('GastosActualesCtrl');
     $scope.desactivado = false;
     $scope.tags = [];
@@ -77,9 +77,47 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
         }
     };
     $scope.addGasto = function(gasto) {
+        console.log(gasto);
         $scope.loading = true;
+        var obj = $filter('filter')($scope.datos.gastos, {idGasto: gasto.idGasto}, true);
+        if (obj.length !== 0) {
+            show({message: {text: "Gasto ya existe, no se puede agregar."}, type: 'danger'});
+            $scope.loading = false;
+            return;
+        }
         $timeout(function() {
             $scope.loading = false;
+            if (gasto.idGasto === "Nuevo") {
+                gasto.idGasto = i++;
+            }
+            $scope.datos.gastos.push(gasto);
+            $scope.nuevo = [];
         }, 3000);
     };
+    $scope.deleteSelectedGastos = function() {
+        var index = [];
+        for (var i = 0; i < $scope.datos.gastos.length; i++) {
+            if (typeof $scope.datos.gastos[i].select !== "boolean")
+                continue;
+            if ($scope.datos.gastos[i].select) {
+                index[i] = $scope.datos.gastos[i];
+//                $scope.datos.gastos.splice(i--, 1);
+            }
+        }
+        $rootScope.myModalAccept = true;
+        $timeout(function() {
+            angular.forEach(index, function(key, value) {
+                console.log(key);
+                $scope.datos.gastos.splice(key, 1);
+            });
+            $rootScope.myModalAccept = false;
+            $('#myModal').modal('hide');
+        }, 3000);
+    };
+    $scope.showModalBorrar = function() {
+        $scope.showConfirmDialog({title: "Aviso", message: "¿Seguro que desea eliminar los gastos seleccionados?"}, $scope.deleteSelectedGastos);
+//        $scope.deleteSelectedGastos();
+    };
 });
+
+var i = 12;

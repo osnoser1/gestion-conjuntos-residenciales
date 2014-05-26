@@ -7,7 +7,7 @@
         <!--<a class="btn btn-default btn-sm btn-responsive" href="">Agregar</a>-->
         <button type="button" class="btn btn-default btn-sm btn-responsive" ng-click="all(true)">Seleccionar todo</button>
         <button type="button" class="btn btn-default btn-sm btn-responsive" ng-click="all(false)">Deseleccionar todo</button>
-        <a class="btn btn-default btn-sm btn-responsive" ng-disabled="desactivado">Eliminar</a>
+        <a class="btn btn-default btn-sm btn-responsive" ng-disabled="desactivado" ng-click="showModalBorrar()">Eliminar</a>
     </div>
     <div class="list-group">
         <div class="list-group-item row" ng-repeat="element in datos.gastos">
@@ -27,24 +27,24 @@
             <a href="" class="col-xs-2">¿No consigues lo que buscas?</a>
 
         </div>
-        <div class="list-group-item row">
+        <form name="g" class="list-group-item row">
             <p class="col-xs-1 col-xs-offset-1">{{nuevo.idGasto}}</p>
             <div class="col-xs-2">
-                <input type="text" list="list-1" ng-change="getIdGasto(nuevo)" class="form-control" ng-model="nuevo.Nombre"/>
+                <input name="nombre" requiered type="text" list="list-1" ng-change="getIdGasto(nuevo)" class="form-control" ng-model="nuevo.Nombre"/>
                 <datalist id="list-1">
                     <option ng-repeat="gasto in gastos" value="{{gasto.Nombre}}">{{gasto.idGasto}}</option>
                 </datalist>
             </div>
             <div class="col-xs-1">
-                <input class="form-control" ng-model="nuevo.Precio"/>
+                <input name="precio" required ng-pattern="/^\d+$/" class="form-control" ng-model="nuevo.Precio"/>
             </div>
-            <tags-input class="col-xs-5" ng-model="element.sitios" placeholder="Agrega un sitio" add-from-autocomplete-only="true" replace-spaces-with-dashes="false">
+            <tags-input class="col-xs-5" ng-model="nuevo.sitios" placeholder="Agrega un sitio" add-from-autocomplete-only="true" replace-spaces-with-dashes="false">
                 <auto-complete source="loadTags($query)" max-results-to-show="100"></auto-complete>
             </tags-input>
-            <a ng-click="addGasto(nuevo)" class="col-xs-2 btn btn-primary ladda-button" data-style="zoom-in" data-ui-ladda="loading">
+            <a ng-disabled="g.nombre.$invalid || g.precio.$invalid" ng-click="addGasto(nuevo)" class="col-xs-2 btn btn-primary ladda-button" data-style="zoom-in" data-ui-ladda="loading">
                 <span class="ladda-label">Agregar</span>
             </a>
-        </div>
+        </form>
     </div>
 </div>
 <!--<script src="assets/checkd-list-group-bootstrap/checked-list-group.js"></script>-->

@@ -3,7 +3,7 @@
 
 var pruebaControllers = angular.module('myControllers', []);
 
-pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $location) {
+pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $location, $sce, $rootScope) {
     $scope.cargando = false;
     $scope.error = function(data) {
         console.log(data);
@@ -15,6 +15,19 @@ pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $l
             show({message: {text: data.aviso}, type: 'danger'});
         }
         $scope.cargando = false;
+    };
+    $scope.showConfirmDialog = function(params, success) {
+        $scope.successDialog = success;
+        var o = {title: "", message: "Mensaje de prueba."};
+        $.extend(o, params);
+        var modalHtml = "";
+        if (o.title !== "") {
+            modalHtml = '<div class="modal-header"><h4 class="modal-title">Modal title</h4></div>';
+        }
+        modalHtml += '<div class="modal-body">' + o.message + '</div>';
+        modalHtml += '<div class="modal-footer"><button data-ui-ladda="myModalAccept" class="btn btn-primary ladda-button" data-style="zoom-in" ng-click="successDialog()"><span class="ladda-label">Aceptar</span></button><button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button></div>';
+        $scope.modalHtml = modalHtml;
+        $('#myModal').modal('show');
     };
 });
 
