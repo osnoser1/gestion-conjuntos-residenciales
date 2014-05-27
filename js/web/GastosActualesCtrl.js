@@ -101,7 +101,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
                 continue;
             if ($scope.datos.gastos[i].select) {
                 index.push($scope.datos.gastos[i]);
-                console.log(i);
+//                console.log(i);
 //                $scope.datos.gastos.splice(i--, 1);
             }
         }
@@ -109,7 +109,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
         $rootScope.myModalAccept = true;
         $timeout(function() {
             angular.forEach(index, function(key, value) {
-                console.log(key);
+//                console.log(key);
                 $scope.datos.gastos.remove(key);
             });
             $rootScope.myModalAccept = false;
