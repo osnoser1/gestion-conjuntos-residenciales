@@ -10,16 +10,16 @@
         <a class="btn btn-default btn-sm btn-responsive" ng-disabled="desactivado" ng-click="showModalBorrar()">Eliminar</a>
     </div>
     <div class="list-group">
-        <div class="list-group-item row" ng-repeat="element in datos.gastos">
+        <div class="list-group-item row no-select" ng-repeat="element in datos.gastos" >
             <input ng-change=check() ng-model="element.select" class="col-xs-1" type="checkbox"/>
             <p class="col-xs-1">{{element.idGasto}}</p>
             <p ng-hide="element.editing['Nombre']" ng-dblclick="setEditing(element, 'Nombre', true)" class="col-xs-2 pointer">{{element.Nombre}}</p>
             <div class="col-xs-2" ng-show="element.editing['Nombre']">
-                <input ng-blur="setEditing(element, 'Nombre', false)" class="form-control" ng-model="element.Nombre"/>
+                <input focus-me="element.editing['Nombre']" ng-blur="setEditing(element, 'Nombre', false)" class="form-control" ng-model="element.Nombre"/>
             </div>
             <p ng-hide="element.editing['Precio']" ng-dblclick="setEditing(element, 'Precio', true)" class="col-xs-1">{{element.Precio}}</p>
             <div class="col-xs-1" ng-show="element.editing['Precio']">
-                <input ng-blur="setEditing(element, 'Precio', false)" class="form-control" ng-model="element.Precio" type="number"/>
+                <input focus-me="element.editing['Precio']" ng-blur="setEditing(element, 'Precio', false)" class="form-control" ng-model="element.Precio" type="number"/>
             </div>
             <tags-input class="col-xs-5" ng-model="element.sitios" placeholder="Agrega un sitio" add-from-autocomplete-only="true" replace-spaces-with-dashes="false">
                 <auto-complete source="loadTags($query)" max-results-to-show="20"></auto-complete>

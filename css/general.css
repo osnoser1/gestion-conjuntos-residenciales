@@ -87,3 +87,12 @@ tags-input .host {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 }
+
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;    
+}
