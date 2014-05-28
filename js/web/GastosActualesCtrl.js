@@ -100,15 +100,17 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
             if (typeof $scope.datos.gastos[i].select !== "boolean")
                 continue;
             if ($scope.datos.gastos[i].select) {
-                index[i] = $scope.datos.gastos[i];
+                index.push($scope.datos.gastos[i]);
+//                console.log(i);
 //                $scope.datos.gastos.splice(i--, 1);
             }
         }
+        console.log('------------');
         $rootScope.myModalAccept = true;
         $timeout(function() {
             angular.forEach(index, function(key, value) {
-                console.log(key);
-                $scope.datos.gastos.splice(key, 1);
+//                console.log(key);
+                $scope.datos.gastos.remove(key);
             });
             $rootScope.myModalAccept = false;
             $('#myModal').modal('hide');
