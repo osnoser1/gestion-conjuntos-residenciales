@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `conjunto_residenciales`
 --
-CREATE DATABASE IF NOT EXISTS `conjunto_residenciales` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `conjunto_residenciales` DEFAULT CHARACTER SET latin1 COLLATE utf8_spanish_ci;
 USE `conjunto_residenciales`;
 
 -- --------------------------------------------------------
