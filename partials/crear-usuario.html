@@ -1,19 +1,30 @@
-<h1>Crear usuario</h1>
-<form>
-    Correo: <input type="text" name="correo" value=""/><br>
-    Contraseña: <input type="password" name="clave"/><br><br>
-
-    <table>
+<link rel="stylesheet" href="css/estilo-mariangela.css"/>
+<h1> Crear Usuario</h1>
+<form class="form-horizontal" role="form">
+    <div class="form-group col-sm-10">
+        Cedula: <input type="text" name="cedula" value="" class="form-control" /><br>
+        Nombre: <input type="text" name="nombre" value="" class="form-control" /><br>
+        Apellido: <input type="text" name="apellido" value="" class="form-control" /><br>
+        Correo: <input type="text" name="correo" value="" class="form-control" /><br>
+        Contraseña: <input type="password" name="clave" class="form-control"/><br>
+    </div>
+    <table class="cu">
         <tr>
-            <td>
-                <form>
-                    Edificio: <input list="edificio">
-                    <datalist id="edificio">
+            <td class="celda">
 
-                    </datalist>
+                Edificio: <input list="edificio" class="listas">
+                <datalist id="edificio">
+
+                </datalist>
             </td>
-            <td>
-                Apartamento: <input list="apartamento">
+            <td class="celda">
+                Piso: <input list="apartamento" class="listas">
+                <datalist id="piso">
+
+                </datalist>
+            </td>
+            <td class="celda">
+                Apto: <input list="apartamento" class="listas">
                 <datalist id="apartamento">
 
                 </datalist>
@@ -21,14 +32,16 @@
         </tr>
     </table>
     <br>
-    <table>
-        <tr>
-            <td>
-                <input type="submit" value="Aceptar"/>
-            </td>
-            <td>
-                <input type="submit" value="Cancelar"/>
-            </td>
-        </tr>
-    </table>
+    <div>
+        <table class="botones">
+            <tr>
+                <td class="celdabotones">
+                    <input type="submit" value="Aceptar" class="css_buttonaceptar"/>
+                </td>
+                <td class="celdabotones">
+                    <input type="submit" value="Cancelar" class="css_buttoncancelar"/>
+                </td>
+            </tr>
+        </table>
+    </div>
 </form>
