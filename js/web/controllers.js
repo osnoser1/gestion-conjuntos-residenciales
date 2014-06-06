@@ -22,7 +22,7 @@ pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $l
         $.extend(o, params);
         var modalHtml = "";
         if (o.title !== "") {
-            modalHtml = '<div class="modal-header"><h4 class="modal-title">Modal title</h4></div>';
+            modalHtml = '<div class="modal-header"><h4 class="modal-title"> ' + o.title + '</h4></div>';
         }
         modalHtml += '<div class="modal-body">' + o.message + '</div>';
         modalHtml += '<div class="modal-footer"><button data-ui-ladda="myModalAccept" class="btn btn-primary ladda-button" data-style="zoom-in" ng-click="successDialog()"><span class="ladda-label">Aceptar</span></button><button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button></div>';
