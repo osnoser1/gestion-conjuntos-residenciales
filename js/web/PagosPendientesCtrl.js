@@ -8,8 +8,8 @@
 
 var myApp = angular.module('myApp');
 
-myApp.controllerProvider.register('PagosConsignacionesPendientesCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
-    console.log('PagosConsignacionesPendientesCtrl');
+myApp.controllerProvider.register('PagosPendientesCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
+    console.log('PagosPendientesCtrl');
     $scope.datos = {
         consignaciones: [
 		    {"idConsignacion": "1", "nombre": "Ricardo","apellido": "Felicce",	"monto": "870",	"nro_referencia": "123456789"	},
@@ -19,7 +19,24 @@ myApp.controllerProvider.register('PagosConsignacionesPendientesCtrl', function(
 		    {"idConsignacion": "5", "nombre": "Luna", 	"apellido": "Lopez",	"monto": "230",	"nro_referencia": "567891234"	}
 		],
     };
-    $scope.showModalRechazar = function() {
-        $scope.showConfirmDialog({title: "Aviso", message: "¿Seguro que desea rechazar esta consignacion?"}, $scope.deleteSelectedGastos);
+
+
+    $scope.aceptarPago = function(idConsignacion) {
+    	$scope.loading = true;
+    	console.log(idConsignacion);
+    	//Editar en BD la consignacion id, y colocar estado en 1.
     };
+
+    $scope.showModalRechazar = function() {
+        $scope.showConfirmDialog({title: "Aviso", message: "¿Seguro que desea rechazar esta consignación?"}, $scope.rechazarPago);
+    };
+
+	$scope.rechazarPago = function() {
+		//Editar en BD la consignacion id, y colocar estado en 2.
+	};
+
+    $scope.copiarPortaPapeles = function(elemento){
+    	console.log(elemento);
+    };
+
 });
