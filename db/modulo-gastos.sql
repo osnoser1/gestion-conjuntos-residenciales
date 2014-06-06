@@ -112,7 +112,14 @@ INSERT INTO `tipos_de_pago` (`id`, `nombre`) VALUES
 ALTER TABLE `consignaciones`
   ADD CONSTRAINT `consignaciones_ibfk_2` FOREIGN KEY (`idbanco`) REFERENCES `bancos` (`id`),
   ADD CONSTRAINT `consignaciones_ibfk_1` FOREIGN KEY (`idtipo_de_pago`) REFERENCES `tipos_de_pago` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
+  ADD CONSTRAINT `consignaciones_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario`(`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+/* DATOS DE TEST
+INSERT INTO `consignaciones` (`id`, `idusuario`, `monto`, `idtipo_de_pago`, `nro_referencia`, `idbanco`, `fecha`, `estado`) VALUES
+(1, 1, 920, 1, 987654321, 11, '2014-06-06', 0),
+(2, 2, 765, 1, 12345789, 18, '2014-06-07', 0);
+
+*/
