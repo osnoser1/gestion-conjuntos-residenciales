@@ -1,32 +1,50 @@
 <h1>Buzón de entrada</h1>
-<!-- <center>
-	<div class="table-responsive">
-	  <table class="table">
-	  <tr>
-	  	<td> <input type="checkbox"> </td>
-	  	<td>Hola Pedro Perez</td>
-	  	<td>Administrador</td>
-	  	<td>Que tal, es el administrador te active el servicio del salon de fiestas y esta disponible....</td>  	
-	  	<td>Mar 1</td>
-	  </tr>
-	  <tr>
-	  	<td> <input type="checkbox"> </td>
-	  	<td>Factura de vencimiento</td>
-	  	<td>Administrador</td>
-	  	<td>Sr Pedro Perez, Se le anuncia que su  factura  de mensualidad de los servicios  adquiridos esta por vencerse</td>  	
-	  	<td>Feb 2</td>
-	  </tr>
-	    <tr>
-	    <td> <input type="checkbox"> </td>
-	  	<td>Reunion Importante</td>
-	  	<td>Administrador</td>
-	  	<td>Sr Pedro Perez, Se le anuncia que tendremos reunion el viernes a las 9:00am</td>  
-	  	<td>Feb 1</td>	
-	  </tr>
-	  </table>
+
+<script type="text/javascript">
+	
+	$(document).ready(function () {
+		 $.ajax
+        ({
+        type: "POST",
+        url: "models/consultas-crearMensaje.php",
+        data: {id:6},
+        async: false,
+        dataType: "json",
+        success:
+        function (msg) 
+        {       
+         
+           var table=$('<table class="table" ></table>');
+
+           for(i=0; i<msg[0].m; i++){
+
+           	var tr=$('<tr></tr>');
+           	var td1=$('<td ></td>').text(msg[i].asunto);
+           	var td2=$('<td></td>').text("administrador");
+           	var td3=$('<td></td>').text(msg[i].descripcion);
+           	var td4=$('<td></td>').text(msg[i].fecha);
+
+           	tr.append(td1);
+           	tr.append(td2);
+           	tr.append(td3);
+           	tr.append(td4);
+           	table.append(tr);
+           }
+          
+          $('#contenido').append(table);
+        },
+        error:
+        function (msg) {alert( msg +"No se pudo realizar la conexion");}
+        });
+	});
+
+</script>
+<center>
+	<div class="table-responsive" id="contenido">
+	 
 	</div>
-</center> -->
-<button class="btn">
+</center>
+<!-- <button class="btn">
 	<span class="glyphicon glyphicon-hand-left"></span>Atras
 </button>
 
@@ -46,4 +64,4 @@
 
 <footer>
 	<button type="submit" class="btn btn-danger">Eliminar </button> <button type="submit" class="btn">Marcar Como no Leido </button>
-</footer>
+</footer> -->

@@ -25,11 +25,36 @@ switch($id)
 	case 5: 
 		enviarmensaje();
 		break;
+
+	case 6:
+		obtenermensaje();
 	default;
 
 }
 }
 /*echo call_user_func(array($_POST['funcion']));*/
+
+	function obtenermensaje(){
+		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+		$idUsuario=1;
+		$tupla="SELECT *, usuario.idUsuario FROM mensaje INNER JOIN  usuario on mensaje.para=usuario.email where usuario.idUsuario='$idUsuario'";
+		$resultado = $mysqli->query($tupla);
+		$objeto[0]['m']=$resultado->num_rows;	
+		$i=0;
+		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		{
+			
+			$objeto[$i]['asunto']=$db_resultado['asunto'];
+			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
+			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
+			$objeto[$i]['fecha']=$db_resultado['fecha'];
+
+			$i++;	
+		}		
+		$mysqli->close();
+		echo json_encode($objeto);
+	}
+
 	function enviarmensaje(){
 		date_default_timezone_set('America/Caracas');
 		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
