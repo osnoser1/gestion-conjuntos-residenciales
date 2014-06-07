@@ -43,16 +43,34 @@ pruebaControllers.controller('PanelCtrl', function($scope, $http, $location) {
 
 pruebaControllers.controller('PanelHeaderCtrl', function($scope, $http) {
     $scope.header = "partials/panel-header.html";
-});
-
-pruebaControllers.controller('crearmensajeCtrl', function($scope, $http) {
     $scope.header = "partials/panel-header.html";
     $scope.CrearMensaje = function(datos) {
-        console.log("click en el boton enviar");
-        console.log(datos);
-        $http.post("archivo_php", {datos: datos, funcion: 'nombreFuncionPhp'}, function(data) {
-
-        });
+        console.log($('.summernote').code());
+        if(para.value!=""&&Titulo.value!=""&&$('.summernote').code()!=""){
+                    $.ajax
+                  ({
+                  type: "POST",
+                  url: "models/consultas-crearMensaje.php",
+                  data: {id:5, para:para.value, titulo:Titulo.value, mensaje: $('.summernote').code()},
+                  async: false,
+                  dataType: "json",
+                  success:
+                  function (msg) 
+                  {    
+                    console.log(msg);
+                    show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
+                    para.value="";
+                    titulo:Titulo.value="";
+                    $('.summernote').code("");
+                  },
+                  error:
+                  function (msg) {alert( msg +"No se pudo realizar la conexion");}
+                  });
+                
+       }
+       else{
+            show({message: {text: "Debe llenar todos los campos para poder enviar el mensaje"}, type: 'danger'});
+       }
     };
 });
 

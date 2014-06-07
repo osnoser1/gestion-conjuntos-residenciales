@@ -1,7 +1,22 @@
 <!--modulo Cartelera mensajes publicados por el admin unicamente-->
+<link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
+ <script type="text/javascript">
+         $(function() {
+            $('.summernote').summernote({
+                height: 200,
+                lang: 'es-ES'
+              });  
+         });   
+
+         function publicar(){
+
+            console.log($('.summernote').code(""));
+         }     
+</script>
+
 <h1>Cartelera</h1>
 <!--Division entre crear el mensaje y los mensajes publicados-->
-<div class="col-md-6">
+<div class="col-md-12">
     <div class="accordion" id="accordion2">
         <div class="accordion-group">
             <div class="accordion-heading">
@@ -13,6 +28,8 @@
                         event.preventDefault();
                     });
                 </script>
+
+
             </div>
             <div id="collapseOne" class="accordion-body collapse">
                 <div class="accordion-inner">
@@ -22,7 +39,7 @@
                             <fieldset>
                                 <div class="row">
                                     <div Align="center">
-                                        <textarea required ng-model="post.content" placeholder="Haga un anuncio aqui" rows="3" class="form-control"></textarea>
+                                        <textarea class="summernote form-control" rows="10" cols="50" required ng-model="post.content" placeholder="Haga un anuncio aqui"></textarea>
                                     </div>
                                 </div>
                                 <!----Modal-->
@@ -48,7 +65,7 @@
 
                                 </div>
                                 <!--Boton aceptar con verificacion de texto escrito-->
-                                <button type="submit" class="button large-12" ng-click="addPost(post)">Aceptar</button>
+                                <button type="submit" class="button large-12" onclick="publicar()">Publicar</button>
                             </fieldset>
                         </form>
                     </div>
