@@ -22,10 +22,21 @@ pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $l
         $.extend(o, params);
         var modalHtml = "";
         if (o.title !== "") {
-            modalHtml = '<div class="modal-header"><h4 class="modal-title">Modal title</h4></div>';
+            modalHtml = '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">' + o.title + '</h4></div>';
         }
         modalHtml += '<div class="modal-body">' + o.message + '</div>';
         modalHtml += '<div class="modal-footer"><button data-ui-ladda="myModalAccept" class="btn btn-primary ladda-button" data-style="zoom-in" ng-click="successDialog()"><span class="ladda-label">Aceptar</span></button><button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button></div>';
+        $scope.modalHtml = modalHtml;
+        $('#myModal').modal({show: true, backdrop: 'static'});
+    };
+    $scope.showDialog = function(params) {
+        var o = {title: "", message: "Mensaje de prueba."};
+        $.extend(o, params);
+        var modalHtml = "";
+        if (o.title !== "") {
+            modalHtml = '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">' + o.title + '</h4></div>';
+        }
+        modalHtml += '<div class="modal-body">' + o.message + '</div>';
         $scope.modalHtml = modalHtml;
         $('#myModal').modal('show');
     };
@@ -43,16 +54,34 @@ pruebaControllers.controller('PanelCtrl', function($scope, $http, $location) {
 
 pruebaControllers.controller('PanelHeaderCtrl', function($scope, $http) {
     $scope.header = "partials/panel-header.html";
-});
-
-pruebaControllers.controller('crearmensajeCtrl', function($scope, $http) {
     $scope.header = "partials/panel-header.html";
     $scope.CrearMensaje = function(datos) {
-        console.log("click en el boton enviar");
-        console.log(datos);
-        $http.post("archivo_php", {datos: datos, funcion: 'nombreFuncionPhp'}, function(data) {
-
-        });
+        console.log($('.summernote').code());
+        if(para.value!=""&&Titulo.value!=""&&$('.summernote').code()!=""){
+                    $.ajax
+                  ({
+                  type: "POST",
+                  url: "models/consultas-crearMensaje.php",
+                  data: {id:5, para:para.value, titulo:Titulo.value, mensaje: $('.summernote').code()},
+                  async: false,
+                  dataType: "json",
+                  success:
+                  function (msg) 
+                  {    
+                    console.log(msg);
+                    show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
+                    para.value="";
+                    titulo:Titulo.value="";
+                    $('.summernote').code("");
+                  },
+                  error:
+                  function (msg) {alert( msg +"No se pudo realizar la conexion");}
+                  });
+                
+       }
+       else{
+            show({message: {text: "Debe llenar todos los campos para poder enviar el mensaje"}, type: 'danger'});
+       }
     };
 });
 

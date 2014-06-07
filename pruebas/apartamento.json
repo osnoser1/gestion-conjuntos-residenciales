@@ -1,0 +1,9 @@
+[
+    {"idApartamento": "1", "idPiso": "1", "idEdificio": "1"},
+    {"idApartamento": "2", "idPiso": "1", "idEdificio": "2"},
+    {"idApartamento": "3", "idPiso": "2", "idEdificio": "3"},
+    {"idApartamento": "4", "idPiso": "3", "idEdificio": "4"},
+    {"idApartamento": "5", "idPiso": "4", "idEdificio": "5"},
+    {"idApartamento": "6", "idPiso": "5", "idEdificio": "6"},
+  
+]
