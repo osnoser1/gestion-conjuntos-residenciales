@@ -1,6 +1,6 @@
 <script src="js/web/PagosConsignarCtrl.js"></script>
-<h1>Consignar Pagos</h1>
-<div >
+<h1>Consignar pagos</h1>
+<div ng-controller="PagosConsignarCtrl">
     <form class="form-horizontal" role="form">
         <div class="form-group">
             <label for="select_tipo_de_pago" class="col-lg-2 control-label">Tipo de pago</label>
@@ -72,14 +72,20 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="input_fecha" class="col-lg-2 control-label">Fecha</label>
-            <div class="col-lg-10">
-                <input type="date" id="input_fecha" class="form-control">
+            <label for="input_fecha" class="col-lg-2 control-label" title="Fecha en la que se realizó el pago">Fecha</label>
+            <div class="row">
+                <div class="col-lg-10">
+                    <p class="input-group">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
             </div>
+            <!-- <input type="date" id="input_fecha" class="form-control">-->
         </div>
         <button type="submit" class="btn btn-primary pull-right">Consignar Pago</button>
     </form>
 </div>
-<script src="js/bootstrap-select.min.js"></script>
 <script>$('.selectpicker').selectpicker();</script>
-

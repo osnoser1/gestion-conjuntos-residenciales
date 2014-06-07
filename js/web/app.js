@@ -1,6 +1,6 @@
 'use strict';
 
-var myApp = angular.module('myApp', ['ui.router', 'myControllers', 'myServices', 'ngTagsInput', 'ngResource', 'ui.ladda']);
+var myApp = angular.module('myApp', ['ui.router', 'myControllers', 'myServices', 'ngTagsInput', 'ngResource', 'ui.ladda', 'ui.bootstrap']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider',
     function($stateProvider, $urlRouterProvider, $controllerProvider) {
