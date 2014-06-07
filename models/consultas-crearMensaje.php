@@ -28,12 +28,44 @@ switch($id)
 
 	case 6:
 		obtenermensaje();
+		break;
+
+	case 7:
+	     leermensaje();
+	     break;
+
 	default;
+
+
 
 }
 }
 /*echo call_user_func(array($_POST['funcion']));*/
 
+
+	function leermensaje(){
+		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+		$idMensaje=$_REQUEST['idMensaje'];
+		$tupla="SELECT * FROM mensaje WHERE idMensaje='$idMensaje'";
+		$resultado = $mysqli->query($tupla);
+		$objeto[0]['m']=$resultado->num_rows;	
+		
+		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		{
+			
+			$objeto[0]['asunto']=$db_resultado['asunto'];
+			$objeto[0]['descripcion']=$db_resultado['descripcion'];	
+			$objeto[0]['idMensaje']=$db_resultado['idMensaje'];
+			$objeto[0]['fecha']=$db_resultado['fecha'];
+			
+		}		
+
+		$tupla="UPDATE mensaje SET leido='1' WHERE idMensaje='$idMensaje'";
+		$resultado = $mysqli->query($tupla);
+		$mysqli->close();
+		echo json_encode($objeto);
+
+	}
 	function obtenermensaje(){
 		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
 		$idUsuario=1;
@@ -48,6 +80,8 @@ switch($id)
 			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
 			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
 			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			$objeto[$i]['leido']=$db_resultado['leido'];
+
 
 			$i++;	
 		}		
