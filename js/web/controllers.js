@@ -29,6 +29,16 @@ pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $l
         $scope.modalHtml = modalHtml;
         $('#myModal').modal('show');
     };
+    $scope.showDialog = function(params) {
+        var o = {title: "", message: "Mensaje de prueba."};
+        $.extend(o, params);
+        var modalHtml = "";
+        if (o.title !== "") {
+            modalHtml = '<div class="modal-header"><h4 class="modal-title">Modal title</h4></div>';
+        }
+        $scope.modalHtml = modalHtml;
+        $('#myModal').modal('show');
+    };
 });
 
 pruebaControllers.controller('LoginCtrl', ['$scope', '$state', '$location', '$http', function($scope, $state, $location, $http) {
