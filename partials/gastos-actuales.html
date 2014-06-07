@@ -15,7 +15,10 @@
             <p class="col-xs-1">{{element.idGasto}}</p>
             <p ng-hide="element.editing['Nombre']" ng-dblclick="setEditing(element, 'Nombre', true)" class="col-xs-2 pointer">{{element.Nombre}}</p>
             <div class="col-xs-2" ng-show="element.editing['Nombre']">
-                <input focus-me="element.editing['Nombre']" ng-blur="setEditing(element, 'Nombre', false)" class="form-control" ng-model="element.Nombre"/>
+                <!--<input focus-me="element.editing['Nombre']" ng-blur="setEditing(element, 'Nombre', false)" class="form-control" ng-model="element.Nombre"/>-->
+                <select focus-me="element.editing['Nombre']" ng-blur="setEditing(element, 'Nombre', false)" data-live-search="true" class="form-control" data-style="form-control" ng-model="element.Nombre" ng-change="getIdGasto(element)">
+                    <option ng-repeat="gasto in gastos" value="{{gasto.Nombre}}">{{gasto.Nombre}}</option>
+                </select>
             </div>
             <p ng-hide="element.editing['Precio']" ng-dblclick="setEditing(element, 'Precio', true)" class="col-xs-1">{{element.Precio}}</p>
             <div class="col-xs-1" ng-show="element.editing['Precio']">
@@ -48,3 +51,4 @@
     </div>
 </div>
 <!--<script src="assets/checkd-list-group-bootstrap/checked-list-group.js"></script>-->
+<script src="js/bootstrap-select.min.js"></script>
