@@ -1,1 +1,21 @@
-<h1>Historial pagos</h1>
+<script src="js/web/PagosHistorialCtrl.js"></script>
+<div ng-controller="PagosHistorialCtrl">
+    <h1>Historial de pagos</h1>
+    <div class="list-group text-center">
+        <div class="list-group-item row no-select active cabecera">
+            <span class="badge pull-left">#</span>
+            <p ng-dblclick="" class="col-xs-2">Monto</p>
+            <p ng-dblclick="" class="col-xs-2">Fecha</p>
+            <p ng-dblclick="" class="col-xs-2">Nro Referencia</p>
+            <p ng-dblclick="" class="col-xs-2">Estado</p>
+        </div>
+        <div class="list-group-item row no-select" ng-repeat="element in datos.pagos" >
+            <span class="badge pull-left">{{element.id}}</span>
+            <p ng-dblclick="" class="col-xs-2">Bs. {{element.monto}}</p>
+            <p ng-dblclick="" class="col-xs-2">{{element.fecha}}</p>
+            <p ng-dblclick="copiarPortaPapeles(element.nro_referencia)" class="col-xs-2 pointer">{{element.nro_referencia}}</p>
+            <p ng-dblclick="" class="col-xs-2">{{element.estado}}</p>
+            <a class="col-xs-1 pointer" ng-click="pagosPendientesVerDetalles(element)"><span class="glyphicon glyphicon-search" title="Ver detalles"></span></a>
+        </div>
+    </div>
+</div>
