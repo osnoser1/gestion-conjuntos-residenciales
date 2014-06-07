@@ -16,6 +16,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     $scope.nuevo = [];
     $http.get('pruebas/gastos.json').success(function(data) {
         $scope.gastos = data;
+        $('.selectpicker').selectpicker();
     });
     $http.get('pruebas/sitios.json').success(function(data) {
         $scope.sitios = data;
@@ -67,6 +68,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
         $scope.desactivado = !boolean;
     };
     $scope.setEditing = function(element, campo, bool) {
+        console.log(element, campo, bool);
         if (typeof element.editing === "undefined")
             element.editing = [];
         element.editing[campo] = bool;
