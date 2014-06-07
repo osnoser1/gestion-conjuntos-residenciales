@@ -1,24 +1,27 @@
 <script src="js/web/PagosPendientesCtrl.js"></script>
 <div ng-controller="PagosPendientesCtrl">
-    <h1>Consignaciones de Pagos Pendientes</h1>
+    <h1>Consignaciones pendientes</h1>
     <div class="list-group text-center">
         <div class="list-group-item row no-select active cabecera">
-            <span class="col-xs-1 badge pull-left">ID</span>
-            <p ng-dblclick="" class="col-xs-3">Nombre y Apellido</p>
+            <span class="badge pull-left">#</span>
+            <p ng-dblclick="" class="col-xs-2">Propietario</p>
             <p ng-dblclick="" class="col-xs-2">Monto</p>
+            <p ng-dblclick="" class="col-xs-2">Fecha</p>
             <p ng-dblclick="" class="col-xs-2">Nro Referencia</p>
         </div>
-        <div class="list-group-item row no-select" ng-repeat="element in datos.consignaciones" >
-            <span class="col-xs-1 badge pull-left">{{element.idConsignacion}}</span>
-            <p ng-dblclick="" class="col-xs-3">{{element.nombre}} {{element.apellido}}</p>
+        <div class="list-group-item row no-select" ng-repeat="element in datos.pagos" >
+            <span class="badge pull-left">{{element.id}}</span>
+            <p ng-dblclick="" class="col-xs-2">{{element.nombre}} {{element.apellido}}</p>
             <p ng-dblclick="" class="col-xs-2">Bs. {{element.monto}}</p>
+            <p ng-dblclick="" class="col-xs-2">{{element.fecha}}</p>
             <p ng-dblclick="copiarPortaPapeles(element.nro_referencia)" class="col-xs-2 pointer">{{element.nro_referencia}}</p>
-            <a ng-click="aceptarPago(element.idConsignacion)" class="btn btn-primary ladda-button" data-style="zoom-in" data-ui-ladda="loading">
+            <a ng-click="aceptarPago(element.id)" class="btn btn-primary ladda-button" data-style="zoom-in" data-ui-ladda="loading">
                 <span class="ladda-label">Aprobar</span>
             </a>
-            <a ng-click="showModalRechazar(element.idConsignacion)" class="btn btn-danger ladda-button" data-style="zoom-in" data-ui-ladda="loading">
+            <a ng-click="showModalRechazar(element.id)" class="btn btn-danger ladda-button" data-style="zoom-in" data-ui-ladda="loading">
                 <span class="ladda-label">Rechazar</span>
             </a>
+            <a class="col-xs-1 pointer" ng-click="pagosPendientesVerDetalles(element)"><span class="glyphicon glyphicon-search" title="Ver detalles"></span></a>
         </div>
     </div>
 </div>
