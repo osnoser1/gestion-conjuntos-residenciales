@@ -33,7 +33,9 @@ switch($id)
 	case 7:
 	     leermensaje();
 	     break;
-
+	case 8:
+		 borrarMensaje();
+		 break;
 	default;
 
 
@@ -42,7 +44,14 @@ switch($id)
 }
 /*echo call_user_func(array($_POST['funcion']));*/
 
+	function borrarMensaje(){
+		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+		$idMensaje=$_REQUEST['idMensaje'];
+		$tupla="DELETE FROM mensaje WHERE idMensaje='$idMensaje'";
+		$resultado = $mysqli->query($tupla);
 
+		echo json_encode("true");
+	}
 	function leermensaje(){
 		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
 		$idMensaje=$_REQUEST['idMensaje'];
