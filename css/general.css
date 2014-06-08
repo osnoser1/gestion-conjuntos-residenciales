@@ -94,10 +94,14 @@ tags-input .host {
     -khtml-user-select: none;
     -ms-user-select: none;
     -o-user-select: none;
-    user-select: none;    
+    user-select: none;
 }
 
 .cabecera{
     color: #fff;
     font-weight: bold;
+}
+
+.inline-block {
+    display: inline-block;
 }
