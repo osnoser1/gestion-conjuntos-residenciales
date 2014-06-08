@@ -16,7 +16,7 @@ myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http
             {"id": "4", "Nombre": "FRANCIS", "CantidadPisos": "45"},
             {"id": "5", "Nombre": "LILA", "CantidadPisos": "55"},
         ],
-    };    
+    };
     $scope.a = function() {
 
     };
