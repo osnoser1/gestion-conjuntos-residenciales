@@ -1,1 +1,17 @@
-<h1>Listado edificios</h1>
+<script src="js/web/listadoEdificiosCtrl.js"></script>
+<div ng-controller="ListadoEdificiosCtrl">
+    <center><h1>Listado De Edificios</h1></center>
+    <div class="list-group text-center">
+        <div class="list-group-item row no-select active cabecera">
+            <span class="badge pull-left">#</span>
+            <p ng-dblclick="" class="col-xs-3">Nombre</p>
+            <p ng-dblclick="" class="col-xs-3">Cantidad De Pisos</p>
+        </div>
+        <div class="list-group-item row no-select" ng-repeat="element in datos.Edificios" >
+            <span class="badge pull-left">{{element.id}}</span>
+            <p ng-dblclick="" class="col-xs-3"> {{element.Nombre}}</p> <button ng-click="modificarDatosE(element)">Editar</button><br>
+            <p ng-dblclick="" class="col-xs-3">{{element.CantidadPisos}}</p>  
+        </div>
+    </div>
+</div>
+

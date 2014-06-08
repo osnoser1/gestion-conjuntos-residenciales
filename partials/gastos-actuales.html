@@ -17,7 +17,7 @@
             <div class="col-xs-2" ng-show="element.editing['Nombre']">
                 <!--<input focus-me="element.editing['Nombre']" ng-blur="setEditing(element, 'Nombre', false)" class="form-control" ng-model="element.Nombre"/>-->
                 <select focus-me="element.editing['Nombre']" ng-blur="setEditing(element, 'Nombre', false)" data-live-search="true" class="form-control" data-style="form-control" ng-model="element.Nombre" ng-change="getIdGasto(element)">
-                    <option ng-repeat="gasto in gastos" value="{{gasto.Nombre}}">{{gasto.Nombre}}</option>
+                    <option ng-repeat="gasto in gastosFiltrados" value="{{gasto.Nombre}}">{{gasto.Nombre}}</option>
                 </select>
             </div>
             <p ng-hide="element.editing['Precio']" ng-dblclick="setEditing(element, 'Precio', true)" class="col-xs-1">{{element.Precio}}</p>
