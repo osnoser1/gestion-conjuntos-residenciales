@@ -20,6 +20,13 @@ myApp.controllerProvider.register('AgregarEdificioCtrl', function($scope, $http,
     $scope.a = function(elemento) {
         //mando mis datos a la bdd
         //muestra un msj 
+        $http.post(url + 'edificio/agregar', {datos: gasto}
+        ).success(function(data, status, headers, config) {
+            console.log(data);
+        }).error(function(data, status) { // called asynchronously if an error occurs
+        // or server returns response with an error status.
+            $scope.showDialog({message: data});
+        });
         $('#myModal').modal('hide');
                                 show({message: {text: "Edificio agregado exitosamente."}, type: 'success'});
 
