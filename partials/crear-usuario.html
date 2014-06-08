@@ -1,62 +1,82 @@
+<script src="js/web/UsuarioCrearCtrl.js"></script>
 <link rel="stylesheet" href="css/estilo-mariangela.css"/>
-<h1> Crear Usuario</h1>
-<form class="form-horizontal" role="form">
-    <div class="form-group col-sm-10">
-        Cedula: <input type="text" name="cedula" value="" class="form-control" /><br>
-        Nombre: <input type="text" name="nombre" value="" class="form-control" /><br>
-        Apellido: <input type="text" name="apellido" value="" class="form-control" /><br>
-        Correo: <input type="text" name="correo" value="" class="form-control" /><br>
-        Contraseña: <input type="password" name="clave" class="form-control"/><br>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">
-            Telefono: <input type="text" name="telefono" value=""/>
+<div ng-controller="UsuarioCrearCtrl">
+    <h1> Crear Usuario</h1>
+    <form class="form-horizontal" role="form">
+        <div class="row">
+            <div class="form-group col-sm-10">
+                Cedula: <input type="text" name="cedula" required="" value="" class="form-control" ng-model="nuevoUsuario.cedula"/><br>
+                Nombre: <input type="text" name="nombre" required="" value="" class="form-control" ng-model="nuevoUsuario.nombre"/><br>
+                Apellido: <input type="text" name="apellido" required="" value="" class="form-control" ng-model="nuevoUsuario.apellido"/><br>
+                Correo: <input type="text" name="correo" required="" value="" class="form-control" ng-model="nuevoUsuario.correo"/><br>
+                Contraseña: <input type="password" name="clave" required="" class="form-control" ng-model="nuevoUsuario.clave"/><br>
+            </div>
         </div>
-        <div class="col-sm-4">
-            <input placeholder="Agregar Tipo" list="ordenar">
-            <datalist id="ordenar">
-                <option value="Fijo"></option>
-                <option value="Celular"></option>
-            </datalist>
+        <div class="list-group">
+            <div class="list-group-item row no-select" ng-repeat="element in datos.telefonos">
+                <p class="col-xs-2">{{element.Telefono}}</p>
+                <p class="col-xs-2">{{element.Tipo}}</p>
+            </div>
         </div>
-        <div class="col-sm-4">
-            <a href="">Agregar Número</a>
+        <div class="row">
+            <div class="form-group col-sm-10">
+                <div class="list-group-item" style="display: flex;">
+                    <p class="col-xs-2">Telefono:</p>
+                    <div class="col-xs-3">
+                        <input type="text" name="Telefono" value="" ng-model="datos.nuevoTelefono.Telefono" required ng-pattern="/^\d+$/"/>
+                    </div>
+                    <div class="col-xs-3">
+                        <input placeholder="Agregar Tipo" name="Tipo" list="ordenar" ng-model="datos.nuevoTelefono.Tipo">
+                        <datalist id="ordenar">
+                            <option value="Fijo"></option>
+                            <option value="Celular"></option>
+                        </datalist>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="" ng-click="addTelefono(datos)">Agregar Número</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <table class="cu">
-        <tr>
-            <td class="celda">
 
-                Edificio: <input list="edificio" class="listas">
-                <datalist id="edificio">
+        <div class="row">
+            <table class="cu">
+                <tr>
+                    <td class="celda">
 
-                </datalist>
-            </td>
-            <td class="celda">
-                Piso: <input list="apartamento" class="listas">
-                <datalist id="piso">
+                        Edificio: <input list="edificio" class="listas">
+                        <datalist id="edificio">
 
-                </datalist>
-            </td>
-            <td class="celda">
-                Apto: <input list="apartamento" class="listas">
-                <datalist id="apartamento">
+                        </datalist>
+                    </td>
+                    <td class="celda">
+                        Piso: <input list="apartamento" class="listas">
+                        <datalist id="piso">
 
-                </datalist>
-            </td>
-        </tr>
-    </table>
-    <br>
-    <div>
-        <table class="botones">
-            <tr>
-                <td class="celdabotones">
-                    <input type="submit" value="Aceptar" class="css_buttonaceptar"/>
-                </td>
-                <td class="celdabotones">
-                    <input type="submit" value="Cancelar" class="css_buttoncancelar"/>
-                </td>
-            </tr>
-        </table>
-    </div>
-</form>
+                        </datalist>
+                    </td>
+                    <td class="celda">
+                        Apto: <input list="apartamento" class="listas">
+                        <datalist id="apartamento">
+
+                        </datalist>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <br>
+            <table class="botones">
+                <tr>
+                    <td class="celdabotones">
+                        <input type="submit" value="Aceptar" class="css_buttonaceptar" ng-click="addTelefono(nuevoUsuario)"/>
+                    </td>
+                    <td class="celdabotones">
+                        <input type="submit" value="Cancelar" class="css_buttoncancelar"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+
+</div>
