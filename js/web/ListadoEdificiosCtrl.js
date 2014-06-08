@@ -23,7 +23,7 @@ myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http
     $scope.modificarDatosE = function(elemento){
         $scope.edificio = elemento;
         console.log("Hola mundo");
-                $scope.showConfirmDialog({title: "Editar Edificio", message: '<form>Nombre: <input Type="text" name="nombre" value="" ng-model="edificio.Nombre"/> <br><br>Cantidad De Pisos: <input Type="text" name="piso" value="" ng-model="edificio.CantidadPisos"/>  <br><br></form>'}, $scope.a);
+                $scope.showConfirmDialog({title: "Editar Edificio", message: '<form>Nombre: <input Type="text" name="nombre" value="" ng-model="edificio.Nombre"/> <br><br>Cantidad De Pisos: <input Type="text" name="piso" value="" ng-model="edificio.CantidadPisos"/><br><br></form>'}, $scope.a);
 
     };
 });
