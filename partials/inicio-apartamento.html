@@ -1,17 +1,41 @@
-	<p style="padding: 10px; background-color: black; color: white; font-family: bookman old style; font-size: 20px; font-weight: bold;">Modulo Apartamento</p><br>
-	<center><h3>Agregue Direccion:</h3>
-	Torre 
-	<select name="torre">
+<script src="js/web/ApartamentoInicioCtrl.js"></script>
 
-	</select>
-	<br>Piso 
-	<select name ="piso">
+<div ng-controller="ApartamentoInicioCtrl.js">
+    <h1> Dirección de Apartamento</h1>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="Select_La_Torre" class="col-lg-2 control-label">Torre</label>
+            <div class="col-lg-10">
+                <select id="Select_La_Torre" class="selectpicker form-control" data-style="form-control">
+                    
+                </select>
+            </div>
+    </form>
 
-	</select>
-	<br>Numero 
-	<select name="numero">
-            
-	</select>
-		<br><input type="submit" value="Ver">
-		<input type="submit" value="Editar">
-		<input type="submit" value="Salir">
+    <form class="form-horizontal" role="form">
+            <label for="Select_El_Piso" class="col-lg-2 control-label">Piso</label>
+            <div class="col-lg-10">
+                <select id="Select_El_Piso" class="selectpicker form-control" data-style="form-control">
+                    
+                </select>
+            </div>
+    </form>
+    
+    <form class="form-horizontal" role="form">
+            <label for="Select_Numero" class="col-lg-2 control-label">Numero</label>
+            <div class="col-lg-10">
+                <select id="Select_Numero" class="selectpicker form-control" data-style="form-control">
+                    
+                </select>
+            </div>
+    </form>
+    
+        </div>         
+	<a ng-click="ListarApartamento()" class="btn btn-primary ladda-button" data-style="zoom-in" data-ui-ladda="loading">
+                <span class="ladda-label">Listar Apartamentos</span>
+        </a>	
+        <a ng-click="AgregarApartamento()" class="btn btn-primary ladda-button" data-style="zoom-in" data-ui-ladda="loading">
+                <span class="ladda-label">Agregar - Editar</span>
+        </a>
+                	
+</div>
