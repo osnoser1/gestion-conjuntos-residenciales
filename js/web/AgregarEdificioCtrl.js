@@ -17,13 +17,20 @@ myApp.controllerProvider.register('AgregarEdificioCtrl', function($scope, $http,
 		    {"id": "5", "Nombre": "LILA", "CantidadPisos": "55"},
 		],
     };
-    $scope.a = function() {
-        
+    $scope.a = function(elemento) {
+        //mando mis datos a la bdd
+        //muestra un msj 
+        $('#myModal').modal('hide');
+                                show({message: {text: "Edificio agregado exitosamente."}, type: 'success'});
+
     };
     $scope.agregarDatosE = function(elemento){
         $scope.edificio = elemento;
         console.log("Edificio Agregado");
-                $scope.showConfirmDialog({title: "Confirmación", message: '<form>Edificio Agregado<br><br></form>'}, $scope.a);
+        //muestra un msj 
+        $('#myModal').modal('hide');
+            show({message: {text: "Edificio agregado exitosamente."}, type: 'success'});
+        
 
     };
 });

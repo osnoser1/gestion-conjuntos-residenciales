@@ -44,7 +44,7 @@ return array(
           ),
          */
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=encuesta',
+            'connectionString' => 'mysql:host=localhost;dbname=constructora',
             'emulatePrepare' => true,
             'username' => 'root',
             'password' => '',

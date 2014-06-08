@@ -5,11 +5,15 @@
     <form class="form-horizontal" role="form">
         <div class="row">
             <div class="form-group col-sm-10">
-                Cedula: <input type="text" name="cedula" required="" value="" class="form-control" ng-model="nuevoUsuario.cedula"/><br>
-                Nombre: <input type="text" name="nombre" required="" value="" class="form-control" ng-model="nuevoUsuario.nombre"/><br>
-                Apellido: <input type="text" name="apellido" required="" value="" class="form-control" ng-model="nuevoUsuario.apellido"/><br>
-                Correo: <input type="text" name="correo" required="" value="" class="form-control" ng-model="nuevoUsuario.correo"/><br>
-                Contraseña: <input type="password" name="clave" required="" class="form-control" ng-model="nuevoUsuario.clave"/><br>
+                Tipo de Usuario: <select ng-change="seleccionTipoUsuario()" id="select_tipo_de_pago" class="selectpicker form-control" data-style="form-control">
+                    <option value ="1">Usuario</option>
+                    <option value ="2">Administrador</option>
+                </select><br>
+                Cedula: <input type="text" name="cedula" required="" value="" class="form-control" ng-model="datos.nuevoUsuario.cedula"/><br>
+                Nombre: <input type="text" name="nombre" required="" value="" class="form-control" ng-model="datos.nuevoUsuario.nombre"/><br>
+                Apellido: <input type="text" name="apellido" required="" value="" class="form-control" ng-model="datos.nuevoUsuario.apellido"/><br>
+                Correo: <input type="text" name="correo" required="" value="" class="form-control" ng-model="datos.nuevoUsuario.correo"/><br>
+                Contraseña: <input type="password" name="clave" required="" class="form-control" ng-model="datos.nuevoUsuario.clave"/><br>
             </div>
         </div>
         <div class="list-group">
@@ -19,11 +23,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-sm-10">
+            <div class="form-group col-md-12 col-sm-12 col-xs-12 col-lg-12">
                 <div class="list-group-item" style="display: flex;">
                     <p class="col-xs-2">Telefono:</p>
-                    <div class="col-xs-3">
-                        <input type="text" name="Telefono" value="" ng-model="datos.nuevoTelefono.Telefono" required ng-pattern="/^\d+$/"/>
+                    <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                        <input type="text" name="Telefono" value="" ng-model="datos.nuevoTelefono.Telefono"/>
                     </div>
                     <div class="col-xs-3">
                         <input placeholder="Agregar Tipo" name="Tipo" list="ordenar" ng-model="datos.nuevoTelefono.Tipo">
@@ -69,7 +73,7 @@
             <table class="botones">
                 <tr>
                     <td class="celdabotones">
-                        <input type="submit" value="Aceptar" class="css_buttonaceptar" ng-click="addTelefono(nuevoUsuario)"/>
+                        <input type="submit" value="Aceptar" class="css_buttonaceptar" ng-click="addUsuario(datos)"/>
                     </td>
                     <td class="celdabotones">
                         <input type="submit" value="Cancelar" class="css_buttoncancelar"/>
