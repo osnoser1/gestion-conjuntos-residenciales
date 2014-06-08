@@ -1,1 +1,40 @@
-<h1>Listado secciones</h1>
+
+<script src="js/web/ListadoSeccionesCtrl.js"></script>
+<div ng-controller="ListadoSeccionesCtrl">
+    <h1>Listado secciones</h1>
+    <div class="list-group">
+        <div class="list-group-item row no-select" ng-repeat="element in datos.seccion" >
+            <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">{{element.Titulo}}</button>
+            <hr>
+            <div collapse="isCollapsed">
+                <div class="well well-lg">{{element.Contenido}}<a class="pull-right pointer" ng-click="entrarSeccion(element)"><span class="glyphicon glyphicon-pencil" title="Modificar Seccion"></span> Modificar</a>      
+                </div> 
+           </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Modificar </h4>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+                <label>Titulo</label><input ng-model="seccion.titulo" type="text" id="Titulo" class="form-control" placeholder="Titulo">
+                <br></br>
+                <textarea  ng-model="seccion.contenido" class="summernote form-control" rows="10" cols="50" placeholder="Descripcion de seccion" >
+
+                </textarea>
+               
+            <form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary">Guardar Cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>  
+</div>
+ 

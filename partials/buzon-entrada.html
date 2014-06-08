@@ -1,67 +1,63 @@
-<h1>Buzón de entrada</h1>
-
+<!--<script type="text/javascript" src="js/web/buzon-entrada.js"></script>
 <script type="text/javascript">
-	
-	$(document).ready(function () {
-		 $.ajax
-        ({
-        type: "POST",
-        url: "models/consultas-crearMensaje.php",
-        data: {id:6},
-        async: false,
-        dataType: "json",
-        success:
-        function (msg) 
-        {       
-         
-           var table=$('<table class="table" ></table>');
+	eventos();
+</script>-->
 
-           for(i=0; i<msg[0].m; i++){
-
-           	var tr=$('<tr></tr>');
-           	var td1=$('<td ></td>').text(msg[i].asunto);
-           	var td2=$('<td></td>').text("administrador");
-           	var td3=$('<td></td>').text(msg[i].descripcion);
-           	var td4=$('<td></td>').text(msg[i].fecha);
-
-           	tr.append(td1);
-           	tr.append(td2);
-           	tr.append(td3);
-           	tr.append(td4);
-           	table.append(tr);
-           }
-          
-          $('#contenido').append(table);
-        },
-        error:
-        function (msg) {alert( msg +"No se pudo realizar la conexion");}
-        });
-	});
-
-</script>
-<center>
-	<div class="table-responsive" id="contenido">
-	 
-	</div>
-</center>
-<!-- <button class="btn">
-	<span class="glyphicon glyphicon-hand-left"></span>Atras
-</button>
-
-
-<h6>Para: Pedro Perez</h6>
-<h6>De: Administrador</h6>
-<h6>Titulo: Factura de vencimiento</h6>
-<h6>Fecha:Feb 2 9:56am </h6>
-	
+<script type="text/javascript" src="js/web/buzonentradaCtrl.js"></script>
+<div ng-controller="buzonentradaCtrl">
+	<h1>Buzón de entrada</h1>
 		
-	<form role="form">
-		<textarea class="form-control" rows="10" cols="50" placeholder="Descripcion">
-			Sr Pedro Perez, Se le anuncia que su  factura  de mensualidad de los servicios  adquiridos esta por vencerse
-		</textarea>
-	<form>
+		<div id="mensajeabierto" style="display:none;">
+			<button class="btn" id="atras">
+				<span class="glyphicon glyphicon-hand-left"></span>Atras
+			</button>	
+			<h6>De: <label id="de"></label></h6>
+			<h6>Titulo: <label id="titulo"></label></h6>
+			<h6>Fecha: <label id="fecha"></label> </h6>			
+			<form role="form">
+				<div class="form-control" style="height:300px; overflow: auto; " placeholder="Descripcion" id="descripcion">				
+				</div>
+			<form>
+
+			<br>
+			<footer>
+				<button type="submit" class="btn btn-danger" id="eliminar" value="sdfdsfdf">Eliminar </button> <button type="submit" class="btn">Marcar Como no Leido </button>
+			</footer>
+		</div>
+
+		<center id="mensajes">
+			<div class="table-responsive table-bordered"  id="contenido">
+			 
+			</div>
+		</center>
 
 
-<footer>
-	<button type="submit" class="btn btn-danger">Eliminar </button> <button type="submit" class="btn">Marcar Como no Leido </button>
-</footer> -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">¿Esta seguro que desea eliminar este mensaje?</h4>
+	      </div>
+	      <div class="modal-body" id="bodymensaje" style="overflow: auto;">
+	        
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        <button id="confirmacion" type="button" class="btn btn-primary" >Eliminar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+
+<!--  <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
+</div>
+ -->
