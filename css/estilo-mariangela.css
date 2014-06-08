@@ -34,9 +34,6 @@ table.botonesmpu{position: relative;
                  left: 300px;
 }
 
-p{color: red;
-  font-size: 12px;
-}
 
 .listas{
     background: #E6E6FA;
@@ -130,7 +127,7 @@ p{color: red;
 .botonlistausuario2{
     position:relative;
     top: 50px;
-    left: 550px;
+    left: 350px;
 
 }
 

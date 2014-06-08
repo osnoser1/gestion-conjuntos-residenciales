@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,12 +10,21 @@ var myApp = angular.module('myApp');
 myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
     $scope.datos = {
         Edificios: [
-		    {"id": "1", "Nombre": "Luna Nueva", "CantidadPisos": "5"},
-		    {"id": "2", "Nombre": "Acuarela","CantidadPisos": "5"},
-		    {"id": "3", "Nombre": "Rosa Nautica", "CantidadPisos": "5"},
-		    {"id": "4", "Nombre": "Orquidea",  "CantidadPisos": "5"},
-		    {"id": "5", "Nombre": "Margarita", "CantidadPisos": "5"},
-		],
+            {"id": "1", "Nombre": "TOPACIO", "CantidadPisos": "25"},
+            {"id": "2", "Nombre": "RUBI", "CantidadPisos": "16"},
+            {"id": "3", "Nombre": "SHEILA", "CantidadPisos": "20"},
+            {"id": "4", "Nombre": "FRANCIS", "CantidadPisos": "45"},
+            {"id": "5", "Nombre": "LILA", "CantidadPisos": "55"},
+        ],
+    };
+    $scope.a = function() {
+
+    };
+    $scope.modificarDatosE = function(elemento) {
+        $scope.edificio = elemento;
+        console.log("Hola mundo");
+        $scope.showConfirmDialog({title: "Editar Edificio", src: "'partials/modificar-edificio.html'"}, $scope.a);
+
     };
 });
 
