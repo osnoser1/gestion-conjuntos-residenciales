@@ -35,7 +35,7 @@ function eventos(){
 	        function (msg) {alert( msg +"No se pudo realizar la conexion");}
 	        });
 
-        $('tr').live("click",function(){ 
+        $('tr').live("click", function(){ 
         	idMensaje = $(this).attr('id'); 
         	$('#mensajes').fadeOut(function(){
         		$.ajax
