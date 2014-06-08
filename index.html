@@ -21,6 +21,7 @@
         <script src="js/bootstrap-select.min.js"></script>
         <script src="assets/ladda-bootstrap/spin.min.js"></script>
         <script src="assets/ladda-bootstrap/ladda.min.js"></script>
+        <script src="assets/noty/jquery.noty.packaged.min.js"></script>
         <script src="js/angular/angular.min.js"></script>
         <script src="js/angular/angular-ui-router.min.js"></script>
         <script src="js/angular/angular-resource.min.js"></script>
@@ -55,9 +56,10 @@
                 <div class="modal-content" compile-data template="{{modalHtml}}"></div>
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+        <script>
+            var n = noty({layout: 'bottom', type: 'success', text: 'Nombre base de datos: <b>"conjunto_residencial"</b>, usuario: <b>"root"</b>, clave: <b>""</b><br>Por favor revisar el archivo <b>"Orden de importación.txt"</b> dentro de la carpeta db.'});
+            var url = location.pathname + "yii.php?r=";
+            console.log(url);
+        </script>
     </body>
 </html>
-<script>
-    var url = "/conjunto-residencial/yii.php?r=";
-    console.log(url);
-</script>
