@@ -1,16 +1,16 @@
-<!--<script type="text/javascript" src="js/web/buzon-entrada.js"></script>
+<script type="text/javascript" src="js/web/buzon-entrada.js"></script>
 <script type="text/javascript">
 	eventos();
-</script>-->
+</script>
 
-<script type="text/javascript" src="js/web/buzonentradaCtrl.js"></script>
-<div ng-controller="buzonentradaCtrl">
+<!--<script type="text/javascript" src="js/web/buzonentradaCtrl.js"></script>-->
+<div >
 	<h1>Buzón de entrada</h1>
 		
 		<div id="mensajeabierto" style="display:none;">
-			<button class="btn" id="atras">
+			<a class="btn" id="atras"  href="#/panel/buzon-entrada.html">
 				<span class="glyphicon glyphicon-hand-left"></span>Atras
-			</button>	
+			</a>	
 			<h6>De: <label id="de"></label></h6>
 			<h6>Titulo: <label id="titulo"></label></h6>
 			<h6>Fecha: <label id="fecha"></label> </h6>			
@@ -21,12 +21,13 @@
 
 			<br>
 			<footer>
-				<button type="submit" class="btn btn-danger" id="eliminar" value="sdfdsfdf">Eliminar </button> <button type="submit" class="btn">Marcar Como no Leido </button>
+				<button type="submit" class="btn btn-danger" id="eliminar" value="sdfdsfdf">Eliminar </button>
+				 <button type="submit" class="btn" id="marcar">Marcar Como no Leido </button>
 			</footer>
 		</div>
 
 		<center id="mensajes">
-			<div class="table-responsive table-bordered"  id="contenido">
+			<div class="table-responsive table-bordered"   id="contenido">
 			 
 			</div>
 		</center>
