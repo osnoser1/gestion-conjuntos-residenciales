@@ -1,5 +1,6 @@
 <!--modulo Cartelera mensajes publicados por el admin unicamente-->
 <link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
+ <script src="js/web/cartelera.js"></script>
  <script type="text/javascript">
          $(function() {
             $('.summernote').summernote({
@@ -16,8 +17,9 @@
 
 <h1>Cartelera</h1>
 <!--Division entre crear el mensaje y los mensajes publicados-->
+
 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-   <!-- <div class="accordion" id="accordion2">
+   <div class="accordion" id="accordion2">
         <div class="accordion-group">
             <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
@@ -53,10 +55,8 @@
 
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary">Edificio</button>
-                                                    <button type="button" class="btn btn-primary">Piso</button>
-                                                    <button type="button" class="btn btn-primary">Apartamento</button>
-                                                    <button type="button" class="btn btn-info">Aceptar</button>
+                                                    <button type="button" class="btn btn-primary">Aceptar </button>
+                                                    <button type="button" class="btn btn-info " data-dismiss="modal"> Cancelar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,42 +75,66 @@
 
 
     </div>
-</div> -->
+</div>
 
-
+<div class="well well-sm">
+    <div> 
+        <h4><b>Titulo de la noticia</b></h4>
+    </div>
+    <div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px; " class="form-control "> este es un mensaje de prueva kjdjkfjldfhkldbjfkdjbkjgnab  jygd gfhjkbf yujsfhdjkfbdkjhgbksdgbdkfbakbfsakbfdskfbkasbdkasbdkasbfskabfkasbfkbaskfbaskfb xkc kzxbvkzxcbvkjzc vbjkzcbjvnzjvnzxj    kzzvdka v aklfjklfhnadinfladgdg
+    dgadgadsgd
+    hsfdhsfdhsfhsfh
+    fsh
+    sfhsf
+    hsfhsf
+    d kfha c zxhk vhkzx vhkzx k vx h vxHK chk chk hk HKc hzxf xjcb 
+    </div>
+    <a type="button" class="btn btn-default btn-xs" href="#/panel/crear-mensaje">
+        <span class="glyphicon glyphicon-envelope"></span> 
+    </a>
+</div>
 <div class="well">
-        <div> <h4><b>Titulo de la noticia</b></h4></div>
-        <div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px;
+  <div> 
+        <h4><b>Titulo de la noticia</b></h4>
+    </div>
+    <div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px; " class="form-control "> este es un mensaje de prueva kjdjkfjldfhkldbjfkdjbkjgnab  jygd gfhjkbf yujsfhdjkfbdkjhgbksdgbdkfbakbfsakbfdskfbkasbdkasbdkasbfskabfkasbfkbaskfbaskfb xkc kzxbvkzxcbvkjzc vbjkzcbjvnzjvnzxj    kzzvdka v aklfjklfhnadinfladgdg
     dgadgadsgd
     hsfdhsfdhsfhsfh
-    fsh
+    fsho
     sfhsf
     hsfhsf
-    d kfha c zxhk vhkzx vhkzx k vx h vxHK chk chk hk HKc hzxf xjcb </div>
-    <buttom type="button" class="btn btn-default btn-xs">
-  <span class="glyphicon glyphicon-envelope"></span> 
-</button>
+    d kfha c zxhk vhkzx vhkzx k vx h vxHK chk chk hk HKc hzxf xjcb 
+    </div>
+    <a type="button" class="btn btn-default btn-xs" href="#/panel/crear-mensaje">
+        <span class="glyphicon glyphicon-envelope"></span> 
+    </a>
+     <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModaleliminar">Eliminar</button>
+     <div class="modal fade" id="myModaleliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+       <b> <h4 class="modal-title" id="myModalLabel">Aviso</h4></b>
+      </div>
+      <div class="modal-body">
+        Esta seguro de querer eliminar el mensaje
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
 </div>
 
-  <div> <h4><b>Titulo de la noticia4</b></h4></div>
-        <div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px; " class="form-control "> este es un mensaje de prueva kjdjkfjldfhkldbjfkdjbkjgnab  jygd gfhjkbf yujsfhdjkfbdkjhgbksdgbdkfbakbfsakbfdskfbkasbdkasbdkasbfskabfkasbfkbaskfbaskfb xkc kzxbvkzxcbvkjzc vbjkzcbjvnzjvnzxj    kzzvdka v aklfjklfhnadinfladgdg
-    dgadgadsgd
-    hsfdhsfdhsfhsfh
-    fsh
-    sfhsf
-    hsfhsf
-    d kfha c zxhk vhkzx vhkzx k vx h vxHK chk chk hk HKc hzxf xjcb </div>
-    <buttom type="button" class="btn btn-default btn-xs" href="#http://127.0.0.1/gestion-conjuntos-residenciales/#/panel/crear-mensaje">
-  <span class="glyphicon glyphicon-envelope"></span> 
-</button>
-</div>
  <br>
 <ul class="pager">
   <li class="previous"><a href="#">&larr; Anterior</a></li>
   <li class="next"><a href="#">Siguiente &rarr;</a></li>
 </ul>
-
 
 </div>
