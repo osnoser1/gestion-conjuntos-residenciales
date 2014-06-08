@@ -1,1 +1,54 @@
+<script src="js/web/GestionarServicios.js"></script>
 <h1>Gestionar Servicios</h1>
+<form class="form-horizontal" role="form" ng-controller="GestionarServiciosCtrl">
+
+
+    <div class="form-group"><!-- AGREGAR NOMBRE -->
+        <label for="inputName" class="col-sm-2 control-label">Nombre</label>
+        <div class="col-sm-7">
+            <input ng-model="servicio.nombre" type="text" class="form-control" id="inputName" placeholder="Nombre del servicio que desea agregar...">
+        </div>
+    </div>
+
+    <div class="form-group"><!-- AGREGAR COSTO -->
+        <label for="inputCost" class="col-md-2 control-label">Costo</label>
+        <div class="col-sm-4">
+            <input ng-model="servicio.costo" type="number" class="col-md-6 form-control" id="inputCost" placeholder="Costo del servicio">
+        </div>
+        <label for="inputCost" class="col-md-2 control-label text-left">BS</label>
+    </div>
+
+    <div class="form-group"> <!-- TIPO DE SERVICIOS -->
+        <label  class="col-md-2 control-label text-right">Tipo de servicio</label>
+        <div class="col-md-7">
+            <select class="form-control">
+                <option ng-repeat="tipoServicio in servicios.tipoServicio">{{tipoServicios.tipoServicio}}</option>
+
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group"><!-- BOTON AGREGAR SERVICIOS -->
+        <div class="col-md-2 col-md-offset-7">
+            <button type="submit" class="btn btn-default">Agregar Servicio</button>
+        </div>
+    </div>
+
+    <div class="form-group"><!-- TEXT BOX ELIMINAR SERVICIOS -->
+        <label  class="col-md-2 control-label text-right">Servicio a eliminar</label>
+        <div class="col-md-7">
+            <select class="form-control">
+                <option ng-repeat="servicio in servicios.Servicios">{{servicio.name}}</option>
+
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group"><!-- BTN ELIMINAR SERVICIOS -->
+        <div class="col-md-2 col-md-offset-7">
+            <button type="submit" class="btn btn-default">Eliminar Servicio</button>
+        </div>
+    </div>
+
+</form>
+<link rel="stylesheet" href="css/style-Gabriel.css"/>
