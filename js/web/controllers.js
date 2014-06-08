@@ -18,13 +18,25 @@ pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $l
     };
     $scope.showConfirmDialog = function(params, success) {
         $scope.successDialog = success;
-        var o = {title: "", message: "Mensaje de prueba."};
+        if (success.src && success.message) {
+            console.log('No puede existir atributos html y message al mismo tiempo');
+            return;
+        }
+        var o;
+        if (success.message) {
+            o = {title: "", message: "Mensaje de prueba."};
+        } else {
+            o = {title: ""};
+        }
         $.extend(o, params);
         var modalHtml = "";
         if (o.title !== "") {
             modalHtml = '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">' + o.title + '</h4></div>';
         }
-        modalHtml += '<div class="modal-body">' + o.message + '</div>';
+        if (success.message)
+            modalHtml += '<div class="modal-body">' + o.message + '</div>';
+        else
+            modalHtml += '<div class="modal-body"><div ng-include src="' + o.src + '"></div></div>';
         modalHtml += '<div class="modal-footer"><button data-ui-ladda="myModalAccept" class="btn btn-primary ladda-button" data-style="zoom-in" ng-click="successDialog()"><span class="ladda-label">Aceptar</span></button><button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button></div>';
         $scope.modalHtml = modalHtml;
         $('#myModal').modal({show: true, backdrop: 'static'});
@@ -57,31 +69,33 @@ pruebaControllers.controller('PanelHeaderCtrl', function($scope, $http) {
     $scope.header = "partials/panel-header.html";
     $scope.CrearMensaje = function(datos) {
         console.log($('.summernote').code());
-        if(para.value!=""&&Titulo.value!=""&&$('.summernote').code()!=""){
-                    $.ajax
-                  ({
-                  type: "POST",
-                  url: "models/consultas-crearMensaje.php",
-                  data: {id:5, para:para.value, titulo:Titulo.value, mensaje: $('.summernote').code()},
-                  async: false,
-                  dataType: "json",
-                  success:
-                  function (msg) 
-                  {    
-                    console.log(msg);
-                    show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
-                    para.value="";
-                    titulo:Titulo.value="";
-                    $('.summernote').code("");
-                  },
-                  error:
-                  function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                  });
-                
-       }
-       else{
+        if (para.value != "" && Titulo.value != "" && $('.summernote').code() != "") {
+            $.ajax
+                    ({
+                        type: "POST",
+                        url: "models/consultas-crearMensaje.php",
+                        data: {id: 5, para: para.value, titulo: Titulo.value, mensaje: $('.summernote').code()},
+                        async: false,
+                        dataType: "json",
+                        success:
+                                function(msg)
+                                {
+                                    console.log(msg);
+                                    show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
+                                    para.value = "";
+                                    titulo:Titulo.value = "";
+                                    $('.summernote').code("");
+                                },
+                        error:
+                                function(msg) {
+                                    alert(msg + "No se pudo realizar la conexion");
+                                }
+                    });
+
+        }
+        else {
             show({message: {text: "Debe llenar todos los campos para poder enviar el mensaje"}, type: 'danger'});
-       }
+        }
     };
 });
 
