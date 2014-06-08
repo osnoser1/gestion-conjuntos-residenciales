@@ -14,15 +14,17 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     $scope.desactivado = false;
     $scope.tags = [];
     $scope.sitios = [];
-    $scope.nuevo = [];
+    $scope.nuevo = {};
     $scope.datos = {
         Mes: "Febrero",
+        Ano: "2014",
+        Fecha: "2014-02-01",
         gastos: [
-            {idGasto: "1", Nombre: "Vigilancia", Precio: "10000"},
-            {idGasto: "2", Nombre: "Aseo urbano", Precio: "10000"},
-            {idGasto: "3", Nombre: "Mantenimiento piscina", Precio: "10000"},
-            {idGasto: "4", Nombre: "Mantenimiento ascensor", Precio: "10000"},
-            {idGasto: "5", Nombre: "Luz residencia", Precio: "10000"},
+            {idHistorialGasto: "7", idGastoFecha: "1", idGasto: "1", Nombre: "Vigilancia", Precio: "10000"},
+            {idHistorialGasto: "8", idGastoFecha: "1", idGasto: "2", Nombre: "Aseo urbano", Precio: "10000"},
+            {idHistorialGasto: "9", idGastoFecha: "1", idGasto: "3", Nombre: "Mantenimiento piscina", Precio: "10000"},
+            {idHistorialGasto: "10", idGastoFecha: "1", idGasto: "4", Nombre: "Mantenimiento ascensor", Precio: "10000"},
+            {idHistorialGasto: "11", idGastoFecha: "1", idGasto: "5", Nombre: "Luz residencia", Precio: "10000"},
         ],
     };
     $http.get('pruebas/gastos.json').success(function(data) {
@@ -100,28 +102,44 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     };
     $scope.addGasto = function(gasto) {
         console.log(gasto);
-        $scope.loading = true;
+        $rootScope.loading = true;
         var obj = $filter('filter')($scope.datos.gastos, {idGasto: gasto.idGasto}, true);
         if (obj.length !== 0) {
             show({message: {text: "Gasto ya existe, no se puede agregar."}, type: 'danger'});
-            $scope.loading = false;
+            $rootScope.loading = false;
             return;
         }
-        $http.post(url + 'site/functionName', {datos: gasto}
-        ).success(function(data, status, headers, config) {
-            console.log(data);
-        }).error(function(data, status) { // called asynchronously if an error occurs
-// or server returns response with an error status.
-            $scope.showDialog({message: data});
-        });
-        $timeout(function() {
-            $scope.loading = false;
-            if (gasto.idGasto === "Nuevo") {
-                gasto.idGasto = i++;
-            }
-            $scope.datos.gastos.push(gasto);
-            $scope.nuevo = [];
-        }, 3000);
+//        $http.post(url + 'gasto/functionName', {datos: gasto}
+//        ).success(function(data, status, headers, config) {
+//            console.log(data);
+//        }).error(function(data, status) { // called asynchronously if an error occurs
+//// or server returns response with an error status.
+//            $scope.showDialog({message: data});
+//        });
+        if (gasto.idGasto === "Nuevo") {
+            gasto.Fecha = $scope.datos.Fecha;
+            delete gasto.idGasto;
+            $http.post(url + 'gasto/createHistorial', $.param({datos: gasto}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+            ).success(function(data, status, headers, config) {
+                if (typeof data === "undefined" || !data.respuesta) {
+                    $scope.error(data, status, headers, config);
+                    return;
+                }
+                console.log(data);
+                $rootScope.loading = false;
+                $scope.datos.gastos.push(data['gasto_historial']);
+                $scope.nuevo = {};
+                show({message: {text: "Gasto agregado exitosamente."}, type: 'success'});
+            }).error($scope.error);
+        }
+        /*$timeout(function() {
+         $scope.loading = false;
+         if (gasto.idGasto === "Nuevo") {
+         gasto.idGasto = i++;
+         }
+         $scope.datos.gastos.push(gasto);
+         $scope.nuevo = {};
+         }, 3000);*/
     };
     $scope.deleteSelectedGastos = function() {
         var index = [];
@@ -148,6 +166,10 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     $scope.showModalBorrar = function() {
         $scope.showConfirmDialog({title: "Aviso", message: "¿Seguro que desea eliminar los gastos seleccionados?"}, $scope.deleteSelectedGastos);
 //        $scope.deleteSelectedGastos();
+    };
+    $scope.submit = function(datos) {
+        console.log(datos);
+        $scope.showConfirmDialog({title: "Procesar Gastos.", message: "¿Está seguro que desea procesar el mes de " + datos.Mes + " - " + datos.Ano + "?<br><br><b>No hay vuelta atrás.</b>"});
     };
 });
 

@@ -26,6 +26,7 @@
         <script src="js/angular/angular-ui-router.min.js"></script>
         <script src="js/angular/angular-resource.min.js"></script>
         <script src="js/angular/angular-sanitize.min.js"></script>
+        <script src="js/angular/angular-animate.min.js"></script>
         <script src="js/angular/ui-bootstrap-tpls-0.11.0.min.js"></script> <!-- Angular UI Bootstrap -->
         <script src="assets/ladda-bootstrap/ui-ladda.js"></script>
         <script src="assets/ng-tags-input/ng-tags-input.min.js"></script>
@@ -42,7 +43,7 @@
         <section ui-view>
             <i>Some content will load here!</i>
         </section>
-        <div class="notifications bottom-right"></div>
+        <div style="z-index: 99999999" class="notifications bottom-right"></div>
         <script type="text/javascript">
                     $(function() {
                         $('.summernote').summernote({

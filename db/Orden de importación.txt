@@ -2,5 +2,6 @@
 1,conjunto_residencial.sql,crea la bd
 2,modulo-usuario (1).sql,no tiene dependencia
 3,modulo-pagos.sql,depende de usuario
+4,modulo-gastos.sql,no tiene dependencia por los momentos. Pronto tendrá con edificio y apartamento.
 4,publicacion.sql,no tiene dependencia
 5,cartelera.sql,depende de edificio,apartamento

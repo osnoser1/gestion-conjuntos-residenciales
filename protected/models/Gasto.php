@@ -1,8 +1,8 @@
 <?php
 
-Yii::import('application.models._base.BaseCliente');
+Yii::import('application.models._base.BaseGasto');
 
-class Cliente extends BaseCliente
+class Gasto extends BaseGasto
 {
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
