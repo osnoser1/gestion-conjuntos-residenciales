@@ -42,6 +42,12 @@ switch($id)
 	case 10:
 		obtenertodoslosmensajesenviados();
 		break;
+	case 11:
+		obtenerMensajeEnviado();
+		break;
+	case 12:
+		borrarMensajeEnviado();
+		break;
 	default;
 
 
@@ -55,6 +61,37 @@ else{
 	}
 }
 /*echo call_user_func(array($_POST['funcion']));*/
+	function borrarMensajeEnviado(){
+		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+		$idMensaje=$_REQUEST['idMensaje'];
+		$tupla="DELETE FROM mensajesenviados WHERE idMensaje='$idMensaje'";
+		$resultado = $mysqli->query($tupla);
+		$mysqli->close();
+		echo json_encode("true");
+	}
+
+	function obtenerMensajeEnviado(){
+		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+		$idMensaje=$_REQUEST['idMensaje'];
+		$tupla="SELECT * FROM mensajesenviados WHERE idMensaje='$idMensaje'";
+		$resultado = $mysqli->query($tupla);
+		$objeto[0]['m']=$resultado->num_rows;	
+		
+		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		{
+			
+			$objeto[0]['asunto']=$db_resultado['asunto'];
+			$objeto[0]['descripcion']=$db_resultado['descripcion'];	
+			$objeto[0]['idMensaje']=$db_resultado['idMensaje'];
+			$objeto[0]['fecha']=$db_resultado['fecha'];
+			
+		}		
+
+		
+		$mysqli->close();
+		echo json_encode($objeto);
+
+	}
 	function obtenertodoslosmensajesenviados(){
 		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
 		

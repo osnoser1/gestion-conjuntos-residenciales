@@ -41,7 +41,7 @@ function eventos(){
 		        ({
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
-		        data: {id:7, idMensaje:idMensaje},
+		        data: {id:11, idMensaje:idMensaje},
 		        async: false,
 		        dataType: "json",
 		        success:
@@ -136,7 +136,7 @@ function eventos(){
 		        ({
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
-		        data: {id:8, idMensaje:idMensaje},
+		        data: {id:12, idMensaje:idMensaje},
 		        async: false,
 		        dataType: "json",
 		        success:
