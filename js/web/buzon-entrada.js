@@ -35,7 +35,7 @@ function eventos(){
 	        function (msg) {alert( msg +"No se pudo realizar la conexion");}
 	        });
 
-        $('tr').on('click', null, function(){ 
+        $('tr').live('click', function(){ 
         	idMensaje = $(this).attr('id'); 
         	console.log("sdfsdfsfds");
         	$('#mensajes').fadeOut(function(){
@@ -86,47 +86,47 @@ function eventos(){
 		        });
          });
 
-        //   $('#atras').click(function(){
+          $('#atras').click(function(){
 
-        // 	$('#mensajeabierto').fadeOut(function(){
-        // 		$.ajax
-	       //  ({
-	       //  type: "POST",
-	       //  url: "models/consultas-crearMensaje.php",
-	       //  data: {id:6},
-	       //  async: false,
-	       //  dataType: "json",
-	       //  success:
-	       //  function (msg) 
-	       //  {       
-	       //   contenido.innerHTML="";
-	       //     var table=$('<table class="table table-hover" ></table>');
+        	$('#mensajeabierto').fadeOut(function(){
+        		$.ajax
+	        ({
+	        type: "POST",
+	        url: "models/consultas-crearMensaje.php",
+	        data: {id:6},
+	        async: false,
+	        dataType: "json",
+	        success:
+	        function (msg) 
+	        {       
+	         contenido.innerHTML="";
+	           var table=$('<table class="table table-hover" ></table>');
 
-	       //     for(i=0; i<msg[0].m; i++){
-	       //         	var tr="";
-		      //      	if(msg[i].leido==0)
-			     //       	 tr=$("<tr id="+msg[i].idMensaje+" class='info'></tr>");          	
-		      //      	else
-		      //      		 tr=$("<tr id="+msg[i].idMensaje+" ></tr>"); 
-	       // 			var td1=$('<td ></td>').text(msg[i].asunto);
-		      //      	var td2=$('<td></td>').text("administrador");
-		      //      	var td3=$('<td></td>').html("<b>"+msg[i].descripcion+"</b>");
-		      //      	var td4=$('<td></td>').text(msg[i].fecha);
-		      //      	tr.append(td1);
-		      //      	tr.append(td2);
-		      //      	tr.append(td3);
-		      //      	tr.append(td4);
-		      //      	table.append(tr);           
-	       //     }
+	           for(i=0; i<msg[0].m; i++){
+	               	var tr="";
+		           	if(msg[i].leido==0)
+			           	 tr=$("<tr id="+msg[i].idMensaje+" class='info'></tr>");          	
+		           	else
+		           		 tr=$("<tr id="+msg[i].idMensaje+" ></tr>"); 
+	       			var td1=$('<td ></td>').text(msg[i].asunto);
+		           	var td2=$('<td></td>').text("administrador");
+		           	var td3=$('<td></td>').html("<b>"+msg[i].descripcion+"</b>");
+		           	var td4=$('<td></td>').text(msg[i].fecha);
+		           	tr.append(td1);
+		           	tr.append(td2);
+		           	tr.append(td3);
+		           	tr.append(td4);
+		           	table.append(tr);           
+	           }
 	          
-	       //    $('#contenido').append(table);
-	       //  },
-	       //  error:
-	       //  function (msg) {alert( msg +"No se pudo realizar la conexion");}
-	       //  });
-        // 		$('#mensajes').fadeIn();
-        // 	});
-        // });
+	          $('#contenido').append(table);
+	        },
+	        error:
+	        function (msg) {alert( msg +"No se pudo realizar la conexion");}
+	        });
+        		$('#mensajes').fadeIn();
+        	});
+        });
 
         $('#eliminar').click(function(){
         	$('#myModal').modal('show');
