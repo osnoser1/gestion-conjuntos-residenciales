@@ -5,6 +5,10 @@
     <form class="form-horizontal" role="form">
         <div class="row">
             <div class="form-group col-sm-10">
+                Tipo de Usuario: <select ng-change="seleccionTipoUsuario()" id="select_tipo_de_pago" class="selectpicker form-control" data-style="form-control">
+                    <option value ="1">Usuario</option>
+                    <option value ="2">Administrador</option>
+                </select><br>
                 Cedula: <input type="text" name="cedula" required="" value="" class="form-control" ng-model="datos.nuevoUsuario.cedula"/><br>
                 Nombre: <input type="text" name="nombre" required="" value="" class="form-control" ng-model="datos.nuevoUsuario.nombre"/><br>
                 Apellido: <input type="text" name="apellido" required="" value="" class="form-control" ng-model="datos.nuevoUsuario.apellido"/><br>
