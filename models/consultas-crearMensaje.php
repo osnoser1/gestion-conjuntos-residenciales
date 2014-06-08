@@ -141,7 +141,7 @@ else{
 			echo json_encode($objeto);
 	}
 	function ObtenerApartamentosdePisosdeunEdificio(){
-			$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+			$mysqli = new mysqli("127.0.0.1", "root", "", "conjuntoresidencial");
 			$idPiso=$_REQUEST['idPiso'];
 			$idEdificio=$_REQUEST['idEdificio'];
 			$tupla="SELECT DISTINCT  apartamentos.idApartamento as idApartamento,  apartamentos.idUsuario  FROM  apartamentos INNER JOIN pisos on pisos.idPiso=apartamentos.idPiso INNER JOIN edificio on edificio.idEdificio=apartamentos.idEdificio where  apartamentos.idEdificio='$idEdificio' and apartamentos.idPiso='$idPiso'";
