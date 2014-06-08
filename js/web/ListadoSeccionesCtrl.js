@@ -6,28 +6,23 @@ myApp.controllerProvider.register('ListadoSeccionesCtrl', function($scope, $http
     $scope.datos = {
         seccion: [
                    {"id": "1", "Titulo": "Informacion", "Contenido":"hola mucho gusto"},
-                   {"id": "1", "Titulo": "Informacion", "Contenido":"hola mucho gusto"},
-                   {"id": "1", "Titulo": "Informacion", "Contenido":"hola mucho gusto"},
-                   {"id": "1", "Titulo": "Informacion", "Contenido":"hola mucho gusto"},
+                   {"id": "2", "Titulo": "Informacion", "Contenido":"hola mucho gusto"},
+                   {"id": "3", "Titulo": "Informacion", "Contenido":"hola mucho gusto"},
+                   {"id": "4", "Titulo": "Informacion", "Contenido":"hola mucho gusto"},
 		],
     };
     $scope.isCollapsed = true;
-    $scope.entrarSeccion = function(seccion) {
-        //$('#myModal').modal('show');<form role="form">
-        console.log(seccion.Titulo);      
-        /*var mensaje='<form role="form">'+
-                '<label>Modificar Seccion</label><input ng-model="seccion.Titulo" type="text" id="Titulo" class="form-control" placeholder="Titulo" >'+
-                '<br></br>'+
-                '<textarea  ng-model="seccion.Contenido" class="summernote form-control" rows="10" cols="50" placeholder="Descripcion de seccion" ></textarea>'               
-            +'<form>'
-          +'</div>';
-        $scope.showConfirmDialog({tittle:"Modificar",message:mensaje},$scope.ModificarSeccion);*/
-        $scope.showConfirmDialog({title: "Modificar", src: "'partials/modificar-edificio.html'"}, $scope.ModificarSeccion());
+    $scope.entrarSeccion = function(elemento) {
+        $rootScope.seccion = {id:elemento.id,Titulo:elemento.Titulo, Contenido:elemento.Contenido};
+        $scope.showConfirmDialog({title: "Modificar", src: "'partials/modificar-seccion.html'"}, $scope.ModificarSeccion);
     };
-    $scope.ModificarSeccion = function() {
-        console.log("guardar");
-        
+    $scope.ModificarSeccion = function(){
+        console.log("Guardar");
+        var array = $filter('filter')($scope.datos.seccion, {id: $rootScope.seccion.id}, true);
+        if(array.length !== 0){
+            array[0].Titulo = $rootScope.seccion.Titulo;
+            array[0].Contenido = $rootScope.seccion.Contenido;
+        }
+        $('#myModal').modal('hide');        
     };
-    
-    
 });
