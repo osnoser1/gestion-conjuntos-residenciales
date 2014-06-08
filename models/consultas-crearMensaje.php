@@ -42,6 +42,12 @@ switch($id)
 
 }
 }
+else{
+	$input = json_decode(file_get_contents("php://input"));
+	if ($input != null) {
+		echo call_user_func($input->funcion);
+	}
+}
 /*echo call_user_func(array($_POST['funcion']));*/
 
 	function borrarMensaje(){
