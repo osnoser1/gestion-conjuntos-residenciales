@@ -36,6 +36,12 @@ switch($id)
 	case 8:
 		 borrarMensaje();
 		 break;
+	case 9:
+		 marcarnoleido();
+		 break;
+	case 10:
+		obtenertodoslosmensajesenviados();
+		break;
 	default;
 
 
@@ -49,13 +55,42 @@ else{
 	}
 }
 /*echo call_user_func(array($_POST['funcion']));*/
+	function obtenertodoslosmensajesenviados(){
+		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+		
+		$tupla="SELECT * FROM mensajesenviados";
+		$resultado = $mysqli->query($tupla);
+		$objeto[0]['m']=$resultado->num_rows;	
+		$i=0;
+		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		{
+			
+			$objeto[$i]['asunto']=$db_resultado['asunto'];
+			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
+			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
+			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			
 
+
+			$i++;	
+		}		
+		$mysqli->close();
+		echo json_encode($objeto);
+	}
+	function marcarnoleido(){
+		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+		$idMensaje=$_REQUEST['idMensaje'];
+		$tupla="UPDATE mensaje SET leido='0' WHERE idMensaje='$idMensaje'";
+		$resultado = $mysqli->query($tupla);
+		$mysqli->close();
+		echo json_encode("true");
+	}
 	function borrarMensaje(){
 		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
 		$idMensaje=$_REQUEST['idMensaje'];
 		$tupla="DELETE FROM mensaje WHERE idMensaje='$idMensaje'";
 		$resultado = $mysqli->query($tupla);
-
+		$mysqli->close();
 		echo json_encode("true");
 	}
 	function leermensaje(){
@@ -117,6 +152,8 @@ else{
 			if(strlen($usuario)>4){
 				$tupla="INSERT INTO mensaje (para, asunto, descripcion, fecha, leido) VALUES ('$usuario', '$titulo', '$mensaje', '$fecha', 'false')";
 				$resultado = $mysqli->query($tupla);
+				$tupla2="INSERT INTO mensajesenviados (para, asunto, descripcion, fecha) VALUES ('$usuario', '$titulo', '$mensaje', '$fecha')";
+				$resultado2 = $mysqli->query($tupla2);
 			}
 		}
 		$mysqli->close();
