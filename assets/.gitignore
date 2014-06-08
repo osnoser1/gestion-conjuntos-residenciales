@@ -1,2 +1,13 @@
 *
 !.gitignore
+!/checkd-list-group-bootstrap
+!/checkd-list-group-bootstrap/*
+!/ladda-bootstrap
+!/ladda-bootstrap/*
+!/ng-tags-input
+!/ng-tags-input/*
+!/nya-bootstrap-select
+!/nya-bootstrap-select/*
+!/noty
+!/noty/*
+

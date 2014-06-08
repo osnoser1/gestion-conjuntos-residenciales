@@ -20,10 +20,15 @@ myApp.controllerProvider.register('PagosPendientesCtrl', function($scope, $http,
     };
 
 
+
     $scope.aceptarPago = function(idConsignacion) {
-    	$scope.loading = true;
+    	//$scope.loading = true;
     	console.log(idConsignacion);
     	//Editar en BD la consignacion id, y colocar estado en 1.
+        $http.post(url + '/endpoint', { foo: 'bar' }).success(function(response) {
+            $scope.response = response;
+            $scope.loading = false;
+        });
     };
 
     $scope.showModalRechazar = function() {

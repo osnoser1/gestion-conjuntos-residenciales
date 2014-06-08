@@ -1,63 +1,68 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
-    <head>
-        <title>Conjunto residencial</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="favicon.ico" />
-        <link rel="stylesheet" href="css/bootstrap-select.min.css"/>
-        <link rel="stylesheet" href="css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
-        <link rel="stylesheet" href="css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="css/fonts.css"/>
-        <link rel="stylesheet" href="css/general.css"/>
-        <link rel="stylesheet" href="css/bootstrap-notify.css"/>
-        <!--<link rel="stylesheet" href="assets/ladda-bootstrap/ladda.min.css"/>-->
-        <link rel="stylesheet" href="assets/ladda-bootstrap/ladda-themeless.min.css"/>
-        <link rel="stylesheet" href="assets/ng-tags-input/ng-tags-input.min.css"/>
-        <script src="js/jquery/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/bootstrap-notify.js"></script>
-        <script src="js/bootstrap-select.min.js"></script>
-        <script src="assets/ladda-bootstrap/spin.min.js"></script>
-        <script src="assets/ladda-bootstrap/ladda.min.js"></script>
-        <script src="js/angular/angular.min.js"></script>
-        <script src="js/angular/angular-ui-router.min.js"></script>
-        <script src="js/angular/angular-resource.min.js"></script>
-        <script src="js/angular/angular-sanitize.min.js"></script>
-        <script src="js/angular/ui-bootstrap-tpls-0.11.0.min.js"></script> <!-- Angular UI Bootstrap -->
-        <script src="assets/ladda-bootstrap/ui-ladda.js"></script>
-        <script src="assets/ng-tags-input/ng-tags-input.min.js"></script>
-        <script src="assets/nya-bootstrap-select/nya-bootstrap-select.js"></script>
-        <script src="js/web/app.js"></script>
-        <script src="js/web/controllers.js"></script>
+<head>
+    <title>Conjunto residencial</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <link rel="stylesheet" href="css/bootstrap-select.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/fonts.css"/>
+    <link rel="stylesheet" href="css/general.css"/>
+    <link rel="stylesheet" href="css/bootstrap-notify.css"/>
+    <!--<link rel="stylesheet" href="assets/ladda-bootstrap/ladda.min.css"/>-->
+    <link rel="stylesheet" href="assets/ladda-bootstrap/ladda-themeless.min.css"/>
+    <link rel="stylesheet" href="assets/ng-tags-input/ng-tags-input.min.css"/>
+    <script src="js/jquery/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-notify.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+    <script src="assets/ladda-bootstrap/spin.min.js"></script>
+    <script src="assets/ladda-bootstrap/ladda.min.js"></script>
+    <script src="assets/noty/jquery.noty.packaged.min.js"></script>
+    <script src="js/angular/angular.min.js"></script>
+    <script src="js/angular/angular-ui-router.min.js"></script>
+    <script src="js/angular/angular-resource.min.js"></script>
+    <script src="js/angular/angular-sanitize.min.js"></script>
+    <script src="js/angular/angular-animate.min.js"></script>
+    <!-- Angular Strap -->
+    <script src="js/angular/angular-strap.min.js"></script>
+    <script src="js/angular/angular-strap.tpl.min.js"></script>
+    <script src="assets/ladda-bootstrap/ui-ladda.js"></script>
+    <script src="assets/ng-tags-input/ng-tags-input.min.js"></script>
+    <script src="assets/nya-bootstrap-select/nya-bootstrap-select.js"></script>
+    <script src="js/web/app.js"></script>
+    <script src="js/web/controllers.js"></script>
 
-        <script src="js/web/services.js"></script>
-        <script src="js/web/directives.js"></script>
-        <script src="js/web/editor/summernote.js"></script>
-        <script src="js/web/editor/summernote-es-ES.js"></script>
-    </head>
-    <body ng-controller="PrincipalCtrl">
-        <section ui-view>
-            <i>Some content will load here!</i>
-        </section>
-        <div class="notifications bottom-right"></div>
-        <script type="text/javascript">
-                    $(function() {
-                        $('.summernote').summernote({
-                            height: 200,
-                            lang: 'es-ES'
-                        });
-                    });
-        </script>
-        <div class="modal fade example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content" compile-data template="{{modalHtml}}"></div>
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-    </body>
-</html>
-<script>
-    var url = "/conjunto-residencial/yii.php?r=";
+    <script src="js/web/services.js"></script>
+    <script src="js/web/directives.js"></script>
+    <script src="js/web/editor/summernote.js"></script>
+    <script src="js/web/editor/summernote-es-ES.js"></script>
+</head>
+<body ng-controller="PrincipalCtrl">
+    <section ui-view>
+        <i>Some content will load here!</i>
+    </section>
+    <div style="z-index: 99999999" class="notifications bottom-right"></div>
+    <script type="text/javascript">
+    $(function() {
+        $('.summernote').summernote({
+            height: 200,
+            lang: 'es-ES'
+        });
+    });
+    </script>
+    <div class="modal fade example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" compile-data template="{{modalHtml}}"></div>
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script>
+    var n = noty({layout: 'bottom', type: 'success', text: 'Nombre base de datos: <b>"conjunto_residencial"</b>, usuario: <b>"root"</b>, clave: <b>""</b><br>Por favor revisar el archivo <b>"Orden de importación.txt"</b> dentro de la carpeta db.'});
+    var url = location.pathname + "yii.php?r=";
     console.log(url);
-</script>
+    </script>
+</body>
+</html>

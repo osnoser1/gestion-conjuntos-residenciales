@@ -17,8 +17,9 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `modulo-usuario`
+-- Base de datos: `conjunto-residencial`
 --
+USE `conjunto_residencial`;
 
 -- --------------------------------------------------------
 
@@ -33,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `telefono` (
   `Tipo` varchar(10) NOT NULL,
   PRIMARY KEY (`IDTelefono`),
   KEY `usuario-tlf` (`IDUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -50,7 +51,16 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `Correo` varchar(40) NOT NULL,
   `Contraseña` varchar(60) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`TipoUsuario`, `Nombre`, `Apellido`, `Cedula`, `Correo`, `Contraseña`) VALUES
+(1, 'Ricardo', 'Felicce', '20448909', 'exosymmetry@hotmail.com', '123'),
+(1, 'Jenny', 'Gonzales', '9831876', 'exosymmetry@hotmail.com', '321'),
+(1, 'Alfonso Andrés', 'López Molina', '20503457', 'osnoser_12@hotmail.com', 'osnoser1');
 
 --
 -- Restricciones para tablas volcadas

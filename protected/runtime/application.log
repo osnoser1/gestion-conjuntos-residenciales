@@ -1320,3 +1320,86 @@ Stack trace:
 REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=gii/giixModel/index
 HTTP_REFERER=http://localhost/gestion-conjuntos-residenciales/yii.php?r=gii/default/index
 ---
+2014/06/08 22:43:55 [warning] [application] Failed to set unsafe attribute "idGasto" of "Gasto".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (42)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 22:43:55 [warning] [application] Failed to set unsafe attribute "Precio" of "Gasto".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (42)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 22:43:55 [warning] [application] Failed to set unsafe attribute "Fecha" of "Gasto".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (42)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:11:28 [warning] [application] Failed to set unsafe attribute "Precio" of "Gasto".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (43)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:11:28 [warning] [application] Failed to set unsafe attribute "Fecha" of "Gasto".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (43)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:11:28 [warning] [application] Failed to set unsafe attribute "Nombre" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (54)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:11:28 [warning] [application] Failed to set unsafe attribute "Fecha" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (54)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:11:28 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`gasto_historial`, CONSTRAINT `gasto_historial_ibfk_2` FOREIGN KEY (`idGasto`) REFERENCES `gasto` (`idGasto`)). The SQL statement executed was: INSERT INTO `gasto_historial` (`Precio`, `idGastoFecha`) VALUES (:yp0, :yp1).
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (56)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:11:29 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`gasto_historial`, CONSTRAINT `gasto_historial_ibfk_2` FOREIGN KEY (`idGasto`) REFERENCES `gasto` (`idGasto`)). The SQL statement executed was: INSERT INTO `gasto_historial` (`Precio`, `idGastoFecha`) VALUES (:yp0, :yp1)' in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\db\CDbCommand.php:358
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php(56): CActiveRecord->insert()
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\actions\CInlineAction.php(49): GastoController->actionCreateHistorial()
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): CController->run('createHistorial')
+#7 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/createHis...')
+#8 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/createHistorial
+HTTP_REFERER=http://localhost/conjunto-residencial/
+---
+2014/06/08 23:13:33 [warning] [application] Failed to set unsafe attribute "Precio" of "Gasto".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (43)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:13:33 [warning] [application] Failed to set unsafe attribute "Fecha" of "Gasto".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (43)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:13:33 [warning] [application] Failed to set unsafe attribute "Nombre" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (54)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:13:33 [warning] [application] Failed to set unsafe attribute "Fecha" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (54)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:13:33 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`gasto_historial`, CONSTRAINT `gasto_historial_ibfk_2` FOREIGN KEY (`idGasto`) REFERENCES `gasto` (`idGasto`)). The SQL statement executed was: INSERT INTO `gasto_historial` (`Precio`, `idGastoFecha`) VALUES (:yp0, :yp1).
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (56)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:13:34 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`gasto_historial`, CONSTRAINT `gasto_historial_ibfk_2` FOREIGN KEY (`idGasto`) REFERENCES `gasto` (`idGasto`)). The SQL statement executed was: INSERT INTO `gasto_historial` (`Precio`, `idGastoFecha`) VALUES (:yp0, :yp1)' in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\db\CDbCommand.php:358
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php(56): CActiveRecord->insert()
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\actions\CInlineAction.php(49): GastoController->actionCreateHistorial()
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): CController->run('createHistorial')
+#7 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/createHis...')
+#8 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/createHistorial
+HTTP_REFERER=http://localhost/conjunto-residencial/
+---
+2014/06/08 23:20:09 [warning] [application] Failed to set unsafe attribute "Precio" of "Gasto".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (43)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:20:09 [warning] [application] Failed to set unsafe attribute "Fecha" of "Gasto".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (43)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:28:11 [warning] [application] Failed to set unsafe attribute "Precio" of "Gasto".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (43)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/08 23:28:11 [warning] [application] Failed to set unsafe attribute "Fecha" of "Gasto".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (43)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)

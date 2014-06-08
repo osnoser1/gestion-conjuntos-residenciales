@@ -1,6 +1,6 @@
 <!--modulo Cartelera mensajes publicados por el admin unicamente-->
 <link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
- <script src="js/web/cartelera.js"></script>
+ <script src="js/web/carteleractrl.js"></script>
  <script type="text/javascript">
          $(function() {
             $('.summernote').summernote({
@@ -12,7 +12,8 @@
          function publicar(){
 
             console.log($('.summernote').code(""));
-         }     
+         }  
+        eventos();   
 </script>
 
 <h1>Cartelera</h1>
@@ -52,7 +53,29 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                 <h4>Seleccionar restricciones de mensaje</h4>
                                                 <div class="modal-body">
-
+                                                  <table class="table">
+                                                    <thead>
+                                                      <th>Edificios</th>
+                                                      <th>Pisos</th>
+                                                      <th>Apartamentos</th>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr>
+                                                        <td>
+                                                          <select class="multiselect" multiple="multiple" id="Edificios">
+                                                        </select>
+                                                        </td>
+                                                        <td>
+                                                          <select id="Pisos" multiple>
+                                                        </select>
+                                                        </td>
+                                                        <td>
+                                                          <select id="Apartamentos" multiple>
+                                                        </select>
+                                                        </td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary">Aceptar </button>
@@ -72,10 +95,8 @@
 
             </div>
         </div>
-
-
     </div>
-</div>
+
 
 <div class="well well-sm">
   <div> 
@@ -94,7 +115,7 @@ Navbar
 Default navbar
 Navbars are responsive meta components that serve as navigation headers for your application or site. They begin collapsed (and are toggleable) in mobile views and become horizontal as the available viewport width increases.
     </div>
-    <a type="button" class="btn btn-default btn-xs" href="#/panel/crear-mensaje">
+    <a class="btn btn-default btn-xs" href="#/panel/crear-mensaje">
         <span class="glyphicon glyphicon-envelope"></span> 
     </a>
      <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModaleliminar">Eliminar</button>
@@ -103,7 +124,7 @@ Navbars are responsive meta components that serve as navigation headers for your
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-       <b> <h4 class="modal-title" id="myModalLabel">Aviso</h4></b>
+        <h4 class="modal-title" id="myModalLabel"><b>Aviso</b></h4>
       </div>
       <div class="modal-body">
         Esta seguro de querer eliminar el mensaje

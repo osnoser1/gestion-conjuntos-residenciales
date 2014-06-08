@@ -17,10 +17,9 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `conjunto_residenciales`
+-- Base de datos: `conjunto_residencial`
 --
-CREATE DATABASE IF NOT EXISTS `conjunto_residenciales` DEFAULT CHARACTER SET latin1 COLLATE utf8_spanish_ci;
-USE `conjunto_residenciales`;
+USE `conjunto_residencial`;
 
 -- --------------------------------------------------------
 
@@ -33,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `apartamento` (
   `nrodepiso` int(2) NOT NULL,
   `idedificio` int(7) NOT NULL,
   PRIMARY KEY (`idapartamento`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -46,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `edificio` (
   `nombre` varchar(7) NOT NULL,
   `cantpisos` int(2) NOT NULL,
   PRIMARY KEY (`idedificio`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -63,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `aptos` set('','','','','','','','','','','','','') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fecha` datetime NOT NULL,
   PRIMARY KEY (`idpost`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

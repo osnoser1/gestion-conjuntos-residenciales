@@ -17,8 +17,9 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `gestion-conjuntos-residenciales`
+-- Base de datos: `conjunto-residencial`
 --
+USE `conjunto_residencial`;
 
 -- --------------------------------------------------------
 
@@ -41,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `pagos` (
   KEY `idtipo_de_pago` (`idtipo`),
   KEY `idbanco` (`idbanco`),
   KEY `idEstado` (`idEstado`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `pagos`
@@ -63,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `pagos_bancos` (
   `banco` varchar(60) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
 
 --
 -- Volcado de datos para la tabla `pagos_bancos`
@@ -118,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `pagos_estados` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `estado` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `pagos_estados`
@@ -140,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `pagos_tipos` (
   `id` tinyint(11) NOT NULL AUTO_INCREMENT,
   `tipo` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `pagos_tipos`
@@ -149,32 +150,6 @@ CREATE TABLE IF NOT EXISTS `pagos_tipos` (
 INSERT INTO `pagos_tipos` (`id`, `tipo`) VALUES
 (1, 'Depósito'),
 (2, 'Transferencia');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuario`
---
-
--- DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `TipoUsuario` int(11) NOT NULL,
-  `Nombre` varchar(30) NOT NULL,
-  `Apellido` varchar(30) NOT NULL,
-  `Cedula` varchar(8) NOT NULL,
-  `Correo` varchar(40) NOT NULL,
-  `Contraseña` varchar(60) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`TipoUsuario`, `Nombre`, `Apellido`, `Cedula`, `Correo`, `Contraseña`) VALUES
-(1, 'Ricardo', 'Felicce', '20448909', 'exosymmetry@hotmail.com', '123'),
-(1, 'Jenny', 'Gonzales', '9831876', 'exosymmetry@hotmail.com', '321');
 
 --
 -- Restricciones para tablas volcadas

@@ -5,17 +5,33 @@ var pruebaControllers = angular.module('myControllers', []);
 
 pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $location, $sce, $rootScope) {
     $scope.cargando = false;
-    $scope.error = function(data) {
-        console.log(data);
-        if (typeof data !== "object") {
-            $('.modal-content').html(data);
-            $('#myModal').modal('show');
-            show({message: {text: "Error en el servidor."}, type: 'danger'});
-        } else {
-            show({message: {text: data.aviso}, type: 'danger'});
+    $scope.error = function(data, status, headers, config) {
+        $rootScope.loading = false;
+        var headers = headers();
+        console.log(data, status, headers, config);
+        if (status === 0) {
+            show({message: {text: "Tiempo límite excedido."}, type: 'danger'});
+            return;
+        } else if (status === 200 || status === 500) {
+            if (typeof data === "undefined") {
+                $scope.showDialog({message: data + "<br>" + status});
+                show({message: {text: "Error en el servidor."}, type: 'danger'});
+            }
+            else
+                how({message: {text: data.aviso}, type: 'danger'});
         }
-        $scope.cargando = false;
     };
+//    $scope.error = function(data) {
+//        console.log(data);
+//        if (typeof data !== "object") {
+//            $('.modal-content').html(data);
+//            $('#myModal').modal('show');
+//            show({message: {text: "Error en el servidor."}, type: 'danger'});
+//        } else {
+//            show({message: {text: data.aviso}, type: 'danger'});
+//        }
+//        $scope.cargando = false;
+//    };
     $scope.showConfirmDialog = function(params, success) {
         $scope.successDialog = success;
         if (params.src && params.message) {
