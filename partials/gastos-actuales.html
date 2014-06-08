@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="assets/checkd-list-group-bootstrap/cheked-list-group.css"/>
 <div ng-controller="GastosActualesCtrl">
     <h1>Gastos actuales</h1>
-    <h2>{{datos.Mes}}</h2>
+    <h2>{{datos.Mes}} - {{datos.Ano}}</h2>
     <div class="barra-pers2">
         <!--<a class="btn btn-default btn-sm btn-responsive" href="">Agregar</a>-->
         <button type="button" class="btn btn-default btn-sm btn-responsive" ng-click="all(true)">Seleccionar todo</button>
@@ -10,7 +10,7 @@
         <a class="btn btn-default btn-sm btn-responsive" ng-disabled="desactivado" ng-click="showModalBorrar()">Eliminar</a>
     </div>
     <div class="list-group">
-        <div class="list-group-item row no-select" ng-repeat="element in datos.gastos" >
+        <div class="list-group-item row no-select" ng-repeat="element in datos.gastos" ng-animate="'animate'">
             <input ng-change=check() ng-model="element.select" class="col-xs-1" type="checkbox"/>
             <p class="col-xs-1">{{element.idGasto}}</p>
             <p ng-hide="element.editing['Nombre']" ng-dblclick="setEditing(element, 'Nombre', true)" class="col-xs-2 pointer">{{element.Nombre}}</p>
@@ -25,7 +25,7 @@
                 <input focus-me="element.editing['Precio']" ng-blur="setEditing(element, 'Precio', false)" class="form-control" ng-model="element.Precio" type="number"/>
             </div>
             <tags-input class="col-xs-5" ng-model="element.sitios" placeholder="Agrega un sitio" add-from-autocomplete-only="true" replace-spaces-with-dashes="false">
-                <auto-complete source="loadTags($query)" max-results-to-show="20"></auto-complete>
+                <auto-complete source="loadTags($query)" max-results-to-show="20" min-length="1"></auto-complete>
             </tags-input>
             <a href="" class="col-xs-2">¿No consigues lo que buscas?</a>
 
@@ -48,6 +48,9 @@
                 <span class="ladda-label">Agregar</span>
             </a>
         </form>
+    </div>
+    <div >
+        <a class="btn btn-primary pull-right" ng-click="submit(datos)">Procesar gastos mensuales</a>
     </div>
 </div>
 <!--<script src="assets/checkd-list-group-bootstrap/checked-list-group.js"></script>-->
