@@ -20,8 +20,12 @@ myApp.controllerProvider.register('UsuarioCrearCtrl', function($scope, $http, $q
         datos.nuevoTelefono = [];
     };
     $scope.addUsuario = function(usuario) {
+        console.log(usuario.nuevoUsuario.cedula + " " + usuario.nuevoUsuario.nombre);
+        console.log(datos.telefonos[0].Telefono);
+        $scope.showDialog({title: "Aviso", message: "Usuario Agregado Exitosamente"});
+        usuario.nuevoUsuario = [];
+    };
 
-    }
 });
 
 

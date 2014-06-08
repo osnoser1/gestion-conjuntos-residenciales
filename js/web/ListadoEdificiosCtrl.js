@@ -18,13 +18,21 @@ myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http
         ],
     };
     $scope.a = function() {
+        console.log($rootScope.edificio);
+        var array = $filter('filter')($scope.datos.Edificios, {id: $rootScope.edificio.id}, true);
+        console.log(array);
+        if(array.length !== 0) {
+            array[0].Nombre = $rootScope.edificio.Nombre;
+            array[0].CantidadPisos = $rootScope.edificio.CantidadPisos;
+        }
+                    $('#myModal').modal('hide');
+                                show({message: {text: "Edificio modificado exitosamente."}, type: 'success'});
 
     };
     $scope.modificarDatosE = function(elemento) {
-        $scope.edificio = elemento;
+        $rootScope.edificio = {id:elemento.id,Nombre:elemento.Nombre, CantidadPisos:elemento.CantidadPisos};
         console.log("Hola mundo");
-        $scope.showConfirmDialog({title: "Editar Edificio", message: ''}, $scope.a);
-
+        $scope.showConfirmDialog({title: "Editar Edificio", src: "'partials/modificar-edificio.html'"}, $scope.a);
     };
 });
 

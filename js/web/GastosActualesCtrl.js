@@ -107,6 +107,13 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
             $scope.loading = false;
             return;
         }
+        $http.post(url + 'site/functionName', {datos: gasto}
+        ).success(function(data, status, headers, config) {
+            console.log(data);
+        }).error(function(data, status) { // called asynchronously if an error occurs
+// or server returns response with an error status.
+            $scope.showDialog({message: data});
+        });
         $timeout(function() {
             $scope.loading = false;
             if (gasto.idGasto === "Nuevo") {
