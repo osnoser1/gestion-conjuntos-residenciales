@@ -12,7 +12,20 @@ myApp.controllerProvider.register('ListadoSeccionesCtrl', function($scope, $http
 		],
     };
     $scope.isCollapsed = true;
-    $scope.entrarSeccion = function() {
-         $('#myModal').modal('show');
+    $scope.entrarSeccion = function(seccion) {
+        //$('#myModal').modal('show');<form role="form">
+        console.log(seccion.Titulo);        
+        var mensaje='<div class="modal-body"><form role="form">'+
+                '<label>Modificar Seccion</label><input ng-model="seccion.titulo" type="text" id="Titulo" class="form-control" placeholder="Titulo" value="' + seccion.Titulo + '">'+
+                '<br></br>'+
+                '<textarea  ng-model="seccion.contenido" class="summernote form-control" rows="10" cols="50" placeholder="Descripcion de seccion" >' + seccion.Contenido + '</textarea>'               
+            +'<form>'
+          +'</div>';
+        $scope.showConfirmDialog({tittle:"Modificar",message:mensaje},$scope.ModificarSeccion);
     };
+    $scope.ModificarSeccion = function() {
+        
+    };
+    
+    
 });
