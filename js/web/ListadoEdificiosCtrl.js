@@ -23,7 +23,7 @@ myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http
     $scope.modificarDatosE = function(elemento) {
         $scope.edificio = elemento;
         console.log("Hola mundo");
-        $scope.showConfirmDialog({title: "Editar Edificio", message: ''}, $scope.a);
+        $scope.showConfirmDialog({title: "Editar Edificio", src: "'partials/modificar-edificio.html'"}, $scope.a);
 
     };
 });

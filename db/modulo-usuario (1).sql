@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2014 a las 22:21:13
+-- Tiempo de generación: 08-06-2014 a las 01:25:51
 -- Versión del servidor: 5.6.16
 -- Versión de PHP: 5.5.11
 
@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `telefono` (
   `IDTelefono` int(11) NOT NULL AUTO_INCREMENT,
   `IDUsuario` int(11) NOT NULL,
   `Telefono` varchar(12) NOT NULL,
+  `Tipo` varchar(10) NOT NULL,
   PRIMARY KEY (`IDTelefono`),
   KEY `usuario-tlf` (`IDUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -49,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `Correo` varchar(40) NOT NULL,
   `Contraseña` varchar(60) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Restricciones para tablas volcadas
