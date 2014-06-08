@@ -62,7 +62,7 @@
                                                     <tbody>
                                                       <tr>
                                                         <td>
-                                                          <select id="Edificios" multiple>
+                                                          <select class="multiselect" multiple="multiple" id="Edificios">
                                                         </select>
                                                         </td>
                                                         <td>
@@ -95,10 +95,8 @@
 
             </div>
         </div>
-
-
     </div>
-</div>
+
 
 <div class="well well-sm">
   <div> 
@@ -117,7 +115,7 @@ Navbar
 Default navbar
 Navbars are responsive meta components that serve as navigation headers for your application or site. They begin collapsed (and are toggleable) in mobile views and become horizontal as the available viewport width increases.
     </div>
-    <a type="button" class="btn btn-default btn-xs" href="#/panel/crear-mensaje">
+    <a class="btn btn-default btn-xs" href="#/panel/crear-mensaje">
         <span class="glyphicon glyphicon-envelope"></span> 
     </a>
      <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModaleliminar">Eliminar</button>
@@ -126,7 +124,7 @@ Navbars are responsive meta components that serve as navigation headers for your
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-       <b> <h4 class="modal-title" id="myModalLabel">Aviso</h4></b>
+        <h4 class="modal-title" id="myModalLabel"><b>Aviso</b></h4>
       </div>
       <div class="modal-body">
         Esta seguro de querer eliminar el mensaje
