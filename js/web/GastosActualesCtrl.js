@@ -10,17 +10,11 @@ var myApp = angular.module('myApp');
 
 myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
     console.log('GastosActualesCtrl');
+    var temp;
     $scope.desactivado = false;
     $scope.tags = [];
     $scope.sitios = [];
     $scope.nuevo = [];
-    $http.get('pruebas/gastos.json').success(function(data) {
-        $scope.gastos = data;
-        $('.selectpicker').selectpicker();
-    });
-    $http.get('pruebas/sitios.json').success(function(data) {
-        $scope.sitios = data;
-    });
     $scope.datos = {
         Mes: "Febrero",
         gastos: [
@@ -31,6 +25,21 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
             {idGasto: "5", Nombre: "Luz residencia", Precio: "10000"},
         ],
     };
+    $http.get('pruebas/gastos.json').success(function(data) {
+        $scope.gastos = data;
+        console.log($scope.gastosFiltrados);
+        $scope.gastosFiltrados = [];
+        angular.forEach($scope.gastos, function(key) {
+            if ($filter('filter')($scope.datos.gastos, {idGasto: key.idGasto}, true).length === 0) {
+                $scope.gastosFiltrados.push(key);
+            }
+        });
+//        $('.selectpicker').selectpicker();
+    });
+    $http.get('pruebas/sitios.json').success(function(data) {
+        $scope.sitios = data;
+    });
+
     $scope.loadTags = function(query) {
         console.log(query);
         var _p = $q.defer();
@@ -74,9 +83,20 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
         element.editing[campo] = bool;
         if (bool) {
             $scope.textAnterior = element[campo];
-        } else if ($scope.textAnterior !== element[campo]) {
-
+            if (campo === "Nombre") {
+                temp = {idGasto: element['idGasto'], Nombre: element['Nombre']};
+                $scope.gastosFiltrados.unshift(temp);
+                console.log(temp);
+            }
+        } else {
+            if (campo === "Nombre") {
+                $scope.gastosFiltrados.remove(temp);
+                console.log(temp);
+            }
         }
+//       } else if ($scope.textAnterior !== element[campo]) {
+//
+//       }
     };
     $scope.addGasto = function(gasto) {
         console.log(gasto);

@@ -3,5 +3,6 @@
     {"idGasto": "2", "Nombre": "Aseo urbano"},
     {"idGasto": "3", "Nombre": "Mantenimiento piscina"},
     {"idGasto": "4", "Nombre": "Mantenimiento ascensor"},
-    {"idGasto": "5", "Nombre": "Luz residencia"}
+    {"idGasto": "5", "Nombre": "Luz residencia"},
+    {"idGasto": "6", "Nombre": "Agua de la residencia"}
 ]
