@@ -1,64 +1,42 @@
+<script src="js/web/UsuarioListadoCtrl.js"></script>
 <link rel="stylesheet" href="css/estilo-mariangela.css"/>
-<h1>Lista De Usuarios</h1>
-<form>
-    <div class="col-sm-12">
-        <div class="col-sm-3">
-            Ordenar Por: <input list="ordenar">
-            <datalist id="ordenar">
-                <option value="Id"></option>
-                <option value="Nombre"></option>
-                <option value="Apto"></option>
-            </datalist><br><br><br><br><br>
-        </div>
-        <div class="col-sm-3">
-            Edificio: <input list="edif">
-            <datalist id="ordenar">
+<div ng-controller="UsuarioListadoCtrl">
+    <h1>Lista De Usuarios</h1>
+    <div class="barra-pers2">
+        Ordenar Por: <input list="ordenar">
+        <datalist id="ordenar">
+            <option value="Id"></option>
+            <option value="Nombre"></option>
+            <option value="Apto"></option>
+        </datalist>
+        Edif: <input list="edif">
+        <datalist id="ordenar">
 
-            </datalist><br><br><br><br><br>
-        </div>
-        <div class="col-sm-3">
-            Piso: <input list="piso">
-            <datalist id="ordenar">
+        </datalist>
+        Apto: <input list="apto">
+        <datalist id="ordenar">
 
-            </datalist><br><br><br><br><br>
-        </div>
-        <div class="col-sm-2">
-            Apto: <input list="apto">
-            <datalist id="ordenar">
-
-            </datalist><br><br><br><br><br>
-        </div>
+        </datalist>
     </div>
-    <div class="list-group col-sm-12">
-        <a style="display: flex;" class="list-group-item">
-            <p class="col-sm-1">1</p>
-            <p class="col-sm-3">mariangela diaz</p>
-            <p class="col-sm-3">marinageladiaz@gmail.com</p>
-            <div class="col-sm-5">
-                <div class="col-sm-12">
-                    <p class="col-sm-8">Las Flores</p>
-                    <p class="col-sm-4">1-A</p>
-                </div>
-                <div class="col-sm-12">
-                    <p class="col-sm-8">La Palma</p>
-                    <p class="col-sm-4">3-A</p>
-                </div>
+    <form>
+        <div class="list-group text-center">
+            <div class="list-group-item row no-select active cabecera">
+                <span class="badge pull-left">#</span>
+                <p ng-dblclick="" class="col-xs-3">Nombre</p>
+                <p ng-dblclick="" class="col-xs-4">Correo</p>
+                <p ng-dblclick="" class="col-xs-2">Edif</p>
+                <p ng-dblclick="" class="col-xs-1">Apto</p>
             </div>
+            <div class="list-group-item row no-select" ng-repeat="element in datos.usuarios" >
+                <span class="badge pull-left">{{element.id}}</span>
+                <p ng-dblclick="" class="col-xs-3">{{element.Nombre}}</p>
+                <p ng-dblclick="" class="col-xs-4">{{element.Correo}}</p>
+                <p ng-dblclick="" class="col-xs-2">{{element.Edif}}</p>
+                <p ng-dblclick="" class="col-xs-1">{{element.Apto}}</p>
+                <a class="col-xs-1 pointer" ng-click="UsuariosVerDetalles(element)"><span class="glyphicon glyphicon-search" title="Ver detalles"></span></a>
+                <a class="col-xs-1 pointer" ng-click="UsuarioModificar(element)"><span class="glyphicon glyphicon-pencil" title="Modificar"></span></a>
 
-
-        </a>
-        <a style="display: flex;" class="list-group-item"></a>
-        <a style="display: flex;" class="list-group-item"></a>
-        <a style="display: flex;" class="list-group-item"></a>
-        <a style="display: flex;" class="list-group-item"></a>
-    </div>
-    <table class="botonlistausuario2">
-        <tr>
-            <td class="celdabotones">
-                <input type="submit" value="Modificar" class="css_buttonaceptar"/>
-            </td>
-        </tr>
-    </table>
-
-
-</form>
+            </div>
+        </div>
+    </form>
+</div>
