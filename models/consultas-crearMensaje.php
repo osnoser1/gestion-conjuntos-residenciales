@@ -36,6 +36,18 @@ switch($id)
 	case 8:
 		 borrarMensaje();
 		 break;
+	case 9:
+		 marcarnoleido();
+		 break;
+	case 10:
+		obtenertodoslosmensajesenviados();
+		break;
+	case 11:
+		obtenerMensajeEnviado();
+		break;
+	case 12:
+		borrarMensajeEnviado();
+		break;
 	default;
 
 
@@ -49,13 +61,73 @@ else{
 	}
 }
 /*echo call_user_func(array($_POST['funcion']));*/
+	function borrarMensajeEnviado(){
+		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+		$idMensaje=$_REQUEST['idMensaje'];
+		$tupla="DELETE FROM mensajesenviados WHERE idMensaje='$idMensaje'";
+		$resultado = $mysqli->query($tupla);
+		$mysqli->close();
+		echo json_encode("true");
+	}
 
+	function obtenerMensajeEnviado(){
+		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+		$idMensaje=$_REQUEST['idMensaje'];
+		$tupla="SELECT * FROM mensajesenviados WHERE idMensaje='$idMensaje'";
+		$resultado = $mysqli->query($tupla);
+		$objeto[0]['m']=$resultado->num_rows;	
+		
+		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		{
+			
+			$objeto[0]['asunto']=$db_resultado['asunto'];
+			$objeto[0]['descripcion']=$db_resultado['descripcion'];	
+			$objeto[0]['idMensaje']=$db_resultado['idMensaje'];
+			$objeto[0]['fecha']=$db_resultado['fecha'];
+			
+		}		
+
+		
+		$mysqli->close();
+		echo json_encode($objeto);
+
+	}
+	function obtenertodoslosmensajesenviados(){
+		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+		
+		$tupla="SELECT * FROM mensajesenviados";
+		$resultado = $mysqli->query($tupla);
+		$objeto[0]['m']=$resultado->num_rows;	
+		$i=0;
+		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		{
+			
+			$objeto[$i]['asunto']=$db_resultado['asunto'];
+			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
+			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
+			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			
+
+
+			$i++;	
+		}		
+		$mysqli->close();
+		echo json_encode($objeto);
+	}
+	function marcarnoleido(){
+		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+		$idMensaje=$_REQUEST['idMensaje'];
+		$tupla="UPDATE mensaje SET leido='0' WHERE idMensaje='$idMensaje'";
+		$resultado = $mysqli->query($tupla);
+		$mysqli->close();
+		echo json_encode("true");
+	}
 	function borrarMensaje(){
 		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
 		$idMensaje=$_REQUEST['idMensaje'];
 		$tupla="DELETE FROM mensaje WHERE idMensaje='$idMensaje'";
 		$resultado = $mysqli->query($tupla);
-
+		$mysqli->close();
 		echo json_encode("true");
 	}
 	function leermensaje(){
@@ -117,6 +189,8 @@ else{
 			if(strlen($usuario)>4){
 				$tupla="INSERT INTO mensaje (para, asunto, descripcion, fecha, leido) VALUES ('$usuario', '$titulo', '$mensaje', '$fecha', 'false')";
 				$resultado = $mysqli->query($tupla);
+				$tupla2="INSERT INTO mensajesenviados (para, asunto, descripcion, fecha) VALUES ('$usuario', '$titulo', '$mensaje', '$fecha')";
+				$resultado2 = $mysqli->query($tupla2);
 			}
 		}
 		$mysqli->close();
@@ -141,7 +215,7 @@ else{
 			echo json_encode($objeto);
 	}
 	function ObtenerApartamentosdePisosdeunEdificio(){
-			$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+			$mysqli = new mysqli("127.0.0.1", "root", "", "conjuntoresidencial");
 			$idPiso=$_REQUEST['idPiso'];
 			$idEdificio=$_REQUEST['idEdificio'];
 			$tupla="SELECT DISTINCT  apartamentos.idApartamento as idApartamento,  apartamentos.idUsuario  FROM  apartamentos INNER JOIN pisos on pisos.idPiso=apartamentos.idPiso INNER JOIN edificio on edificio.idEdificio=apartamentos.idEdificio where  apartamentos.idEdificio='$idEdificio' and apartamentos.idPiso='$idPiso'";
