@@ -18,12 +18,12 @@ pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $l
     };
     $scope.showConfirmDialog = function(params, success) {
         $scope.successDialog = success;
-        if (success.src && success.message) {
+        if (params.src && params.message) {
             console.log('No puede existir atributos html y message al mismo tiempo');
             return;
         }
         var o;
-        if (success.message) {
+        if (params.message) {
             o = {title: "", message: "Mensaje de prueba."};
         } else {
             o = {title: ""};
@@ -33,7 +33,7 @@ pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $l
         if (o.title !== "") {
             modalHtml = '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">' + o.title + '</h4></div>';
         }
-        if (success.message)
+        if (params.message)
             modalHtml += '<div class="modal-body">' + o.message + '</div>';
         else
             modalHtml += '<div class="modal-body"><div ng-include src="' + o.src + '"></div></div>';
