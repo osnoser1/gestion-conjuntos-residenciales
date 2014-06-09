@@ -12,24 +12,26 @@ class GastoController extends GxController {
         $this->render('index');
     }
 
-    public function actionView($id) {
-        $this->render('view', array(
-            'model' => $this->loadModel($id, 'Usuario'),
-        ));
+    public function actionView() {
+        $gf = GastoFecha::model()->findBySql('SELECT * FROM gasto_fecha ORDER BY Fecha DESC LIMIT 1');
+//        var_dump($gf);
+        $gh = GastoHistorial::model()->findAll("idGastoFecha=$gf->idGastoFecha");
+        $salida["datos"]["Fecha"] = $gf->Fecha;
+        $salida["datos"]["Ano"] = date('Y', strtotime($gf->Fecha));
+        $salida["datos"]["Mes"] = date('M', strtotime($gf->Fecha));
+        foreach ($gh as $value) {
+            $el = $value->getAttributes();
+            $el['Nombre'] = $value->idGasto0->Nombre;
+            $salida["datos"]["gastos"][] = $el;
+        }
+        $salida["gastos"] = $this->modelToArray(Gasto::model()->findAll());
+        echo $this->salida(true, $salida);
     }
 
     public function actionCreate() {
 //        sleep(10);
         if (isset($_POST['datos'])) {
             $gasto = $_POST['datos'];
-//            $model->setAttributes($_POST['Usuario']);
-//
-//            if ($model->save()) {
-//                if (Yii::app()->getRequest()->getIsAjaxRequest())
-//                    Yii::app()->end();
-//                else
-//                    $this->redirect(array('view', 'id' => $model->ID));
-//            }
         } else {
             echo $this->salida(false, "aviso", "Error en el servidor");
         }
@@ -43,7 +45,7 @@ class GastoController extends GxController {
                 $model->setAttributes($gasto);
                 $model->insert();
             } else {
-                $model = Gasto::model()->findAllByPk($gasto['idGasto']);
+                $model = Gasto::model()->findByPk($gasto['idGasto']);
                 if ($model == NULL) {
                     echo $this->salida(false, "aviso", "Error en el servidor");
                     return;
@@ -81,14 +83,16 @@ class GastoController extends GxController {
 //        ));
     }
 
-    public function actionDelete($id) {
-//        if (Yii::app()->getRequest()->getIsPostRequest()) {
-//            $this->loadModel($id, 'Usuario')->delete();
-//
-//            if (!Yii::app()->getRequest()->getIsAjaxRequest())
-//                $this->redirect(array('admin'));
-//        } else
-//            throw new CHttpException(400, Yii::t('app', 'Your request is invalid.'));
+    public function actionDeleteHistorial() {
+        if (isset($_POST['datos'])) {
+            $gastos = (array) $_POST['datos'];
+            $criteria = new CDbCriteria;
+            $criteria->addInCondition('idGastoHistorial', $gastos);
+            GastoHistorial::model()->deleteAll($criteria);
+            echo $this->salida();
+        } else {
+            echo $this->salida(false, "aviso", "Error en el servidor");
+        }
     }
 
     public function modelToArray($models) {
@@ -101,6 +105,9 @@ class GastoController extends GxController {
     function salida($respuesta = true, $key = null, $value = null) {
         if ($key == null) {
             return json_encode(array('respuesta' => $respuesta));
+        } else if ($value == null) {
+            $key["respuesta"] = $respuesta;
+            return json_encode($key);
         }
         return json_encode(array('respuesta' => $respuesta, $key => $value));
     }

@@ -79,7 +79,17 @@ CREATE TABLE IF NOT EXISTS `gasto_historial` (
   PRIMARY KEY (`idGastoHistorial`),
   UNIQUE KEY `idGastoFecha` (`idGastoFecha`,`idGasto`),
   KEY `idGasto` (`idGasto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `gasto_historial`
+--
+
+INSERT INTO `gasto_historial` (`idGastoHistorial`, `idGastoFecha`, `idGasto`, `Precio`) VALUES
+(1, 1, 1, 10000),
+(2, 1, 2, 10000),
+(3, 1, 3, 10000),
+(4, 1, 4, 10000);
 
 --
 -- Restricciones para tablas volcadas
