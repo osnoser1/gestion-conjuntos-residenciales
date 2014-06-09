@@ -1403,3 +1403,80 @@ in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.ph
 2014/06/08 23:28:11 [warning] [application] Failed to set unsafe attribute "Fecha" of "Gasto".
 in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (43)
 in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/09 03:40:33 [error] [php] Trying to get property of non-object (F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php:54)
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(286): GastoController->runAction()
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(265): GastoController->runActionWithFilters()
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): GastoController->run()
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CWebApplication->run()
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/createHistorial
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (54)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/09 20:53:57 [error] [php] Array to string conversion (F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php:28)
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(286): GastoController->runAction()
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(265): GastoController->runActionWithFilters()
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): GastoController->run()
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CWebApplication->run()
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/view
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (28)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/09 21:15:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "deleteHistorial".' in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php:483
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(270): CController->missingAction('deleteHistorial')
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): CController->run('deleteHistorial')
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/deleteHis...')
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/deleteHistorial
+HTTP_REFERER=http://localhost/conjunto-residencial/
+---
+2014/06/09 21:17:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "deleteHistorial".' in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php:483
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(270): CController->missingAction('deleteHistorial')
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): CController->run('deleteHistorial')
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/deleteHis...')
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/deleteHistorial
+HTTP_REFERER=http://localhost/conjunto-residencial/
+---
+2014/06/09 21:18:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "deleteHistorial".' in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php:483
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(270): CController->missingAction('deleteHistorial')
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): CController->run('deleteHistorial')
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/deleteHis...')
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/deleteHistorial
+HTTP_REFERER=http://localhost/conjunto-residencial/
+---
+2014/06/09 21:19:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "deleteHistorial".' in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php:483
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(270): CController->missingAction('deleteHistorial')
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): CController->run('deleteHistorial')
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/deleteHis...')
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/deleteHistorial
+HTTP_REFERER=http://localhost/conjunto-residencial/
+---
+2014/06/09 21:33:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "deleteHistorial".' in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php:483
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(270): CController->missingAction('deleteHistorial')
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): CController->run('deleteHistorial')
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/deleteHis...')
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/deleteHistorial
+HTTP_REFERER=http://localhost/conjunto-residencial/
+---
