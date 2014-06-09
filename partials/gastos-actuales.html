@@ -33,15 +33,15 @@
         <form name="g" class="list-group-item row">
             <p class="col-xs-1 col-xs-offset-1">{{nuevo.idGasto}}</p>
             <div class="col-xs-2">
-                <input name="nombre" requiered type="text" list="list-1" ng-change="getIdGasto(nuevo)" class="form-control" ng-model="nuevo.Nombre"/>
+                <input ng-disabled="loading" name="nombre" requiered type="text" list="list-1" ng-change="getIdGasto(nuevo)" class="form-control" ng-model="nuevo.Nombre"/>
                 <datalist id="list-1">
                     <option ng-repeat="gasto in gastos" value="{{gasto.Nombre}}">{{gasto.idGasto}}</option>
                 </datalist>
             </div>
             <div class="col-xs-1">
-                <input name="precio" required ng-pattern="/^\d+$/" class="form-control" ng-model="nuevo.Precio"/>
+                <input ng-disabled="loading" name="precio" required ng-pattern="/^\d+$/" class="form-control" ng-model="nuevo.Precio"/>
             </div>
-            <tags-input class="col-xs-5" ng-model="nuevo.sitios" placeholder="Agrega un sitio" add-from-autocomplete-only="true" replace-spaces-with-dashes="false">
+            <tags-input ng-disabled="loading" class="col-xs-5" ng-model="nuevo.sitios" placeholder="Agrega un sitio" add-from-autocomplete-only="true" replace-spaces-with-dashes="false">
                 <auto-complete source="loadTags($query)" max-results-to-show="100"></auto-complete>
             </tags-input>
             <a ng-disabled="g.nombre.$invalid || g.precio.$invalid" ng-click="addGasto(nuevo)" class="col-xs-2 btn btn-primary ladda-button" data-style="zoom-in" data-ui-ladda="loading">
