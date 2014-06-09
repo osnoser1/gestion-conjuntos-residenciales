@@ -1,9 +1,9 @@
 'use strict';
 
-var myApp = angular.module('myApp', ['ui.router', 'myControllers', 'myServices', 'ngTagsInput', 'ngResource', 'ui.ladda', 'mgcrea.ngStrap', 'nya.bootstrap.select']);
+var myApp = angular.module('myApp', ['ui.router', 'myControllers', 'myServices', 'ngTagsInput', 'ngResource', 'ui.ladda', 'ngAnimate', 'ngSanitize', 'mgcrea.ngStrap', 'nya.bootstrap.select']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider',
-    function($stateProvider, $urlRouterProvider, $controllerProvider) {
+    function($stateProvider, $urlRouterProvider, $controllerProvider,$datepickerProvider) {
         myApp.controllerProvider = $controllerProvider;
         var templateUrl = function(stateParams) {
             console.log(stateParams);
@@ -23,6 +23,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider',
             url: "/:page",
             templateUrl: templateUrl
         });
-//        $locationProvider.html5Mode(true);
+        //$locationProvider.html5Mode(true);
     }
 ]);

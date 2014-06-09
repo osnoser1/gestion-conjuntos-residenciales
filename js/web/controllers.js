@@ -13,12 +13,12 @@ pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $l
             show({message: {text: "Tiempo límite excedido."}, type: 'danger'});
             return;
         } else if (status === 200 || status === 500) {
-            if (typeof data === "undefined") {
+            if (typeof data === "undefined" || data === null) {
                 $scope.showDialog({message: data + "<br>" + status});
                 show({message: {text: "Error en el servidor."}, type: 'danger'});
             }
             else
-                how({message: {text: data.aviso}, type: 'danger'});
+                show({message: {text: data.aviso}, type: 'danger'});
         }
     };
 //    $scope.error = function(data) {

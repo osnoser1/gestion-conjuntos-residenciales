@@ -138,3 +138,7 @@ tags-input .host {
     height: 30px;
     opacity: 1;
 }
+
+.requerido{
+    color: #FA5858;
+}

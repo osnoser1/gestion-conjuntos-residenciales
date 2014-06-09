@@ -2,6 +2,13 @@
 
 class PagosController extends GxController {
 
+
+	public function actionView($id) {
+		$this->render('view', array(
+			'model' => $this->loadModel($id, 'Pagos'),
+		));
+	}
+
 	public function actionCreate() {
 		$model = new Pagos;
 
@@ -17,7 +24,7 @@ class PagosController extends GxController {
 			}
 		}
 
-		//$this->render('create', array( 'model' => $model));
+		$this->render('create', array( 'model' => $model));
 	}
 
 	public function actionUpdate($id) {
@@ -32,9 +39,9 @@ class PagosController extends GxController {
 			}
 		}
 
-		/*$this->render('update', array(
+		$this->render('update', array(
 				'model' => $model,
-				));*/
+				));
 	}
 
 	public function actionDelete($id) {
@@ -47,6 +54,13 @@ class PagosController extends GxController {
 			throw new CHttpException(400, Yii::t('app', 'Your request is invalid.'));
 	}
 
+	public function actionIndex() {
+		$dataProvider = new CActiveDataProvider('Pagos');
+		$this->render('index', array(
+			'dataProvider' => $dataProvider,
+		));
+	}
+
 	public function actionAdmin() {
 		$model = new Pagos('search');
 		$model->unsetAttributes();
@@ -54,9 +68,9 @@ class PagosController extends GxController {
 		if (isset($_GET['Pagos']))
 			$model->setAttributes($_GET['Pagos']);
 
-		/*$this->render('admin', array(
+		$this->render('admin', array(
 			'model' => $model,
-		));*/
+		));
 	}
 
 }
