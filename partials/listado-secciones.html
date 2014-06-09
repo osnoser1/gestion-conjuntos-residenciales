@@ -1,25 +1,20 @@
 <script src="js/web/ListadoSeccionesCtrl.js"></script>
 <link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
 
- <script type="text/javascript">
-         $(function() {
-            $('.summernote').summernote({
-                height: 200,
-                lang: 'es-ES'
-              });  
-         });
+<script type="text/javascript">
+$(function() {
+  $('.summernote').summernote({
+    height: 200,
+    lang: 'es-ES'
+  });  
+});
 </script>
 <div ng-controller="ListadoSeccionesCtrl">
-    <h1>Listado secciones</h1>
-    <div class="list-group">
-        <div class="list-group-item row no-select" ng-repeat="element in datos.seccion" >
-            <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">{{element.Titulo}}</button>
-            <hr>
-            <div collapse="isCollapsed">
-                <div class="well well-lg" >{{element.Contenido}}<a class="pull-right pointer" ng-click="entrarSeccion(element)"><span class="glyphicon glyphicon-pencil" title="Modificar Seccion"></span> Modificar</a>      
-                </div> 
-           </div>
-        </div>
+  <h1>Listado secciones</h1>
+  <div class="list-group">
+    <div class="list-group-item row no-select" ng-repeat="element in datos.seccion" >
+      <button class="btn btn-default" ng-click="verSeccion(element)">{{element.titulo}}</button>
+      <a class="pull-right pointer" ng-click="entrarSeccion(element)"><span class="glyphicon glyphicon-pencil" title="Modificar Seccion"></span> Modificar</a> 
     </div>
- 
+  </div>
 </div>

@@ -106,7 +106,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
 //       }
     };
     $scope.addGasto = function(gasto) {
-        console.log(gasto);
+        
         $rootScope.loading = true;
         var obj = $filter('filter')($scope.datos.gastos, {idGasto: gasto.idGasto}, true);
         if (obj.length !== 0) {
@@ -116,6 +116,21 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
         }
         if (gasto.idGasto === "Nuevo") {
             delete gasto.idGasto;
+            console.log("gasto: ");
+            console.dir(gasto);
+            $http.post(url + 'gasto/createHistorial', $.param({datos: gasto}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+            ).success(function(data, status, headers, config) {
+                if (typeof data === "undefined" || !data.respuesta) {
+                    $scope.error(data, status, headers, config);
+                    return;
+                }
+                console.log("Data: ");
+                console.log(data);
+                $rootScope.loading = false;
+                $scope.datos.gastos.push(data['gasto_historial']);
+                $scope.nuevo = {};
+                show({message: {text: "Gasto agregado exitosamente."}, type: 'success'});
+            }).error($scope.error);
         }
         gasto.Fecha = $scope.datos.Fecha;
         $http.post(url + 'gasto/createHistorial', $.param({datos: gasto}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
@@ -175,7 +190,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     };
     $scope.submit = function(datos) {
         console.log(datos);
-        $scope.showConfirmDialog({title: "Procesar Gastos.", message: "¿Está seguro que desea procesar el mes de " + datos.Mes + " - " + datos.Ano + "?<br><br><b>No hay vuelta atrás.</b>"});
+        $scope.showConfirmDialog({title: "Procesar Gastos.", message: "¿Está seguro que desea procesar el mes de " + datos.Mes + " - " + datos.Ano + "?<br><br><small><b>Esta operación no se puede deshacer.</b></small>"});
     };
 });
 

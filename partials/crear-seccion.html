@@ -1,24 +1,24 @@
 <script src="js/web/CrearSeccionesCtrl.js"></script>
 
 <h1>Crear sección</h1>
-    
+
 <link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
 
- <script type="text/javascript">
-         $(function() {
-            $('.summernote').summernote({
-                height: 200,
-                lang: 'es-ES'
-              });  
-         });
+<script type="text/javascript">
+$(function() {
+  $('.summernote').summernote({
+    height: 200,
+    lang: 'es-ES'
+  });  
+});
 </script>
-    <div ng-controller="CrearSeccionesCtrl">
-    <div class="col-md-12 ">
-        <form role="form">
+<div ng-controller="CrearSeccionesCtrl">
+  <div class="col-md-12 ">
+    <form role="form">
       <label>Titulo</label><input ng-model="nuevaSeccion.Titulo" type="text" id="Titulo" class="form-control" placeholder="Titulo">
       <textarea  ng-model="nuevaSeccion.Contenido" class="summernote form-control" rows="10" cols="50" placeholder="Descripcion de seccion" >
       </textarea>
       <button class="btn btn-primary" ng-click="GuardarSeccion(nuevaSeccion)">Enviar</button>
-        </form>
-    </div>
-    </div>
+    </form>
+  </div>
+</div>
