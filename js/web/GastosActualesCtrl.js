@@ -15,29 +15,34 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     $scope.tags = [];
     $scope.sitios = [];
     $scope.nuevo = {};
-    $scope.datos = {
-        Mes: "Febrero",
-        Ano: "2014",
-        Fecha: "2014-02-01",
-        gastos: [
-            {idHistorialGasto: "7", idGastoFecha: "1", idGasto: "1", Nombre: "Vigilancia", Precio: "10000"},
-            {idHistorialGasto: "8", idGastoFecha: "1", idGasto: "2", Nombre: "Aseo urbano", Precio: "10000"},
-            {idHistorialGasto: "9", idGastoFecha: "1", idGasto: "3", Nombre: "Mantenimiento piscina", Precio: "10000"},
-            {idHistorialGasto: "10", idGastoFecha: "1", idGasto: "4", Nombre: "Mantenimiento ascensor", Precio: "10000"},
-            {idHistorialGasto: "11", idGastoFecha: "1", idGasto: "5", Nombre: "Luz residencia", Precio: "10000"},
-        ],
-    };
-    $http.get('pruebas/gastos.json').success(function(data) {
-        $scope.gastos = data;
-        console.log($scope.gastosFiltrados);
+    $scope.datos = {gastos: []};
+//    $scope.datos = {
+//        Mes: "Febrero",
+//        Ano: "2014",
+//        Fecha: "2014-02-01",
+//        gastos: [
+//            {idHistorialGasto: "7", idGastoFecha: "1", idGasto: "1", Nombre: "Vigilancia", Precio: "10000"},
+//            {idHistorialGasto: "8", idGastoFecha: "1", idGasto: "2", Nombre: "Aseo urbano", Precio: "10000"},
+//            {idHistorialGasto: "9", idGastoFecha: "1", idGasto: "3", Nombre: "Mantenimiento piscina", Precio: "10000"},
+//            {idHistorialGasto: "10", idGastoFecha: "1", idGasto: "4", Nombre: "Mantenimiento ascensor", Precio: "10000"},
+//            {idHistorialGasto: "11", idGastoFecha: "1", idGasto: "5", Nombre: "Luz residencia", Precio: "10000"},
+//        ],
+//    };
+    $http.get(url + 'gasto/view').success(function(data, status, headers, config) {
+//        console.log(data);
+        if (!data.respuesta) {
+            $scope.error(data, status, headers, config);
+            return;
+        }
+        $scope.datos = data.datos;
+        $scope.gastos = data.gastos;
         $scope.gastosFiltrados = [];
         angular.forEach($scope.gastos, function(key) {
             if ($filter('filter')($scope.datos.gastos, {idGasto: key.idGasto}, true).length === 0) {
                 $scope.gastosFiltrados.push(key);
             }
         });
-//        $('.selectpicker').selectpicker();
-    });
+    }).error($scope.error);
     $http.get('pruebas/sitios.json').success(function(data) {
         $scope.sitios = data;
     });
@@ -109,15 +114,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
             $rootScope.loading = false;
             return;
         }
-//        $http.post(url + 'gasto/functionName', {datos: gasto}
-//        ).success(function(data, status, headers, config) {
-//            console.log(data);
-//        }).error(function(data, status) { // called asynchronously if an error occurs
-//// or server returns response with an error status.
-//            $scope.showDialog({message: data});
-//        });
         if (gasto.idGasto === "Nuevo") {
-            gasto.Fecha = $scope.datos.Fecha;
             delete gasto.idGasto;
             console.log("gasto: ");
             console.dir(gasto);
@@ -135,6 +132,19 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
                 show({message: {text: "Gasto agregado exitosamente."}, type: 'success'});
             }).error($scope.error);
         }
+        gasto.Fecha = $scope.datos.Fecha;
+        $http.post(url + 'gasto/createHistorial', $.param({datos: gasto}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+        ).success(function(data, status, headers, config) {
+            if (typeof data !== "object" || !data.respuesta) {
+                $scope.error(data, status, headers, config);
+                return;
+            }
+            console.log(data);
+            $rootScope.loading = false;
+            $scope.datos.gastos.push(data['gasto_historial']);
+            $scope.nuevo = {};
+            show({message: {text: "Gasto agregado exitosamente."}, type: 'success'});
+        }).error($scope.error);
         /*$timeout(function() {
          $scope.loading = false;
          if (gasto.idGasto === "Nuevo") {
@@ -146,25 +156,33 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     };
     $scope.deleteSelectedGastos = function() {
         var index = [];
+        var ids = [];
         for (var i = 0; i < $scope.datos.gastos.length; i++) {
             if (typeof $scope.datos.gastos[i].select !== "boolean")
                 continue;
             if ($scope.datos.gastos[i].select) {
                 index.push($scope.datos.gastos[i]);
+                ids.push($scope.datos.gastos[i].idGastoHistorial);
 //                console.log(i);
 //                $scope.datos.gastos.splice(i--, 1);
             }
         }
         console.log('------------');
         $rootScope.myModalAccept = true;
-        $timeout(function() {
+        $http.post(url + 'gasto/deleteHistorial', $.param({datos: ids}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+        ).success(function(data, status, headers, config) {
+            if (typeof data !== "object" || !data.respuesta) {
+                $scope.error(data, status, headers, config);
+                return;
+            }
+            console.log(data);
             angular.forEach(index, function(key, value) {
-//                console.log(key);
                 $scope.datos.gastos.remove(key);
             });
             $rootScope.myModalAccept = false;
             $('#myModal').modal('hide');
-        }, 3000);
+            show({message: {text: "Gastos eliminados exitosamente."}, type: 'success'});
+        }).error($scope.error);
     };
     $scope.showModalBorrar = function() {
         $scope.showConfirmDialog({title: "Aviso", message: "¿Seguro que desea eliminar los gastos seleccionados?"}, $scope.deleteSelectedGastos);

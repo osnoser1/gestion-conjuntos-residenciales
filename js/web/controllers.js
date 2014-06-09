@@ -12,8 +12,8 @@ pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $l
         if (status === 0) {
             show({message: {text: "Tiempo límite excedido."}, type: 'danger'});
             return;
-        } else if (status === 200 || status === 500) {
-            if (typeof data === "undefined" || data === null) {
+        } else {
+            if (typeof data !== "object" || data === null) {
                 $scope.showDialog({message: data + "<br>" + status});
                 show({message: {text: "Error en el servidor."}, type: 'danger'});
             }
@@ -58,6 +58,7 @@ pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $l
         $('#myModal').modal({show: true, backdrop: 'static'});
     };
     $scope.showDialog = function(params) {
+        $rootScope.myModalAccept = false;
         var o = {title: "", message: "Mensaje de prueba."};
         $.extend(o, params);
         var modalHtml = "";
