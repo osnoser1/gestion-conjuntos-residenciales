@@ -1,10 +1,10 @@
 function eventos (){
 
-
+ $('#contenedor2').append('<div><h4><b>Titulo de la noticia</b></h4></div>');
        $.ajax
         ({
         type: "POST",
-        url: "models/consultas-crearMensaje.php",
+        url: "models/cartelera.php",
         data: {id:1},
         async: false,
         dataType: "json",
@@ -33,8 +33,8 @@ function eventos (){
         Edificios.onchange = function () 
           { 
             idEdificio=Edificios.value;
-            $('#Pisos').empty();
-            $('#Apartamentos').empty();
+            // $('#Pisos').empty();
+            // $('#Apartamentos').empty();
             $.ajax
                   ({
                   type: "POST",
@@ -85,4 +85,97 @@ function eventos (){
                   function (msg) {alert( msg +"No se pudo realizar la conexion");}
                   });
           }
+
+          $('#publicar').click(function(){
+            if(titulo.value!=''&& $('.sumernote').code()!=""){
+          
+            $.ajax
+            ({
+            type: "POST",
+            url: "models/cartelera.php",
+            data: {id:4, para:titulo.value,contenido:$('.summernote').code()},
+            async: false,
+            dataType: "json",
+            success:
+            function (msg) 
+            {       
+                       
+              $('#myModal').modal('hide');
+               show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
+             titulo.value="";
+              $('.sumernote').code("");
+
+
+                   $.ajax
+                    ({
+                    type: "POST",
+                    url: "models/cartelera.php",
+                    data: {id:5},
+                    async: false,
+                    dataType: "json",
+                    success:
+                    function (msg) 
+                    {       
+                          console.log('dfdfdgdsgsdg');
+                        $('#contenedor').append('<div><h4><b>Titulo de la noticia</b></h4></div>');
+                        // $('#contenedor').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px;
+                        //                          border-bottom-right-radius: 4px; " class="form-control "></div>');
+                        // $('#contenedor').append('<a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></span></a>');   
+                        // $('#contenedor').append('<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModaleliminar">Eliminar</button>');
+     
+                    },
+                    error:
+                    function (msg) {alert( msg +"No se pudo realizar la conexion");}
+                    });
+
+
+
+
+
+
+            },
+            error:
+            function (msg) {alert( msg +"No se pudo realizar la conexion");}
+            });}
+            else
+            {
+             $('#myModal').modal('hide');
+               show({message: {text: "Debe rellenar titulo y contenido"}, type: 'danger'});
+            }
+
+
+          });
+
+
+          $('#chkEdificio').click(function(){
+            if ( $('#chkEdificio').is (':checked'))
+              {
+                console.log("sdfasdasd");
+
+                $('#Pisos').fadeOut();
+                 $('#Apartamentos').fadeOut();
+
+                 $('#ckPiso').attr('checked',false);
+                 $('#ckApartamentos').attr('checked',false);
+              }
+          });
+           $('#ckPiso').click(function(){
+            if ( $('#ckPiso').is (':checked'))
+              {
+                console.log("sdfasdasd");
+                 $('#Pisos').fadeIn();
+                $('#Apartamentos').fadeOut();
+                  $('#chkEdificio').attr('checked',false);
+                 $('#ckApartamentos').attr('checked',false);
+              }
+          });
+            $('#ckApartamentos').click(function(){
+            if ( $('#ckApartamentos').is (':checked'))
+              {
+                $('#ckPiso').attr('checked',false);
+                 $('#chkEdificio').attr('checked',false);
+                $('#Apartamentos').fadeIn();
+                  $('#Pisos').fadeIn();
+              }
+          });
 }
