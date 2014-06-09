@@ -1403,3 +1403,326 @@ in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.ph
 2014/06/08 23:28:11 [warning] [application] Failed to set unsafe attribute "Fecha" of "Gasto".
 in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (43)
 in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/09 04:38:14 [error] [exception.CException] exception 'CException' with message 'PagosController cannot find the requested view "create".' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php:878
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(782): CController->renderPartial('create', Array, true)
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(35): CController->render('create', Array)
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 04:48:08 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `idtipo`, `nro_referencia`, `monto`, `idbanco`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5).
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php (28)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 04:48:08 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `idtipo`, `nro_referencia`, `monto`, `idbanco`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5)' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(28): CActiveRecord->insert()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 04:54:12 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `idtipo`, `nro_referencia`, `monto`, `idbanco`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5).
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php (33)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 04:54:12 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `idtipo`, `nro_referencia`, `monto`, `idbanco`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5)' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(33): CActiveRecord->insert()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 04:56:27 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `idtipo`, `nro_referencia`, `monto`, `idbanco`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5).
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php (33)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 04:56:27 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `idtipo`, `nro_referencia`, `monto`, `idbanco`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5)' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(33): CActiveRecord->insert()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 04:57:28 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `idbanco`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4).
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php (33)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 04:57:28 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `idbanco`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4)' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(33): CActiveRecord->insert()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 04:58:25 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3).
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php (33)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 04:58:25 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3)' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(33): CActiveRecord->insert()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 04:59:35 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3).
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php (33)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 04:59:35 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3)' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(33): CActiveRecord->insert()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 05:01:34 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3).
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php (33)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 05:01:34 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3)' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(33): CActiveRecord->insert()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 05:01:43 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3).
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php (33)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 05:01:43 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3)' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(33): CActiveRecord->insert()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 05:02:17 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3).
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php (33)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 05:02:17 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3)' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(33): CActiveRecord->insert()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 05:02:57 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3).
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php (33)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 05:02:57 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3)' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(33): CActiveRecord->insert()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 05:03:03 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3).
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php (33)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 05:03:03 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3)' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(33): CActiveRecord->insert()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 05:03:30 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3).
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php (33)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 05:03:30 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3)' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(33): CActiveRecord->insert()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 05:03:34 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3).
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php (33)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 05:03:34 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`conjunto_residencial`.`pagos`, CONSTRAINT `pagos_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION). The SQL statement executed was: INSERT INTO `pagos` (`idEstado`, `nro_referencia`, `monto`, `fecha`) VALUES (:yp0, :yp1, :yp2, :yp3)' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\PagosController.php(33): CActiveRecord->insert()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): PagosController->actionInsertar()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 05:10:39 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'conjunto_residencial.gasto' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `gasto`.
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\GastoController.php (42)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 05:10:39 [error] [exception.CDbException] exception 'CDbException' with message 'The table "gasto" for active record class "Gasto" cannot be found in the database.' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Gasto))
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\GastoController.php(42): CActiveRecord->__construct()
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\actions\CInlineAction.php(49): GastoController->actionCreateHistorial()
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('createHistorial')
+#8 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/createHis...')
+#9 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=gasto/createHistorial
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 18:23:50 [warning] [application] Failed to set unsafe attribute "sitios" of "Gasto".
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\GastoController.php (43)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 18:23:50 [warning] [application] Failed to set unsafe attribute "Precio" of "Gasto".
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\GastoController.php (43)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 18:23:50 [warning] [application] Failed to set unsafe attribute "Fecha" of "Gasto".
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\GastoController.php (43)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 18:26:35 [warning] [application] Failed to set unsafe attribute "sitios" of "Gasto".
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\GastoController.php (43)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 18:26:35 [warning] [application] Failed to set unsafe attribute "Precio" of "Gasto".
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\GastoController.php (43)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 18:26:35 [warning] [application] Failed to set unsafe attribute "Fecha" of "Gasto".
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\protected\controllers\GastoController.php (43)
+in C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php (13)
+2014/06/09 20:55:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "insertar".' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(270): CController->missingAction('insertar')
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
+2014/06/09 21:09:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "insertar".' in C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CController.php(270): CController->missingAction('insertar')
+#1 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(282): CController->run('insertar')
+#2 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\web\CWebApplication.php(141): CWebApplication->runController('pagos/insertar')
+#3 C:\xampp\htdocs\gestion-conjuntos-residenciales\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\gestion-conjuntos-residenciales\yii.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/gestion-conjuntos-residenciales/yii.php?r=pagos/insertar
+HTTP_REFERER=http://127.0.0.1/gestion-conjuntos-residenciales/
+---
