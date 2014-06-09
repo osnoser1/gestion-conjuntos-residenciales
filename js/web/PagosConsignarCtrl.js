@@ -60,10 +60,12 @@
  	$scope.addConsignacion = function(nuevo){
  		
  		//$rootScope.loading = true;
- 		nuevo.fecha = "2014-02-01"
- 		nuevo.idEstado = "1";
- 		nuevo.idusuario = "1";
+ 		nuevo.fecha = "2014-02-01";
+ 		nuevo.idEstado = 1;
+ 		nuevo.idusuario = 1;
+ 		nuevo.nro_referencia = parseInt(nuevo.nro_referencia, 10);
  		console.dir(nuevo);
+ 		return;
  		$http.post(url + 'pagos/insertar', $.param({datos: nuevo}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
  			).success(function(data, status, headers, config) {
  				if (typeof data === "undefined" || data === null || !data.respuesta) {
