@@ -17,20 +17,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     $scope.sitios = [];
     $scope.nuevo = {};
     $scope.datos = {gastos: []};
-//    $scope.datos = {
-//        Mes: "Febrero",
-//        Ano: "2014",
-//        Fecha: "2014-02-01",
-//        gastos: [
-//            {idHistorialGasto: "7", idGastoFecha: "1", idGasto: "1", Nombre: "Vigilancia", Precio: "10000"},
-//            {idHistorialGasto: "8", idGastoFecha: "1", idGasto: "2", Nombre: "Aseo urbano", Precio: "10000"},
-//            {idHistorialGasto: "9", idGastoFecha: "1", idGasto: "3", Nombre: "Mantenimiento piscina", Precio: "10000"},
-//            {idHistorialGasto: "10", idGastoFecha: "1", idGasto: "4", Nombre: "Mantenimiento ascensor", Precio: "10000"},
-//            {idHistorialGasto: "11", idGastoFecha: "1", idGasto: "5", Nombre: "Luz residencia", Precio: "10000"},
-//        ],
-//    };
     $http.get(url + 'gasto/view').success(function(data, status, headers, config) {
-//        console.log(data);
         if (!data.respuesta) {
             $scope.error(data, status, headers, config);
             return;
@@ -129,7 +116,6 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
 
     };
     $scope.addGasto = function(gasto) {
-        
         $rootScope.loading = true;
         var obj = $filter('filter')($scope.datos.gastos, {idGasto: gasto.idGasto}, true);
         if (obj.length !== 0) {
@@ -141,19 +127,6 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
             delete gasto.idGasto;
             console.log("gasto: ");
             console.dir(gasto);
-            $http.post(url + 'gasto/createHistorial', $.param({datos: gasto}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
-            ).success(function(data, status, headers, config) {
-                if (typeof data === "undefined" || !data.respuesta) {
-                    $scope.error(data, status, headers, config);
-                    return;
-                }
-                console.log("Data: ");
-                console.log(data);
-                $rootScope.loading = false;
-                $scope.datos.gastos.push(data['gasto_historial']);
-                $scope.nuevo = {};
-                show({message: {text: "Gasto agregado exitosamente."}, type: 'success'});
-            }).error($scope.error);
         }
         gasto.Fecha = $scope.datos.Fecha;
         $http.post(url + 'gasto/createHistorial', $.param({datos: gasto}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
@@ -162,10 +135,16 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
                 $scope.error(data, status, headers, config);
                 return;
             }
+            console.log("Data: ");
             console.log(data);
             $rootScope.loading = false;
             $scope.datos.gastos.push(data['gasto_historial']);
             $scope.nuevo = {};
+            if (typeof gasto.idGasto !== "undefined") {
+                $scope.gastosFiltrados.remove($filter('filter')($scope.gastos, {Nombre: gasto.Nombre}, true)[0]);
+            } else {
+                $scope.gastos.push({idGasto: data['gasto_historial'].idGasto, Nombre: data['gasto_historial'].Nombre})
+            }
             show({message: {text: "Gasto agregado exitosamente."}, type: 'success'});
         }).error($scope.error);
         /*$timeout(function() {
@@ -201,6 +180,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
             console.log(data);
             angular.forEach(index, function(key, value) {
                 $scope.datos.gastos.remove(key);
+                $scope.gastosFiltrados.push($filter('filter')($scope.gastos, {Nombre: key.Nombre}, true)[0]);
             });
             $rootScope.myModalAccept = false;
             $('#myModal').modal('hide');
