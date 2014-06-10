@@ -57,6 +57,9 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
 //        console.log(obj);
 //        console.log(gasto);
     };
+    $scope.select = function(i) {
+        $scope.datos.gastos[i].select = !$scope.datos.gastos[i].select;
+    }
     $scope.check = function() {
         var salida = false;
         angular.forEach($scope.datos.gastos, function(key, value) {
@@ -107,6 +110,9 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
                     else
                         $scope.gastosFiltrados.remove($filter('filter')($scope.gastos, {Nombre: element.Nombre}, true)[0]);
                     console.log(temp);
+                } else {
+                    $scope.total -= parseInt($scope.gastoAnterior.Precio);
+                    $scope.total += parseInt(element.Precio);
                 }
                 show({message: {text: "Gasto modificado exitosamente."}, type: 'success'});
             }).error(function(data, status, headers, config) {
