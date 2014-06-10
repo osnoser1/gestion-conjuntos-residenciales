@@ -9,18 +9,21 @@ class UsuarioController extends GxController {
     }
 
     public function actionCreate() {
+        $input = json_decode(file_get_contents("php://input"));
         $model = new Usuario;
-
-
+        $json = $input->datos;
         if (isset($_POST['Usuario'])) {
             $model->setAttributes($_POST['Usuario']);
 
             if ($model->save()) {
-                
+                if (Yii::app()->getRequest()->getIsAjaxRequest())
+                    Yii::app()->end();
+                else
+                    $this->redirect(array('view', 'id' => $model->ID));
             }
         }
 
-        //$this->render('create', array('model' => $model));
+        $this->render('create', array('model' => $model));
     }
 
     public function actionUpdate($id) {

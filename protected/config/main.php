@@ -44,7 +44,7 @@ return array(
           ),
          */
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=constructora',
+            'connectionString' => 'mysql:host=localhost;dbname=conjunto_residencial',
             'emulatePrepare' => true,
             'username' => 'root',
             'password' => '',

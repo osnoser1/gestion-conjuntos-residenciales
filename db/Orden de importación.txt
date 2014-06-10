@@ -1,0 +1,7 @@
+//Orden por los momentos, modificar de ser necesario
+conjunto_residencial.sql,crea la bd
+modulo-usuario.sql,no tiene dependencia
+modulo-pagos.sql,depende de usuario
+modulo-gastos.sql,no tiene dependencia por los momentos. Pronto tendrá con edificio y apartamento.
+publicacion.sql,no tiene dependencia
+cartelera.sql,depende de edificio,apartamento

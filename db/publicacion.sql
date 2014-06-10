@@ -17,8 +17,9 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `conjuntoresidencial`
+-- Base de datos: `conjunto-residencial`
 --
+USE `conjunto_residencial`;
 
 -- --------------------------------------------------------
 
@@ -31,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `publicacion` (
   `titulo` varchar(50) NOT NULL,
   `contenido` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

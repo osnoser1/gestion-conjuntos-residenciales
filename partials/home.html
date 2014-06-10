@@ -1,7 +1,14 @@
 <!--modulo Cartelera mensajes publicados por el admin unicamente-->
 <link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
- <script src="js/web/cartelera.js"></script>
+
+		<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css">
+		<link rel="stylesheet" href="css/prettify.css" type="text/css">
+
+		<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+		<script type="text/javascript" src="js/prettify.js"></script>
+           <script src="js/web/carteleractrl.js"></script>      
  <script type="text/javascript">
+     
          $(function() {
             $('.summernote').summernote({
                 height: 200,
@@ -12,8 +19,16 @@
          function publicar(){
 
             console.log($('.summernote').code(""));
-         }     
+         }  
+        eventos();   
 </script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.multiselect').multiselect();
+  });
+</script>
+
+
 
 <h1>Cartelera</h1>
 <!--Division entre crear el mensaje y los mensajes publicados-->
@@ -40,7 +55,8 @@
                             <fieldset>
                                 <div class="row">
                                     <div Align="center">
-                                        <textarea class="summernote form-control" rows="10" cols="50" required ng-model="post.content" placeholder="Haga un anuncio aqui"></textarea>
+                                         <input  type="text"  class="form-control" placeholder="Titulo" id="titulo">
+                                        <textarea class="summernote form-control" rows="10" cols="50" placeholder="Haga un anuncio aqui"></textarea>
                                     </div>
                                 </div>
                                
@@ -53,9 +69,34 @@
                                                 <h4>Seleccionar restricciones de mensaje</h4>
                                                 <div class="modal-body">
 
+                                                  <table class="table">
+                                                    <tr>
+                                                      <td>Por Edificios<input type="checkbox" value="1"  id="chkEdificio" checked ></td>
+                                                      <td>Por Piso<input type="checkbox" value="2"  id="ckPiso"  ></td>
+                                                      <td>Por apartamentos<input type="checkbox" value="3"  id="ckApartamentos"></td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td>
+                                                        <select id="Edificios" multiple="false" style="width:120px;"></select>
+                                                      </td>
+                                                      <td>
+                                                        </div><select id="Pisos" multiple="multiple" style="width:120px; display:none;" ></select>
+                                                      </td>
+                                                      <td>
+                                                          <select id="Apartamentos" multiple="multiple" style="width:120px; display:none;" ></select>
+                                                        </td>
+                                                    </tr>
+
+                                                  </table>
+                                                  
+
+                                                  
+
+                                                  
+                                                  
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary">Aceptar </button>
+                                                    <button type="submit" class="btn btn-primary" id="publicar">Publicar </button>
                                                     <button type="button" class="btn btn-info " data-dismiss="modal"> Cancelar</button>
                                                 </div>
                                             </div>
@@ -64,7 +105,7 @@
 
                                 </div>
                               
-                                <button type="submit" class="button large-12" onclick="publicar()">Publicar</button>
+                               
                             </fieldset>
                         </form>
                     </div>
@@ -72,38 +113,33 @@
 
             </div>
         </div>
-
-
     </div>
+
+
+<div class="well well-sm" id="contenedor2">
+     
+    
 </div>
 
-<div class="well well-sm">
-  <div> 
-        <h4><b>Titulo de la noticia</b></h4>
-    </div>
-    <div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px; " class="form-control "> 
 
-    Button addons
-Buttons in input groups are a bit different and require one extra level of nesting. Instead of .input-group-addon, you'll need to use .input-group-btn to wrap the buttons. This is required due to default browser styles that cannot be overridden.
-Navs
 
-Navs available in Bootstrap have shared markup, starting with the base .nav class, as well as shared states. Swap modifier classes to switch between each style.
-Navbar
 
-Default navbar
-Navbars are responsive meta components that serve as navigation headers for your application or site. They begin collapsed (and are toggleable) in mobile views and become horizontal as the available viewport width increases.
-    </div>
-    <a type="button" class="btn btn-default btn-xs" href="#/panel/crear-mensaje">
-        <span class="glyphicon glyphicon-envelope"></span> 
-    </a>
-     <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModaleliminar">Eliminar</button>
-     <div class="modal fade" id="myModaleliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <br>
+<ul class="pager">
+  <li class="previous"><a href="#">&larr; Anterior</a></li>
+  <li class="next"><a href="#">Siguiente &rarr;</a></li>
+</ul>
+
+</div>
+
+
+
+ <div class="modal fade" id="myModaleliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-       <b> <h4 class="modal-title" id="myModalLabel">Aviso</h4></b>
+        <h4 class="modal-title" id="myModalLabel"><b>Aviso</b></h4>
       </div>
       <div class="modal-body">
         Esta seguro de querer eliminar el mensaje
@@ -115,12 +151,125 @@ Navbars are responsive meta components that serve as navigation headers for your
     </div>
   </div>
 </div>
-</div>
 
- <br>
-<ul class="pager">
-  <li class="previous"><a href="#">&larr; Anterior</a></li>
-  <li class="next"><a href="#">Siguiente &rarr;</a></li>
-</ul>
 
-</div>
+<!--
+<script>
+    $(document).ready(function() {
+                    
+			 $('#Edificios').multiselect({
+			            buttonText: function(options) {
+			                if (options.length === 0) {
+			                    return 'None selected <b class="caret"></b>';
+			                }
+			                else if (options.length > 6) {
+			                    return options.length + ' selected  <b class="caret"></b>';
+			                }
+			                else {
+			                    var selected = '';
+			                    options.each(function() {
+			                        selected += $(this).text() + ', ';
+			                    });
+
+			                    return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+			                }
+			            },
+			            onChange: function(element, checked) {
+			                if(checked === true) {
+			                    //action taken here if true
+			                }
+			                else if(checked === false) {
+			                    if(confirm('¿desea deseleccionar este elemento?')) {
+			                        //action taken here
+			                    }
+			                    else {
+			                        $("#Edificios").multiselect('select', element.val());
+			                    }
+			                }
+			            }
+			        });
+                    
+                    var firstConfigurationSet = {
+                        includeSelectAllOption: false,
+                        enableFiltering: false
+                    };
+                    var secondConfigurationSet = {
+                        includeSelectAllOption: true,
+                        enableFiltering: true
+                    };
+                    
+                    var set = 1;
+                     $('#Pisos').multiselect({
+                  buttonText: function(options) {
+                      if (options.length === 0) {
+                          return 'None selected <b class="caret"></b>';
+                      }
+                      else if (options.length > 6) {
+                          return options.length + ' selected  <b class="caret"></b>';
+                      }
+                      else {
+                          var selected = '';
+                          options.each(function() {
+                              selected += $(this).text() + ', ';
+                          });
+
+                          return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+                      }
+                  },
+                  onChange: function(element, checked) {
+                      if(checked === true) {
+                          //action taken here if true
+                      }
+                      else if(checked === false) {
+                          if(confirm('¿desea deseleccionar este elemento?')) {
+                              //action taken here
+                          }
+                          else {
+                              $("#Pisos").multiselect('select', element.val());
+                          }
+                      }
+                  }
+              });
+                    
+                   
+                    
+                   
+                     $('#Apartamentos').multiselect({
+                  buttonText: function(options) {
+                      if (options.length === 0) {
+                          return 'None selected <b class="caret"></b>';
+                      }
+                      else if (options.length > 6) {
+                          return options.length + ' selected  <b class="caret"></b>';
+                      }
+                      else {
+                          var selected = '';
+                          options.each(function() {
+                              selected += $(this).text() + ', ';
+                          });
+
+                          return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+                      }
+                  },
+                  onChange: function(element, checked) {
+                      if(checked === true) {
+                          //action taken here if true
+                      }
+                      else if(checked === false) {
+                          if(confirm('¿desea deseleccionar este elemento?')) {
+                              //action taken here
+                          }
+                          else {
+                              $("#Apartamentos").multiselect('select', element.val());
+                          }
+                      }
+                  }
+              });
+                    
+                  
+                   });
+			</script>
+                    -->    
+                        
+                        
+                        
