@@ -22,17 +22,20 @@
             
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error': !formConsignaciones.nro_referencia.$error.required && formConsignaciones.nro_referencia.$invalid}">
         <label class="col-lg-2 control-label">Nro referencia</label>
         <small class="requerido" ng-show="formConsignaciones.nro_referencia.$error.required">*Indicar número de referencia o confirmación</small>
+        <small class="requerido" ng-show="!formConsignaciones.nro_referencia.$error.required && formConsignaciones.nro_referencia.$invalid">*Debe ser una número</small>
         <div class="col-lg-10">
             <input ng-model="nuevo.nro_referencia" name="nro_referencia" required ng-pattern="/^\d+$/" type="text" class="form-control" placeholder="">
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error': !formConsignaciones.monto.$error.required && formConsignaciones.monto.$invalid}">
         <label for="input_monto" class="col-lg-2 control-label">Monto</label>
         <small class="requerido" ng-show="formConsignaciones.monto.$error.required">*Indicar monto</small>
+        <small class="requerido" ng-show="!formConsignaciones.monto.$error.required && formConsignaciones.monto.$invalid">*Debe ser una cantidad</small>
+        
         <div class="col-lg-10">
             <div class="input-group">
                 <span class="input-group-addon">Bs.</span>
@@ -43,7 +46,7 @@
     </div>
     <div class="form-group">
         <label class="col-lg-2 control-label">Banco</label>
-        <small class="requerido" ng-show="formConsignaciones.monto.$error.required">*Seleccionar banco</small>
+        <small class="requerido" ng-show="formConsignaciones.idbanco.$error.required">*Seleccionar banco</small>
         <div class="col-lg-10">
             <select ng-model="nuevo.idbanco" name="idbanco" class="form-control"
             ng-options="banco.idbanco as banco.name for banco in datos.bancos"
@@ -52,16 +55,17 @@
 
     </div>
 </div>
-<div class="form-group" ng-class="{'has-error': datepickerForm.fecha.$invalid}">
+<div class="form-group" ng-class="{'has-error': formConsignaciones.fecha.$invalid}">
     <label class="col-lg-2 control-label" title="Fecha en la que se realizó el pago"><i class="fa fa-calendar"></i> Fecha</label>
-    <small class="requerido" ng-show="formConsignaciones.fecha.$error.required">*Indicar fecha del pago</small>
-    <div class="row">
+    <small class="requerido" ng-show="!nuevo.fecha && !formConsignaciones.fecha.$invalid">*Indicar fecha del pago</small>
+    <small class="requerido" ng-show="formConsignaciones.fecha.$invalid">*Fecha inválida</small>
+
         <div class="col-lg-10">
             <input ng-model="nuevo.fecha" name="fecha" type="text" class="form-control" data-date-format="dd/MM/yyyy" bs-datepicker requiered>
         </div>
-    </div>
+
 </div>
-<a ng-disabled="formConsignaciones.concepto.$invalid || formConsignaciones.fecha.$invalid || formConsignaciones.idtipo.$invalid || formConsignaciones.nro_referencia.$invalid || formConsignaciones.monto.$invalid || formConsignaciones.idbanco.$invalid" ng-click="addConsignacion(nuevo)" class="col-xs-2 btn btn-primary ladda-button pull-right" data-style="zoom-in" data-ui-ladda="loading">
+<a ng-disabled="!nuevo.fecha || formConsignaciones.concepto.$invalid || formConsignaciones.fecha.$invalid || formConsignaciones.idtipo.$invalid || formConsignaciones.nro_referencia.$invalid || formConsignaciones.monto.$invalid || formConsignaciones.idbanco.$invalid" ng-click="addConsignacion(nuevo)" class="col-xs-2 btn btn-primary ladda-button pull-right" data-style="zoom-in" data-ui-ladda="loading">
     <span class="ladda-label">Consignar Pago</span>
 </a>
 </form>
