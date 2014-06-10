@@ -111,7 +111,7 @@ class SiteController extends Controller {
     }
 
     public function actionFunctionName() {
-        echo $this->salida('true');
+        echo $this->salida('false');
     }
 
 //    public function accessRules() {

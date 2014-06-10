@@ -1,43 +1,120 @@
+<script src="js/web/ApartamentoCrearCtrl.js"></script>
 
-<p style="padding: 10px; background-color: black; color: white; font-family: bookman 	old style; font-size: 25px; font-weight: bold;">Modulo Apartamento</p>
-	<center><p style="padding: 10px; background-color: #ABA7A7; color: black; font-family: bookman 	old style; font-size: 20px; font-weight: bold;">ID:XXX<br>
+<div ng-controller="ApartamentoCrearCtrl">
+<h1> Crear Apartamento</h1>
+	<p style="padding: 10px; background-color: #ABA7A7; color: black; font-family: bookman 	old style; font-size: 20px; font-weight: bold;">ID:XXX<br>
 	<br><b>Datos del Due&ntilde;o</b><br>
 	<br>Nombre: xxxxx
 	<br>Apellido: xxxxx
 	<br>Numero de Telefono: (xxxx) - xxx - xxxx
-	<br>E-Mail: x@x.com</p></center>
-	<br><b><center><h3>Caracteristicas</h3></center></b>
-	<br>Tama&ntilde;o <input name="name" type=text size=8> Mt<sup>2</sup><br>
-	<br><form>Habitaciones
-		<input name="respuesta" type=radio value="1">1
-		<input name="respuesta" type=radio value="2">2
-		<input name="respuesta" type=radio value="3">3
-		<input name="respuesta" type=radio value="4">4</form>
-	<br><form>Ba&ntilde;os
-		<input name="respuesta" type=radio value="1">1
-		<input name="respuesta" type=radio value="2">2
-		<input name="respuesta" type=radio value="3">3
-		<input name="respuesta" type=radio value="4">4</form>
-	<br><form>Salas
-		<input name="respuesta" type=radio value="1">1
-		<input name="respuesta" type=radio value="2">2</form>
-	<br>Cocina: Si<br>
-	<br><form>Lavandero 
-		<input name="respuesta" type=radio value="si"> Si
-		<input name="respuesta" type=radio value="No"> No</form>
-	<br><form>Comedor 
-	<input name="respuesta" type=radio value="si"> Si
-	<input name="respuesta" type=radio value="no"> No</form>
-	<br><form>Maletero 
-	<input name="respuesta" type=radio value="si"> Si
-	<input name="respuesta" type=radio value="no"> No</form>
-	<br><form>Casillero 
-	<input name="respuesta" type=radio value="si"> Si
-	<input name="respuesta" type=radio value="no"> No</form>
-	<br><form>Puesto Estacionamiento
-		<input name="respuesta" type=radio value="1">1
-		<input name="respuesta" type=radio value="2">2</form>
-	<br>Alicuota: xxxx<br>
-	<br><center><input type="submit" value="Volver">
-	<input type="submit" value="Guardar">
-	<input type="submit" value="Salir"></center>
+	<br>E-Mail: x@x.com</p>
+	<br><h3>Caracteristicas</h3>
+
+    
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="TipoApartamento" class="col-lg-2 control-label">Tipo Apartamento</label>
+            <div class="col-lg-10">
+                <select id="Tipo_Apartamento" class="selectpicker form-control" data-style="form-control">
+                    <option value ="0">Estudio</option>
+                    <option value ="1">Familiar</option>
+                    <option value ="2">Town House</option>
+                </select>
+            </div>
+
+    <form class="form-horizontal" role="form">
+            <label for="Tamano" class="col-lg-2 control-label">Tamaño</label>
+            <div class="col-lg-10">
+                <select id="Tamano" class="selectpicker form-control" data-style="form-control">
+                    
+                </select>
+            </div>
+    <form class="form-horizontal" role="form">
+            <label for="NumeroHabitaciones" class="col-lg-2 control-label">Numero De Habitaciones</label>
+            <div class="col-lg-10">
+                <select id="NumeroHabitaciones" class="selectpicker form-control" data-style="form-control">
+                    <option value ="0">1</option>
+                    <option value ="1">2</option>
+                    <option value ="2">3</option>
+                </select>
+            </div>
+        </div>  
+    <form class="form-horizontal" role="form">
+            <label for="NumeroBanos" class="col-lg-2 control-label">Numero De Baños</label>
+            <div class="col-lg-10">
+                <select id="NumeroBanos" class="selectpicker form-control" data-style="form-control">
+                    <option value ="0">1</option>
+                    <option value ="1">2</option>
+                    <option value ="2">3</option>
+                </select>
+            </div>
+
+    <form class="form-horizontal" role="form">
+            <label for="Sala" class="col-lg-2 control-label">Sala</label>
+            <div class="col-lg-10">
+                <select id="Sala" class="selectpicker form-control" data-style="form-control">
+                    <option value ="0">Si</option>
+                    <option value ="1">No</option>
+                </select>
+            </div>
+     <form class="form-horizontal" role="form">
+            <label for="Cocina" class="col-lg-2 control-label">Cocina</label>
+            <div class="col-lg-10">
+                <select id="Cocina" class="selectpicker form-control" data-style="form-control">
+                    <option value ="0">Si</option>
+                    <option value ="1">No</option>
+                </select>
+            </div>   
+    <form class="form-horizontal" role="form">
+            <label for="Comedor" class="col-lg-2 control-label">Comedor</label>
+            <div class="col-lg-10">
+                <select id="Comedor" class="selectpicker form-control" data-style="form-control">
+                    <option value ="0">Si</option>
+                    <option value ="1">No</option>
+                </select>
+            </div>
+    <form class="form-horizontal" role="form">
+            <label for="Lavadero" class="col-lg-2 control-label">Lavadero</label>
+            <div class="col-lg-10">
+                <select id="Lavadero" class="selectpicker form-control" data-style="form-control">
+                    <option value ="0">Si</option>
+                    <option value ="1">No</option>
+                </select>
+            </div>
+    <form class="form-horizontal" role="form">
+            <label for="Maletero" class="col-lg-2 control-label">Maletero</label>
+            <div class="col-lg-10">
+                <select id="Maletero" class="selectpicker form-control" data-style="form-control">
+                    <option value ="0">Si</option>
+                    <option value ="1">No</option>
+                </select>
+            </div>
+    <form class="form-horizontal" role="form">
+            <label for="Casillero" class="col-lg-2 control-label">Casillero</label>
+            <div class="col-lg-10">
+                <select id="Casillero" class="selectpicker form-control" data-style="form-control">
+                    <option value ="0">Si</option>
+                    <option value ="1">No</option>
+                </select>
+            </div>
+    <form class="form-horizontal" role="form">
+            <label for="NumeroDePuestoEstacionamiento" class="col-lg-2 control-label">Numero de puesto estacionamiento</label>
+            <div class="col-lg-10">
+                <select id="NumeroDePuestoEstacionamiento" class="selectpicker form-control" data-style="form-control">
+                    <option value ="0">1</option>
+                    <option value ="1">2</option>
+                </select>
+            </div>
+    <form class="form-horizontal" role="form">
+            <label for="Alicuota" class="col-lg-2 control-label">Alicuota</label>
+            <div class="col-lg-10">
+                <select id="Alicuota" class="selectpicker form-control" data-style="form-control">
+                
+                </select>
+            </div>
+           
+            <a ng-click="GuardarApartamento(element.id)" class="btn btn-primary ladda-button" data-style="zoom-in" data-ui-ladda="loading">
+                <span class="ladda-label">Guardar</span>
+            </a>
+                
+</div> 

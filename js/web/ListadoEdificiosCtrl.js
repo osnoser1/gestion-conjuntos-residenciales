@@ -25,8 +25,15 @@ myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http
             array[0].Nombre = $rootScope.edificio.Nombre;
             array[0].CantidadPisos = $rootScope.edificio.CantidadPisos;
         }
-                    $('#myModal').modal('hide');
-                                show({message: {text: "Edificio modificado exitosamente."}, type: 'success'});
+        $http.post(url + 'edificio/listado', {datos: gasto}
+        ).success(function(data, status, headers, config) {
+            console.log(data);
+        }).error(function(data, status) { // called asynchronously if an error occurs
+        // or server returns response with an error status.
+            $scope.showDialog({message: data});
+        });
+            $('#myModal').modal('hide');
+                show({message: {text: "Edificio modificado exitosamente."}, type: 'success'});
 
     };
     $scope.modificarDatosE = function(elemento) {

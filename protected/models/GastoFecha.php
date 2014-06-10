@@ -1,8 +1,8 @@
 <?php
 
-Yii::import('application.models._base.BaseSeleccion');
+Yii::import('application.models._base.BaseGastoFecha');
 
-class Seleccion extends BaseSeleccion
+class GastoFecha extends BaseGastoFecha
 {
 	public static function model($className=__CLASS__) {
 		return parent::model($className);

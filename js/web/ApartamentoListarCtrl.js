@@ -18,5 +18,15 @@ myApp.controllerProvider.register('ApartamentoListarCtrl', function($scope, $htt
             {idApartamento: "IpbJ", TipoApartamento: "Familiar", Tamano: "250 mt2", NumHabitaciones: "3", NumBanos: "2", Sala: "Si", Comedor: "Si", Cocina: "Si", Lavandero: "Si"},
         ],
     };
+
+    if ($rootScope.activado === true) {
+        console.log($rootScope.datos);
+        $scope.datos = {
+            Apartamentos: [
+                {idApartamento: "A4H", TipoApartamento: "Familiar", Tamano: "250 mt2", NumHabitaciones: "3", NumBanos: "2", Sala: "Si", Comedor: "Si", Cocina: "Si", Lavandero: "Si"},
+                {idApartamento: "BpbW", TipoApartamento: "Estudio", Tamano: "150 mt2", NumHabitaciones: "1", NumBanos: "1", Sala: "Si", Comedor: "No", Cocina: "Si", Lavandero: "No"},
+            ],
+        };
+    }
 });
 
