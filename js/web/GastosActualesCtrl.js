@@ -22,8 +22,10 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
             $scope.error(data, status, headers, config);
             return;
         }
+        console.log(data);
         $rootScope.show = true;
         $scope.datos = data.datos;
+        $scope.total = parseInt(data.Total);
         $scope.gastos = data.gastos;
         $scope.gastosFiltrados = [];
         angular.forEach($scope.gastos, function(key) {
@@ -139,6 +141,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
             console.log(data);
             $rootScope.loading = false;
             $scope.datos.gastos.push(data['gasto_historial']);
+            $scope.total += parseInt(data['gasto_historial'].Precio);
             $scope.nuevo = {};
             if (typeof gasto.idGasto !== "undefined") {
                 $scope.gastosFiltrados.remove($filter('filter')($scope.gastos, {Nombre: gasto.Nombre}, true)[0]);
@@ -179,6 +182,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
             }
             console.log(data);
             angular.forEach(index, function(key, value) {
+                $scope.total -= parseInt(key.Precio);
                 $scope.datos.gastos.remove(key);
                 $scope.gastosFiltrados.push($filter('filter')($scope.gastos, {Nombre: key.Nombre}, true)[0]);
             });

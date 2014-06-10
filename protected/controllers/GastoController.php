@@ -25,6 +25,11 @@ class GastoController extends GxController {
             $salida["datos"]["gastos"][] = $el;
         }
         $salida["gastos"] = $this->modelToArray(Gasto::model()->findAll());
+        $salida["Total"] = Yii::app()->db->createCommand()
+                        ->select('SUM(Precio) as Total')
+                        ->from('gasto_historial')
+                        ->where("idGastoFecha=$gf->idGastoFecha")
+                        ->queryRow()["Total"];
         echo $this->salida(true, $salida);
     }
 
