@@ -1,6 +1,5 @@
 function eventos (){
 
- $('#contenedor2').append('<div><h4><b>Titulo de la noticia</b></h4></div>');
        $.ajax
         ({
         type: "POST",
@@ -38,7 +37,7 @@ function eventos (){
             $.ajax
                   ({
                   type: "POST",
-                  url: "models/consultas-crearMensaje.php",
+                  url: "models/cartelera.php",
                   data: {id:2, idEdificio:Edificios.value},
                   async: false,
                   dataType: "json",
@@ -65,7 +64,7 @@ function eventos (){
                 $.ajax
                   ({
                   type: "POST",
-                  url: "models/consultas-crearMensaje.php",
+                  url: "models/cartelera.php",
                   data: {id:3, idEdificio:Edificios.value, idPiso:Pisos.value},
                   async: false,
                   dataType: "json",

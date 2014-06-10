@@ -1,5 +1,8 @@
 <?php
-
+ 	define('Host', 'localhost');
+	define('User', 'root');
+	define('Pass', '');
+ 	define('BasedeDatos','conjunto_residencial');
 
 if(isset($_POST['id'])){
 $id=$_POST['id'];
@@ -40,8 +43,7 @@ else{
 /*echo call_user_func(array($_POST['funcion']));*/
 
 function mensajes(){
-		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
-	
+		$mysqli = new mysqli(Host, User, "", BasedeDatos);
 		$tupla="SELECT * FROM post";
 		$resultado = $mysqli->query($tupla);
 		$objeto[0]['m']=$resultado->num_rows;	
@@ -64,7 +66,7 @@ function mensajes(){
 
 	function Ingresar(){
 		
-		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+		$mysqli = new mysqli(Host, User, "", BasedeDatos);
 		$titulo=$_REQUEST['para'];
 		$contenido=$_REQUEST['contenido'];
 		// $edificio=$_REQUESt['edificio'];
@@ -78,7 +80,7 @@ function mensajes(){
 	}
 
 	function ObtenerApartamentosdePisosdeunEdificio(){
-			$mysqli = new mysqli("127.0.0.1", "root", "", "conjuntoresidencial");
+			$mysqli = new mysqli(Host, User, "", BasedeDatos);
 			$idPiso=$_REQUEST['idPiso'];
 			$idEdificio=$_REQUEST['idEdificio'];
 			$tupla="SELECT DISTINCT  apartamentos.idApartamento as idApartamento,  apartamentos.idUsuario  FROM  apartamentos INNER JOIN pisos on pisos.idPiso=apartamentos.idPiso INNER JOIN edificio on edificio.idEdificio=apartamentos.idEdificio where  apartamentos.idEdificio='$idEdificio' and apartamentos.idPiso='$idPiso'";
@@ -96,7 +98,7 @@ function mensajes(){
 			echo json_encode($objeto);
 	}
 	function ObtenerEdificios(){
-			$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+			$mysqli = new mysqli(Host, User, "", BasedeDatos);
 			$tupla="SELECT nombre, idEdificio FROM  edificio";
 			$resultado = $mysqli->query($tupla);
 			$objeto[0]['m']=$resultado->num_rows;	
@@ -113,7 +115,7 @@ function mensajes(){
 	}
 
 	function ObtenerPisosdeunEdificio(){
-			$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
+			$mysqli = new mysqli(Host, User, "", BasedeDatos);
 			$idEdificio=$_REQUEST['idEdificio'];
 			$tupla="SELECT * FROM  pisos INNER JOIN edificio on edificio.idEdificio=pisos.idEdificio where  pisos.idEdificio='$idEdificio'";
 			$resultado = $mysqli->query($tupla);
