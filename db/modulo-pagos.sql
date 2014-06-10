@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `pagos` (
   `idbanco` smallint(11) NOT NULL,
   `fecha` date NOT NULL,
   `idEstado` tinyint(4) NOT NULL DEFAULT '1',
+  `concepto` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idusuario` (`idusuario`),
   KEY `idtipo_de_pago` (`idtipo`),
@@ -48,9 +49,9 @@ CREATE TABLE IF NOT EXISTS `pagos` (
 -- Volcado de datos para la tabla `pagos`
 --
 
-INSERT INTO `pagos` (`id`, `idusuario`, `monto`, `idtipo`, `nro_referencia`, `idbanco`, `fecha`, `idEstado`) VALUES
-(1, 1, 920, 1, 987654321, 11, '2014-06-06', 2),
-(2, 2, 765, 2, 12345789, 16, '2014-06-07', 2);
+INSERT INTO `pagos` (`id`, `idusuario`, `monto`, `idtipo`, `nro_referencia`, `idbanco`, `fecha`, `idEstado`, `concepto`) VALUES
+(1, 1, 920, 1, 987654321, 11, '2014-06-06', 2, 'Abono mes mayo'),
+(2, 2, 765, 2, 12345789, 16, '2014-06-07', 2, 'Pago mes Junio ');
 
 -- --------------------------------------------------------
 

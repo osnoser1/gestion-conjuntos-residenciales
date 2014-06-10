@@ -1,79 +1,20 @@
 <script src="js/web/ListadoSeccionesCtrl.js"></script>
 <link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
 
- <script type="text/javascript">
-         $(function() {
-            $('.summernote').summernote({
-                height: 200,
-                lang: 'es-ES'
-              });  
-         });
-         
-           $(document).ready(function () {
-               
-            $.ajax
-             ({
-             type: "POST",
-             url: "models/consultas-listadoseccion.php",
-             data: {id:1},
-             async: false,
-             dataType: "json",
-             success:
-             function (msg) 
-             {       
-                 var i;
-                for(i=0; i<msg[0].m; i++){
-                    for(i=0; i<msg[0].m; i++){
-                    console.log(msg[i].titulo);
-                    $('#contenedor').append('<div class="btn btn-default" >'+msg[i].titulo+'</div><br>');
-                    $('#contenedor').append('<div ><div class="well well-lg" style="height:300px; overflow: auto;">'+msg[i].titulo+'<a class="pull-right pointer"  ><span class="glyphicon glyphicon-pencil" title="Modificar Seccion" id="'+msg[i].id+'"></span> Modificar</a></div> </div>');
-                    
-                      
-                
-                }
-                }
-
-             },
-             error:
-             function (msg) {alert( msg +"No se pudo realizar la conexion");}
-             });
-             $('a.pull-right').click(function(){
-                 $('#myModal').modal('show'); 
-             });
-           });
+<script type="text/javascript">
+$(function() {
+  $('.summernote').summernote({
+    height: 200,
+    lang: 'es-ES'
+  });  
+});
 </script>
 <div ng-controller="ListadoSeccionesCtrl">
-    <h1>Listado secciones</h1>
-    <div class="list-group">
-        
-           <!-- <button class="btn btn-default" >{{element.Titulo}}</button>
-            <hr>
-            <div collapse="isCollapsed">
-                <div class="well well-lg" id="contenido">{{element.Contenido}}<a class="pull-right pointer" ng-click="entrarSeccion(element)"><span class="glyphicon glyphicon-pencil" title="Modificar Seccion"></span> Modificar</a>      
-                </div> 
-           </div>-->
-        
+  <h1>Listado secciones</h1>
+  <div class="list-group">
+    <div class="list-group-item row no-select" ng-repeat="element in datos.seccion" >
+      <button class="btn btn-default" ng-click="verSeccion(element)">{{element.titulo}}</button>
+      <a class="pull-right pointer" ng-click="entrarSeccion(element)"><span class="glyphicon glyphicon-pencil" title="Modificar Seccion"></span> Modificar</a> 
     </div>
- 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	      </div>
-	      <div class="modal-body" id="bodymensaje" style="overflow: auto;">
-	        <form role="form">
-                <label>Modificar Seccion</label>
-                <input ng-model="seccion.Titulo" type="text" id="Titulo" class="form-control" placeholder="Titulo" >
-                <br>
-                <textarea  ng-model="seccion.Contenido" class="summernote form-control" rows="10" cols="50" placeholder="Descripcion de seccion" ></textarea>
-                <p></p>
-                 </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	        <button id="confirmacion" type="button" class="btn btn-primary" >Aceptar</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+  </div>
 </div>
- 

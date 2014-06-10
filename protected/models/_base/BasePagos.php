@@ -17,11 +17,12 @@
  * @property integer $idbanco
  * @property string $fecha
  * @property integer $idEstado
+ * @property string $concepto
  *
- * @property PagosEstados $idEstado0
  * @property PagosTipos $idtipo0
  * @property PagosBancos $idbanco0
  * @property Usuario $idusuario0
+ * @property PagosEstados $idEstado0
  */
 abstract class BasePagos extends GxActiveRecord {
 
@@ -45,17 +46,18 @@ abstract class BasePagos extends GxActiveRecord {
 		return array(
 			array('idusuario, monto, idtipo, nro_referencia, idbanco, fecha', 'required'),
 			array('idusuario, monto, idtipo, nro_referencia, idbanco, idEstado', 'numerical', 'integerOnly'=>true),
-			array('idEstado', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, idusuario, monto, idtipo, nro_referencia, idbanco, fecha, idEstado', 'safe', 'on'=>'search'),
+			array('concepto', 'length', 'max'=>100),
+			array('idEstado, concepto', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, idusuario, monto, idtipo, nro_referencia, idbanco, fecha, idEstado, concepto', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
-			'idEstado0' => array(self::BELONGS_TO, 'PagosEstados', 'idEstado'),
 			'idtipo0' => array(self::BELONGS_TO, 'PagosTipos', 'idtipo'),
 			'idbanco0' => array(self::BELONGS_TO, 'PagosBancos', 'idbanco'),
 			'idusuario0' => array(self::BELONGS_TO, 'Usuario', 'idusuario'),
+			'idEstado0' => array(self::BELONGS_TO, 'PagosEstados', 'idEstado'),
 		);
 	}
 
@@ -74,10 +76,11 @@ abstract class BasePagos extends GxActiveRecord {
 			'idbanco' => null,
 			'fecha' => Yii::t('app', 'Fecha'),
 			'idEstado' => null,
-			'idEstado0' => null,
+			'concepto' => Yii::t('app', 'Concepto'),
 			'idtipo0' => null,
 			'idbanco0' => null,
 			'idusuario0' => null,
+			'idEstado0' => null,
 		);
 	}
 
@@ -92,6 +95,7 @@ abstract class BasePagos extends GxActiveRecord {
 		$criteria->compare('idbanco', $this->idbanco);
 		$criteria->compare('fecha', $this->fecha, true);
 		$criteria->compare('idEstado', $this->idEstado);
+		$criteria->compare('concepto', $this->concepto, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

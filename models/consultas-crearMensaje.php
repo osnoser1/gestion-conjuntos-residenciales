@@ -156,9 +156,7 @@ else{
 	function obtenermensaje(){
 		$mysqli = new mysqli("localhost", "root", "", "conjuntoresidencial");
 		$idUsuario=1;
-		$tupla1="SELECT Count(*) FROM mensaje";
-		$resultado = $mysqli->query($tupla1);
-		if()
+		
 
 		$tupla="SELECT *, usuario.idUsuario FROM mensaje INNER JOIN  usuario on mensaje.para=usuario.email where usuario.idUsuario='$idUsuario'";
 		$resultado = $mysqli->query($tupla);
