@@ -11,14 +11,14 @@
         </div>
         <div class="list-group-item row no-select" ng-repeat="element in datos.pagos" >
             <span class="badge pull-left">{{element.id}}</span>
-            <p ng-dblclick="" class="col-xs-2">{{element.nombre}} {{element.apellido}}</p>
+            <p ng-dblclick="" class="col-xs-2">{{element.Nombre}} {{element.Apellido}}</p>
             <p ng-dblclick="" class="col-xs-2">Bs. {{element.monto}}</p>
             <p ng-dblclick="" class="col-xs-2">{{element.fecha}}</p>
             <p ng-dblclick="copiarPortaPapeles(element.nro_referencia)" class="col-xs-2 pointer">{{element.nro_referencia}}</p>
-            <a ng-click="aceptarPago(element.id)" class="btn btn-primary ladda-button" data-style="zoom-in" data-ui-ladda="loading">
+            <a ng-click="aceptarPago(element)" class="btn btn-primary ladda-button" data-style="zoom-in" data-ui-ladda="loading">
                 <span class="ladda-label">Aprobar</span>
             </a>
-            <a ng-click="showModalRechazar(element.id)" class="btn btn-danger ladda-button" data-style="zoom-in" data-ui-ladda="loading">
+            <a ng-click="showModalRechazar(element)" class="btn btn-danger ladda-button" data-style="zoom-in" data-ui-ladda="loading">
                 <span class="ladda-label">Rechazar</span>
             </a>
             <a class="col-xs-1 pointer" ng-click="pagosPendientesVerDetalles(element)"><span class="glyphicon glyphicon-search" title="Ver detalles"></span></a>

@@ -20,8 +20,13 @@ myApp.controllerProvider.register('UsuarioCrearCtrl', function($scope, $http, $q
         datos.nuevoTelefono = [];
     };
     $scope.addUsuario = function(usuario) {
-        console.log(usuario.nuevoUsuario.cedula + " " + usuario.nuevoUsuario.nombre);
-        console.log(datos.telefonos[0].Telefono);
+
+        $http.post(url + 'usuario/create', {Usuario: usuario.nuevoUsuario}).success(function(data, status, headers, config) {
+            console.log(data);
+        }).error(function(data, status) { // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            $scope.showDialog({message: data});
+        });
         $scope.showDialog({title: "Aviso", message: "Usuario Agregado Exitosamente"});
         usuario.nuevoUsuario = [];
     };
