@@ -70,17 +70,18 @@ class GastoController extends GxController {
         }
     }
 
-    public function actionUpdate($id) {
-//        $model = $this->loadModel($id, 'Usuario');
-//        if (isset($_POST['Usuario'])) {
-//            $model->setAttributes($_POST['Usuario']);
-//            if ($model->save()) {
-//                $this->redirect(array('view', 'id' => $model->ID));
-//            }
-//        }
-//        $this->render('update', array(
-//            'model' => $model,
-//        ));
+    public function actionUpdateHistorial() {
+        if (isset($_POST['datos'])) {
+            $gastoHistorial = (array) $_POST['datos'];
+            $gh = GastoHistorial::model()->findByPk($gastoHistorial['idGastoHistorial']);
+            $gh->setAttributes($gastoHistorial);
+            if (($bandera = $gh->update()))
+                echo $this->salida();
+            else
+                echo $this->salida(false, "aviso", "Error al actualizar gasto");
+        } else {
+            echo $this->salida(false, "aviso", "Error en el servidor");
+        }
     }
 
     public function actionDeleteHistorial() {

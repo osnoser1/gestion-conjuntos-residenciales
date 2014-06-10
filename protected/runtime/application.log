@@ -1480,3 +1480,165 @@ Stack trace:
 REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/deleteHistorial
 HTTP_REFERER=http://localhost/conjunto-residencial/
 ---
+2014/06/10 06:33:27 [warning] [application] Failed to set unsafe attribute "idGastoHistorial" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:33:27 [warning] [application] Failed to set unsafe attribute "Nombre" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:33:27 [warning] [application] Failed to set unsafe attribute "$$hashKey" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:33:46 [warning] [application] Failed to set unsafe attribute "idGastoHistorial" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:33:46 [warning] [application] Failed to set unsafe attribute "Nombre" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:33:46 [warning] [application] Failed to set unsafe attribute "$$hashKey" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:34:02 [warning] [application] Failed to set unsafe attribute "idGastoHistorial" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:34:02 [warning] [application] Failed to set unsafe attribute "Nombre" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:34:02 [warning] [application] Failed to set unsafe attribute "$$hashKey" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:43:57 [warning] [application] Failed to set unsafe attribute "idGastoHistorial" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:43:57 [warning] [application] Failed to set unsafe attribute "Nombre" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:43:57 [warning] [application] Failed to set unsafe attribute "$$hashKey" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:43:57 [warning] [application] Failed to set unsafe attribute "select" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:44:13 [warning] [application] Failed to set unsafe attribute "idGastoHistorial" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:44:13 [warning] [application] Failed to set unsafe attribute "Nombre" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:44:13 [warning] [application] Failed to set unsafe attribute "$$hashKey" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:44:13 [warning] [application] Failed to set unsafe attribute "select" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 06:44:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "updateHistorial".' in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php:483
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(270): CController->missingAction('updateHistorial')
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): CController->run('updateHistorial')
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/updateHis...')
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/updateHistorial
+HTTP_REFERER=http://localhost/conjunto-residencial/
+---
+2014/06/10 06:46:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "updateHistorial".' in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php:483
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(270): CController->missingAction('updateHistorial')
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): CController->run('updateHistorial')
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/updateHis...')
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/updateHistorial
+HTTP_REFERER=http://localhost/conjunto-residencial/
+---
+2014/06/10 06:46:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "updateHistorial".' in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php:483
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(270): CController->missingAction('updateHistorial')
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): CController->run('updateHistorial')
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/updateHis...')
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/updateHistorial
+HTTP_REFERER=http://localhost/conjunto-residencial/
+---
+2014/06/10 06:47:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "updateHistorial".' in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php:483
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(270): CController->missingAction('updateHistorial')
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): CController->run('updateHistorial')
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/updateHis...')
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/updateHistorial
+HTTP_REFERER=http://localhost/conjunto-residencial/
+---
+2014/06/10 07:01:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "updateHistorial".' in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php:483
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(270): CController->missingAction('updateHistorial')
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): CController->run('updateHistorial')
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/updateHis...')
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/updateHistorial
+HTTP_REFERER=http://localhost/conjunto-residencial/
+---
+2014/06/10 07:01:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "updateHistorial".' in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php:483
+Stack trace:
+#0 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CController.php(270): CController->missingAction('updateHistorial')
+#1 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(282): CController->run('updateHistorial')
+#2 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\web\CWebApplication.php(141): CWebApplication->runController('gasto/updateHis...')
+#3 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/conjunto-residencial/yii.php?r=gasto/updateHistorial
+HTTP_REFERER=http://localhost/conjunto-residencial/
+---
+2014/06/10 07:06:04 [warning] [application] Failed to set unsafe attribute "idGastoHistorial" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:06:04 [warning] [application] Failed to set unsafe attribute "Nombre" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:06:04 [warning] [application] Failed to set unsafe attribute "$$hashKey" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:06:52 [warning] [application] Failed to set unsafe attribute "idGastoHistorial" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:06:52 [warning] [application] Failed to set unsafe attribute "Nombre" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:06:52 [warning] [application] Failed to set unsafe attribute "$$hashKey" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:07:00 [warning] [application] Failed to set unsafe attribute "idGastoHistorial" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:07:00 [warning] [application] Failed to set unsafe attribute "Nombre" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:07:00 [warning] [application] Failed to set unsafe attribute "$$hashKey" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:08:00 [warning] [application] Failed to set unsafe attribute "idGastoHistorial" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:08:00 [warning] [application] Failed to set unsafe attribute "Nombre" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:08:00 [warning] [application] Failed to set unsafe attribute "$$hashKey" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:09:28 [warning] [application] Failed to set unsafe attribute "idGastoHistorial" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:09:28 [warning] [application] Failed to set unsafe attribute "Nombre" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)
+2014/06/10 07:09:28 [warning] [application] Failed to set unsafe attribute "$$hashKey" of "GastoHistorial".
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\protected\controllers\GastoController.php (77)
+in F:\Users\Alfonso Andrés\Dropbox\Mis Proyectos\Web\conjunto-residencial\yii.php (13)

@@ -11,6 +11,7 @@ var myApp = angular.module('myApp');
 myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
     console.log('GastosActualesCtrl');
     var temp;
+    $rootScope.show = false;
     $scope.desactivado = false;
     $scope.tags = [];
     $scope.sitios = [];
@@ -34,6 +35,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
             $scope.error(data, status, headers, config);
             return;
         }
+        $rootScope.show = true;
         $scope.datos = data.datos;
         $scope.gastos = data.gastos;
         $scope.gastosFiltrados = [];
@@ -46,7 +48,6 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     $http.get('pruebas/sitios.json').success(function(data) {
         $scope.sitios = data;
     });
-
     $scope.loadTags = function(query) {
         console.log(query);
         var _p = $q.defer();
@@ -64,8 +65,8 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
         }
         var obj = $filter('filter')($scope.gastos, {Nombre: gasto.Nombre}, true);
         gasto.idGasto = obj.length === 0 ? "Nuevo" : obj[0].idGasto;
-        console.log(obj);
-        console.log(gasto);
+//        console.log(obj);
+//        console.log(gasto);
     };
     $scope.check = function() {
         var salida = false;
@@ -89,21 +90,43 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
             element.editing = [];
         element.editing[campo] = bool;
         if (bool) {
-            $scope.textAnterior = element[campo];
+            $scope.gastoAnterior = $.extend({}, element);
             if (campo === "Nombre") {
-                temp = {idGasto: element['idGasto'], Nombre: element['Nombre']};
+                temp = $filter('filter')($scope.gastos, {Nombre: element.Nombre}, true)[0];
                 $scope.gastosFiltrados.unshift(temp);
                 console.log(temp);
             }
-        } else {
-            if (campo === "Nombre") {
-                $scope.gastosFiltrados.remove(temp);
-                console.log(temp);
-            }
+        } else if ($scope.gastoAnterior[campo] !== element[campo]) {
+            var comprobarError = function(data, status, headers, config) {
+                if (data === null || typeof data !== "object" || !data.respuesta) {
+                    $.extend(element, $scope.gastoAnterior);
+                    if (campo === "Nombre")
+                        $scope.gastosFiltrados.remove(temp);
+                    $scope.error(data, status, headers, config);
+                    return true;
+                }
+                return false;
+            };
+            $http.post(url + 'gasto/updateHistorial', $.param({datos: element}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+            ).success(function(data, status, headers, config) {
+                if (comprobarError(data, status, headers, config))
+                    return;
+                console.log(data);
+                if (campo === "Nombre") {
+                    if (element.Nombre === temp.Nombre)
+                        $scope.gastosFiltrados.remove(temp);
+                    else
+                        $scope.gastosFiltrados.remove($filter('filter')($scope.gastos, {Nombre: element.Nombre}, true)[0]);
+                    console.log(temp);
+                }
+                show({message: {text: "Gasto modificado exitosamente."}, type: 'success'});
+            }).error(function(data, status, headers, config) {
+                comprobarError(data, status, headers, config);
+            });
+        } else if (campo === "Nombre") {
+            $scope.gastosFiltrados.remove(temp);
         }
-//       } else if ($scope.textAnterior !== element[campo]) {
-//
-//       }
+
     };
     $scope.addGasto = function(gasto) {
         console.log(gasto);
@@ -178,5 +201,4 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
         $scope.showConfirmDialog({title: "Procesar Gastos.", message: "¿Está seguro que desea procesar el mes de " + datos.Mes + " - " + datos.Ano + "?<br><br><b>No hay vuelta atrás.</b>"});
     };
 });
-
 var i = 12;
