@@ -7,7 +7,7 @@
 /* Controllers */
 var myApp = angular.module('myApp');
 
-myApp.controllerProvider.register('AgregarEdificioCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
+myApp.controllerProvider.register('AgregarEdificioCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope, $location) {
     $scope.datos = {
         Edificios: [
 		    {"id": "1", "Nombre": "TOPACIO", "CantidadPisos": "25"},
@@ -28,17 +28,21 @@ myApp.controllerProvider.register('AgregarEdificioCtrl', function($scope, $http,
             $scope.showDialog({message: data});
         });
         $('#myModal').modal('hide');
-                                show({message: {text: "Edificio agregado exitosamente."}, type: 'success'});
+                        show({message: {text: "Edificio agregado exitosamente."}, type: 'success'});
 
     };
     $scope.agregarDatosE = function(elemento){
-        $scope.edificio = elemento;
-        console.log("Edificio Agregado");
-        //muestra un msj 
-        $('#myModal').modal('hide');
+//        $scope.edificio = elemento;
+        $http.post(url + 'edificio/agregar', $.param({datos: elemento}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+        ).success(function(data, status, headers, config) {
+            console.log(data);
+            if(typeof data !== "object" || !data.respuesta) {
+                $scope.error(data, status, headers, config);
+            }
+            $('#myModal').modal('hide');
             show({message: {text: "Edificio agregado exitosamente."}, type: 'success'});
-        
-
+            $location.path('/panel/listado-edificios');
+        }).error($scope.error);
     };
 });
 
