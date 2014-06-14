@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE DATABASE IF NOT EXISTS `conjunto_residencial` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-
+USE `conjunto_residencial`;
 
 -- --------------------------------------------------------
 
