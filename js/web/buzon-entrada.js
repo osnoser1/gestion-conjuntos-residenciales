@@ -22,10 +22,14 @@ function eventos(){
 		           	var td2=$('<td></td>').text("administrador");
 		           	var td3=$('<td></td>').html("<b>"+msg[i].descripcion+"</b>");
 		           	var td4=$('<td></td>').text(msg[i].fecha);
+		           	var td5=$('<td ></td>').html('<button type="button" class="ver btn btn-default btn-xs" name="'+msg[i].idMensaje+'">	<span class="glyphicon glyphicon-eye-open"></span></button>');
+	           	  	var td6=$("<td ></td>").html('<button type="button" class="eliminar btn btn-default btn-xs" name="'+msg[i].idMensaje+'">	<span class="glyphicon glyphicon-remove"></span></button>');
 		           	tr.append(td1);
 		           	tr.append(td2);
 		           	tr.append(td3);
 		           	tr.append(td4);
+	           		tr.append(td5);
+	           		tr.append(td6);
 		           	table.append(tr);           
 	           }
 	          
@@ -35,9 +39,10 @@ function eventos(){
 	        function (msg) {alert( msg +"No se pudo realizar la conexion");}
 	        });
 
-        $('tr').live('click', function(){ 
-        	idMensaje = $(this).attr('id'); 
-        	console.log("sdfsdfsfds");
+        $('.ver').click(function(){
+        	idMensaje = $(this).attr('name'); 
+	    	
+        	$(document.getElementById(idMensaje)).removeClass('info');
         	$('#mensajes').fadeOut(function(){
         		$.ajax
 		        ({
@@ -79,7 +84,7 @@ function eventos(){
 		        function (msg) 
 		        {       
 			         
-		          
+		          $(document.getElementById(idMensaje)).addClass('info');
 		        },
 		        error:
 		        function (msg) {alert( msg +"No se pudo realizar la conexion");}
@@ -89,7 +94,7 @@ function eventos(){
           $('#atras').click(function(){
 
         	$('#mensajeabierto').fadeOut(function(){
-        		$.ajax
+        /*		$.ajax
 	        ({
 	        type: "POST",
 	        url: "models/consultas-crearMensaje.php",
@@ -123,14 +128,9 @@ function eventos(){
 	        },
 	        error:
 	        function (msg) {alert( msg +"No se pudo realizar la conexion");}
-	        });
+	        });*/
         		$('#mensajes').fadeIn();
         	});
-        });
-
-        $('#eliminar').click(function(){
-        	$('#myModal').modal('show');
-
         });
 
         $('#confirmacion').click(function(){		          
@@ -138,7 +138,7 @@ function eventos(){
 		        ({
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
-		        data: {id:8, idMensaje:idMensaje},
+		        data: {id:8, idMensaje:idMensajeEliminar},
 		        async: false,
 		        dataType: "json",
 		        success:
@@ -146,13 +146,24 @@ function eventos(){
 		        {       
 					$('#myModal').modal('hide');
 					if(msg=="true"){
+						
 						show({message: {text: "El Mensaje ha sido eliminado exitosamente"}, type: 'success'});
-					}   
+						$('#' + id).remove();
+					}  
 		        },
 		        error:
 		        function (msg) {alert( msg +"No se pudo realizar la conexion");}
 		        });
 
         });
+
+       		$('.eliminar').click(function(){
+	        	id=$(this).attr('name');
+	        	idMensajeEliminar=id;
+	        
+	        	$('#myModal').modal('show');
+
+	        });
+	 var idMensajeEliminar="";
 
 }

@@ -1,6 +1,6 @@
 <script src="js/web/GastosActualesCtrl.js"></script>
 <link rel="stylesheet" href="assets/checkd-list-group-bootstrap/cheked-list-group.css"/>
-<div ng-controller="GastosActualesCtrl">
+<div ng-controller="GastosActualesCtrl" class="content" ng-show="show">
     <h1>Gastos actuales</h1>
     <h2>{{datos.Mes}} - {{datos.Ano}}</h2>
     <div class="barra-pers2">
@@ -10,15 +10,12 @@
         <a class="btn btn-default btn-sm btn-responsive" ng-disabled="desactivado" ng-click="showModalBorrar()">Eliminar</a>
     </div>
     <div class="list-group">
-        <div class="list-group-item row no-select" ng-repeat="element in datos.gastos" ng-animate="'animate'">
+        <div class="list-group-item row no-select am-fade-and-slide-top" ng-repeat="element in datos.gastos">
             <input ng-change=check() ng-model="element.select" class="col-xs-1" type="checkbox"/>
             <p class="col-xs-1">{{element.idGasto}}</p>
             <p ng-hide="element.editing['Nombre']" ng-dblclick="setEditing(element, 'Nombre', true)" class="col-xs-2 pointer">{{element.Nombre}}</p>
             <div class="col-xs-2" ng-show="element.editing['Nombre']">
-                <!--<input focus-me="element.editing['Nombre']" ng-blur="setEditing(element, 'Nombre', false)" class="form-control" ng-model="element.Nombre"/>-->
-                <select focus-me="element.editing['Nombre']" ng-blur="setEditing(element, 'Nombre', false)" data-live-search="true" class="form-control" data-style="form-control" ng-model="element.Nombre" ng-change="getIdGasto(element)">
-                    <option ng-repeat="gasto in gastosFiltrados" value="{{gasto.Nombre}}">{{gasto.Nombre}}</option>
-                </select>
+                <button focus-me="element.editing['Nombre']" ng-blur="setEditing(element, 'Nombre', false)" class="form-control" ng-model="element.Nombre" ng-change="getIdGasto(element)" ng-options="gasto.Nombre as gasto.Nombre for gasto in gastosFiltrados" bs-select></button>
             </div>
             <p ng-hide="element.editing['Precio']" ng-dblclick="setEditing(element, 'Precio', true)" class="col-xs-1">{{element.Precio}}</p>
             <div class="col-xs-1" ng-show="element.editing['Precio']">
@@ -27,16 +24,12 @@
             <tags-input class="col-xs-5" ng-model="element.sitios" placeholder="Agrega un sitio" add-from-autocomplete-only="true" replace-spaces-with-dashes="false">
                 <auto-complete source="loadTags($query)" max-results-to-show="20" min-length="1"></auto-complete>
             </tags-input>
-            <a href="" class="col-xs-2">¿No consigues lo que buscas?</a>
-
+            <div class="col-xs-2 a-pers">¿No consigues lo que buscas?</div>
         </div>
         <form name="g" class="list-group-item row">
             <p class="col-xs-1 col-xs-offset-1">{{nuevo.idGasto}}</p>
             <div class="col-xs-2">
-                <input ng-disabled="loading" name="nombre" requiered type="text" list="list-1" ng-change="getIdGasto(nuevo)" class="form-control" ng-model="nuevo.Nombre"/>
-                <datalist id="list-1">
-                    <option ng-repeat="gasto in gastos" value="{{gasto.Nombre}}">{{gasto.idGasto}}</option>
-                </datalist>
+                <input ng-disabled="loading" name="nombre" required type="text" ng-change="getIdGasto(nuevo)" class="form-control" data-min-length="0" ng-model="nuevo.Nombre" ng-options="gasto.Nombre as gasto.Nombre for gasto in gastosFiltrados" data-animation="am-flip-x" bs-typeahead>
             </div>
             <div class="col-xs-1">
                 <input ng-disabled="loading" name="precio" required ng-pattern="/^\d+$/" class="form-control" ng-model="nuevo.Precio"/>
@@ -49,7 +42,8 @@
             </a>
         </form>
     </div>
-    <div >
+    <div class="col-xs-12"><b class="col-sm-offset-8 col-xs-2">Total gastos del mes:</b><b class="col-sm-2 text-right">{{total}} Bs.</b></div>
+    <div class="col-xs-12">
         <a class="btn btn-primary pull-right" ng-click="submit(datos)">Procesar gastos mensuales</a>
     </div>
 </div>

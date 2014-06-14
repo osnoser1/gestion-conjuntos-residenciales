@@ -1,4 +1,4 @@
-<!-- <script src="js/web/crear-mensajeCtrl.js"></script> -->
+ <script src="js/web/crearmensaje.js"></script>
 <link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
 
  <script type="text/javascript">
@@ -9,279 +9,53 @@
               });  
          });
          
-
-    // $(document).ready(function () {
-    //   $('label.tree-toggler').parent().children('ul.tree').toggle(300);
-    //   $('label.tree-toggler').click(function () {
-    //     $(this).parent().children('ul.tree').toggle(300);
-    //   });
-    // });
-        
-      $(document).ready(function () {
-      var idEdificio=-1, idPiso=-1;
-
-       $.ajax
-        ({
-        type: "POST",
-        url: "models/consultas-crearMensaje.php",
-        data: {id:1},
-        async: false,
-        dataType: "json",
-        success:
-        function (msg) 
-        {       
-         
-            Edificios.options[0]= new Option ("");
-            Edificios.options[0].text = "";
-            Edificios.options[0].value ="-1" ; 
-          for(i=0; i < msg[0].m; i++)
-          {
-
-            Edificios.options[i+1]= new Option (msg[i].nombre);
-            Edificios.options[i+1].text = msg[i].nombre;
-            Edificios.options[i+1].value = msg[i].idEdificio; 
-
-          }          
-          
-        },
-        error:
-        function (msg) {alert( msg +"No se pudo realizar la conexion");}
-        });
-
-        Edificios.onchange = function () 
-          { 
-            idEdificio=Edificios.value;
-            $('#Pisos').empty();
-            $('#Apartamentos').empty();
-            $.ajax
-                  ({
-                  type: "POST",
-                  url: "models/consultas-crearMensaje.php",
-                  data: {id:2, idEdificio:Edificios.value},
-                  async: false,
-                  dataType: "json",
-                  success:
-                  function (msg) 
-                  {    
-                    
-                    for(i=0; i < msg[0].m; i++)
-                    {
-                      Pisos.options[i]= new Option ("Piso" + msg[i].idPiso);
-                      Pisos.options[i].text ="Piso" + msg[i].idPiso ;
-                      Pisos.options[i].value = msg[i].idPiso; 
-                    } 
-                      
-                  },
-                  error:
-                  function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                  });
-          }
-          Pisos.onchange = function () 
-          {   idPiso=Pisos.value;
-               $('#Apartamentos').empty();
-                $.ajax
-                  ({
-                  type: "POST",
-                  url: "models/consultas-crearMensaje.php",
-                  data: {id:3, idEdificio:Edificios.value, idPiso:Pisos.value},
-                  async: false,
-                  dataType: "json",
-                  success:
-                  function (msg) 
-                  {    
-                    console.log("Piso: "+ Pisos.value + "Numero de apartamentos" + msg[0].m);
-                    for(i=0; i < msg[0].m; i++)
-                    {
-                      Apartamentos.options[i]= new Option ("Apartamento" + msg[i].idapartamento);
-                      Apartamentos.options[i].text ="Apartamento" + msg[i].idapartamento ;
-                      Apartamentos.options[i].value = msg[i].idUsuario; 
-                    } 
-                      
-                  },
-                  error:
-                  function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                  });
-          }
-
-          Apartamentos.onclick=function(){
-               $.ajax
-                  ({
-                  type: "POST",
-                  url: "models/consultas-crearMensaje.php",
-                  data: {id:4, idUsuario:Apartamentos.value},
-                  async: false,
-                  dataType: "json",
-                  success:
-                  function (msg) 
-                  {    
-
-                       console.log("para " + para.value + " email: "+msg[0].email);
-                       para.value+=msg[0].email+",";
-                       $("#Apartamentos option[value="+Apartamentos.value+"]").remove();
-                      
-                  },
-                  error:
-                  function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                  });
-
-          }
-        
-
-/*       $('#conjuntoResidencial').click(function(){
-        if(b){
-          conjuntoResidencial.innerHTML='<span class="glyphicon glyphicon-minus"></span> Conjunto Residencial';
-          b=false;
-
-            $('#edificios').fadeIn();
-            $('li.edificios').click(function(){
-             edificio= $(this).attr('id'); 
-             console.log("edificio: "+ edificio);
-
-            
-
-               $.ajax
-                  ({
-                  type: "POST",
-                  url: "models/consultas-crearMensaje.php",
-                  data: {id:2, idEdificio:edificio},
-                  async: false,
-                  dataType: "json",
-                  success:
-                  function (msg) 
-                  {    
-                    var ul=$('<ul id="Pisos" ></ul>');
-                    for(i=0; i < msg[0].m; i++)
-                    {
-                      var li=$('<li class="Pisos'+msg[i].idPiso+'" id="'+msg[i].idPiso+'"></li>').html('<input type="checkbox"><button type="button" class="btn btn-default btn-xs"  > <span cass="glyphicon glyphicon-plus"></span>Piso'+msg[i].idPiso+'</button>');
-                      ul.append(li);
-                    } 
-                    $('#'+edificio).append(ul);    
-                  },
-                  error:
-                  function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                  });
-             
-
-             });
-
-        }
-        else{
-          conjuntoResidencial.innerHTML='<span class="glyphicon glyphicon-plus"></span> Conjunto Residencial';
-          b=true;
-           $('#edificios').fadeOut();
-
-        }
-       });*/
-  
-
-
-
-
-
-    });
+      
+     eventos();
+   
 
 </script>
 
-<h1>Crear mensaje</h1>
+    <h1>Crear mensaje</h1>
 
-<div ng-controller="PanelHeaderCtrl">
-<div class="alert alert-info">
-  ¡Seleccione un Apartamento, piso o Edificio para enviar el mensaje, haciendo click en Conjunto Residencial!
-</div>
-
-
-
-<table class="table">
-  <thead>
-    <th>Edificios</th>
-    <th>Pisos</th>
-    <th>Apartamentos</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <select id="Edificios">
-      </select>
-      </td>
-      <td>
-        <select id="Pisos" multiple>
-      </select>
-      </td>
-      <td>
-        <select id="Apartamentos" multiple>
-      </select>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <div ng-controller="PanelHeaderCtrl">
+    <div class="alert alert-info">
+      ¡Seleccione un Apartamento, piso o Edificio para enviar el mensaje!
+    </div>
 
 
 
-<!--   <div style=" width:500px; padding: 8px 0; height: hidden; " class="form-group">
-        <ul class="list-unstyled">
-            <li >  
-              <label class="tree-toggler">
-                <input type="checkbox">
-                <button type="button" class="btn btn-default btn-xs" id="conjuntoResidencial">
-                      <span class="glyphicon glyphicon-plus"></span> Conjunto Residencial
-                </button> 
-                  <ul id="edificios" style="display:none" >
+      <table class="table">
+        <thead>
+          <th>Edificios</th>
+          <th>Pisos</th>
+          <th>Apartamentos</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <select id="Edificios">
+            </select>
+            </td>
+            <td>
+              <select id="Pisos" multiple>
+            </select>
+            </td>
+            <td>
+              <select id="Apartamentos" multiple>
+            </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
+      <form role="form">
+        <label>Para</label><input ng-model="datos.para" type="text" id="para" class="form-control" placeholder="Para">
+        <label>Titulo</label><input ng-model="datos.titulo" type="text" id="Titulo" class="form-control" placeholder="Asunto del Mensaje">
 
-                                                               
-                  </ul>
-              </label>                      
-            </li>            
-        </ul>
-  </div> -->
-
-
-<!--     <div style=" width:200px; padding: 8px 0; height: hidden; " class="form-group">
-        <ul class="list-unstyled">
-            <li>
-            <label class="tree-toggler nav-header form-control"> <input type="checkbox">  Conjunto Residencial</label>
-                <ul class="tree">
-                    <li>
-                      <label class="tree-toggler nav-header form-control"> <input type="checkbox">Edificio A</label>
-                        <ul class="tree">
-                            <li><label class="tree-toggler nav-header form-control"> <input type="checkbox">Piso 1</label>
-                              <ul class="list-unstyled tree">
-                                <li><input type="checkbox"> Apartamento 1</li>
-                                <li><input type="checkbox">  Apartamento 2</li>
-                                <li><input type="checkbox">  Apartamento 3</li>
-                              </ul>
-                            </li>                          
-                           
-                        </ul>
-                    </li>
-                     <li><label class="tree-toggler nav-header form-control"><input type="checkbox"> Edificia B</label>
-                        <ul class="tree">
-                            <li><label class="tree-toggler nav-header form-control"> <input type="checkbox"> Piso 1</label>
-                              <ul class="nav nav-list tree">
-                                <li><input type="checkbox">  Apartamento 1</li>
-                                <li> <input type="checkbox"> Apartamento 2</li>
-                                <li><input type="checkbox">  Apartamento 3</li>
-                              </ul>
-                            </li>   
-                        </ul> 
-                    </li>
-
-                </ul>
-            </li>            
-        </ul>
-  </div> -->
-
-
-
-
-<form role="form">
-  <label>Para</label><input ng-model="datos.para" type="text" id="para" class="form-control" placeholder="Para">
-  <label>Titulo</label><input ng-model="datos.titulo" type="text" id="Titulo" class="form-control" placeholder="Asunto del Mensaje">
-  <label>Adjuntar</label><button class="btn">+</button>
-  <textarea  ng-model="mensaje" class="summernote form-control" rows="10" cols="50" placeholder="Descripcion" >
-    
-  </textarea>
-  <button class="btn btn-primary" ng-click="CrearMensaje(datos)">Enviar</button>
-  <button class="btn">Guardar Borrador</button>
-<form>
+        <textarea  ng-model="mensaje" class="summernote form-control" rows="10" cols="50" placeholder="Descripcion" >
+          
+        </textarea>
+        <button class="btn btn-primary" ng-click="CrearMensaje(datos)">Enviar</button>
+        
+      <form>
   </div>

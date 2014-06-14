@@ -20,7 +20,6 @@ myApp.controllerProvider.register('CrearSeccionesCtrl', function($scope, $http, 
             url: "models/consultas-crearseccion.php",
             data: {id:1, titulo:seccion.Titulo,contenido:seccion.Contenido},
             async: false,
-            dataType: "json",
             success:
             function (msg) 
             {       

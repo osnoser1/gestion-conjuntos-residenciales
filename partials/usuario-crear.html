@@ -1,0 +1,50 @@
+<script src="js/web/UsuarioCrearCtrl.js"></script>
+<link rel="stylesheet" href="css/estilo-mariangela.css"/>
+<div ng-controller="UsuarioCrearCtrl">
+    <h1> Crear Usuario</h1>
+    <form class="form-horizontal" role="form" ng-submit="submit()">
+        <div class="row form-group col-md-12 col-sm-12 col-xs-12 col-lg-12">
+
+            Tipo de Usuario: <select class="selectpicker form-control" data-style="form-control" ng-model="datos.nuevoUsuario.TipoUsuario">
+            <option value ="1">Usuario</option>
+            <option value ="2">Administrador</option>
+        </select><br>
+        Cedula: <input type="text" name="cedula" required value="" class="form-control" ng-model="datos.nuevoUsuario.Cedula"/><br>
+        Nombre: <input type="text" name="nombre" required value="" class="form-control" ng-model="datos.nuevoUsuario.Nombre"/><br>
+        Apellido: <input type="text" name="apellido" required value="" class="form-control" ng-model="datos.nuevoUsuario.Apellido"/><br>
+        Correo: <input type="text" name="correo" required value="" class="form-control" ng-model="datos.nuevoUsuario.Correo"/><br>
+        Contraseña: <input type="password" name="contrasena" required class="form-control" ng-model="datos.nuevoUsuario.Contrasena"/><br>
+
+    </div>
+    <div class="row form-group col-md-12 col-sm-12 col-xs-12 col-lg-12 list-group">
+        <div class="list-group-item row no-select" ng-repeat="element in datos.telefonos">
+            <p class="col-xs-2">Teléfono: {{element.Telefono}}</p>
+            <p class="col-xs-2">Tipo: {{element.Tipo}}</p>
+        </div>
+    </div>
+    <div class="row form-group col-md-12 col-sm-12 col-xs-12 col-lg-12">
+
+        <div class="list-group-item" style="display: flex;">
+            <p class="col-xs-2">Telefono:</p>
+            <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                <input type="text" name="Telefono" value="" ng-model="datos.nuevoTelefono.Telefono"/>
+            </div>
+            <div class="col-xs-3">
+                <input placeholder="Agregar Tipo" name="Tipo" list="ordenar" ng-model="datos.nuevoTelefono.Tipo">
+                <datalist id="ordenar">
+                    <option value="Fijo"></option>
+                    <option value="Celular"></option>
+                </datalist>
+            </div>
+            <div class="col-xs-4">
+                <a class="btn btn-primary btn-sm btn-responsive pull-right" ng-click="addTelefono(datos)" >Agregar Número</a>
+            </div>
+        </div>
+    </div>
+
+  <div class="row form-group col-md-12 col-sm-12 col-xs-12 col-lg-12">
+    <input type="submit" class="btn btn-primary btn-sm btn-responsive  pull-right col-md-2" ng-click="addUsuario(datos)" value="Aceptar"/>
+
+</div>
+</form>
+</div>

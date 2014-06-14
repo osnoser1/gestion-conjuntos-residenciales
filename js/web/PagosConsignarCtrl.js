@@ -13,6 +13,7 @@
  		idbanco: '',
  	};
  	$scope.datos = {
+ 		format: 'dd/MM/yyyy',
  		tiposDePagos: [
  		{idtipo: 1, name: 'Deposito'},
  		{idtipo: 2, name: 'Transferencia'}
@@ -59,10 +60,35 @@
 
  	$scope.addConsignacion = function(nuevo){
  		
+ 		nuevo.idusuario = 2;
+ 		nuevo.fecha = $filter('date')(nuevo.fecha, $scope.datos.format);
+ 		$rootScope.loading = true;
+        $.ajax
+		({
+		    type: "POST",
+		    url: "models/pagos-consultas.php",
+		    data: {id:1, nuevo: nuevo},
+		    async: false,
+		    success:
+		    function (msg) 
+		    {       
+		       show({message: {text: "Consignación exitosa "}, type: 'success'});
+		       $scope.nuevo = [];
+		       $rootScope.loading = false;
+		   },
+		   error:
+		   function (msg) {
+		   	show({message: {text: "Error consignando pago "}, type: 'danger'});
+		   	$rootScope.loading = false;
+		   }
+		});
+
+
  		//$rootScope.loading = true;
- 		nuevo.fecha = "2014-02-01";
+ 		/*nuevo.fecha = "2014-02-01";
  		nuevo.idEstado = 1;
  		nuevo.idusuario = 1;
+ 		nuevo.fecha = $filter('date')(nuevo.fecha, $scope.datos.format);
  		nuevo.nro_referencia = parseInt(nuevo.nro_referencia, 10);
  		console.dir(nuevo);
  		return;
@@ -80,4 +106,7 @@
  				//show({message: {text: "Pago agregado exitosamente."}, type: 'success'});
  			}).error($scope.error);
  		};
- 	});
+ 		*/
+ 		
+ 	};
+ });
