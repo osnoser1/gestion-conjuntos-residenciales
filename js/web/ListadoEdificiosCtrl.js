@@ -17,6 +17,17 @@ myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http
 //            {"id": "5", "Nombre": "LILA", "CantidadPisos": "55"},
         ],
     };
+    
+    $scope.all = function(boolean) {
+        angular.forEach($scope.datos.Edificios, function(key, value) {
+            key.select = boolean;
+        });
+        $scope.desactivado = !boolean;
+    };
+    $scope.select = function(i) {
+        $scope.datos.Edificios[i].select = !$scope.datos.Edificios[i].select;
+    };
+    
     $http.post(url + 'edificio/listar', {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
     ).success(function(data, status, headers, config) {
         console.log(data);
@@ -48,7 +59,7 @@ myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http
         $scope.datos.edificio[i].select = !$scope.datos.edificio[i].select;
     }
     $scope.modificarDatosE = function(elemento) {
-        $rootScope.edificio = {id: elemento.id, Nombre: elemento.Nombre, CantidadPisos: elemento.CantidadPisos};
+        $rootScope.edificio = {id: elemento.id, Nombre: elemento.Nombre, NroDePisos: elemento.NroDePisos};
         $scope.showConfirmDialog({title: "Editar Edificio", src: "'partials/modificar-edificio.html'"}, $scope.a);
     };
     
@@ -56,22 +67,35 @@ myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http
         
     };
     
+    $scope.check = function() {
+        var salida = false;
+        angular.forEach($scope.datos.Edificios, function(key, value) {
+            if (key.select && !salida) {
+                $scope.desactivado = !key.select;
+                salida = true;
+            }
+        });
+        $scope.desactivado = !salida;
+    };
+    
+    $scope.showModalBorrar = function() {
+        $scope.showConfirmDialog({title: "Aviso", message: "¿Seguro que desea eliminar los edificios seleccionados?"}, $scope.deleteSelectedEdificios);
+    };
     $scope.deleteSelectedEdificios = function() {
         var index = [];
         var ids = [];
-        for (var i = 0; i < $scope.datos.length; i++) {
-            if (typeof $scope.datos.gastos[i].select !== "boolean")
+        for (var i = 0; i < $scope.datos.Edificios.length; i++) {
+            if (typeof $scope.datos.Edificios[i].select !== "boolean")
                 continue;
-            if ($scope.datos.gastos[i].select) {
-                index.push($scope.datos.gastos[i]);
-                ids.push($scope.datos.gastos[i].idGastoHistorial);
-//                console.log(i);
-//                $scope.datos.gastos.splice(i--, 1);
+            if ($scope.datos.Edificios[i].select) {
+                index.push($scope.datos.Edificios[i]);
+                ids.push($scope.datos.Edificios[i].idEdificio);
             }
         }
         console.log('------------');
         $rootScope.myModalAccept = true;
-        $http.post(url + 'gasto/deleteHistorial', $.param({datos: ids}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+        console.log(ids);
+        $http.post(url + 'edificio/eliminar', $.param({datos: ids}), {timeout: 5000, headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
         ).success(function(data, status, headers, config) {
             if (typeof data !== "object" || !data.respuesta) {
                 $scope.error(data, status, headers, config);
@@ -85,7 +109,7 @@ myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http
             });
             $rootScope.myModalAccept = false;
             $('#myModal').modal('hide');
-            show({message: {text: "Gastos eliminados exitosamente."}, type: 'success'});
+            show({message: {text: "Edificios eliminados exitosamente."}, type: 'success'});
         }).error($scope.error);
     };
 });

@@ -29,10 +29,11 @@ class EdificioController extends GxController {
     public function actionEliminar() {
         if (isset($_POST['datos'])) {
             $idUsuario = (array) $_POST['datos'];
+//            var_dump($idUsuario);
             $criteria = new CDbCriteria;
-            $criteria->addInCondition('ID', $idUsuario);
-            Usuario::model()->deleteAll($criteria);
-            echo $this->salida();
+            $criteria->addInCondition('idEdificio', $idUsuario);
+            Edificio::model()->deleteAll($criteria);
+            echo $this->salida(false, "aviso", "Error en el servidor");
         } else {
             echo $this->salida(false, "aviso", "Error en el servidor");
         }

@@ -18,7 +18,7 @@
             <p ng-dblclick="" class="col-xs-1">Cantidad De Pisos</p>
         </div>
         <div class="list-group-item row no-select" ng-repeat="element in datos.Edificios" >
-            <input ng-change=check() ng-model="elemento.edificio" class="col-xs-1" type="checkbox"/>
+            <input ng-change=check() ng-model="element.select" class="col-xs-1" type="checkbox"/>
             <span class="badge pull-left">{{element.idEdificio}}</span>
             <p ng-dblclick="" class="col-xs-2"> {{element.Nombre}}</p> 
             
