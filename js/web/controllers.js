@@ -7,6 +7,7 @@ pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $l
     $scope.cargando = false;
     $scope.error = function(data, status, headers, config) {
         $rootScope.loading = false;
+        $rootScope.myModalAccept = false;
         var headers = headers();
         console.log(data, status, headers, config);
         if (status === 0) {
