@@ -15,18 +15,34 @@ myApp.controllerProvider.register('ApartamentoInicioCtrl', function($scope, $htt
         $scope.dt = null;
     };
     $scope.datos = {
-        Apartamentos: [
-            {idApartamento: "A4H", TipoApartamento: "Familiar", Tamano: "250 mt2", NumHabitaciones: "3", NumBanos: "2", Sala: "Si", Comedor: "Si", Cocina: "Si", Lavandero: "Si"},
-            {idApartamento: "BpbW", TipoApartamento: "Estudio", Tamano: "150 mt2", NumHabitaciones: "1", NumBanos: "1", Sala: "Si", Comedor: "No", Cocina: "Si", Lavandero: "No"},
-            {idApartamento: "C7A", TipoApartamento: "Thomw House", Tamano: "450 mt2", NumHabitaciones: "5", NumBanos: "4", Sala: "Si", Comedor: "Si", Cocina: "Si", Lavandero: "Si"},
-            {idApartamento: "F2C", TipoApartamento: "Estudio", Tamano: "150 mt2", NumHabitaciones: "1", NumBanos: "1", Sala: "Si", Comedor: "No", Cocina: "Si", Lavandero: "No"},
-            {idApartamento: "IpbJ", TipoApartamento: "Familiar", Tamano: "250 mt2", NumHabitaciones: "3", NumBanos: "2", Sala: "Si", Comedor: "Si", Cocina: "Si", Lavandero: "Si"},
-        ],
+        edificios: [],
+        apartamentos: [],
     };
+
+    $scope.ListarEdificiosyApartamentos = function() {
+        $http.get(url + 'edificio/listar').success(function(data, status, headers, config) {
+            console.dir("Salida");
+            console.dir(data);
+            $scope.datos.edificios = data.edificios;
+        }).error($scope.error);
+
+        $http.get(url + 'apartamento/listar').success(function(data, status, headers, config) {
+            console.dir("Salida2");
+            console.dir(data);
+            $scope.datos.apartamentos = data.apartamentos;
+        }).error($scope.error);
+    };
+    $scope.ListarEdificiosyApartamentos();
+
     $scope.ListarApartamento = function(element) {
         $rootScope.activado = true;
         $rootScope.datos = "0";
         $location.path("panel/listado-apartamentos");
+    };
+    $scope.AgregarApartamento = function(element) {
+        $rootScope.activado = true;
+        $rootScope.datos = "0";
+        $location.path("panel/agregar-apartamento");
     };
 });
 

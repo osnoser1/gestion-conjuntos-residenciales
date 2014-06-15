@@ -1,0 +1,49 @@
+
+
+
+<h1>Administrar Servicios</h1>
+<form class="form-horizontal" role="form" ng-controller="GestionarServiciosCtrl">
+
+    <div class="form-group"> <!-- SELECCIONAR USUARIO -->
+        <label  class="col-md-2 control-label text-right">Usuario</label>
+        <div class="col-md-7">
+            <select class="form-control">
+                <!--<option ng-repeat="tipoServicio in servicios.tipoServicio">{{tipoServicios.tipoServicio}}</option>-->
+
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group"> <!-- SERVICIOS PENDIENTES DEL USUARIO -->
+        <label  class="col-md-2 control-label text-right">Servicios Pendientes</label>
+        <div class="col-md-7">
+            <select class="form-control">
+                <!--<option ng-repeat="tipoServicio in servicios.tipoServicio">{{tipoServicios.tipoServicio}}</option>-->
+
+            </select>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" id='bCerrar' class="btn btn-default" data-dismiss="modal" >Anular</button>
+        <button type="button" id='bAgregar' class="btn btn-primary">Aprobar</button>
+    </div>
+    <h3>
+        Historial del Usuario
+    </h3>
+    <br>
+    <table style="width:300px">
+        <tr>
+            <th>Servicio</th>
+            <th>Fecha</th> 
+            <th>Estado</th>
+
+        </tr>
+        <tr>
+            <td>Eve</td>
+            <td>Jackson</td> 
+            <td>94</td>
+        </tr>
+    </table>
+</form>

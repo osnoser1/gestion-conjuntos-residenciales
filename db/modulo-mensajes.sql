@@ -47,27 +47,6 @@ INSERT INTO `apartamentos` (`id`, `idApartamento`, `idPiso`, `idEdificio`, `idUs
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `edificio`
---
-
-CREATE TABLE IF NOT EXISTS `edificio` (
-  `idEdificio` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(25) NOT NULL,
-  PRIMARY KEY (`idEdificio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `edificio`
---
-
-INSERT INTO `edificio` (`idEdificio`, `nombre`) VALUES
-(1, 'Edificio A'),
-(2, 'Edificio B'),
-(3, 'Edificio B');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `mensaje`
 --
 
