@@ -150,7 +150,7 @@ INSERT INTO `pagos_usuario` (`idPagosUsuario`, `idUsuario`, `idGastoFecha`, `Est
 -- Filtros para la tabla `gasto_entidad_historial`
 --
 ALTER TABLE `gasto_entidad_historial`
-  ADD CONSTRAINT `gasto_entidad_historial_ibfk_3` FOREIGN KEY (`idApartamento`) REFERENCES `apartamentos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gasto_entidad_historial_ibfk_3` FOREIGN KEY (`idApartamento`) REFERENCES `apartamento` (`idApartamento`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gasto_entidad_historial_ibfk_1` FOREIGN KEY (`idGastoHistorial`) REFERENCES `gasto_historial` (`idGastoHistorial`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gasto_entidad_historial_ibfk_2` FOREIGN KEY (`idEdificio`) REFERENCES `edificio` (`idEdificio`) ON DELETE CASCADE ON UPDATE CASCADE;
 

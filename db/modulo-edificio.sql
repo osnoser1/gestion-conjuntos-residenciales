@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `conjunto_residencial`
 --
+CREATE DATABASE IF NOT EXISTS `conjunto_residencial` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `conjunto_residencial`;
 
 -- --------------------------------------------------------
 
@@ -32,7 +34,16 @@ CREATE TABLE IF NOT EXISTS `edificio` (
   `Nombre` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `NroDePisos` int(11) NOT NULL,
   PRIMARY KEY (`idEdificio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `edificio`
+--
+
+INSERT INTO `edificio` (`idEdificio`, `Nombre`, `NroDePisos`) VALUES
+(1, 'La palma', 8),
+(2, 'Las flores', 16);
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
