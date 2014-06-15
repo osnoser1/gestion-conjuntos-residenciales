@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `pagos_usuario` (
 
 INSERT INTO `pagos_usuario` (`idPagosUsuario`, `idUsuario`, `idGastoFecha`, `Estado`) VALUES
 (1, 3, 1, 2),
-(2, 2, 2, 2);
+(2, 3, 2, 2);
 
 --
 -- Restricciones para tablas volcadas
