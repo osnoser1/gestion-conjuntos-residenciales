@@ -11,6 +11,12 @@
 
     <form class="form-horizontal" role="form">
         <div class="form-group">
+            <label for="Nombre" class="col-lg-2 control-label">Nombre</label>
+            <div class="col-lg-10">
+                <input ng-model="nuevo.Nombre" name="Nombre" required type="text" class="form-control" placeholder="">
+            </div>
+        </div>
+        <div class="form-group">
             <label for="TipoApartamento" class="col-lg-2 control-label">Tipo Apartamento</label>
             <small class="requerido" ng-show="TipoApartamento.idtipo.$error.required">*Seleccionar tipo de apartamento</small>
             <div class="col-lg-10">
@@ -19,145 +25,9 @@
                 required>
                 </select>
             </div>
-        </div>
-        </form>
-        
-    <form name="formTamaño" class="form-horizontal" role="form">
-        <div class="form-group">
-            <label class="col-lg-2 control-label">Tamaño</label>
-            <small class="requerido" ng-show="formTamaño.concepto.$error.required">*Indicar Tamaño en Mt2</small>
-            <div class="col-lg-10">
-                <input ng-model="nuevo.Tamano" name="tamano" required type="text" class="form-control" placeholder="min 100 mt2">
-            </div>
-        </div>
-        </form>
-        
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label for="NumeroHabitaciones" class="col-lg-2 control-label">N° Habitaciones</label>
-            <small class="requerido" ng-show="NumeroHabitaciones.concepto.$error.required"></small>
-            <div class="col-lg-10">
-                <select ng-model="nuevo.numHab" name="numhabitaciones" class="form-control"
-                ng-options="habitaciones.value as habitaciones.name for habitaciones in datos.numhabitaciones"
-                required>
-                </select>
-            </div>
-        </div>
-        </form>
-        
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label for="NumeroBanos" class="col-lg-2 control-label">N° Baños</label>
-            <small class="requerido" ng-show="NumeroBanos.concepto.$error.required"></small>
-            <div class="col-lg-10">
-                <select ng-model="nuevo.numBanos" name="numbanos" class="form-control"
-                ng-options="banos.value as banos.name for banos in datos.numbanos"
-                required>
-                </select>
-            </div>
-        </div>
-        </form>
-        
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label for="Sala" class="col-lg-2 control-label">Sala</label>
-            <div class="col-lg-10">
-                <select ng-model="nuevo.Sala" name="Sala" class="form-control"
-                ng-options="sala.value as sala.name for sala in datos.sala"
-                required>
-                </select>
-            </div>
-        </div>
-        </form>
-        
-     <form class="form-horizontal" role="form">
-         <div class="form-group">
-            <label for="Cocina" class="col-lg-2 control-label">Cocina</label>
-            <div class="col-lg-10">
-                <select ng-model="nuevo.Cocina" name="Cocina" class="form-control"
-                ng-options="cocina.value as cocina.name for cocina in datos.cocina"
-                required>
-                </select>
-            </div>
-        </div>
-        </form>
-        
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label for="Comedor" class="col-lg-2 control-label">Comedor</label>
-            <div class="col-lg-10">
-                <select ng-model="nuevo.Comedor" name="Comedor" class="form-control"
-                ng-options="comedor.value as comedor.name for comedor in datos.comedor"
-                required>
-                </select>
-            </div>
-        </div>
-        </form>
-        
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label for="Lavadero" class="col-lg-2 control-label">Lavadero</label>
-            <div class="col-lg-10">
-                <select ng-model="nuevo.Lavadero" name="Lavadero" class="form-control"
-                ng-options="lavadero.value as lavadero.name for lavadero in datos.lavadero"
-                required>
-                </select>
-            </div>
-        </div>
-        </form>
-        
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label for="Maletero" class="col-lg-2 control-label">Maletero</label>
-            <div class="col-lg-10">
-                <select ng-model="nuevo.Maletero" name="Maletero" class="form-control"
-                ng-options="maletero.value as maletero.name for maletero in datos.maletero"
-                required>
-                </select>
-            </div>
-        </div>
-        </form>
-        
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label for="Casillero" class="col-lg-2 control-label">Casillero</label>
-            <div class="col-lg-10">
-                <select ng-model="nuevo.Casillero" name="Casillero" class="form-control"
-                ng-options="casillero.value as casillero.name for casillero in datos.casillero"
-                required>
-                </select>
-            </div>
-        </div>
-        </form>
-        
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label for="NumeroDePuestoEstacionamiento" class="col-lg-2 control-label">N° Puesto Estacionamiento</label>
-            <div class="col-lg-10">
-                <select ng-model="nuevo.numEst" name="numEst" class="form-control"
-                ng-options="estacionamiento.value as estacionamiento.name for estacionamiento in datos.numestacion"
-                required>
-                    <option value ="0">1</option>
-                    <option value ="1">2</option>
-                </select>
-            </div>
-        </div>
-        </form>
-        
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label for="Alicuota" class="col-lg-2 control-label">Alicuota</label>
-            <div class="col-lg-10">
-                <select ng-model="nuevo.Alicuota" name="Alicuota" class="form-control"
-                ng-options="alicuota.value as alicuota.name for alicuota in datos.alicuota"
-                required>
-                </select>
-            </div>
-        </div>
-        </form>
-        
+        </div>       
         <center><a ng-click="GuardarApartamento(nuevo)" class="btn btn-primary ladda-button" data-style="zoom-in" data-ui-ladda="loading">
-                <span class="ladda-label">Guardar</span>
-            </a>
-                
+                Guardar
+            </a></center>
+        </form>       
 </div> 

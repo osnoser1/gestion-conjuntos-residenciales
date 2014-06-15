@@ -9,17 +9,19 @@ class ApartamentoController extends GxController {
 		));
 	}
         
+        public function actionListarEdificiosApartamentos(){
+            $Edificios = Edificio::model()->findAll("idGastoFecha=$gf->idGastoFecha");
+        
+        }
         public function actionInsertar(){
             echo var_dump($_POST['datos']);
             if (isset($_POST['datos'])) {
-                echo "IS SI  ";
-			$apartamento = $_POST['datos'];
-			$model = new Apartamento;
-			$model->setAttributes($apartamento);
-                    $model->insert();
-		}
+                $apartamento = $_POST['datos'];
+                $model = new Apartamento;
+                $model->setAttributes($apartamento);
+                $model->insert();
+            }
         }
-
 	public function actionCreate() {
 		$model = new Apartamento;
 

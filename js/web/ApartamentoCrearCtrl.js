@@ -68,6 +68,7 @@ myApp.controllerProvider.register('ApartamentoCrearCtrl', function($scope, $http
 
     $scope.GuardarApartamento = function(nuevo) {
         console.dir($scope.nuevo);
+
         $http.post(url + 'apartamento/insertar', $.param({datos: nuevo}), {timeout: 5000/*, responseType: "json"*/, headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
         ).success(function(data, status, headers, config) {
             console.log(data);
