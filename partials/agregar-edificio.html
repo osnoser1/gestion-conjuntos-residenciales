@@ -1,11 +1,13 @@
+<script src="js/web/AgregarEdificioCtrl.js"></script>
 <h1> Agregar Edificios</h1><br><br>
+<div ng-controller="AgregarEdificioCtrl">
 <form>
-    
-    Nombre: <input Type="text" name="nombre" value="" ng-model="Nombre"/> <br><br>
+    Nombre: <input Type="text" name="nombre" value="requered" ng-model="element.Nombre" placeholder=" Edificio A" /> <br><br>
     <br>
-    Cantidad De Pisos: <input Type="text" name="piso" value="" ng-model="Cantidad De Pisos"/>  <br><br>
+    Cantidad De Pisos: <input Type="text" name="piso" value="requered" ng-model="element.NroDePisos" placeholder=" 1 " />  <br><br>
     <br>
     <br>
     <Center><button ng-click="agregarDatosE(element)">AGREGAR</button><br></center>
         
 </form>
+</div>
