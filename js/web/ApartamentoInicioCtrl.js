@@ -28,5 +28,10 @@ myApp.controllerProvider.register('ApartamentoInicioCtrl', function($scope, $htt
         $rootScope.datos = "0";
         $location.path("panel/listado-apartamentos");
     };
+    $scope.AgregarApartamento = function(element) {
+        $rootScope.activado = true;
+        $rootScope.datos = "0";
+        $location.path("panel/agregar-apartamento");
+    }
 });
 
