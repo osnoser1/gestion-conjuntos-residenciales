@@ -3,6 +3,6 @@ modulo-usuario.sql,no tiene dependencia
 modulo-edificio.sql,no tiene dependencia
 modulo-mensajes.sql,crea apartamentos.
 modulo-pagos.sql,depende de usuario
-modulo-gastos.sql,no tiene dependencia por los momentos. Pronto tendrá con edificio y apartamento.
+modulo-gastos.sql,depende de edificio,apartamento y usuario.
 publicacion.sql,no tiene dependencia
 cartelera.sql,depende de edificio,apartamentos

@@ -8,16 +8,15 @@
 
 var myApp = angular.module('myApp');
 
-myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
-    console.log('GastosActualesCtrl');
+myApp.controllerProvider.register('PagosPendientesUserCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
+    console.log('PagosPendientesUserCtrl');
     var temp;
     $rootScope.show = false;
     $scope.desactivado = false;
     $scope.tags = [];
-    $scope.sitios = [];
     $scope.nuevo = {};
-    $scope.datos = {gastos: []};
-    $http.get(url + 'gasto/view').success(function(data, status, headers, config) {
+    $scope.datos = {pagos: []};
+    $http.get(url + 'pagos/viewPendientes').success(function(data, status, headers, config) {
         if (!data.respuesta) {
             $scope.error(data, status, headers, config);
             return;
@@ -26,17 +25,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
         $rootScope.show = true;
         $scope.datos = data.datos;
         $scope.total = parseInt(data.Total);
-        $scope.gastos = data.gastos;
-        $scope.gastosFiltrados = [];
-        angular.forEach($scope.gastos, function(key) {
-            if ($filter('filter')($scope.datos.gastos, {idGasto: key.idGasto}, true).length === 0) {
-                $scope.gastosFiltrados.push(key);
-            }
-        });
     }).error($scope.error);
-    $http.get('pruebas/sitios.json').success(function(data) {
-        $scope.sitios = data;
-    });
     $scope.update = function(tag, element) {
         console.log(tag);
         $http.post(url + 'gastoEntidadHistorial/create', $.param({datos: tag}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}

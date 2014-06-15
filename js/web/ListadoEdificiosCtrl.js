@@ -21,7 +21,7 @@ myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http
         console.log($rootScope.edificio);
         var array = $filter('filter')($scope.datos.Edificios, {id: $rootScope.edificio.id}, true);
         console.log(array);
-        if(array.length !== 0) {
+        if (array.length !== 0) {
             array[0].Nombre = $rootScope.edificio.Nombre;
             array[0].CantidadPisos = $rootScope.edificio.CantidadPisos;
         }
@@ -29,15 +29,15 @@ myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http
         ).success(function(data, status, headers, config) {
             console.log(data);
         }).error(function(data, status) { // called asynchronously if an error occurs
-        // or server returns response with an error status.
+            // or server returns response with an error status.
             $scope.showDialog({message: data});
         });
-            $('#myModal').modal('hide');
-                show({message: {text: "Edificio modificado exitosamente."}, type: 'success'});
+        $('#myModal').modal('hide');
+        show({message: {text: "Edificio modificado exitosamente."}, type: 'success'});
 
     };
     $scope.modificarDatosE = function(elemento) {
-        $rootScope.edificio = {id:elemento.id,Nombre:elemento.Nombre, CantidadPisos:elemento.CantidadPisos};
+        $rootScope.edificio = {id: elemento.id, Nombre: elemento.Nombre, CantidadPisos: elemento.CantidadPisos};
         console.log("Hola mundo");
         $scope.showConfirmDialog({title: "Editar Edificio", src: "'partials/modificar-edificio.html'"}, $scope.a);
     };

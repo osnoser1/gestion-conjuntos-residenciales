@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `conjunto_residencial`
 --
+CREATE DATABASE IF NOT EXISTS `conjunto_residencial` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `conjunto_residencial`;
 
 -- --------------------------------------------------------
@@ -27,6 +28,7 @@ USE `conjunto_residencial`;
 -- Estructura de tabla para la tabla `gasto`
 --
 
+DROP TABLE IF EXISTS `gasto`;
 CREATE TABLE IF NOT EXISTS `gasto` (
   `idGasto` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -47,23 +49,43 @@ INSERT INTO `gasto` (`idGasto`, `Nombre`, `Descripcion`) VALUES
 (6, 'Mantenimiento cancha de fútbol', NULL);
 
 -- --------------------------------------------------------
+--
+-- Estructura de tabla para la tabla `gasto_entidad_historial`
+--
+
+DROP TABLE IF EXISTS `gasto_entidad_historial`;
+CREATE TABLE IF NOT EXISTS `gasto_entidad_historial` (
+  `idEntidadHistorial` int(11) NOT NULL AUTO_INCREMENT,
+  `idGastoHistorial` int(11) NOT NULL,
+  `idEdificio` int(11) NOT NULL,
+  `idApartamento` int(11) NOT NULL,
+  `NroDePiso` int(11) NOT NULL,
+  PRIMARY KEY (`idEntidadHistorial`),
+  KEY `idGastoHistorial` (`idGastoHistorial`),
+  KEY `idApartamento` (`idApartamento`),
+  KEY `idEdificio` (`idEdificio`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `gasto_fecha`
 --
 
+DROP TABLE IF EXISTS `gasto_fecha`;
 CREATE TABLE IF NOT EXISTS `gasto_fecha` (
   `idGastoFecha` int(11) NOT NULL AUTO_INCREMENT,
   `Fecha` date NOT NULL,
   PRIMARY KEY (`idGastoFecha`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `gasto_fecha`
 --
 
 INSERT INTO `gasto_fecha` (`idGastoFecha`, `Fecha`) VALUES
-(1, '2014-02-01');
+(1, '2014-02-01'),
+(2, '2014-01-01');
 
 -- --------------------------------------------------------
 
@@ -71,6 +93,7 @@ INSERT INTO `gasto_fecha` (`idGastoFecha`, `Fecha`) VALUES
 -- Estructura de tabla para la tabla `gasto_historial`
 --
 
+DROP TABLE IF EXISTS `gasto_historial`;
 CREATE TABLE IF NOT EXISTS `gasto_historial` (
   `idGastoHistorial` int(11) NOT NULL AUTO_INCREMENT,
   `idGastoFecha` int(11) NOT NULL,
@@ -79,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `gasto_historial` (
   PRIMARY KEY (`idGastoHistorial`),
   UNIQUE KEY `idGastoFecha` (`idGastoFecha`,`idGasto`),
   KEY `idGasto` (`idGasto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `gasto_historial`
@@ -89,18 +112,61 @@ INSERT INTO `gasto_historial` (`idGastoHistorial`, `idGastoFecha`, `idGasto`, `P
 (1, 1, 1, 10000),
 (2, 1, 2, 10000),
 (3, 1, 3, 10000),
-(4, 1, 4, 10000);
+(4, 1, 4, 10000),
+(5, 2, 1, 3200),
+(6, 2, 2, 10000),
+(7, 2, 3, 5000),
+(8, 2, 4, 10000);
+
+--
+-- Estructura de tabla para la tabla `pagos_usuario`
+--
+
+DROP TABLE IF EXISTS `pagos_usuario`;
+CREATE TABLE IF NOT EXISTS `pagos_usuario` (
+  `idPagosUsuario` int(11) NOT NULL AUTO_INCREMENT,
+  `idUsuario` int(11) NOT NULL,
+  `idGastoFecha` int(11) NOT NULL,
+  `Estado` int(11) NOT NULL,
+  PRIMARY KEY (`idPagosUsuario`),
+  KEY `idUsuario` (`idUsuario`),
+  KEY `idUsuario_2` (`idUsuario`),
+  KEY `idGastoFecha` (`idGastoFecha`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `pagos_usuario`
+--
+
+INSERT INTO `pagos_usuario` (`idPagosUsuario`, `idUsuario`, `idGastoFecha`, `Estado`) VALUES
+(1, 3, 1, 2),
+(2, 2, 2, 2);
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
+-- Filtros para la tabla `gasto_entidad_historial`
+--
+ALTER TABLE `gasto_entidad_historial`
+  ADD CONSTRAINT `gasto_entidad_historial_ibfk_3` FOREIGN KEY (`idApartamento`) REFERENCES `apartamentos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gasto_entidad_historial_ibfk_1` FOREIGN KEY (`idGastoHistorial`) REFERENCES `gasto_historial` (`idGastoHistorial`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gasto_entidad_historial_ibfk_2` FOREIGN KEY (`idEdificio`) REFERENCES `edificio` (`idEdificio`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `gasto_historial`
 --
 ALTER TABLE `gasto_historial`
-  ADD CONSTRAINT `gasto_historial_ibfk_2` FOREIGN KEY (`idGasto`) REFERENCES `gasto` (`idGasto`),
-  ADD CONSTRAINT `gasto_historial_ibfk_1` FOREIGN KEY (`idGastoFecha`) REFERENCES `gasto_fecha` (`idGastoFecha`);
+  ADD CONSTRAINT `gasto_historial_ibfk_2` FOREIGN KEY (`idGasto`) REFERENCES `gasto` (`idGasto`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gasto_historial_ibfk_1` FOREIGN KEY (`idGastoFecha`) REFERENCES `gasto_fecha` (`idGastoFecha`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `pagos_usuario`
+--
+ALTER TABLE `pagos_usuario`
+  ADD CONSTRAINT `pagos_usuario_ibfk_2` FOREIGN KEY (`idGastoFecha`) REFERENCES `gasto_fecha` (`idGastoFecha`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pagos_usuario_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

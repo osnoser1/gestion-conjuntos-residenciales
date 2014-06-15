@@ -12,20 +12,6 @@ class GastoController extends GxController {
         $this->render('index');
     }
 
-    public function getListadoSitios($o) {
-        $array = [];
-        if ($o instanceof Edificio) {
-            $array = array_merge($array, ["text" => "Edif. $o->Nombre", "idEdificio" => $o->idEdificio, "idApartamento" => null, "NroPiso" => null]);
-            for ($index = 1; $index <= $o->NroDePisos; $index++) {
-                $array = array_merge($array, ["text" => "Piso $index - Edif. $o->Nombre", "idEdificio" => $o->idEdificio, "idApartamento" => null, "NroPiso" => $index]);
-            }
-        } else {
-            $nombre = $o->idEdificio0->Nombre;
-            $array = array_merge($array, ["text" => "Apto. $o->Nombre - Edif. $nombre", "idEdificio" => $o->idEdificio, "idApartamento" => $o->idApartamento, "NroPiso" => $o->Piso]);
-        }
-        return $array;
-    }
-
     public function actionView() {
         $gf = GastoFecha::model()->findBySql('SELECT * FROM gasto_fecha ORDER BY Fecha DESC LIMIT 1');
 //        var_dump($gf);
@@ -50,11 +36,8 @@ class GastoController extends GxController {
     public function actionCreate() {
 //        sleep(10);
         if (isset($_POST['datos'])) {
-//            $geh = $_POST['datos'];
-//            $o = new GastoEntidadHistorial;
-//            $o->setAttributes($geh);
-//            $o->insert();
-            echo $this->salida(false, "aviso", "No se pudo actualizar");
+            $tag = $_POST['datos'];
+            echo $this->salida(false, "aviso", "Error en el servidor");
         } else {
             echo $this->salida(false, "aviso", "Error en el servidor");
         }

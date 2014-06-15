@@ -44,6 +44,7 @@ pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $l
         } else {
             o = {title: ""};
         }
+        o.backdrop = 'static';
         $.extend(o, params);
         var modalHtml = "";
         if (o.title !== "") {
@@ -55,19 +56,37 @@ pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $l
             modalHtml += '<div class="modal-body"><div ng-include src="' + o.src + '"></div></div>';
         modalHtml += '<div class="modal-footer"><button data-ui-ladda="myModalAccept" class="btn btn-primary ladda-button" data-style="zoom-in" ng-click="successDialog()"><span class="ladda-label">Aceptar</span></button><button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button></div>';
         $scope.modalHtml = modalHtml;
-        $('#myModal').modal({show: true, backdrop: 'static'});
+        $('#myModal').modal({show: true});
+        $('#myModal').on('hidden.bs.modal', function(e) {
+            $scope.$apply(function() {
+                $scope.modalHtml = "";
+            });
+        });
     };
     $scope.showDialog = function(params) {
         $rootScope.myModalAccept = false;
-        var o = {title: "", message: "Mensaje de prueba."};
+        var o;
+        if (params.message) {
+            o = {title: "", message: "Mensaje de prueba."};
+        } else {
+            o = {title: ""};
+        }
         $.extend(o, params);
         var modalHtml = "";
         if (o.title !== "") {
             modalHtml = '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">' + o.title + '</h4></div>';
         }
-        modalHtml += '<div class="modal-body">' + o.message + '</div>';
+        if (params.message)
+            modalHtml += '<div class="modal-body">' + o.message + '</div>';
+        else
+            modalHtml += '<div class="modal-body"><div ng-include src="' + o.src + '"></div></div>';
         $scope.modalHtml = modalHtml;
         $('#myModal').modal('show');
+        $('#myModal').on('hidden.bs.modal', function(e) {
+            $scope.$apply(function() {
+                $scope.modalHtml = "";
+            });
+        });
     };
 });
 

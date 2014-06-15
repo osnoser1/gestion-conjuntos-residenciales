@@ -1,0 +1,30 @@
+<script src="js/web/GastosDetalleCtrl.js"></script>
+<div ng-controller="GastosDetalleCtrl" class="content" ng-show="showGastosDetalle" id="print">
+    <h1>Detalle gasto</h1>
+    <h2>{{datos.Mes}} - {{datos.Ano}}</h2>
+    <div class="list-group">
+        <div class="list-group-item row no-select active cabecera">
+            <div class="col-xs-1">
+                <span class="badge">#</span>
+            </div>
+            <p class="col-xs-3">Nombre</p>
+            <p class="col-xs-2">Precio</p>
+            <p class="col-xs-5">Entidades</p>
+        </div>
+        <div class="list-group-item row no-select am-fade-and-slide-top" ng-repeat="element in datos.gastos">
+            <p class="col-xs-1">{{element.idGasto}}</p>
+            <p class="col-xs-3">{{element.Nombre}}</p>
+            <p class="col-xs-2">{{element.Precio}}</p>
+            <tags-input class="col-xs-6" ng-model="element.sitios" placeholder="Agrega un sitio" add-from-autocomplete-only="true" replace-spaces-with-dashes="false">
+                <auto-complete source="loadTags($query)" max-results-to-show="20" min-length="1"></auto-complete>
+            </tags-input>
+        </div>
+    </div>
+    <div class="row"><b class="col-sm-offset-6 col-sm-3">Total gastos del mes:</b><b class="col-sm-3 text-right">{{total}} Bs.</b></div>
+    <div class="row" style="padding-top: 15px;">
+        <div class="pull-right">
+            <a class="btn btn-default" ng-click="guardarPDF()">Guardar como PDF</a>
+            <a class="btn btn-default" ng-click="imprimir()">Imprimir</a>
+        </div>
+    </div>
+</div>
