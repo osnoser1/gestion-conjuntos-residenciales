@@ -9,10 +9,26 @@ class ApartamentoController extends GxController {
 		));
 	}
         
+        public function actionListar(){
+            $apartamentos = Apartamento::model()->findAll();
+            foreach ($apartamentos as &$value) {
+                $salida[] = $value->getAttributes();
+            }
+            echo $this->salida(true, 'apartamentos', $salida);
+        }
+        
+        function salida($respuesta = true, $key = null, $value = null) {
+            if ($key == null) {
+                return json_encode(array('respuesta' => $respuesta));
+            } else if ($value == null) {
+                $key["respuesta"] = $respuesta;
+                return json_encode($key);
+            }
+            return json_encode(array('respuesta' => $respuesta, $key => $value));
+        }
+
         public function actionInsertar(){
-            echo var_dump($_POST['datos']);
             if (isset($_POST['datos'])) {
-                echo "IS SI  ";
 			$apartamento = $_POST['datos'];
 			$model = new Apartamento;
 			$model->setAttributes($apartamento);

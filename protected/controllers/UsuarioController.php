@@ -10,7 +10,7 @@ class UsuarioController extends GxController {
 	}
 
 
-	function salida($respuesta = true, $key = null, $value = null) {
+	function salida($respuesta = true, $key = null, $value = null){
 		if ($key == null) {
 			return json_encode(array('respuesta' => $respuesta));
 		} else if ($value == null) {
@@ -21,18 +21,17 @@ class UsuarioController extends GxController {
 	}
 
 	public function actionListar(){
-		//$gf = GastoFecha::model()->findBySql('SELECT * FROM gasto_fecha ORDER BY Fecha DESC LIMIT 1');
-		$usuarios = Usuario::model()->findAll();
-		for($i=0; $i < count($usuarios); $i++){
-			$salida[$i]['ID'] = $usuarios[$i]->ID;
-			$salida[$i]['Nombre'] = $usuarios[$i]->Nombre;
-			$salida[$i]['Apellido'] = $usuarios[$i]->Apellido;
-			$salida[$i]['Cedula'] = $usuarios[$i]->Cedula;
-			$salida[$i]['Correo'] = $usuarios[$i]->Correo;
-			$salida[$i]['Contrasena'] = $usuarios[$i]->Contrasena;
-			$salida[$i]['TipoUsuario'] = $usuarios[$i]->TipoUsuario; 
-		}
-		echo $this->salida(true, $salida);
+            $usuarios = Usuario::model()->findAll();
+            for($i=0; $i < count($usuarios); $i++){
+                $salida[$i]['ID'] = $usuarios[$i]->ID;
+                $salida[$i]['Nombre'] = $usuarios[$i]->Nombre;
+                $salida[$i]['Apellido'] = $usuarios[$i]->Apellido;
+                $salida[$i]['Cedula'] = $usuarios[$i]->Cedula;
+                $salida[$i]['Correo'] = $usuarios[$i]->Correo;
+                $salida[$i]['Contrasena'] = $usuarios[$i]->Contrasena;
+                $salida[$i]['TipoUsuario'] = $usuarios[$i]->TipoUsuario; 
+            }
+            echo $this->salida(true, $salida);
 	}
 
 	public function actionEliminar(){
