@@ -4,8 +4,10 @@
 <form class="form-horizontal" role="form">
     <div class="form-group col-sm-10">
         Correo:<input type="text" name="correo" value="" class="form-control"/><br>
-        Telefono:<input type="text" name="telefono" value="" class="form-control"/><br>
-        Celular: <input type="text" name="celular" value="" class="form-control"/><br>
+        <div class="col-lg-10">
+            <input class="form-control-static" ng-repeat="tel in usuario.telefonos" ng-model="tel.Telefono"/>
+        </div>
+
     </div>
     <table class="botonesmpu">
         <tr>

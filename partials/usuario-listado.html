@@ -22,19 +22,19 @@
         <div class="list-group text-center">
             <div class="list-group-item row no-select active cabecera">
                 <span class="badge pull-left">#</span>
-                <p ng-dblclick="" class="col-xs-3">Nombre</p>
-                <p ng-dblclick="" class="col-xs-4">Correo</p>
-                <p ng-dblclick="" class="col-xs-2">Edif</p>
-                <p ng-dblclick="" class="col-xs-1">Apto</p>
+                <p ng-dblclick="" class="col-xs-2">Nombre</p>
+                <p ng-dblclick="" class="col-xs-2">Apellido</p>
+                <p ng-dblclick="" class="col-xs-2">Cedula</p>
+                <p ng-dblclick="" class="col-xs-3">Correo</p>
             </div>
             <div class="list-group-item row no-select" ng-repeat="element in datos.usuarios" >
                 <span class="badge pull-left">{{element.ID}}</span>
-                <p ng-dblclick="" class="col-xs-3">{{element.Nombre}}</p>
-                <p ng-dblclick="" class="col-xs-4">{{element.Correo}}</p>
-                <p ng-dblclick="" class="col-xs-2">{{element.Edif}}</p>
-                <p ng-dblclick="" class="col-xs-1">{{element.Apto}}</p>
+                <p ng-dblclick="" class="col-xs-2">{{element.Nombre}}</p>
+                <p ng-dblclick="" class="col-xs-2">{{element.Apellido}}</p>
+                <p ng-dblclick="" class="col-xs-2">{{element.Cedula}}</p>
+                <p ng-dblclick="" class="col-xs-3">{{element.Correo}}</p>
                 <a class=" pointer" ng-click="usuariosVerDetalles(element)"><span class="glyphicon glyphicon-search" title="Ver detalles"></span></a>
-                
+
                 <a class=" pointer" ng-click="usuarioModificar(element)"><span class="glyphicon glyphicon-pencil" title="Modificar"></span></a>
                 <a class="eliminarglyphicon pointer" ng-click="showModalBorrar(element)"><span class="glyphicon glyphicon-remove" title="Eliminar"></span></a>
             </div>
