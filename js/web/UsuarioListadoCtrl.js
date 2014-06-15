@@ -4,17 +4,17 @@
  * and open the template in the editor.
  */
 
- 'use strict';
- /* Controllers */
+'use strict';
+/* Controllers */
 
- var myApp = angular.module('myApp');
+var myApp = angular.module('myApp');
 
- myApp.controllerProvider.register('UsuarioListadoCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope, $location) {
+myApp.controllerProvider.register('UsuarioListadoCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope, $location) {
     $scope.datos = {
         usuarios: [],
     };
 
-    $scope.listarUsuarios = function(){
+    $scope.listarUsuarios = function() {
         console.log("Local");
         console.dir($scope.datos.usuarios);
         $http.get(url + 'usuario/listar').success(function(data, status, headers, config) {
@@ -25,13 +25,14 @@
     };
     $scope.listarUsuarios();
 
-    $scope.usuarioModificar=function(element){
-    	console.log("holaaaaa");
-    	$location.path("panel/usuario-modificar-usuario");
+    $scope.usuarioModificar = function(element) {
+        $rootScope.usuarioModificado = element;
+        $location.path("panel/usuario-modificar-usuario");
+
     };
 
-    $scope.usuarioEliminar=function(){
-        console.log("Usuario a Eliminar");
+    $scope.usuarioEliminar = function() {
+        //console.log("Usuario a Eliminar");
         console.dir($scope.usuarioSeleccionado);
         $http.post(url + 'usuario/eliminar', $.param({datos: $scope.usuarioSeleccionado.ID}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
         ).success(function(data, status, headers, config) {
@@ -46,6 +47,16 @@
     $scope.showModalBorrar = function(elemento) {
         $scope.usuarioSeleccionado = elemento;
         $scope.showConfirmDialog({title: "Aviso", message: "¿Seguro que desea eliminar el usuario seleccionado?"}, $scope.usuarioEliminar);
+    };
+
+    $scope.usuariosVerDetalles = function(element) {
+        console.dir(element);
+        $rootScope.idUsuario = element.ID;
+        $scope.showConfirmDialog({title: "<b>ID Usuario: </b> \n" + element.ID, src: "'partials/usuario-modal-detalles.html'"}, $scope.VerDetalles);
+
+    };
+    $scope.VerDetalles = function() {
+        console.dir($scope.usuarioSeleccionado);
     };
 
 });
