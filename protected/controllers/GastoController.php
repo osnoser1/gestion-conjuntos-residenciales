@@ -12,6 +12,20 @@ class GastoController extends GxController {
         $this->render('index');
     }
 
+    public function getListadoSitios($o) {
+        $array = [];
+        if ($o instanceof Edificio) {
+            $array = array_merge($array, ["text" => "Edif. $o->Nombre", "idEdificio" => $o->idEdificio, "idApartamento" => null, "NroPiso" => null]);
+            for ($index = 1; $index <= $o->NroDePisos; $index++) {
+                $array = array_merge($array, ["text" => "Piso $index - Edif. $o->Nombre", "idEdificio" => $o->idEdificio, "idApartamento" => null, "NroPiso" => $index]);
+            }
+        } else {
+            $nombre = $o->idEdificio0->Nombre;
+            $array = array_merge($array, ["text" => "Apto. $o->Nombre - Edif. $nombre", "idEdificio" => $o->idEdificio, "idApartamento" => $o->idApartamento, "NroPiso" => $o->Piso]);
+        }
+        return $array;
+    }
+
     public function actionView() {
         $gf = GastoFecha::model()->findBySql('SELECT * FROM gasto_fecha ORDER BY Fecha DESC LIMIT 1');
 //        var_dump($gf);
@@ -36,7 +50,11 @@ class GastoController extends GxController {
     public function actionCreate() {
 //        sleep(10);
         if (isset($_POST['datos'])) {
-            $gasto = $_POST['datos'];
+//            $geh = $_POST['datos'];
+//            $o = new GastoEntidadHistorial;
+//            $o->setAttributes($geh);
+//            $o->insert();
+            echo $this->salida(false, "aviso", "No se pudo actualizar");
         } else {
             echo $this->salida(false, "aviso", "Error en el servidor");
         }
@@ -96,6 +114,36 @@ class GastoController extends GxController {
             $criteria->addInCondition('idGastoHistorial', $gastos);
             GastoHistorial::model()->deleteAll($criteria);
             echo $this->salida();
+        } else {
+            echo $this->salida(false, "aviso", "Error en el servidor");
+        }
+    }
+
+    public function actionListar() {
+        $gf = Yii::app()->db->createCommand('SELECT gf.idGastoFecha, gf.Fecha, SUM(gh.Precio) AS Total FROM gasto_historial gh, gasto_fecha gf WHERE gf.idGastoFecha=gh.idGastoFecha GROUP BY gf.idGastoFecha')->queryAll();
+//        var_dump($gf);
+        echo $this->salida(true, 'datos', ['gastos' => $gf]);
+    }
+
+    public function actionDetalle() {
+        if (isset($_POST['datos'])) {
+            $id = $_POST['datos'];
+            $gh = GastoHistorial::model()->findAll("idGastoFecha=$id");
+            $gf = GastoFecha::model()->find("idGastoFecha=$id");
+            $salida["datos"]["Fecha"] = $gf->Fecha;
+            $salida["datos"]["Ano"] = date('Y', strtotime($gf->Fecha));
+            $salida["datos"]["Mes"] = date('M', strtotime($gf->Fecha));
+            foreach ($gh as $value) {
+                $el = $value->getAttributes();
+                $el['Nombre'] = $value->idGasto0->Nombre;
+                $salida["datos"]["gastos"][] = $el;
+            }
+            $salida["Total"] = Yii::app()->db->createCommand()
+                            ->select('SUM(Precio) as Total')
+                            ->from('gasto_historial')
+                            ->where("idGastoFecha=$id")
+                            ->queryRow()["Total"];
+            echo $this->salida(true, $salida);
         } else {
             echo $this->salida(false, "aviso", "Error en el servidor");
         }

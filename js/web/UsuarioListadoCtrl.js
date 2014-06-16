@@ -9,16 +9,54 @@
 
 var myApp = angular.module('myApp');
 
-myApp.controllerProvider.register('UsuarioListadoCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
+myApp.controllerProvider.register('UsuarioListadoCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope, $location) {
     $scope.datos = {
-        usuarios: [
-            {"id": "1", "Nombre": "Ricardo", "Correo": "Felicce@gmail.com", "Edif": "topacio", "Apto": "1"},
-            {"id": "2", "Nombre": "Jenny", "Correo": "Gonzales@gmail.com", "Edif": "perla", "Apto": "2"},
-            {"id": "3", "Nombre": "Carlos", "Correo": "Salazar@gmail.com", "Edif": "perla", "Apto": "3"},
-            {"id": "4", "Nombre": "Andrés", "Correo": "Freites@gmail.com", "Edif": "perla", "Apto": "4"},
-            {"id": "5", "Nombre": "Luna", "Correo": "Lopez@gmail.com", "Edif": "topacio", "Apto": "4"}
-        ],
+        usuarios: [],
     };
 
+    $scope.listarUsuarios = function() {
+        console.log("Local");
+        console.dir($scope.datos.usuarios);
+        $http.get(url + 'usuario/listar').success(function(data, status, headers, config) {
+            console.dir("Salida");
+            console.dir(data);
+            $scope.datos.usuarios = data;
+        }).error($scope.error);
+    };
+    $scope.listarUsuarios();
+
+    $scope.usuarioModificar = function(element) {
+        $rootScope.usuarioModificado = element;
+        $location.path("panel/usuario-modificar-usuario");
+
+    };
+
+    $scope.usuarioEliminar = function() {
+        //console.log("Usuario a Eliminar");
+        console.dir($scope.usuarioSeleccionado);
+        $http.post(url + 'usuario/eliminar', $.param({datos: $scope.usuarioSeleccionado.ID}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+        ).success(function(data, status, headers, config) {
+            console.log("data");
+            console.dir(data);
+            $('#myModal').modal('hide');
+            show({message: {text: "Usuario eliminando exitosamente."}, type: 'success'});
+        }).error($scope.error);
+        $scope.idSeleccionado = "";
+    };
+
+    $scope.showModalBorrar = function(elemento) {
+        $scope.usuarioSeleccionado = elemento;
+        $scope.showConfirmDialog({title: "Aviso", message: "¿Seguro que desea eliminar el usuario seleccionado?"}, $scope.usuarioEliminar);
+    };
+
+    $scope.usuariosVerDetalles = function(element) {
+        console.dir(element);
+        $rootScope.idUsuario = element.ID;
+        $scope.showConfirmDialog({title: "<b>ID Usuario: </b> \n" + element.ID, src: "'partials/usuario-modal-detalles.html'"}, $scope.VerDetalles);
+
+    };
+    $scope.VerDetalles = function() {
+        console.dir($scope.usuarioSeleccionado);
+    };
 
 });

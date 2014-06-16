@@ -1,0 +1,23 @@
+<script src="js/web/UsuarioModificarCtrl.js"></script>
+<link rel="stylesheet" href="css/estilo-mariangela.css"/>
+<h1> Modificar Datos de Usuario</h1>
+<div ng-controller="UsuarioModificarCtrl">
+    <form>
+        <div class="row">
+
+            <div class="form-group col-sm-10">
+                Cedula: <input type="text" name="cedula" value="" class="form-control" ng-model="usuarioModificado.Cedula"/><br>
+                Nombre: <input type="text" name="nombre" value="" class="form-control" ng-model="usuarioModificado.Nombre"/><br>
+                Apellido: <input type="text" name="apellido" value="" class="form-control" ng-model="usuarioModificado.Apellido"/><br>
+                Correo: <input type="text" name="correo" value="" class="form-control" ng-model="usuarioModificado.Correo"/>
+            </div>
+        </div>
+        <table class="botones">
+            <tr>
+                <td class="celdabotones">
+                    <input type="submit" value="Aceptar" class="css_buttonaceptar" ng-click="usuarioModificar(usuarioModificado)" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

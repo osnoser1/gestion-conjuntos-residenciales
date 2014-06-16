@@ -1,0 +1,24 @@
+<script src="js/web/GastosHistorialCtrl.js"></script>
+<div ng-controller="GastosHistorialCtrl" class="content" ng-show="show">
+    <h1>Historial gastos</h1>
+    <div class="barra-pers2">
+        <!--<a class="btn btn-default btn-sm btn-responsive" href="">Agregar</a>-->
+        <button type="button" class="btn btn-default btn-sm btn-responsive" ng-click="all(true)">Seleccionar todo</button>
+        <button type="button" class="btn btn-default btn-sm btn-responsive" ng-click="all(false)">Deseleccionar todo</button>
+        <a class="btn btn-default btn-sm btn-responsive" ng-disabled="desactivado" ng-click="showModalBorrar()">Eliminar</a>
+    </div>
+    <div class="list-group">
+        <div class="list-group-item row no-select active cabecera">
+            <div class="col-xs-1">
+                <span class="badge">#</span>
+            </div>
+            <p class="col-xs-2">Fecha</p>
+            <p class="col-xs-2">Monto total</p>
+        </div>
+        <div class="list-group-item row no-select am-fade-and-slide-top a" ng-repeat="element in datos.gastos">
+            <p class="col-xs-1">{{element.idGastoFecha}}</p>
+            <div class="col-xs-2 a-pers" ng-click="showDetalle(element.idGastoFecha)">{{element.Fecha}}</div>
+            <p class="col-xs-2">{{element.Total}} Bs</p>
+        </div>
+    </div>
+</div>

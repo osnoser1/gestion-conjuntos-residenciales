@@ -1,0 +1,28 @@
+<script src="js/web/PagosPendientesDetalleCtrl.js"></script>
+<div ng-controller="PagosPendientesDetalleCtrl" class="content" ng-show="showPagosPendientes" id="print">
+    <h1>Detalle gasto</h1>
+    <h2>{{datos.Mes}} - {{datos.Ano}}</h2>
+    <div class="list-group">
+        <div class="list-group-item row no-select active cabecera">
+            <div class="col-xs-1">
+                <span class="badge">#</span>
+            </div>
+            <p class="col-xs-4">Nombre</p>
+            <p class="col-xs-3">Precio gasto completo</p>
+            <p class="col-xs-3">Precio con alicuota</p>
+        </div>
+        <div class="list-group-item row no-select am-fade-and-slide-top" ng-repeat="element in datos.pagos">
+            <p class="col-xs-1">{{element.idPagosHistorialUsuario}}</p>
+            <p class="col-xs-4">{{element.Nombre}}</p>
+            <p class="col-xs-3">{{element.Precio}}</p>
+            <p class="col-xs-2">{{element.TotalAlicuota}}</p>
+        </div>
+    </div>
+    <div class="row"><b class="col-sm-offset-6 col-sm-3">Total pago del mes:</b><b class="col-sm-3 text-right">{{datos.Total}} Bs.</b></div>
+    <div class="row" style="padding-top: 15px;">
+        <div class="pull-right">
+            <a class="btn btn-default" ng-click="guardarPDF()">Guardar como PDF</a>
+            <a class="btn btn-default" ng-click="imprimir()">Imprimir</a>
+        </div>
+    </div>
+</div>

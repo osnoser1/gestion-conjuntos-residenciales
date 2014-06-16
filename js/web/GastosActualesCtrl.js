@@ -37,6 +37,19 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     $http.get('pruebas/sitios.json').success(function(data) {
         $scope.sitios = data;
     });
+    $scope.update = function(tag, element) {
+        console.log(tag);
+        $http.post(url + 'gastoEntidadHistorial/create', $.param({datos: tag}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+        ).success(function(data, status, headers, config) {
+            if (typeof data !== "object" || !data.respuesta) {
+                $scope.error(data, status, headers, config);
+                return;
+            }
+        }).error(function(data, status, headers, config) {
+            $scope.error(data, status, headers, config);
+            element.sitios.remove(tag);
+        });
+    };
     $scope.loadTags = function(query) {
         console.log(query);
         var _p = $q.defer();
@@ -57,6 +70,9 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
 //        console.log(obj);
 //        console.log(gasto);
     };
+    $scope.select = function(i) {
+        $scope.datos.gastos[i].select = !$scope.datos.gastos[i].select;
+    }
     $scope.check = function() {
         var salida = false;
         angular.forEach($scope.datos.gastos, function(key, value) {
@@ -107,6 +123,9 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
                     else
                         $scope.gastosFiltrados.remove($filter('filter')($scope.gastos, {Nombre: element.Nombre}, true)[0]);
                     console.log(temp);
+                } else {
+                    $scope.total -= parseInt($scope.gastoAnterior.Precio);
+                    $scope.total += parseInt(element.Precio);
                 }
                 show({message: {text: "Gasto modificado exitosamente."}, type: 'success'});
             }).error(function(data, status, headers, config) {

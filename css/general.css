@@ -83,6 +83,12 @@ h4 {
     cursor: pointer;
 }
 
+.box {
+    display: -webkit-box;
+    display: -ms-box;
+    display: -moz-box;
+}
+
 tags-input .host {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
@@ -98,6 +104,7 @@ tags-input .host {
 }
 
 .cabecera{
+    background: #428bca;
     color: #fff;
     font-weight: bold;
 }
@@ -106,22 +113,37 @@ tags-input .host {
     display: inline-block;
 }
 
-.a {
+.a-pers {
     background: transparent;
     color: #428bca;
     text-decoration: none;
     cursor: pointer;
 }
-.a:active,
-.a:hover {
+.a-pers:active,
+.a-pers:hover {
     outline: 0;
     color: #2a6496;
     text-decoration: underline;
 }
-.a:focus {
+.a-pers:focus {
     outline: thin dotted;
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px;
+}
+
+.a.list-group-item:hover,
+.a.list-group-item:focus {
+    text-decoration:none;
+    background-color:#f5f5f5
+}
+
+.a.list-group-item.active,
+.a.list-group-item.active:hover,
+.a.list-group-item.active:focus {
+    z-index:2;
+    color:#fff;
+    background-color:#428bca;
+    border-color:#428bca
 }
 
 .animate.ng-enter,
@@ -190,4 +212,13 @@ tags-input .host {
 
 .requerido{
     color: #FA5858;
+}
+.pull-right{
+    margin-left: 10px;
+}
+.eliminarglyphicon{
+    color: #FA5858;
+}
+.eliminarglyphicon:hover{
+    color: #DF3737;
 }

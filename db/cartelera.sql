@@ -19,33 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `conjunto_residencial`
 --
+CREATE DATABASE IF NOT EXISTS `conjunto_residencial` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `conjunto_residencial`;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `apartamento`
---
-
-CREATE TABLE IF NOT EXISTS `apartamento` (
-  `idapartamento` int(7) NOT NULL,
-  `nrodepiso` int(2) NOT NULL,
-  `idedificio` int(7) NOT NULL,
-  PRIMARY KEY (`idapartamento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `edificio`
---
-
-CREATE TABLE IF NOT EXISTS `edificio` (
-  `idedificio` int(7) NOT NULL,
-  `nombre` varchar(7) NOT NULL,
-  `cantpisos` int(2) NOT NULL,
-  PRIMARY KEY (`idedificio`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -55,11 +30,11 @@ CREATE TABLE IF NOT EXISTS `edificio` (
 
 CREATE TABLE IF NOT EXISTS `post` (
   `idpost` int(7) NOT NULL,
-  `contenido` varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  ` titulo` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `edif` set('','','','','','','','','','') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `pisos` set('','','','','','','','','') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `aptos` set('','','','','','','','','','','','','') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `contenido` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  ` titulo` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `edif` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `pisos` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `aptos` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `fecha` datetime NOT NULL,
   PRIMARY KEY (`idpost`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

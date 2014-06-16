@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="css/estilo-mariangela.css"/>
+<h1>Modificar Perfil</h1>
+<div ng-include src="'partials/usuario-configuracion-menu.html'"></div>
+<form class="form-horizontal" role="form">
+    <div class="form-group col-sm-10">
+        Correo:<input type="text" name="correo" value="" class="form-control"/><br>
+        <div class="col-lg-10">
+            <input class="form-control-static" ng-repeat="tel in usuario.telefonos" ng-model="tel.Telefono"/>
+        </div>
+
+    </div>
+    <table class="botonesmpu">
+        <tr>
+            <td class="celdabotones">
+                <input  type="submit" value="Aceptar" class="css_buttonaceptar"/>
+            </td>
+            <td class="celdabotones">
+                <input type="submit" value="Cancelar" class="css_buttoncancelar"/>
+            </td>
+        </tr>
+    </table>
+</form>

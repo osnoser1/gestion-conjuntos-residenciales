@@ -96,6 +96,7 @@
         function (msg) 
         {       
          show({message: {text: "Pago rechazado"}, type: 'success'});
+         console.dir(pago);
          $scope.datos.pagos.remove(pago);
          $rootScope.loading = false;
      },

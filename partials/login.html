@@ -1,12 +1,13 @@
+<script src="js/web/UsuarioLoginCtrl.js"></script>
 <link href="css/signin.css" rel="stylesheet">
-<div class="container" ng-controller="LoginCtrl">
+<div class="container" ng-controller="UsuarioLoginCtrl">
     <form class="form-signin" role="form" ng-submit="login(user)">
         <h2 class="form-signin-heading">Por favor, inicie sesión</h2>
-        <input type="email" ng-model="user.Email" class="form-control" placeholder="Dirección de correo" required autofocus>
-        <input type="password" ng-model="user.Clave" class="form-control" placeholder="Contraseña" required>
+        <input type="email" ng-model="user.Correo" class="form-control" placeholder="Dirección de correo" required autofocus>
+        <input type="password" ng-model="user.Contrasena" class="form-control" placeholder="Contraseña" required>
         <label class="checkbox">
             <input type="checkbox" ng-model="user.rebemberme"> Recordar
         </label>
-        <button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
+        <button type="submit" ng-click="usuariologin(user)" class="btn btn-lg btn-primary btn-block">Entrar</button>
     </form>
 </div>

@@ -1,23 +1,31 @@
 <script src="js/web/PagosHistorialCtrl.js"></script>
-<div ng-controller="PagosHistorialCtrl">
-    <h1>Historial de pagos</h1>
-    <div class="list-group text-center">
-        <div class="list-group-item row no-select active cabecera">
-            <span class="badge pull-left">#</span>
-            <p ng-dblclick="" class="col-xs-2">Concepto</p>
-            <p ng-dblclick="" class="col-xs-2">Monto</p>
-            <p ng-dblclick="" class="col-xs-2">Fecha</p>
-            <p ng-dblclick="" class="col-xs-2">Nro Referencia</p>
-            <p ng-dblclick="" class="col-xs-2">Estado</p>
+<div ng-controller="PagosHistorialCtrl" class="content" ng-show="show">
+    <h1>Historial pagos (Usuario)</h1>
+    <div class="barra-pers2 box">
+        <!--<a class="btn btn-default btn-sm btn-responsive" href="">Agregar</a>-->
+        <!--        <button type="button" class="btn btn-default btn-sm btn-responsive" ng-click="all(true)">Seleccionar todo</button>
+                <button type="button" class="btn btn-default btn-sm btn-responsive" ng-click="all(false)">Deseleccionar todo</button>
+                <a class="btn btn-default btn-sm btn-responsive" ng-disabled="desactivado || datos.pagos.length === 0" ng-click="showConfirmPagoDialog()">Pagar</a>-->
+        <div class="col-sm-3">
+            <button class="form-control" ng-model="reverse" bs-select></button>
         </div>
-        <div class="list-group-item row no-select" ng-repeat="element in datos.pagos" >
-            <span class="badge pull-left">{{element.id}}</span>
-            <p ng-dblclick="" class="col-xs-2">{{element.concepto}}</p>
-            <p ng-dblclick="" class="col-xs-2">Bs. {{element.monto}}</p>
-            <p ng-dblclick="" class="col-xs-2">{{element.fecha}}</p>
-            <p ng-dblclick="copiarPortaPapeles(element.nro_referencia)" class="col-xs-2 pointer">{{element.nro_referencia}}</p>
-            <p ng-dblclick="" class="col-xs-2">{{element.estado}}</p>
-            <a class="col-xs-1 pointer" ng-click="historialVerDetalles(element)"><span class="glyphicon glyphicon-search" title="Ver detalles"></span></a>
+    </div>
+    <div class="list-group">
+        <div class="list-group-item row no-select am-fade-and-slide-top" ng-repeat="element in datos.pagos">
+            <p class="col-xs-1">{{element.idPagosUsuario}}</p>
+            <p class="col-xs-3">{{element.Fecha}}</p>
+            <div class="col-xs-4">
+                <p>Total a pagar: {{element.Total}} Bs</p>
+                <p>Estado pago: No pagado</p>
+            </div>
+            <div class="col-xs-3">
+                <a class="row" href="" ng-click="showDetalle(element.idPagosUsuario)">Ver detalle</a>
+                <a class="row" href="">Descargar como PDF</a>
+                <a class="row" href="">Imprimir</a>
+            </div>
+        </div>
+        <div ng-show="datos.pagos.length === 0">
+            <p class="content" ng-show="datos.pagos.length === 0"><b>Usted no posee ningún pago.</b></p>
         </div>
     </div>
 </div>

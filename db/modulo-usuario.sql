@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `conjunto-residencial`
 --
+
+CREATE DATABASE IF NOT EXISTS `conjunto_residencial` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `conjunto_residencial`;
 
 -- --------------------------------------------------------
@@ -49,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `Apellido` varchar(30) NOT NULL,
   `Cedula` varchar(8) NOT NULL,
   `Correo` varchar(40) NOT NULL,
-  `Contraseña` varchar(60) NOT NULL,
+  `Contrasena` varchar(60) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -57,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`TipoUsuario`, `Nombre`, `Apellido`, `Cedula`, `Correo`, `Contraseña`) VALUES
+INSERT INTO `usuario` (`TipoUsuario`, `Nombre`, `Apellido`, `Cedula`, `Correo`, `Contrasena`) VALUES
 (1, 'Ricardo', 'Felicce', '20448909', 'exosymmetry@hotmail.com', '123'),
 (1, 'Jenny', 'Gonzales', '9831876', 'exosymmetry@hotmail.com', '321'),
 (1, 'Alfonso Andrés', 'López Molina', '20503457', 'osnoser_12@hotmail.com', 'osnoser1');

@@ -16,15 +16,19 @@ function eventos(){
 	               	var tr="";
 		           
 		           	tr=$("<tr id="+msg[i].idMensaje+" ></tr>"); 
-	       			var td1=$('<td ></td>').text(msg[i].asunto);
+					var td1=$('<td ></td>').text(msg[i].asunto);
 		           	var td2=$('<td></td>').text("administrador");
 		           	var td3=$('<td></td>').html("<b>"+msg[i].descripcion+"</b>");
 		           	var td4=$('<td></td>').text(msg[i].fecha);
+		           	var td5=$('<td ></td>').html('<button type="button" class="ver btn btn-default btn-xs" name="'+msg[i].idMensaje+'">	<span class="glyphicon glyphicon-eye-open"></span></button>');
+	           	  	var td6=$("<td ></td>").html('<button type="button" class="eliminar btn btn-default btn-xs" name="'+msg[i].idMensaje+'">	<span class="glyphicon glyphicon-remove"></span></button>');
 		           	tr.append(td1);
 		           	tr.append(td2);
 		           	tr.append(td3);
 		           	tr.append(td4);
-		           	table.append(tr);           
+	           		tr.append(td5);
+	           		tr.append(td6);
+		           	table.append(tr);              
 	           }
 	          
 	          $('#contenido').append(table);
@@ -33,9 +37,10 @@ function eventos(){
 	        function (msg) {alert( msg +"No se pudo realizar la conexion");}
 	        });
 
-        $('tr').on('click', null, function(){ 
-        	idMensaje = $(this).attr('id'); 
-        	console.log("sdfsdfsfds");
+         $('.ver').click(function(){
+        	idMensaje = $(this).attr('name'); 
+        	
+        	console.log(idMensaje );
         	$('#mensajes').fadeOut(function(){
         		$.ajax
 		        ({
@@ -50,6 +55,7 @@ function eventos(){
 			         de.innerHTML="administrador";
 			         titulo.innerHTML=msg[0].asunto;
 			         fecha.innerHTML=msg[0].fecha;
+			         para.innerHTML=msg[0].para;
 			         descripcion.innerHTML=msg[0].descripcion;
 			         bodymensaje.innerHTML=msg[0].descripcion;
 			          $('#mensajeabierto').fadeIn(); 
@@ -82,61 +88,14 @@ function eventos(){
 		        error:
 		        function (msg) {alert( msg +"No se pudo realizar la conexion");}
 		        });
-         });
-
-        //   $('#atras').click(function(){
-
-        // 	$('#mensajeabierto').fadeOut(function(){
-        // 		$.ajax
-	       //  ({
-	       //  type: "POST",
-	       //  url: "models/consultas-crearMensaje.php",
-	       //  data: {id:6},
-	       //  async: false,
-	       //  dataType: "json",
-	       //  success:
-	       //  function (msg) 
-	       //  {       
-	       //   contenido.innerHTML="";
-	       //     var table=$('<table class="table table-hover" ></table>');
-
-	       //     for(i=0; i<msg[0].m; i++){
-	       //         	var tr="";
-		      //      	if(msg[i].leido==0)
-			     //       	 tr=$("<tr id="+msg[i].idMensaje+" class='info'></tr>");          	
-		      //      	else
-		      //      		 tr=$("<tr id="+msg[i].idMensaje+" ></tr>"); 
-	       // 			var td1=$('<td ></td>').text(msg[i].asunto);
-		      //      	var td2=$('<td></td>').text("administrador");
-		      //      	var td3=$('<td></td>').html("<b>"+msg[i].descripcion+"</b>");
-		      //      	var td4=$('<td></td>').text(msg[i].fecha);
-		      //      	tr.append(td1);
-		      //      	tr.append(td2);
-		      //      	tr.append(td3);
-		      //      	tr.append(td4);
-		      //      	table.append(tr);           
-	       //     }
-	          
-	       //    $('#contenido').append(table);
-	       //  },
-	       //  error:
-	       //  function (msg) {alert( msg +"No se pudo realizar la conexion");}
-	       //  });
-        // 		$('#mensajes').fadeIn();
-        // 	});
-        // });
-
-        $('#eliminar').click(function(){
-        	$('#myModal').modal('show');
-
-        });
+         });          
 
         $('#confirmacion').click(function(){		          
         	$.ajax
 		        ({
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
-		        data: {id:12, idMensaje:idMensaje},
+		        data: {id:12, idMensaje:idMensajeEliminar},
 		        async: false,
 		        dataType: "json",
 		        success:
@@ -144,7 +103,13 @@ function eventos(){
 		        {       
 					$('#myModal').modal('hide');
 					if(msg=="true"){
-						show({message: {text: "El Mensaje ha sido eliminado exitosamente"}, type: 'success'});
+						$('#mensajeabierto').fadeOut(function(){
+							$('#mensajes').fadeIn();
+							show({message: {text: "El Mensaje ha sido eliminado exitosamente"}, type: 'success'});
+							$('#' + id).remove();
+						});
+						
+						
 					}   
 		        },
 		        error:
@@ -152,5 +117,18 @@ function eventos(){
 		        });
 
         });
+			$('.eliminar').click(function(){
+	        	id=$(this).attr('name');
+	        	idMensajeEliminar=id;
+	        	console.log("click en boton" + id);
+	        	$('#myModal').modal('show');
 
+	        });
+		 	var idMensajeEliminar="";
+
+		 	 $('#atras').click(function(){
+        		$('#mensajeabierto').fadeOut(function(){
+        			$('#mensajes').fadeIn();
+        		});
+       		 });
 }

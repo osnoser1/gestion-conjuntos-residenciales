@@ -1,16 +1,29 @@
 <script src="js/web/listadoEdificiosCtrl.js"></script>
 <div ng-controller="ListadoEdificiosCtrl">
     <h1>Listado De Edificios</h1><br><br>
+    <br>
+    
+    <div class="barra-pers2">
+        <!--<a class="btn btn-default btn-sm btn-responsive" href="">Agregar</a>-->
+        <button type="button" class="btn btn-default btn-sm btn-responsive" ng-click="all(true)">Seleccionar todo</button>
+        <button type="button" class="btn btn-default btn-sm btn-responsive" ng-click="all(false)">Deseleccionar todo</button>
+        <a class="btn btn-default btn-sm btn-responsive" ng-disabled="desactivado" ng-click="showModalBorrar()">Eliminar</a>
+    </div>
+    
     <div class="list-group text-center">
         <div class="list-group-item row no-select active cabecera">
+            <p ng-dblclick="" class="col-xs-1"></p>
             <span class="badge pull-left">#</span>
-            <p ng-dblclick="" class="col-xs-3">Nombre</p>
-            <p ng-dblclick="" class="col-xs-3">Cantidad De Pisos</p>
+            <p ng-dblclick="" class="col-xs-2">Nombre</p>
+            <p ng-dblclick="" class="col-xs-1">Cantidad De Pisos</p>
         </div>
         <div class="list-group-item row no-select" ng-repeat="element in datos.Edificios" >
-            <span class="badge pull-left">{{element.id}}</span>
-            <p ng-dblclick="" class="col-xs-3"> {{element.Nombre}}</p> <button ng-click="modificarDatosE(element)">Editar</button><br>
-            <p ng-dblclick="" class="col-xs-3">{{element.CantidadPisos}}</p>  
+            <input ng-change=check() ng-model="element.select" class="col-xs-1" type="checkbox"/>
+            <span class="badge pull-left">{{element.idEdificio}}</span>
+            <p ng-dblclick="" class="col-xs-2"> {{element.Nombre}}</p> 
+            
+            <p ng-dblclick="" class="col-xs-1">{{element.NroDePisos}}</p> 
+            <button ng-click="modificarDatosE(element)" class="btn btn-primary">Editar</button>
         </div>
     </div>
 </div>
