@@ -8,32 +8,47 @@ class PagosController extends GxController {
         ));
     }
 
+    public function actionDetallePendientes() {
+        if (isset($_POST['datos'])) {
+            $pu = PagosUsuario::model()->findByPk($_POST['datos']);
+            $gf = $pu->idGastoFecha0;
+//        var_dump($gf);
+            $phu = PagosHistorialUsuario::model()->findAll("idPagosUsuario=$pu->idPagosUsuario");
+            $salida["datos"]["Fecha"] = $gf->Fecha;
+            $salida["datos"]["Ano"] = date('Y', strtotime($gf->Fecha));
+            $salida["datos"]["Mes"] = date('M', strtotime($gf->Fecha));
+            foreach ($phu as $value) {
+                $el = $value->getAttributes();
+                $gh = $value->idGastoHistorial0;
+                $el['Nombre'] = $gh->idGasto0->Nombre;
+                $el['Precio'] = $gh->Precio;
+                $salida["datos"]["pagos"][] = $el;
+            }
+            $salida["datos"]["Total"] = Yii::app()->db->createCommand()
+                            ->select('SUM(TotalAlicuota) as Total')
+                            ->from('pagos_historial_usuario')
+                            ->where("idPagosUsuario=$pu->idPagosUsuario")
+                            ->queryRow()["Total"];
+            echo $this->salida(true, $salida);
+        } else {
+            echo $this->salida(false, "aviso", "Error en el servidor");
+        }
+    }
+
+    public function actionPagoPendientes() {
+        echo $this->salida(true);
+    }
+
     public function actionViewPendientes() {
         session_start();
 //        $idUsuario = $_POST["ID"];
         $idUsuario = 3;
         $salida["datos"]["pagos"] = Yii::app()->db->createCommand()
-                ->select('idPagosUsuario, gasto_fecha.idGastoFecha, Fecha, IF(Estado="1", "Pagado", "No pagado") AS Estado')
+                ->select('idPagosUsuario, gasto_fecha.idGastoFecha, Fecha, IF(Estado="1", "Pagado", "No pagado") AS Estado, (SELECT SUM(TotalAlicuota) FROM pagos_historial_usuario, pagos_usuario WHERE pagos_historial_usuario.idPagosUsuario=pagos_usuario.idPagosUsuario AND gasto_fecha.idGastoFecha=pagos_usuario.idGastoFecha) AS Total')
                 ->from('pagos_usuario, gasto_fecha')
-                ->where("idUsuario=$idUsuario AND gasto_fecha.idGastoFecha=pagos_usuario.idGastoFecha")
+                ->where("idUsuario=$idUsuario AND gasto_fecha.idGastoFecha=pagos_usuario.idGastoFecha AND Estado=2")
                 ->queryAll();
-//        $gf = GastoFecha::model()->findBySql('SELECT * FROM gasto_fecha ORDER BY Fecha DESC LIMIT 1');
-////        var_dump($gf);
-//        $gh = GastoHistorial::model()->findAll("idGastoFecha=$gf->idGastoFecha");
-//        $salida["datos"]["Fecha"] = $gf->Fecha;
-//        $salida["datos"]["Ano"] = date('Y', strtotime($gf->Fecha));
-//        $salida["datos"]["Mes"] = date('M', strtotime($gf->Fecha));
-//        foreach ($gh as $value) {
-//            $el = $value->getAttributes();
-//            $el['Nombre'] = $value->idGasto0->Nombre;
-//            $salida["datos"]["gastos"][] = $el;
-//        }
-//        $salida["gastos"] = $this->modelToArray(Gasto::model()->findAll());
-//        $salida["Total"] = Yii::app()->db->createCommand()
-//                        ->select('SUM(Precio) as Total')
-//                        ->from('gasto_historial')
-//                        ->where("idGastoFecha=$gf->idGastoFecha")
-//                        ->queryRow()["Total"];
+        $salida["datos"]["Abono"] = 0;
         echo $this->salida(true, $salida);
     }
 
