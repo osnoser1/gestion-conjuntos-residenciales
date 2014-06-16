@@ -52,6 +52,19 @@ class PagosController extends GxController {
         echo $this->salida(true, $salida);
     }
 
+    public function actionViewTodosPendientes() {
+        session_start();
+//        $idUsuario = $_POST["ID"];
+        $idUsuario = 3;
+        $salida["datos"]["pagos"] = Yii::app()->db->createCommand()
+                ->select('idPagosUsuario, gasto_fecha.idGastoFecha, Fecha, IF(Estado="1", "Pagado", "No pagado") AS Estado, (SELECT SUM(TotalAlicuota) FROM pagos_historial_usuario, pagos_usuario WHERE pagos_historial_usuario.idPagosUsuario=pagos_usuario.idPagosUsuario AND gasto_fecha.idGastoFecha=pagos_usuario.idGastoFecha) AS Total')
+                ->from('pagos_usuario, gasto_fecha')
+                ->where("idUsuario=$idUsuario AND gasto_fecha.idGastoFecha=pagos_usuario.idGastoFecha")
+                ->queryAll();
+        $salida["datos"]["Abono"] = 0;
+        echo $this->salida(true, $salida);
+    }
+
     public function actionCreate() {
         $model = new Pagos;
 
