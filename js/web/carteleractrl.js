@@ -1,6 +1,32 @@
 function eventos (){
-        cargarcartelera();
+
         var idpostEliminar="";
+        $.ajax
+          ({
+          type: "POST",
+          url: "models/cartelera.php",
+          data: {id:5},
+          async: true,
+          dataType: "json",
+          success:
+          function (msg) 
+          {       
+           
+            
+               var ul=$('<ul class="pagination" ></ul>');
+                 for(i=0; i<=msg[0].paginas; i++){
+                  var li=$('<li></li>');
+                  li.html("<a  name="+i+" class='enlaces'>"+i+"</a>");
+                  ul.append(li);
+                  console.log(i);
+               }
+             $('#paginas').append(ul);            
+            cargarcartelera(msg);
+          },
+          error:
+          function (msg) {alert( msg +"No se pudo realizar la conexion");}
+          });
+
        $.ajax
         ({
         type: "POST",
@@ -51,7 +77,7 @@ function eventos (){
             Edificios2.options[i+1].value = msg[i].idEdificio; 
 
           }          
-          
+          cargarpisos();
         },
         error:
         function (msg) {alert( msg +"No se pudo realizar la conexion");}
@@ -84,14 +110,17 @@ function eventos (){
         function (msg) {alert( msg +"No se pudo realizar la conexion");}
         });
 
-
+        
         Edificios2.onchange = function () 
           { 
             idEdificio=Edificios2.value;
             console.log(idEdificio);
             $('#Pisos').empty();
-            // $('#Apartamentos').empty();
-            $.ajax
+            cargarpisos();
+            // $('#Apartamentos').empty();Ç
+          }
+           function cargarpisos(){
+                $.ajax
                   ({
                   type: "POST",
                   url: "models/cartelera.php",
@@ -116,8 +145,38 @@ function eventos (){
                   function (msg) {alert( msg +"No se pudo realizar la conexion");}
                   });
           }
+          Edificios3.onchange = function () 
+          { 
+            idEdificio=Edificios3.value;
+            console.log(idEdificio);
+            $('#Pisos2').empty();
+            // $('#Apartamentos').empty();
+            $.ajax
+                  ({
+                  type: "POST",
+                  url: "models/cartelera.php",
+                  data: {id:2, idEdificio:Edificios3.value},
+                  async: false,
+                  dataType: "json",
+                  success:
+                  function (msg) 
+                  {    
+                    Pisos2.options[0]= new Option ("");
+                    Pisos2.options[0].text = "";
+                    Pisos2.options[0].value ="-1" ; 
+                    for(i=0; i < msg[0].m; i++)
+                    {
+                      Pisos2.options[i+1]= new Option ("Piso " + msg[i].idPiso);
+                      Pisos2.options[i+1].text ="Piso " + msg[i].idPiso ;
+                      Pisos2.options[i+1].value = msg[i].idPiso; 
+                    } 
+                      
+                  },
+                  error:
+                  function (msg) {alert( msg +"No se pudo realizar la conexion");}
+                  });
+          }
   
-
 
           Pisos.onchange = function () 
           {   idPiso=Pisos.value;
@@ -214,17 +273,17 @@ function eventos (){
           });
 
 
-      function cargarcartelera(){
-         $.ajax
-                  ({
-                  type: "POST",
-                  url: "models/cartelera.php",
-                  data: {id:5},
-                  async: false,
-                  dataType: "json",
-                  success:
-                  function (msg) 
-                  {      
+      function cargarcartelera(msg){
+         // $.ajax
+         //          ({
+         //          type: "POST",
+         //          url: "models/cartelera.php",
+         //          data: {id:5},
+         //          async: false,
+         //          dataType: "json",
+         //          success:
+         //          function (msg) 
+         //          {      
                     for (var i =msg[0].m-1; i>=0; i--) {
                        $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4><button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:25px;" name='+msg[i].idpost+'>X</button></div>');
                        $('#contenedor2').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div>');
@@ -233,10 +292,11 @@ function eventos (){
                        $('#contenedor2').append('<label style="position: absolute; right:25px;">'+msg[i].fecha+'</label><br>');
                     }
                             
-                  },
-                  error:
-                  function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                  });
+                  // },
+                  // error:
+                  // function (msg) {alert( msg +"No se pudo realizar la conexion");}
+                  // });
+
       }
        $('#confirmacion').click(function(){             
           $.ajax
@@ -254,7 +314,8 @@ function eventos (){
                
                   show({message: {text: "La publicacion ha sido eliminado exitosamente"}, type: 'success'});
               
-            
+                   $('#contenedor2').html("");
+                  //  cargarcartelera();
             
             }   
             },
@@ -263,12 +324,50 @@ function eventos (){
             });
 
         });
-     $('.eliminar').click(function(){
+     $(document).on('click', '.eliminar', (function(e) {
             id=$(this).attr('name');
             idpostEliminar=id;
             console.log("click en boton" + id);     
 
-          });
-      
-
+          }));
     }
+$(document).on('click', '.enlaces', (function(e) {
+            pagina=$(this).attr('name');
+            console.log(pagina);
+            $.ajax
+            ({
+            type: "POST",
+            url: "models/cartelera.php",
+            data: {id:7, pagina:pagina},
+            async: true,
+            dataType: "json",
+            success:
+            function (msg) 
+            {       
+             
+               $('#paginas').empty();
+               console.log("Paginas " + msg[0].paginas);
+                var ul=$('<ul class="pagination" ></ul>');
+                   for(i=0; i<=msg[0].paginas; i++){
+                    var li; 
+                    if(msg[0].paginaactual==i){
+                      li=$('<li class="active"></li>');
+                      li.html("<a  class='enlaces' name="+i+" >"+i+"</a>");
+                    }
+                    
+                   else{
+                      li=$('<li></li>');
+                      li.html("<a   name="+i+" class='enlaces' >"+i+"</a>");
+                   }
+                    
+                    ul.append(li);
+                    console.log("pagina actual " + msg[0].paginaactual);
+                 }
+               $('#paginas').append(ul);              
+         
+            },
+            error:
+            function (msg) {alert( msg +"No se pudo realizar la conexion");}
+            });
+
+          }));
