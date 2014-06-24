@@ -218,9 +218,13 @@ function eventos(){
 	 			});
 	 			
 	 		});
+	 		$('#buscarporfecha').click(function(){	
+	 			console.log(fechadesde.value + "  " + fechahasta.value);
+
+	 		});
 	 		$('#buscar').click(function(){	
-	 			loading.value=true;
-	 			$.ajax
+	 		 if(tbuscar.value!=""){
+	 		 	$.ajax
 		        ({
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
@@ -254,11 +258,17 @@ function eventos(){
 			           }
 		           $('#paginas').append(ul);		          
 		          $('#contenido').append(listarmensajes(msg, table)); 
-		          loading.value=false;
+		          
 		        },
 		        error:
 		        function (msg) {alert( msg +"No se pudo realizar la conexion");}
 		        });
+	 		 }
+
+	 		 else{
+	 		 	show({message: {text: "¡Error Debe escribir algun titulo o descripcion!"}, type: 'danger'});
+	 		 }
+	 			
 	 			
 	 		});
 	 var idMensajeEliminar="";

@@ -1,49 +1,11 @@
 
 <script type="text/javascript" src="js/web/buzon-entrada.js"></script>
 <script type="text/javascript" src="js/web/buzonentradaCtrl.js"></script>
-<!-- <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css"> -->
 <script type="text/javascript">
 	eventos();
-	
-
 </script>
 
-
-<div >
-		<h1>Buzón de entrada</h1>
-
-<!-- <div ng-controller="buzonentradaCtrl">
-    <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
-
-    <h4>Inline</h4>
-    <div style="display:inline-block; min-height:290px;">
-        <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
-    </div>
-
-    <h4>Popup</h4>
-    <div class="row">
-        <div class="col-md-6">
-            <p class="input-group">
-              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <label>Format:</label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>
-        </div>
-    </div>
-
-    <hr />
-    <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
-    <button type="button" class="btn btn-sm btn-default" ng-click="dt = '2009-08-24'">2009-08-24</button>
-    <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
-    <button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" tooltip="After today restriction">Min date</button>
-</div> -->
+<h1>Buzón de entrada</h1>
 
 <div class="row barra-pers2"  ng-controller="buzonentradaCtrl">
   <div class="col-lg-4">
@@ -56,7 +18,7 @@
 
    		<div  style="display: none;" id="busquedapofecha2" class="form-inline">		    	
 		   <i class="glyphicon glyphicon-calendar"></i> Desde
-		   <input ng-model="nuevo.fecha"   ng-click="addConsignacion(nuevo)"   type="text" class="form-control input-sm"  id="tbuscar" placeholder="Presione aqui" data-date-format="dd/MM/yyyy" bs-datepicker requiered>
+		   <input ng-model="nuevo.fecha"   ng-click="Calendario(nuevo)"   type="text" class="form-control input-sm"  id="fechadesde" placeholder="Presione aqui" data-date-format="dd/MM/yyyy" bs-datepicker requiered>
 		</div>
 
     </div>
@@ -64,8 +26,8 @@
 
 		  <div  style="display: none;" id="busquedapofecha" class="form-inline">				  
 		 	  <i class="glyphicon glyphicon-calendar"></i> Hasta
-			   <input ng-model="nuevo.fecha2"  ng-click="addConsignacion(nuevo)"     type="text" class="form-control input-sm"  id="tbuscar" placeholder="Presione aqui" data-date-format="dd/MM/yyyy" bs-datepicker requiered>	
-			   <button class="btn btn-default btn-sm" type="button" id="buscarporfecha" >Encontrar</button>			   
+			   <input ng-model="nuevo.fecha2"  ng-click="Calendario2(nuevo)"     type="text" class="form-control input-sm"  id="fechahasta" placeholder="Presione aqui" data-date-format="dd/MM/yyyy" bs-datepicker requiered>	
+			   <button class="btn btn-default btn-sm" type="button" id="buscarporfecha" ng-click="BuscarPorFecha(nuevo)"  data-ui-ladda="loading">Encontrar</button>			   
 	     </div> 
 
 
@@ -78,9 +40,6 @@
 
      </div> 
 </div>
-
-
-
 		<div id="mensajeabierto" style="display:none;">
 			<button class="btn" id="atras"  >
 				<span class="glyphicon glyphicon-hand-left"></span>Atras
@@ -104,10 +63,7 @@
 			<div class="table-responsive table-bordered list-group"   id="contenido">
 			 
 			</div>
-			<!-- <ul class="pager">
-			  <li class="previous"><a href="#">&larr; Anterior</a></li>
-			  <li class="next"><a href="#">Siguiente &rarr;</a></li>
-			</ul> -->
+			
 		</center>
 		<div id="paginas" style="position: absolute; right: 20px;">
 			
@@ -132,13 +88,4 @@
 	</div>
 </div>
 
-<!--  <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      ...
-    </div>
-  </div>
-</div>
- -->
