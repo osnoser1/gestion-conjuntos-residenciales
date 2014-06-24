@@ -15,8 +15,9 @@
  * @property integer $idEdificio
  * @property integer $idTipo
  *
- * @property Edificio $idEdificio0
  * @property Apartamentotipo $idTipo0
+ * @property Edificio $idEdificio0
+ * @property ApartamentoUsuario[] $apartamentoUsuarios
  * @property GastoEntidadHistorial[] $gastoEntidadHistorials
  */
 abstract class BaseApartamento extends GxActiveRecord {
@@ -48,8 +49,9 @@ abstract class BaseApartamento extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'idEdificio0' => array(self::BELONGS_TO, 'Edificio', 'idEdificio'),
 			'idTipo0' => array(self::BELONGS_TO, 'Apartamentotipo', 'idTipo'),
+			'idEdificio0' => array(self::BELONGS_TO, 'Edificio', 'idEdificio'),
+			'apartamentoUsuarios' => array(self::HAS_MANY, 'ApartamentoUsuario', 'idapartamento'),
 			'gastoEntidadHistorials' => array(self::HAS_MANY, 'GastoEntidadHistorial', 'idApartamento'),
 		);
 	}
@@ -66,8 +68,9 @@ abstract class BaseApartamento extends GxActiveRecord {
 			'Piso' => Yii::t('app', 'Piso'),
 			'idEdificio' => null,
 			'idTipo' => null,
-			'idEdificio0' => null,
 			'idTipo0' => null,
+			'idEdificio0' => null,
+			'apartamentoUsuarios' => null,
 			'gastoEntidadHistorials' => null,
 		);
 	}
