@@ -1,30 +1,31 @@
 
 <script type="text/javascript" src="js/web/buzon-entrada.js"></script>
-<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css">
+<script type="text/javascript" src="js/web/buzonentradaCtrl.js"></script>
+<!-- <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css"> -->
 <script type="text/javascript">
 	eventos();
 	
 
 </script>
 
-<!--<script type="text/javascript" src="js/web/buzonentradaCtrl.js"></script>-->
+
 <div >
 		<h1>Buzón de entrada</h1>
 
 
-<div class="row barra-pers2">
+<div class="row barra-pers2" ng-controller="buzonentradaCtrl">
   <div class="col-lg-6">
       <div class="input-group">
-	     Simple <input type="radio" id="simple">
+	     Simple <input type="radio" id="simple" checked="checked">
 		Fecha <input type="radio" id="fecha">
 	</div> 
   </div><!-- /.col-lg-6 -->
   <div class="col-lg-6">
-    <div class="input-group">
-      <input type="text" class="form-control"  id="tbuscar" placeholder="Titulo, Descripcion, Fecha y  presione enter">
+    <div class="input-group" id="busquedasimple">
+      <input ng-model="fecha" type="text" class="form-control"  id="tbuscar" placeholder="Titulo, Descripcion, Fecha y  presione enter" data-date-format="dd/MM/yyyy" bs-datepicker requiered>
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" id="buscar" data-ui-ladda="loading">Encontrar</button>
+        <button class="btn btn-default" type="button" id="buscar" >Encontrar</button>
       </span>
     </div>
   <!--  <div class="input-group">

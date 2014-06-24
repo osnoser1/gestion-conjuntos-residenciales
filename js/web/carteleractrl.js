@@ -175,11 +175,13 @@ function eventos (){
                         success:
                         function (msg) 
                         {      
-                          $('#contenedor2').append('<div><h4><b>'+msg[0].titulo+'</b></h4></div>');
-                          $('#contenedor2').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[0].contenido+'</div>');
-                          $('#contenedor2').append('<a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></span></a>');   
-                          $('#contenedor2').append('<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModaleliminar">Eliminar</button>');
-         
+                          for (var i =0; i<msg[0].m; i++) {
+                             $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4></div>');
+                             $('#contenedor2').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div>');
+                             $('#contenedor2').append('<a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></span></a>');   
+                             $('#contenedor2').append('<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModaleliminar">Eliminar</button>');
+                           }
+                                  
                         },
                         error:
                         function (msg) {alert( msg +"No se pudo realizar la conexion");}

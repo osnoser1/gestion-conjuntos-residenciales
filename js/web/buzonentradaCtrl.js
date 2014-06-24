@@ -1,10 +1,10 @@
-'use strict';
+/*'use strict';*/
 /* Controllers */
-var myApp = angular.module('myApp');
+/*var myApp = angular.module('myApp');
 
 myApp.controllerProvider.register('buzonentradaCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope, , ['ngGrid']) {
 			$http.post('models/consultas-crearMensaje.php', {'funcion': 'obtenermensaje'}).success(function(data) {
-                               
+                 */              
 			// var table=$('<table class="table table-hover" ></table>');
 
 			// for(i=0; i<data[0].m; i++){
@@ -26,9 +26,28 @@ myApp.controllerProvider.register('buzonentradaCtrl', function($scope, $http, $q
 			// $('#contenido').append(table);
 
 		
-            }).error(function(data, status) {
+/*            }).error(function(data, status) {
                 console.log(data + '\n' + status);
             });
 
     
-});
+});*/
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+ 'use strict';
+ /* Controllers */
+ var myApp = angular.module('myApp');
+
+ myApp.controllerProvider.register('buzonentradaCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
+
+ 	
+
+ 	
+ 		fecha = $filter('date')(nuevo.fecha, $scope.datos.format);
+ 			
+ 	
+ });
