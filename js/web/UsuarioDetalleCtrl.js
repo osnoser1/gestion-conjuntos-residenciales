@@ -11,6 +11,7 @@ var myApp = angular.module('myApp');
 
 myApp.controllerProvider.register('UsuarioDetalleCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope, $location) {
     $scope.usuario = {};
+
     $http.post(url + 'usuario/detalle', $.param({datos: $rootScope.idUsuario}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
     ).success(function(data, status, headers, config) {
         console.log(data);

@@ -92,6 +92,21 @@ INSERT INTO `apartamentotipo` (`idApartamentoTipo`, `Nombre`, `Tamano`, `numBano
 (3, 'Familiar', 200, 2, 3, 1, 1, 1, 1, 1, 1, 1, 0.35),
 (4, 'Penthouse', 300, 3, 4, 1, 1, 1, 2, 1, 1, 1, 0.4);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `apartamento-usuario`
+--
+
+CREATE TABLE IF NOT EXISTS `apartamento-usuario` (
+  `idusuarioapartamento` int(11) NOT NULL AUTO_INCREMENT,
+  `idusuario` int(11) NOT NULL,
+  `idapartamento` int(11) NOT NULL,
+  PRIMARY KEY (`idusuarioapartamento`),
+  UNIQUE KEY `idapartamento` (`idapartamento`),
+  UNIQUE KEY `idusuario` (`idusuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -102,6 +117,10 @@ INSERT INTO `apartamentotipo` (`idApartamentoTipo`, `Nombre`, `Tamano`, `numBano
 ALTER TABLE `apartamento`
   ADD CONSTRAINT `apartamento_ibfk_2` FOREIGN KEY (`idTipo`) REFERENCES `apartamentotipo` (`idApartamentoTipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `apartamento_ibfk_1` FOREIGN KEY (`idEdificio`) REFERENCES `edificio` (`idEdificio`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `apartamento-usuario`
+  ADD CONSTRAINT `fk_apartamento_usuario_apartamento` FOREIGN KEY (`idapartamento`) REFERENCES `apartamento` (`idApartamento`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `apartamento-usuario_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -194,4 +194,12 @@ class UsuarioController extends GxController {
         }
     }
 
+    public function actionUsuarioLogueado() {
+        session_start();
+        if (isset($_SESSION["ID"])) {
+            echo $_SESSION["ID"];
+        } else
+            echo null;
+    }
+
 }
