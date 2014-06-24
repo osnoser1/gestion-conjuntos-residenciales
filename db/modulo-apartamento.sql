@@ -29,12 +29,12 @@ USE `conjunto_residencial`;
 
 DROP TABLE IF EXISTS `apartamento`;
 CREATE TABLE IF NOT EXISTS `apartamento` (
-`idApartamento` int(11) NOT NULL AUTO_INCREMENT,
+  `idApartamento` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `Piso` int(11) NOT NULL,
   `idEdificio` int(11) NOT NULL,
   `idTipo` int(11) NOT NULL,
-  PRIMARY KEY (`idApartamento`),
+  PRIMARY KEY (`idApartamento`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
 
 --
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `apartamentotipo` (
   `Lavandero` tinyint(1) NOT NULL,
   `Casillero` tinyint(4) NOT NULL,
   `Alicuota` float NOT NULL,
-  PRIMARY KEY (`idApartamentoTipo`),
+  PRIMARY KEY (`idApartamentoTipo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
