@@ -1,7 +1,7 @@
 //Orden por los momentos, modificar de ser necesario
 modulo-usuario.sql,no tiene dependencia
 modulo-edificio.sql,no tiene dependencia
-modulo-apartamento.sql,depende de edificio.
+modulo-apartamento.sql,depende de edificio y usuario.
 modulo-mensajes.sql,crea apartamentos.
 modulo-pagos.sql,depende de usuario
 modulo-gastos.sql,depende de edificio,apartamento y usuario.

@@ -24,29 +24,6 @@ USE `conjunto_residencial`;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `apartamentos`
---
-
-CREATE TABLE IF NOT EXISTS `apartamentos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idApartamento` int(11) NOT NULL,
-  `idPiso` int(11) NOT NULL,
-  `idEdificio` int(11) NOT NULL,
-  `idUsuario` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `apartamentos`
---
-
-INSERT INTO `apartamentos` (`id`, `idApartamento`, `idPiso`, `idEdificio`, `idUsuario`) VALUES
-(1, 1, 1, 1, 1),
-(2, 2, 2, 1, 2);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `mensaje`
 --
 
@@ -88,30 +65,6 @@ CREATE TABLE IF NOT EXISTS `mensajesenviados` (
 
 INSERT INTO `mensajesenviados` (`idMensaje`, `para`, `asunto`, `descripcion`, `fecha`) VALUES
 (20, 'exosymmetry@hotmail.com', 'Probando Mensaje 1', 'Probando Mensaje 1', '2014-06-10 10:39:15');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pisos`
---
-
-CREATE TABLE IF NOT EXISTS `pisos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idPiso` int(11) NOT NULL,
-  `idEdificio` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idPiso` (`idPiso`),
-  KEY `idEdificio` (`idEdificio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `pisos`
---
-
-INSERT INTO `pisos` (`id`, `idPiso`, `idEdificio`) VALUES
-(1, 1, 1),
-(2, 2, 1),
-(3, 3, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

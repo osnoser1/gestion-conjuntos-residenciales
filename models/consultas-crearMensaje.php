@@ -7,57 +7,60 @@
 
 
 if(isset($_POST['id'])){
-$id=$_POST['id'];
+	$id=$_POST['id'];
 
-switch($id)
-{
-	case 1:
-		ObtenerEdificios();
-	break;
-
-	case 2:
-		ObtenerPisosdeunEdificio();
-	break;
-
-	case 3:
-		ObtenerApartamentosdePisosdeunEdificio();
-	break;
-
-	case 4:
-		ObtenerUsuario();
+	switch($id)
+	{
+		case 1:
+			ObtenerEdificios();
 		break;
 
-	case 5: 
-		enviarmensaje();
+		case 2:
+			ObtenerPisosdeunEdificio();
 		break;
 
-	case 6:
-		obtenermensaje();
+		case 3:
+			ObtenerApartamentosdePisosdeunEdificio();
 		break;
 
-	case 7:
-	     leermensaje();
-	     break;
-	case 8:
-		 borrarMensaje();
-		 break;
-	case 9:
-		 marcarnoleido();
-		 break;
-	case 10:
-		obtenertodoslosmensajesenviados();
-		break;
-	case 11:
-		obtenerMensajeEnviado();
-		break;
-	case 12:
-		borrarMensajeEnviado();
-		break;
-	default;
+		case 4:
+			ObtenerUsuario();
+			break;
 
+		case 5: 
+			enviarmensaje();
+			break;
 
+		case 6:
+			obtenermensaje();
+			break;
 
-}
+		case 7:
+		     leermensaje();
+		     break;
+		case 8:
+			 borrarMensaje();
+			 break;
+		case 9:
+			 marcarnoleido();
+			 break;
+		case 10:
+			obtenertodoslosmensajesenviados();
+			break;
+		case 11:
+			obtenerMensajeEnviado();
+			break;
+		case 12:
+			borrarMensajeEnviado();
+			break;
+		case 13:
+			 nuevapagina();
+			break;
+		case 14: 
+			 BuscarMensaje();
+			 break;
+		default;
+	}
 }
 else{
 	$input = json_decode(file_get_contents("php://input"));
@@ -66,6 +69,64 @@ else{
 	}
 }
 /*echo call_user_func(array($_POST['funcion']));*/
+
+	function BuscarMensaje(){
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+		$mensaje=$_REQUEST['mensaje'];
+		$tupla = "SELECT * FROM mensaje WHERE  asunto LIKE '%$mensaje%'  OR descripcion LIKE '%$mensaje%'";
+		$resultado = $mysqli->query($tupla);
+		$objeto[0]['m']=$resultado->num_rows;		
+		$i=0;
+		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		{			
+			$objeto[$i]['asunto']=$db_resultado['asunto'];
+			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
+			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
+			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			$objeto[$i]['leido']=$db_resultado['leido'];
+			$i++;	
+		}		
+		$mysqli->close();
+		echo json_encode($objeto);
+
+	}
+	function nuevapagina(){
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+		$pagina=$_REQUEST['pagina'];
+		$tamaño=5;
+		$desde=$pagina*$tamaño;
+		
+		
+
+
+
+		$tupla1="SELECT Count(*) as cantidad FROM mensaje";
+		$resultado = $mysqli->query($tupla1);
+		$cantidadderegistro="";
+		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
+			$cantidadderegistro=$db_resultado['cantidad'];
+		}
+		
+		$paginas=(int)($cantidadderegistro/$tamaño);
+		$objeto[0]['paginas']=$paginas;	
+
+		$tupla="SELECT * FROM mensaje LIMIT $desde,$tamaño";
+		$resultado = $mysqli->query($tupla);
+		$objeto[0]['m']=$resultado->num_rows;	
+		$objeto[0]['paginaactual']=$pagina;
+		$i=0;
+		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		{			
+			$objeto[$i]['asunto']=$db_resultado['asunto'];
+			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
+			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
+			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			$objeto[$i]['leido']=$db_resultado['leido'];
+			$i++;	
+		}		
+		$mysqli->close();
+		echo json_encode($objeto);
+	}
 	function borrarMensajeEnviado(){
 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
 		$idMensaje=$_REQUEST['idMensaje'];
@@ -84,14 +145,11 @@ else{
 		
 		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 		{
-			
 			$objeto[0]['asunto']=$db_resultado['asunto'];
 			$objeto[0]['descripcion']=$db_resultado['descripcion'];	
 			$objeto[0]['idMensaje']=$db_resultado['idMensaje'];
 			$objeto[0]['fecha']=$db_resultado['fecha'];
-			$objeto[0]['para']=$db_resultado['para'];
-
-			
+			$objeto[0]['para']=$db_resultado['para'];			
 		}		
 
 		
@@ -164,46 +222,23 @@ else{
 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
 		$idUsuario=1;
 
-	
-			
 
-		/*	$tupla1="SELECT Count(*) as cantidad FROM mensaje";
-			$resultado = $mysqli->query($tupla1);
-			$cantidadderegistro="";
-			if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
-				$cantidadderegistro=$db_resultado['cantidad'];
-			}*/
-			
-						
-			$tupla="SELECT *, usuario.ID FROM mensaje INNER JOIN  usuario on mensaje.para=usuario.Correo where usuario.ID='$idUsuario'";
-			$resultado = $mysqli->query($tupla);
-			$objeto[0]['m']=$resultado->num_rows;	
-			$i=0;
-			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
-			{
-				
-				$objeto[$i]['asunto']=$db_resultado['asunto'];
-				$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
-				$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
-				$objeto[$i]['fecha']=$db_resultado['fecha'];
-				$objeto[$i]['leido']=$db_resultado['leido'];
-				/*$objeto[0]['paginasiguiente']=1;*/
-
-				$i++;	
-			}		
-
-	
-		/*$tupla1="SELECT Count(*) as cantidad FROM mensaje";
+		
+		$tamaño=5;
+		$tupla1="SELECT Count(*) as cantidad FROM mensaje";
 		$resultado = $mysqli->query($tupla1);
 		$cantidadderegistro="";
 		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
 			$cantidadderegistro=$db_resultado['cantidad'];
 		}
-		$registrosporpagina=10;
-		$cantidaddepaginas=
-		$tupla="SELECT *, usuario.idUsuario FROM mensaje INNER JOIN  usuario on mensaje.para=usuario.email where usuario.idUsuario='$idUsuario' LIMIT 1, 3";
+		
+		$paginas=(int)($cantidadderegistro/$tamaño);
+		
+					
+		$tupla="SELECT *, usuario.ID FROM mensaje INNER JOIN  usuario on mensaje.para=usuario.Correo where usuario.ID='$idUsuario' limit $tamaño";
 		$resultado = $mysqli->query($tupla);
-		$objeto[0]['m']=$resultado->num_rows;	
+		$objeto[0]['m']=$resultado->num_rows;
+		$objeto[0]['paginas']=$paginas;	
 		$i=0;
 		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 		{
@@ -213,12 +248,38 @@ else{
 			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
 			$objeto[$i]['fecha']=$db_resultado['fecha'];
 			$objeto[$i]['leido']=$db_resultado['leido'];
-
+			/*$objeto[0]['paginasiguiente']=1;*/
 
 			$i++;	
-		}		*/
-		$mysqli->close();
-		echo json_encode($objeto);
+		}		
+
+
+	/*$tupla1="SELECT Count(*) as cantidad FROM mensaje";
+	$resultado = $mysqli->query($tupla1);
+	$cantidadderegistro="";
+	if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
+		$cantidadderegistro=$db_resultado['cantidad'];
+	}
+	$registrosporpagina=10;
+	$cantidaddepaginas=
+	$tupla="SELECT *, usuario.idUsuario FROM mensaje INNER JOIN  usuario on mensaje.para=usuario.email where usuario.idUsuario='$idUsuario' LIMIT 1, 3";
+	$resultado = $mysqli->query($tupla);
+	$objeto[0]['m']=$resultado->num_rows;	
+	$i=0;
+	while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+	{
+		
+		$objeto[$i]['asunto']=$db_resultado['asunto'];
+		$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
+		$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
+		$objeto[$i]['fecha']=$db_resultado['fecha'];
+		$objeto[$i]['leido']=$db_resultado['leido'];
+
+
+		$i++;	
+	}		*/
+	$mysqli->close();
+	echo json_encode($objeto);
 	}
 
 	function enviarmensaje(){
@@ -259,11 +320,30 @@ else{
 			$mysqli->close();
 			echo json_encode($objeto);
 	}
+	// function ObtenerApartamentosdePisosdeunEdificio(){
+	// 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+	// 		$idPiso=$_REQUEST['idPiso'];
+	// 		$idEdificio=$_REQUEST['idEdificio'];
+	// 		$tupla="SELECT DISTINCT  apartamentos.idApartamento as idApartamento,  apartamentos.idUsuario  FROM  apartamentos INNER JOIN pisos on pisos.idPiso=apartamentos.idPiso INNER JOIN edificio on edificio.idEdificio=apartamentos.idEdificio where  apartamentos.idEdificio='$idEdificio' and apartamentos.idPiso='$idPiso'";
+	// 		$resultado = $mysqli->query($tupla);
+	// 		$objeto[0]['m']=$resultado->num_rows;	
+	// 		$i=0;
+	// 		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+	// 		{
+				
+	// 			$objeto[$i]['idapartamento']=$db_resultado['idApartamento'];
+	// 			$objeto[$i]['idUsuario']=$db_resultado['idUsuario'];					
+	// 			$i++;	
+	// 		}		
+	// 		$mysqli->close();
+	// 		echo json_encode($objeto);
+	// }
+
 	function ObtenerApartamentosdePisosdeunEdificio(){
 			$mysqli = new mysqli(Host, User, "", BasedeDatos);
 			$idPiso=$_REQUEST['idPiso'];
 			$idEdificio=$_REQUEST['idEdificio'];
-			$tupla="SELECT DISTINCT  apartamentos.idApartamento as idApartamento,  apartamentos.idUsuario  FROM  apartamentos INNER JOIN pisos on pisos.idPiso=apartamentos.idPiso INNER JOIN edificio on edificio.idEdificio=apartamentos.idEdificio where  apartamentos.idEdificio='$idEdificio' and apartamentos.idPiso='$idPiso'";
+			$tupla="SELECT  apartamento.idApartamento, apartamento.idUsuario, apartamento.Nombre  FROM  apartamento INNER JOIN usuario ON apartamento.idUsuario=usuario.ID where  apartamento.idEdificio='$idEdificio' and apartamento.Piso='$idPiso'";
 			$resultado = $mysqli->query($tupla);
 			$objeto[0]['m']=$resultado->num_rows;	
 			$i=0;
@@ -271,22 +351,24 @@ else{
 			{
 				
 				$objeto[$i]['idapartamento']=$db_resultado['idApartamento'];
-				$objeto[$i]['idUsuario']=$db_resultado['idUsuario'];					
+				$objeto[$i]['idUsuario']=$db_resultado['idUsuario'];
+				$objeto[$i]['Nombre']=$db_resultado['Nombre'];					
 				$i++;	
 			}		
 			$mysqli->close();
 			echo json_encode($objeto);
 	}
+
 	function ObtenerEdificios(){
 			$mysqli = new mysqli(Host, User, "", BasedeDatos);
-			$tupla="SELECT nombre, idEdificio FROM  edificio";
+			$tupla="SELECT Nombre, idEdificio FROM  edificio";
 			$resultado = $mysqli->query($tupla);
 			$objeto[0]['m']=$resultado->num_rows;	
 			$i=0;
 			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 			{
 				
-				$objeto[$i]['nombre']=$db_resultado['nombre'];
+				$objeto[$i]['nombre']=$db_resultado['Nombre'];
 				$objeto[$i]['idEdificio']=$db_resultado['idEdificio'];
 				$i++;	
 			}		
@@ -294,19 +376,40 @@ else{
 			echo json_encode($objeto);
 	}
 
+	// function ObtenerPisosdeunEdificio(){
+	// 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+	// 		$idEdificio=$_REQUEST['idEdificio'];
+	// 		$tupla="SELECT * FROM  pisos INNER JOIN edificio on edificio.idEdificio=pisos.idEdificio where  pisos.idEdificio='$idEdificio'";
+	// 		$resultado = $mysqli->query($tupla);
+	// 		$objeto[0]['m']=$resultado->num_rows;	
+	// 		$i=0;
+	// 		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+	// 		{
+				
+	// 			$objeto[$i]['id']=$db_resultado['id'];
+	// 			$objeto[$i]['idPiso']=$db_resultado['idPiso'];
+	// 			$objeto[$i]['idEdificio']=$db_resultado['idEdificio'];
+	// 			$i++;	
+	// 		}		
+	// 		$mysqli->close();
+	// 		echo json_encode($objeto);
+	// }
+
+
 	function ObtenerPisosdeunEdificio(){
-			$mysqli = new mysqli(Host, User, "", BasedeDatos);
+			$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 			$idEdificio=$_REQUEST['idEdificio'];
-			$tupla="SELECT * FROM  pisos INNER JOIN edificio on edificio.idEdificio=pisos.idEdificio where  pisos.idEdificio='$idEdificio'";
+			$tupla="SELECT * FROM  apartamento where  idEdificio='$idEdificio'";
 			$resultado = $mysqli->query($tupla);
 			$objeto[0]['m']=$resultado->num_rows;	
 			$i=0;
 			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 			{
 				
-				$objeto[$i]['id']=$db_resultado['id'];
-				$objeto[$i]['idPiso']=$db_resultado['idPiso'];
+				$objeto[$i]['id']=$db_resultado['idApartamento'];
+				$objeto[$i]['idPiso']=$db_resultado['Piso'];
 				$objeto[$i]['idEdificio']=$db_resultado['idEdificio'];
+
 				$i++;	
 			}		
 			$mysqli->close();
