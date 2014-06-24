@@ -159,10 +159,13 @@
 
 
  <br>
-<ul class="pager">
+ <div id="paginas" style="position: relative; right: 10px;">
+			
+		</div>
+<!-- <ul class="pager">
   <li class="previous"><a href="#">&larr; Anterior</a></li>
   <li class="next"><a href="#">Siguiente &rarr;</a></li>
-</ul>
+</ul> -->
 
 </div>
 
@@ -180,7 +183,7 @@
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="confirmacion">Eliminar</button>
+        <button id="confirmacion" type="button" class="btn btn-primary">Eliminar</button>
       </div>
     </div>
   </div>
@@ -287,7 +290,7 @@
 			                }
 			            }
 			        });
-				/*$('#Pisos').multiselect({
+				$('#Pisos').multiselect({
                   buttonText: function(options) {
                       if (options.length === 0) {
                           return 'Seleccione los pisos <b class="caret"></b>';
@@ -318,6 +321,7 @@
                       }
                   }
               });
+/*
                     
                    $('#Pisos2').multiselect({
                   buttonText: function(options) {

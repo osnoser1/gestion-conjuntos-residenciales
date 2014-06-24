@@ -31,7 +31,9 @@ switch($id)
 	case 6:
 		borrarPublicacion();
 		break;
-
+	case 7:
+		siguientepagina();
+		break;
 	default;
 
 
@@ -44,7 +46,48 @@ else{
 		echo call_user_func($input->funcion);
 	}
 }
+function siguientepagina(){
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+		$pagina=$_REQUEST['pagina'];
+		$tamaño=1;
+		$desde=$pagina*$tamaño;
+		
+		
 
+
+	$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		
+		$tamaño=1;
+		$tupla1="SELECT Count(*) as cantidad FROM post";
+		$resultado = $mysqli->query($tupla1);
+		$cantidadderegistro="";
+		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
+			$cantidadderegistro=$db_resultado['cantidad'];
+		}
+		
+		$paginas=(int)($cantidadderegistro/$tamaño);
+		
+					
+		$tupla="SELECT * FROM post limit $tamaño";
+		$resultado = $mysqli->query($tupla);
+		$objeto[0]['m']=$resultado->num_rows;
+		$objeto[0]['paginas']=$paginas;	
+		$i=0;
+		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		{
+			
+			$objeto[$i]['titulo']=$db_resultado['titulo'];
+		 	$objeto[$i]['contenido']=$db_resultado['contenido'];	
+		 	$objeto[$i]['idpost']=$db_resultado['idpost'];
+		 	$objeto[$i]['fecha']=$db_resultado['fecha'];
+			/*$objeto[0]['paginasiguiente']=1;*/
+
+			$i++;	
+		}		
+
+	$mysqli->close();
+	echo json_encode($objeto);
+	}
 function borrarPublicacion(){
 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
 		$id=$_REQUEST['idpost'];
@@ -54,26 +97,58 @@ function borrarPublicacion(){
 		echo json_encode("true");
 }
 function mensajes(){
+		// $mysqli = new mysqli(Host, User, "", BasedeDatos);
+		// $tupla="SELECT * FROM post";
+		// $resultado = $mysqli->query($tupla);
+		// $objeto[0]['m']=$resultado->num_rows;	
+		// $i=0;
+		// while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		// {
+			
+		// 	$objeto[$i]['titulo']=$db_resultado['titulo'];
+		// 	$objeto[$i]['contenido']=$db_resultado['contenido'];	
+		// 	$objeto[$i]['idpost']=$db_resultado['idpost'];
+		// 	$objeto[$i]['fecha']=$db_resultado['fecha'];
+		// 	$i++;
+		// }		
+
+		
+		// $mysqli->close();
+		// echo json_encode($objeto);
 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
-		$tupla="SELECT * FROM post";
+		
+		$tamaño=1;
+		$tupla1="SELECT Count(*) as cantidad FROM post";
+		$resultado = $mysqli->query($tupla1);
+		$cantidadderegistro="";
+		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
+			$cantidadderegistro=$db_resultado['cantidad'];
+		}
+		
+		$paginas=(int)($cantidadderegistro/$tamaño);
+		
+					
+		$tupla="SELECT * FROM post limit $tamaño";
 		$resultado = $mysqli->query($tupla);
-		$objeto[0]['m']=$resultado->num_rows;	
+		$objeto[0]['m']=$resultado->num_rows;
+		$objeto[0]['paginas']=$paginas;	
 		$i=0;
 		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 		{
 			
 			$objeto[$i]['titulo']=$db_resultado['titulo'];
-			$objeto[$i]['contenido']=$db_resultado['contenido'];	
-			$objeto[$i]['idpost']=$db_resultado['idpost'];
-			$objeto[$i]['fecha']=$db_resultado['fecha'];
-			$i++;
+		 	$objeto[$i]['contenido']=$db_resultado['contenido'];	
+		 	$objeto[$i]['idpost']=$db_resultado['idpost'];
+		 	$objeto[$i]['fecha']=$db_resultado['fecha'];
+			/*$objeto[0]['paginasiguiente']=1;*/
+
+			$i++;	
 		}		
 
-		
-		$mysqli->close();
-		echo json_encode($objeto);
-
+	$mysqli->close();
+	echo json_encode($objeto);
 	}
+	
 
 	function Ingresar(){
 		
