@@ -2,6 +2,14 @@ body {
     font-family: 'Open Sans Light', sans-serif !important;
 }
 
+.nbm {
+    margin-bottom: 0;
+}
+
+.center-form-control {
+    line-height: 30px;
+}
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     /*font-weight: 600 !important;*/
 }
@@ -81,6 +89,12 @@ h4 {
 
 .pointer {
     cursor: pointer;
+}
+
+.box {
+    display: -webkit-box;
+    display: -ms-box;
+    display: -moz-box;
 }
 
 tags-input .host {

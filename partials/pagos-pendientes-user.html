@@ -5,26 +5,31 @@
         <!--<a class="btn btn-default btn-sm btn-responsive" href="">Agregar</a>-->
         <button type="button" class="btn btn-default btn-sm btn-responsive" ng-click="all(true)">Seleccionar todo</button>
         <button type="button" class="btn btn-default btn-sm btn-responsive" ng-click="all(false)">Deseleccionar todo</button>
-        <a class="btn btn-default btn-sm btn-responsive" ng-disabled="desactivado" ng-click="showModalBorrar()">Eliminar</a>
+        <a class="btn btn-default btn-sm btn-responsive" ng-disabled="desactivado || datos.pagos.length === 0" ng-click="showConfirmPagoDialog()">Pagar</a>
     </div>
     <div class="list-group">
         <div class="list-group-item row no-select am-fade-and-slide-top" ng-repeat="element in datos.pagos">
-            <input ng-change=check() ng-model="element.select" class="col-xs-1" type="checkbox"/>
+            <input ng-change=check($index) ng-model="element.select" class="col-xs-1" type="checkbox"/>
             <p class="col-xs-1">{{element.idPagosUsuario}}</p>
             <p class="col-xs-3">{{element.Fecha}}</p>
             <div class="col-xs-4">
-                <p>Total a pagar: 250 bs</p>
+                <p>Total a pagar: {{element.Total}} Bs</p>
                 <p>Estado pago: No pagado</p>
             </div>
             <div class="col-xs-3">
-                <a class="row" href="">Ver detalle</a>
+                <a class="row" href="" ng-click="showDetalle(element.idPagosUsuario)">Ver detalle</a>
                 <a class="row" href="">Descargar como PDF</a>
                 <a class="row" href="">Imprimir</a>
             </div>
         </div>
+        <div ng-show="datos.pagos.length !== 0" class="list-group-item row no-select am-fade-and-slide-top">
+            <p class="text-right"><b>Total seleccionado: {{totalSeleccionado}} Bs</b></p>
+        </div>
+        <div ng-show="datos.pagos.length === 0">
+            <p class="content" ng-show="datos.pagos.length === 0"><b>Usted no posee pagos pendientes.</b></p>
+        </div>
     </div>
-    <div class="col-xs-12"><b class="col-sm-offset-8 col-xs-2">Total gastos del mes:</b><b class="col-sm-2 text-right">{{total}} Bs.</b></div>
-    <div class="col-xs-12">
-        <a class="btn btn-primary pull-right" ng-click="submit(datos)">Procesar gastos mensuales</a>
-    </div>
+    <div class="col-xs-12"><b class="col-sm-offset-7 col-xs-3">Total deuda:</b><b class="col-sm-2 text-right">{{datos.Total}} Bs.</b></div>
+    <div class="col-xs-12"><b class="col-sm-offset-7 col-xs-3">Abono:</b><b class="col-sm-2 text-right">{{datos.Abono}} Bs.</b></div>
+    <div class="col-xs-12"><b class="col-sm-offset-7 col-xs-3">Total a pagar:</b><b class="col-sm-2 text-right">{{datos.TotalAPagar}} Bs.</b></div>
 </div>

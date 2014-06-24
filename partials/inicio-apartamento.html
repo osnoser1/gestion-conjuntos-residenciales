@@ -4,18 +4,17 @@
     <h1> Dirección de Apartamento</h1>
     <form class="form-horizontal" role="form">
         <div class="form-group">
-            <label for="Select_La_Torre" class="col-lg-2 control-label">Torre</label>
+            <label class="col-lg-2 control-label">Torre</label>
             <div class="col-lg-10">
-                <select ng-model="Lista.edificio" name="edificio" ng-options="edificio.idEdificio as edificio.Nombre for edificio in datos.edificios" 
-                        class="form-control" data-style="form-control">
+                <select ng-change="obtenerPisos()" ng-model="Lista.edificio" name="edificio" ng-options="edificio.idEdificio as edificio.Nombre for edificio in datos.edificios" class="form-control" data-style="form-control">
                 </select>
             </div>
         </div>
         
         <div class="form-group">
-            <label for="Select_El_Piso" class="col-lg-2 control-label">Piso</label>
+            <label class="col-lg-2 control-label">Piso</label>
             <div class="col-lg-10">
-                <select class="form-control" data-style="form-control">
+                <select ng-model="Lista.piso" name="piso" ng-options="piso.Numero as piso.Numero for piso in datos.pisos" class="form-control" data-style="form-control">
                 </select>
             </div>
         </div>
@@ -23,8 +22,7 @@
         <div class="form-group">
             <label class="col-lg-2 control-label">Número</label>
             <div class="col-lg-10">
-                <select ng-options="apartamento.idApartamento as apartamento.Nombre for apartamento in datos.apartamentos" 
-                        class="form-control" data-style="form-control">
+                <select ng-model="Lista.apartamento" name="apartamento" ng-options="apartamento.idApartamento as apartamento.Nombre for apartamento in datos.apartamentos" class="form-control" data-style="form-control">
                 </select>
             </div>
         </div>

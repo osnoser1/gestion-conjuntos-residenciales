@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="css/estilo-mariangela.css"/>
 <div ng-controller="UsuarioCrearCtrl">
     <h1> Crear Usuario</h1>
-    <form class="form-horizontal" role="form" ng-submit="submit()">
+    <form class="form-horizontal" role="form" ng-submit="addUsuario(datos)">
         <div class="row form-group col-md-12 col-sm-12 col-xs-12 col-lg-12">
 
             Tipo de Usuario: <select class="selectpicker form-control" data-style="form-control" ng-model="datos.nuevoUsuario.TipoUsuario">

@@ -19,20 +19,27 @@ myApp.controllerProvider.register('ApartamentoInicioCtrl', function($scope, $htt
         apartamentos: [],
     };
 
+    $scope.obtenerPisos = function(){
+        console.log($scope.Lista.edificio);
+    for(var i=0; i < $scope.datos.edificios.length; i++){
+            console.log(i);
+        }
+
+    };
+
     $scope.ListarEdificiosyApartamentos = function() {
         $http.get(url + 'edificio/listar').success(function(data, status, headers, config) {
-            console.dir("Salida");
-            console.dir(data);
             $scope.datos.edificios = data.edificios;
         }).error($scope.error);
 
         $http.get(url + 'apartamento/listar').success(function(data, status, headers, config) {
-            console.dir("Salida2");
-            console.dir(data);
+            console.dir("respuesta apartamento");
+            console.dir(data.apartamentos);
             $scope.datos.apartamentos = data.apartamentos;
         }).error($scope.error);
     };
     $scope.ListarEdificiosyApartamentos();
+
 
     $scope.ListarApartamento = function(element) {
         $rootScope.activado = true;
@@ -45,4 +52,3 @@ myApp.controllerProvider.register('ApartamentoInicioCtrl', function($scope, $htt
         $location.path("panel/agregar-apartamento");
     };
 });
-

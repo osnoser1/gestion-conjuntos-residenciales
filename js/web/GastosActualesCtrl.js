@@ -11,40 +11,45 @@ var myApp = angular.module('myApp');
 myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
     console.log('GastosActualesCtrl');
     var temp;
-    $rootScope.show = false;
-    $scope.desactivado = false;
-    $scope.tags = [];
-    $scope.sitios = [];
-    $scope.nuevo = {};
-    $scope.datos = {gastos: []};
-    $http.get(url + 'gasto/view').success(function(data, status, headers, config) {
-        if (!data.respuesta) {
-            $scope.error(data, status, headers, config);
-            return;
-        }
-        console.log(data);
-        $rootScope.show = true;
-        $scope.datos = data.datos;
-        $scope.total = parseInt(data.Total);
-        $scope.gastos = data.gastos;
-        $scope.gastosFiltrados = [];
-        angular.forEach($scope.gastos, function(key) {
-            if ($filter('filter')($scope.datos.gastos, {idGasto: key.idGasto}, true).length === 0) {
-                $scope.gastosFiltrados.push(key);
+    $scope.init = function() {
+        $rootScope.show = false;
+        $scope.desactivado = false;
+//        $scope.tags = [];
+//        $scope.sitios = [];
+//        $scope.nuevo = {};
+//        $scope.datos = {gastos: []};
+        $http.get(url + 'gasto/view').success(function(data, status, headers, config) {
+            if (!data.respuesta) {
+                $scope.error(data, status, headers, config);
+                return;
             }
-        });
-    }).error($scope.error);
-    $http.get('pruebas/sitios.json').success(function(data) {
-        $scope.sitios = data;
-    });
+            console.log(data);
+            $rootScope.show = true;
+            $scope.datos = data.datos;
+            $scope.total = parseInt(data.Total);
+            $scope.gastos = data.gastos;
+            $scope.gastosFiltrados = [];
+            angular.forEach($scope.gastos, function(key) {
+                if ($filter('filter')($scope.datos.gastos, {idGasto: key.idGasto}, true).length === 0) {
+                    $scope.gastosFiltrados.push(key);
+                }
+            });
+        }).error($scope.error);
+//        $http.get('pruebas/sitios.json').success(function(data) {
+//            $scope.sitios = data;
+//        });
+    };
+    $scope.init();
     $scope.update = function(tag, element) {
         console.log(tag);
-        $http.post(url + 'gastoEntidadHistorial/create', $.param({datos: tag}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+        $http.post(url + 'gasto/create', $.param({datos: {tag: tag, id: element.idGastoHistorial}}), {timeout: 10000, headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
         ).success(function(data, status, headers, config) {
             if (typeof data !== "object" || !data.respuesta) {
                 $scope.error(data, status, headers, config);
                 return;
             }
+            tag.idEntidadHistorial = data.id;
+            console.log($scope.datos.sitios);
         }).error(function(data, status, headers, config) {
             $scope.error(data, status, headers, config);
             element.sitios.remove(tag);
@@ -53,7 +58,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     $scope.loadTags = function(query) {
         console.log(query);
         var _p = $q.defer();
-        var array = $filter('filter')($scope.sitios, {$: query}, false);
+        var array = $filter('filter')($scope.datos.sitios, {$: query}, false);
 //        console.log(array);
         _p.resolve(array);
 //        return $http.get('/tags?query=' + query);
@@ -72,7 +77,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     };
     $scope.select = function(i) {
         $scope.datos.gastos[i].select = !$scope.datos.gastos[i].select;
-    }
+    };
     $scope.check = function() {
         var salida = false;
         angular.forEach($scope.datos.gastos, function(key, value) {
@@ -216,7 +221,22 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     };
     $scope.submit = function(datos) {
         console.log(datos);
-        $scope.showConfirmDialog({title: "Procesar Gastos.", message: "¿Está seguro que desea procesar el mes de " + datos.Mes + " - " + datos.Ano + "?<br><br><small><b>Esta operación no se puede deshacer.</b></small>"});
+        $scope.showConfirmDialog({title: "Procesar Gastos.", message: "¿Está seguro que desea procesar el mes de " + datos.Mes + " - " + datos.Ano + "?<br><br><small><b>Esta operación no se puede deshacer.</b></small>"}, $scope.procesarMes);
+    };
+
+    $scope.procesarMes = function() {
+        $rootScope.myModalAccept = true;
+        $http.post(url + 'gasto/procesarMes', $.param({datos: 1}), {timeout: 10000, headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+        ).success(function(data, status, headers, config) {
+            if (typeof data !== "object" || !data.respuesta) {
+                $scope.error(data, status, headers, config);
+                return;
+            }
+            console.log("Data: ");
+            console.log(data);
+            $('#myModal').modal({show: false});
+            show({message: {text: "Gasto agregado exitosamente."}, type: 'success'});
+        }).error($scope.error);
     };
 });
 var i = 12;
