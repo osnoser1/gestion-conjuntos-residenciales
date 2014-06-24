@@ -14,8 +14,10 @@
  * @property integer $idGasto
  * @property integer $Precio
  *
- * @property Gasto $idGasto0
+ * @property GastoEntidadHistorial[] $gastoEntidadHistorials
  * @property GastoFecha $idGastoFecha0
+ * @property Gasto $idGasto0
+ * @property PagosHistorialUsuario[] $pagosHistorialUsuarios
  */
 abstract class BaseGastoHistorial extends GxActiveRecord {
 
@@ -45,8 +47,10 @@ abstract class BaseGastoHistorial extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'idGasto0' => array(self::BELONGS_TO, 'Gasto', 'idGasto'),
+			'gastoEntidadHistorials' => array(self::HAS_MANY, 'GastoEntidadHistorial', 'idGastoHistorial'),
 			'idGastoFecha0' => array(self::BELONGS_TO, 'GastoFecha', 'idGastoFecha'),
+			'idGasto0' => array(self::BELONGS_TO, 'Gasto', 'idGasto'),
+			'pagosHistorialUsuarios' => array(self::HAS_MANY, 'PagosHistorialUsuario', 'idGastoHistorial'),
 		);
 	}
 
@@ -61,8 +65,10 @@ abstract class BaseGastoHistorial extends GxActiveRecord {
 			'idGastoFecha' => null,
 			'idGasto' => null,
 			'Precio' => Yii::t('app', 'Precio'),
-			'idGasto0' => null,
+			'gastoEntidadHistorials' => null,
 			'idGastoFecha0' => null,
+			'idGasto0' => null,
+			'pagosHistorialUsuarios' => null,
 		);
 	}
 

@@ -11,8 +11,21 @@ myApp.controllerProvider.register('UsuarioLoginCtrl', function($scope, $http, $q
                 $scope.error(data, status, headers, config);
                 return;
             }
+            console.log("ok");
+            $location.path("panel/home");
+
         });
     };
+
+    $scope.comprobarUsuario = function() {
+        console.log("hola enfermero")
+        $http.get(url + 'usuario/usuarioLogueado').success(function(data) {
+            console.log(data);
+            console.log("data");
+        });
+
+    };
+    $scope.comprobarUsuario();
 
 });
 

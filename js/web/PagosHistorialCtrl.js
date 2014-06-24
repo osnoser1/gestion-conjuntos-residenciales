@@ -13,6 +13,8 @@ myApp.controllerProvider.register('PagosHistorialCtrl', function($scope, $http, 
     console.log('PagosHistorialCtrl');
     $rootScope.show = false;
     $scope.desactivado = true;
+    $scope.orden = [{text: "Descendente", bool: true}, {text: "Ascendente", bool: false}];
+    $scope.predicado = [{text: "Identificador", value: "idPagosUsuario"}, {text: "Precio", value: "Total"}, {text: "Fecha", value: "Fecha"}];
     $scope.datos = {pagos: []};
     $http.get(url + 'pagos/viewTodosPendientes').success(function(data, status, headers, config) {
         if (!data.respuesta) {
@@ -26,5 +28,8 @@ myApp.controllerProvider.register('PagosHistorialCtrl', function($scope, $http, 
     $scope.showDetalle = function(idPagosUsuario) {
         $rootScope.idPagosUsuario = idPagosUsuario;
         $scope.showDialog({src: "'partials/pagos-pendientes-detalle.html'"});
+    };
+    $scope.prueba = function(val) {
+        console.log(val);
     };
 });

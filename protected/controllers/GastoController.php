@@ -12,16 +12,16 @@ class GastoController extends GxController {
         $this->render('index');
     }
 
-    public function getListadoSitios($o) {
+    public function getListadoSitios(&$o) {
         $array = [];
         if ($o instanceof Edificio) {
-            $array = array_merge($array, ["text" => "Edif. $o->Nombre", "idEdificio" => $o->idEdificio, "idApartamento" => null, "NroPiso" => null]);
+            $array[] = ["text" => "Edif. $o->Nombre", "idEdificio" => $o->idEdificio];
             for ($index = 1; $index <= $o->NroDePisos; $index++) {
-                $array = array_merge($array, ["text" => "Piso $index - Edif. $o->Nombre", "idEdificio" => $o->idEdificio, "idApartamento" => null, "NroPiso" => $index]);
+                $array[] = ["text" => "Piso $index - Edif. $o->Nombre", "idEdificio" => $o->idEdificio, "NroDePiso" => $index];
             }
         } else {
             $nombre = $o->idEdificio0->Nombre;
-            $array = array_merge($array, ["text" => "Apto. $o->Nombre - Edif. $nombre", "idEdificio" => $o->idEdificio, "idApartamento" => $o->idApartamento, "NroPiso" => $o->Piso]);
+            $array[] = ["text" => "Apto. $o->Nombre - Edif. $nombre", "idEdificio" => $o->idEdificio, "idApartamento" => $o->idApartamento, "NroDePiso" => $o->Piso];
         }
         return $array;
     }
@@ -44,17 +44,32 @@ class GastoController extends GxController {
                         ->from('gasto_historial')
                         ->where("idGastoFecha=$gf->idGastoFecha")
                         ->queryRow()["Total"];
+        $salida["datos"]["sitios"] = array_merge([], $this->getListado(Edificio::model()->findAll()));
+        $salida["datos"]["sitios"] = array_merge($salida["datos"]["sitios"], $this->getListado(Apartamento::model()->findAll()));
+        $salida["datos"]["sitios"][] = ["text" => "Todos"];
         echo $this->salida(true, $salida);
+    }
+
+    public function getListado(&$array) {
+        $a = [];
+        foreach ($array as $value) {
+            $a = array_merge($a, $this->getListadoSitios($value));
+        }
+        return $a;
     }
 
     public function actionCreate() {
 //        sleep(10);
         if (isset($_POST['datos'])) {
-//            $geh = $_POST['datos'];
-//            $o = new GastoEntidadHistorial;
-//            $o->setAttributes($geh);
-//            $o->insert();
-            echo $this->salida(false, "aviso", "No se pudo actualizar");
+            $datos = $_POST['datos'];
+            $geh = new GastoEntidadHistorial;
+            $geh->setAttributes($datos["tag"]);
+            $geh->setAttribute("idGastoHistorial", $datos["id"]);
+            if ($geh->insert()) {
+                echo $this->salida(true, "id", $geh->idEntidadHistorial);
+            } else {
+                echo $this->salida(false, "aviso", "Error en el servidor");
+            }
         } else {
             echo $this->salida(false, "aviso", "Error en el servidor");
         }
@@ -146,6 +161,29 @@ class GastoController extends GxController {
             echo $this->salida(true, $salida);
         } else {
             echo $this->salida(false, "aviso", "Error en el servidor");
+        }
+    }
+
+    public function actionProcesarMes() {
+        $gf = GastoFecha::model()->findBySql('SELECT * FROM gasto_fecha ORDER BY Fecha DESC LIMIT 1');
+        $gh = GastoHistorial::model()->findAll("idGastoFecha=$gf->idGastoFecha");
+        foreach ($gh as $value) {
+            $geh = $value->gastoEntidadHistorials;
+            $array = [];
+            foreach ($geh as $g) {
+                $array = array_merge($array, $this->getReverseListado($g));
+            }
+            var_dump($array);
+        }
+    }
+
+    public function getReverseListado($geh) {
+        if ($geh->idApartamento == NULL && $geh->NroDePiso == NULL) {
+            return $geh->idEdificio == NULL ? Apartamento::model()->findAll() : Apartamento::model()->findAllByAttributes(["idEdificio" => $geh->idEdificio]);
+        } else if ($geh->idApartamento == NULL) {
+            return Apartamento::model()->findAllByAttributes(["idEdificio" => $geh->idEdificio, "Piso" => $geh->NroDePiso]);
+        } else {
+            return [Apartamento::model()->findByPk($geh->idApartamento)];
         }
     }
 

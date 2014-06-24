@@ -8,6 +8,7 @@
 var myApp = angular.module('myApp');
 
 myApp.controllerProvider.register('UsuarioCrearCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope, $location) {
+
     $scope.addTelefono = function(numeroTelefono) {
         $scope.datos.telefonos.push(numeroTelefono);
     };
@@ -32,6 +33,7 @@ myApp.controllerProvider.register('UsuarioCrearCtrl', function($scope, $http, $q
             console.log("Data: ");
             console.log(data);
             show({message: {text: "Usuario agregado exitosamente."}, type: 'success'});
+            usuario.nuevoUsuario = [];
         }).error($scope.error);
         /*
          $http.post(url + 'usuario/create', {Usuario: usuario.nuevoUsuario}).success(function(data, status, headers, config) {

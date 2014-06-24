@@ -21,7 +21,6 @@ SET time_zone = "+00:00";
 --
 USE `conjunto_residencial`;
 
-
 -- --------------------------------------------------------
 
 --
@@ -66,8 +65,6 @@ CREATE TABLE IF NOT EXISTS `mensajesenviados` (
 
 INSERT INTO `mensajesenviados` (`idMensaje`, `para`, `asunto`, `descripcion`, `fecha`) VALUES
 (20, 'exosymmetry@hotmail.com', 'Probando Mensaje 1', 'Probando Mensaje 1', '2014-06-10 10:39:15');
-
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
