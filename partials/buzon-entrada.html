@@ -46,25 +46,38 @@
 </div> -->
 
 <div class="row barra-pers2"  ng-controller="buzonentradaCtrl">
-  <div class="col-lg-6">
+  <div class="col-lg-4">
       <div class="input-group">
 	     Simple <input type="radio" id="simple" checked="checked">
 		Fecha <input type="radio" id="fecha">
 	</div> 
   </div><!-- /.col-lg-6 -->
-  <div class="col-lg-6">
-    <div class="input-group" id="busquedasimple">
-      <input ng-model="nuevo.fecha" ng-click="addConsignacion(nuevo)"    type="text" class="form-control"  id="tbuscar" placeholder="Titulo, Descripcion, Fecha y  presione enter" data-date-format="dd/MM/yyyy" bs-datepicker requiered>
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button" id="buscar" >Encontrar</button>
-      </span>
+  <div class="col-lg-4">
+
+   		<div  style="display: none;" id="busquedapofecha2" class="form-inline">		    	
+		   <i class="glyphicon glyphicon-calendar"></i> Desde
+		   <input ng-model="nuevo.fecha"   ng-click="addConsignacion(nuevo)"   type="text" class="form-control input-sm"  id="tbuscar" placeholder="Presione aqui" data-date-format="dd/MM/yyyy" bs-datepicker requiered>
+		</div>
+
     </div>
-  <!--  <div class="input-group">
-   
-   <input type="text" class="form-control"	id='calendario'>
-   </div> -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
+    <div class="col-lg-4">
+
+		  <div  style="display: none;" id="busquedapofecha" class="form-inline">				  
+		 	  <i class="glyphicon glyphicon-calendar"></i> Hasta
+			   <input ng-model="nuevo.fecha2"  ng-click="addConsignacion(nuevo)"     type="text" class="form-control input-sm"  id="tbuscar" placeholder="Presione aqui" data-date-format="dd/MM/yyyy" bs-datepicker requiered>	
+			   <button class="btn btn-default btn-sm" type="button" id="buscarporfecha" >Encontrar</button>			   
+	     </div> 
+
+
+	     <div class="input-group" id="busquedasimple">
+		      <input    type="text" class="form-control input-sm"  id="tbuscar" placeholder="Titulo, Descripcion y   presione encontrar">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default btn-sm" type="button" id="buscar" >Encontrar</button>
+		      </span>
+	     </div>
+
+     </div> 
+</div>
 
 
 

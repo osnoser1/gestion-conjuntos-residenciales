@@ -200,14 +200,23 @@ function eventos(){
 	 
 			$('#simple').click(function(){	
 	 			console.log("click en simple");
-	 			$('#fecha').prop('checked', false);
-	 			$(busquedasimple).fadeOut();
+	 			$('#fecha').prop('checked', false);	 
+	 			$(busquedapofecha2).fadeOut();			
+	 			$(busquedapofecha).fadeOut(function(){
+	 				
+	 				$(busquedasimple).fadeIn();
+	 			});
+
 	 		});
 	 		
 	 		$('#fecha').click(function(){	
 	 			console.log("click en fecha");
 	 			$('#simple').prop('checked', false);
-	 			$(busquedasimple).fadeOut();
+	 			$(busquedasimple).fadeOut(function(){
+	 					$(busquedapofecha).fadeIn();
+	 					$(busquedapofecha2).fadeIn();
+	 			});
+	 			
 	 		});
 	 		$('#buscar').click(function(){	
 	 			loading.value=true;

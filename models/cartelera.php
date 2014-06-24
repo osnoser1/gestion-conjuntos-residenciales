@@ -12,23 +12,25 @@ switch($id)
 	
 	case 1:
 		ObtenerEdificios();
-	break;
+		break;
 
 	case 2:
 		ObtenerPisosdeunEdificio();
-	break;
+		break;
 
 	case 3:
 		ObtenerApartamentosdePisosdeunEdificio();
-	break;
+		break;
 
 	case 4: 
 		Ingresar();
-	break;
+		break;
 	case 5:
 		mensajes();
 		break;
-
+	case 6:
+		borrarPublicacion();
+		break;
 
 	default;
 
@@ -43,6 +45,14 @@ else{
 	}
 }
 
+function borrarPublicacion(){
+		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		$id=$_REQUEST['idpost'];
+		$tupla="DELETE  FROM post WHERE  idpost='$id'";
+		$resultado = $mysqli->query($tupla);
+		$mysqli->close();
+		echo json_encode("true");
+}
 function mensajes(){
 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
 		$tupla="SELECT * FROM post";

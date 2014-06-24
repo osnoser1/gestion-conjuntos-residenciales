@@ -58,7 +58,7 @@ myApp.controllerProvider.register('buzonentradaCtrl', function($scope, $http, $q
  		
  		nuevo.idusuario = 2;
  		nuevo.fecha = $filter('date')(nuevo.fecha, $scope.datos.format);
-
+		nuevo.fecha2 = $filter('date')(nuevo.fecha2, $scope.datos.format);
  			
  	}
  });

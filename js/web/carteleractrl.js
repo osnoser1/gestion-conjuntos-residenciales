@@ -1,5 +1,6 @@
 function eventos (){
         cargarcartelera();
+        var idpostEliminar="";
        $.ajax
         ({
         type: "POST",
@@ -225,7 +226,7 @@ function eventos (){
                   function (msg) 
                   {      
                     for (var i =msg[0].m-1; i>=0; i--) {
-                       $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4><button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:25px;">X</button></div>');
+                       $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4><button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:25px;" name='+msg[i].idpost+'>X</button></div>');
                        $('#contenedor2').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div>');
                        $('#contenedor2').append('<a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></span></a>');   
                        //$('#contenedor2').append('<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModaleliminar">Eliminar</button>');
@@ -248,27 +249,26 @@ function eventos (){
             success:
             function (msg) 
             {       
-          $('#myModaleliminar').modal('hide');
-          if(msg=="true"){
-            $('#mensajeabierto').fadeOut(function(){
-              $('#mensajes').fadeIn();
-              show({message: {text: "El Mensaje ha sido eliminado exitosamente"}, type: 'success'});
-              $('#' + id).remove();
-            });
+              $('#myModaleliminar').modal('hide');
+              if(msg=="true"){          
+               
+                  show({message: {text: "La publicacion ha sido eliminado exitosamente"}, type: 'success'});
+              
             
             
-          }   
+            }   
             },
             error:
             function (msg) {alert( msg +"No se pudo realizar la conexion");}
             });
 
         });
-      $('.eliminar').click(function(){
+     $('.eliminar').click(function(){
             id=$(this).attr('name');
             idpostEliminar=id;
-            console.log("click en boton" + id);
-            $('#myModaleliminar').modal('show');
+            console.log("click en boton" + id);     
 
           });
-      var idpostEliminar="";
+      
+
+    }
