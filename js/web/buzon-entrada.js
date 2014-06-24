@@ -4,7 +4,7 @@ function eventos(){
 	        type: "POST",
 	        url: "models/consultas-crearMensaje.php",
 	        data: {id:6},
-	        async: false,
+	        async: true,
 	        dataType: "json",
 	        success:
 	        function (msg) 
@@ -38,7 +38,7 @@ function eventos(){
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
 		        data: {id:7, idMensaje:idMensaje},
-		        async: false,
+		        async: true,
 		        dataType: "json",
 		        success:
 		        function (msg) 
@@ -67,7 +67,7 @@ function eventos(){
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
 		        data: {id:9, idMensaje:idMensaje},
-		        async: false,
+		        async: true,
 		        dataType: "json",
 		        success:
 		        function (msg) 
@@ -128,7 +128,7 @@ function eventos(){
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
 		        data: {id:8, idMensaje:idMensajeEliminar},
-		        async: false,
+		        async: true,
 		        dataType: "json",
 		        success:
 		        function (msg) 
@@ -162,7 +162,7 @@ function eventos(){
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
 		        data: {id:13, pagina:pagina},
-		        async: false,
+		        async: true,
 		        dataType: "json",
 		        success:
 		        function (msg) 
@@ -201,11 +201,13 @@ function eventos(){
 			$('#simple').click(function(){	
 	 			console.log("click en simple");
 	 			$('#fecha').prop('checked', false);
+	 			$(busquedasimple).fadeOut();
 	 		});
 	 		
 	 		$('#fecha').click(function(){	
 	 			console.log("click en fecha");
 	 			$('#simple').prop('checked', false);
+	 			$(busquedasimple).fadeOut();
 	 		});
 	 		$('#buscar').click(function(){	
 	 			loading.value=true;

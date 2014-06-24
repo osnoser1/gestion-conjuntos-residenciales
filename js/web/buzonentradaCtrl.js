@@ -46,8 +46,19 @@ myApp.controllerProvider.register('buzonentradaCtrl', function($scope, $http, $q
 
  	
 
- 	
- 		fecha = $filter('date')(nuevo.fecha, $scope.datos.format);
+ 	$scope.nuevo = {
+ 		idbanco: '',
+ 	};
+ 	$scope.datos = {
+ 		format: 'dd/MM/yyyy',
+ 	};
+
+
+ 	$scope.addConsignacion = function(nuevo){
+ 		
+ 		nuevo.idusuario = 2;
+ 		nuevo.fecha = $filter('date')(nuevo.fecha, $scope.datos.format);
+
  			
- 	
+ 	}
  });
