@@ -49,15 +49,15 @@ else{
 function siguientepagina(){
 		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$pagina=$_REQUEST['pagina'];
-		$tamaño=1;
+		$tamaño=5;
 		$desde=$pagina*$tamaño;
 		
 		
 
 
-	$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		$mysqli = new mysqli(Host, User, "", BasedeDatos);
 		
-		$tamaño=1;
+		
 		$tupla1="SELECT Count(*) as cantidad FROM post";
 		$resultado = $mysqli->query($tupla1);
 		$cantidadderegistro="";
@@ -68,10 +68,11 @@ function siguientepagina(){
 		$paginas=(int)($cantidadderegistro/$tamaño);
 		
 					
-		$tupla="SELECT * FROM post limit $tamaño";
+		$tupla="SELECT * FROM post LIMIT $desde,$tamaño";
 		$resultado = $mysqli->query($tupla);
 		$objeto[0]['m']=$resultado->num_rows;
 		$objeto[0]['paginas']=$paginas;	
+		$objeto[0]['paginaactual']=$pagina;
 		$i=0;
 		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 		{
@@ -117,7 +118,7 @@ function mensajes(){
 		// echo json_encode($objeto);
 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
 		
-		$tamaño=1;
+		$tamaño=5;
 		$tupla1="SELECT Count(*) as cantidad FROM post";
 		$resultado = $mysqli->query($tupla1);
 		$cantidadderegistro="";

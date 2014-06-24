@@ -274,16 +274,7 @@ function eventos (){
 
 
       function cargarcartelera(msg){
-         // $.ajax
-         //          ({
-         //          type: "POST",
-         //          url: "models/cartelera.php",
-         //          data: {id:5},
-         //          async: false,
-         //          dataType: "json",
-         //          success:
-         //          function (msg) 
-         //          {      
+  
                     for (var i =msg[0].m-1; i>=0; i--) {
                        $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4><button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:25px;" name='+msg[i].idpost+'>X</button></div>');
                        $('#contenedor2').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div>');
@@ -292,10 +283,7 @@ function eventos (){
                        $('#contenedor2').append('<label style="position: absolute; right:25px;">'+msg[i].fecha+'</label><br>');
                     }
                             
-                  // },
-                  // error:
-                  // function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                  // });
+
 
       }
        $('#confirmacion').click(function(){             
@@ -315,7 +303,7 @@ function eventos (){
                   show({message: {text: "La publicacion ha sido eliminado exitosamente"}, type: 'success'});
               
                    $('#contenedor2').html("");
-                  //  cargarcartelera();
+                    cargarcartelera();
             
             }   
             },
@@ -331,7 +319,7 @@ function eventos (){
 
           }));
     }
-$(document).on('click', '.enlaces', (function(e) {
+    $(document).on('click', '.enlaces', (function(e) {
             pagina=$(this).attr('name');
             console.log(pagina);
             $.ajax
@@ -363,7 +351,15 @@ $(document).on('click', '.enlaces', (function(e) {
                     ul.append(li);
                     console.log("pagina actual " + msg[0].paginaactual);
                  }
-               $('#paginas').append(ul);              
+               $('#paginas').append(ul); 
+               $('#contenedor2').html("");
+               for (var i =msg[0].m-1; i>=0; i--) {
+                       $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4><button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:25px;" name='+msg[i].idpost+'>X</button></div>');
+                       $('#contenedor2').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div>');
+                       $('#contenedor2').append('<a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></span></a>');   
+                       //$('#contenedor2').append('<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModaleliminar">Eliminar</button>');
+                       $('#contenedor2').append('<label style="position: absolute; right:25px;">'+msg[i].fecha+'</label><br>');
+                    }         
          
             },
             error:
