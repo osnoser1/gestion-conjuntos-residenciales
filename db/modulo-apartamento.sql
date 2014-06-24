@@ -29,15 +29,12 @@ USE `conjunto_residencial`;
 
 DROP TABLE IF EXISTS `apartamento`;
 CREATE TABLE IF NOT EXISTS `apartamento` (
-  `idApartamento` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+`idApartamento` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `Piso` int(11) NOT NULL,
   `idEdificio` int(11) NOT NULL,
   `idTipo` int(11) NOT NULL,
   PRIMARY KEY (`idApartamento`),
-  KEY `idEdificio` (`idEdificio`),
-  KEY `Tipo` (`idTipo`),
-  KEY `Tipo_2` (`idTipo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
 
 --
@@ -47,20 +44,20 @@ CREATE TABLE IF NOT EXISTS `apartamento` (
 INSERT INTO `apartamento` (`idApartamento`, `Nombre`, `Piso`, `idEdificio`, `idTipo`) VALUES
 (1, '1-A', 1, 1, 3),
 (2, '1-B', 1, 1, 4),
-(3, '2-A', 1, 1, 3),
-(4, '2-B', 1, 1, 4),
-(5, '3-A', 1, 1, 3),
-(6, '3-B', 1, 1, 4),
-(7, '4-A', 1, 1, 3),
-(8, '4-B', 1, 1, 4),
-(9, '5-A', 1, 1, 3),
-(10, '5-B', 1, 1, 4),
-(11, '6-A', 1, 1, 3),
-(12, '6-B', 1, 1, 4),
-(13, '7-A', 1, 1, 3),
-(14, '7-B', 1, 1, 4),
-(18, '8-A', 1, 1, 3),
-(19, '8-B', 1, 1, 4);
+(3, '2-A', 2, 1, 3),
+(4, '2-B', 2, 1, 4),
+(5, '3-A', 3, 1, 3),
+(6, '3-B', 3, 1, 4),
+(7, '4-A', 4, 1, 3),
+(8, '4-B', 4, 1, 4),
+(9, '5-A', 5, 1, 3),
+(10, '5-B', 5, 1, 4),
+(11, '6-A', 6, 1, 3),
+(12, '6-B', 6, 1, 4),
+(13, '7-A', 7, 1, 3),
+(14, '7-B', 7, 1, 4),
+(18, '8-A', 8, 1, 3),
+(19, '8-B', 8, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -82,8 +79,8 @@ CREATE TABLE IF NOT EXISTS `apartamentotipo` (
   `Maletero` tinyint(4) NOT NULL,
   `Lavandero` tinyint(1) NOT NULL,
   `Casillero` tinyint(4) NOT NULL,
-  `Alicuota` int(11) NOT NULL,
-  PRIMARY KEY (`idApartamentoTipo`)
+  `Alicuota` float NOT NULL,
+  PRIMARY KEY (`idApartamentoTipo`),
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
@@ -91,9 +88,9 @@ CREATE TABLE IF NOT EXISTS `apartamentotipo` (
 --
 
 INSERT INTO `apartamentotipo` (`idApartamentoTipo`, `Nombre`, `Tamano`, `numBanos`, `numHab`, `Sala`, `Cocina`, `Comedor`, `numEst`, `Maletero`, `Lavandero`, `Casillero`, `Alicuota`) VALUES
-(2, 'Estudio', 60, 1, 1, 1, 1, 1, 0, 0, 0, 1, 10),
-(3, 'Familiar', 200, 2, 3, 1, 1, 1, 1, 1, 1, 1, 25),
-(4, 'Penthouse', 300, 3, 4, 1, 1, 1, 2, 1, 1, 1, 35);
+(2, 'Estudio', 60, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0.25),
+(3, 'Familiar', 200, 2, 3, 1, 1, 1, 1, 1, 1, 1, 0.35),
+(4, 'Penthouse', 300, 3, 4, 1, 1, 1, 2, 1, 1, 1, 0.4);
 
 --
 -- Restricciones para tablas volcadas

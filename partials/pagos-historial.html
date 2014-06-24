@@ -7,11 +7,20 @@
                 <button type="button" class="btn btn-default btn-sm btn-responsive" ng-click="all(false)">Deseleccionar todo</button>
                 <a class="btn btn-default btn-sm btn-responsive" ng-disabled="desactivado || datos.pagos.length === 0" ng-click="showConfirmPagoDialog()">Pagar</a>-->
         <div class="col-sm-3">
-            <button class="form-control" ng-model="reverse" bs-select></button>
+            <p class="col-sm-4 nbm center-form-control">Orden:</p>
+            <div class="col-sm-8">
+                <button class="form-control" ng-change="prueba(reverse)" ng-init="reverse = false;" ng-model="reverse" ng-options="o.bool as o.text for o in orden" bs-select></button>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <p class="col-sm-4 nbm center-form-control">Orden:</p>
+            <div class="col-sm-8">
+                <button class="form-control" ng-change="prueba(predicate)" ng-init="predicate = 'Fecha'" ng-model="predicate" ng-options="o.value as o.text for o in predicado" bs-select></button>
+            </div>
         </div>
     </div>
     <div class="list-group">
-        <div class="list-group-item row no-select am-fade-and-slide-top" ng-repeat="element in datos.pagos">
+        <div class="list-group-item row no-select am-fade-and-slide-top" ng-repeat="element in datos.pagos | orderBy:predicate:reverse">
             <p class="col-xs-1">{{element.idPagosUsuario}}</p>
             <p class="col-xs-3">{{element.Fecha}}</p>
             <div class="col-xs-4">
