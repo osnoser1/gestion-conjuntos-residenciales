@@ -1,13 +1,41 @@
 
 <script type="text/javascript" src="js/web/buzon-entrada.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css">
 <script type="text/javascript">
 	eventos();
+	
+
 </script>
 
 <!--<script type="text/javascript" src="js/web/buzonentradaCtrl.js"></script>-->
 <div >
-	<h1>Buzón de entrada</h1>
-		
+		<h1>Buzón de entrada</h1>
+
+
+<div class="row barra-pers2">
+  <div class="col-lg-6">
+      <div class="input-group">
+	     Simple <input type="radio" id="simple">
+		Fecha <input type="radio" id="fecha">
+	</div> 
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control"  id="tbuscar" placeholder="Titulo, Descripcion, Fecha y  presione enter">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" id="buscar" data-ui-ladda="loading">Encontrar</button>
+      </span>
+    </div>
+  <!--  <div class="input-group">
+   
+   <input type="text" class="form-control"	id='calendario'>
+   </div> -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+
+
 		<div id="mensajeabierto" style="display:none;">
 			<button class="btn" id="atras"  >
 				<span class="glyphicon glyphicon-hand-left"></span>Atras
@@ -28,7 +56,7 @@
 		</div>
 
 		<center id="mensajes">
-			<div class="table-responsive table-bordered"   id="contenido">
+			<div class="table-responsive table-bordered list-group"   id="contenido">
 			 
 			</div>
 			<!-- <ul class="pager">
@@ -36,7 +64,9 @@
 			  <li class="next"><a href="#">Siguiente &rarr;</a></li>
 			</ul> -->
 		</center>
-
+		<div id="paginas" style="position: absolute; right: 20px;">
+			
+		</div>
 
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
