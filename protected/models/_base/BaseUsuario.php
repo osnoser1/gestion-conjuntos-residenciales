@@ -17,7 +17,9 @@
  * @property string $Correo
  * @property string $Contrasena
  *
+ * @property ApartamentoUsuario[] $apartamentoUsuarios
  * @property Pagos[] $pagoses
+ * @property PagosUsuario[] $pagosUsuarios
  * @property Telefono[] $telefonos
  */
 abstract class BaseUsuario extends GxActiveRecord {
@@ -52,7 +54,9 @@ abstract class BaseUsuario extends GxActiveRecord {
 
 	public function relations() {
 		return array(
+			'apartamentoUsuarios' => array(self::HAS_MANY, 'ApartamentoUsuario', 'idusuario'),
 			'pagoses' => array(self::HAS_MANY, 'Pagos', 'idusuario'),
+			'pagosUsuarios' => array(self::HAS_MANY, 'PagosUsuario', 'idUsuario'),
 			'telefonos' => array(self::HAS_MANY, 'Telefono', 'IDUsuario'),
 		);
 	}
@@ -71,7 +75,9 @@ abstract class BaseUsuario extends GxActiveRecord {
 			'Cedula' => Yii::t('app', 'Cedula'),
 			'Correo' => Yii::t('app', 'Correo'),
 			'Contrasena' => Yii::t('app', 'Contrasena'),
+			'apartamentoUsuarios' => null,
 			'pagoses' => null,
+			'pagosUsuarios' => null,
 			'telefonos' => null,
 		);
 	}
