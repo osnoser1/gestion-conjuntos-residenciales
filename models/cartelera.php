@@ -9,6 +9,7 @@ $id=$_POST['id'];
 
 switch($id)
 {
+	
 	case 1:
 		ObtenerEdificios();
 	break;
@@ -28,6 +29,7 @@ switch($id)
 		mensajes();
 		break;
 
+
 	default;
 
 
@@ -40,7 +42,6 @@ else{
 		echo call_user_func($input->funcion);
 	}
 }
-/*echo call_user_func(array($_POST['funcion']));*/
 
 function mensajes(){
 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
@@ -73,10 +74,11 @@ function mensajes(){
 		// $apartamento=$_REQUESt["apartamento"];
 		// $piso=$_REQUEST["piso"];
 		$fecha=date("Y-m-d H:i:s");
-		$tupla="INSERT INTO  post  (contenido, titulo,  fecha) VALUES ('$contenido', '$titulo',  '$fecha')";
-		$resultado = $mysqli->query($tupla);
+		$salida="todo esta bien";
+		$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`)  VALUES ('$contenido', '$titulo',  '$fecha')";
+		$resultado = $mysqli->query($tupla) or $salida=$mysqli->error;
 		$mysqli->close();
-		echo json_encode("true");
+		echo json_encode($salida);
 	}
 
 	function ObtenerApartamentosdePisosdeunEdificio(){
@@ -117,16 +119,16 @@ function mensajes(){
 	function ObtenerPisosdeunEdificio(){
 			$mysqli = new mysqli(Host, User, "", BasedeDatos);
 			$idEdificio=$_REQUEST['idEdificio'];
-			$tupla="SELECT * FROM  pisos INNER JOIN edificio on edificio.idEdificio=pisos.idEdificio where  pisos.idEdificio='$idEdificio'";
+			$tupla="SELECT DISTINCT Piso FROM  apartamento where  idEdificio='$idEdificio'";
 			$resultado = $mysqli->query($tupla);
 			$objeto[0]['m']=$resultado->num_rows;	
 			$i=0;
 			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 			{
 				
-				$objeto[$i]['id']=$db_resultado['id'];
-				$objeto[$i]['idPiso']=$db_resultado['idPiso'];
-				$objeto[$i]['idEdificio']=$db_resultado['idEdificio'];
+				
+				$objeto[$i]['idPiso']=$db_resultado['Piso'];
+				
 				$i++;	
 			}		
 			$mysqli->close();
