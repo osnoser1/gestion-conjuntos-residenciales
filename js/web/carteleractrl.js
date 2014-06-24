@@ -1,5 +1,5 @@
 function eventos (){
-
+        cargarcartelera();
        $.ajax
         ({
         type: "POST",
@@ -163,37 +163,9 @@ function eventos (){
                    show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
                  titulo.value="";
                   $('.sumernote').code("");
-
-
-                       $.ajax
-                        ({
-                        type: "POST",
-                        url: "models/cartelera.php",
-                        data: {id:5},
-                        async: false,
-                        dataType: "json",
-                        success:
-                        function (msg) 
-                        {      
-                          for (var i =msg[0].m-1; i>=0; i--) {
-                             $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4></div>');
-                             $('#contenedor2').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div>');
-                             $('#contenedor2').append('<a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></span></a>');   
-                             $('#contenedor2').append('<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModaleliminar">Eliminar</button>');
-                             $('#contenedor2').append('<label style="position: absolute; right:25px;">'+msg[i].fecha+'</label><br>');
-                          }
-                                  
-                        },
-                        error:
-                        function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                        });
-
-
-
-
-
-
-                },
+                   $('#contenedor2').html("");
+                    cargarcartelera();
+               },
                 error:
                 function (msg) {alert( msg +"No se pudo realizar la conexion");}
                 });
@@ -239,4 +211,30 @@ function eventos (){
                   $('#Pisos').fadeIn();
               }
           });
+
+
+      function cargarcartelera(){
+         $.ajax
+                  ({
+                  type: "POST",
+                  url: "models/cartelera.php",
+                  data: {id:5},
+                  async: false,
+                  dataType: "json",
+                  success:
+                  function (msg) 
+                  {      
+                    for (var i =msg[0].m-1; i>=0; i--) {
+                       $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4></div>');
+                       $('#contenedor2').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div>');
+                       $('#contenedor2').append('<a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></span></a>');   
+                       $('#contenedor2').append('<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModaleliminar">Eliminar</button>');
+                       $('#contenedor2').append('<label style="position: absolute; right:25px;">'+msg[i].fecha+'</label><br>');
+                    }
+                            
+                  },
+                  error:
+                  function (msg) {alert( msg +"No se pudo realizar la conexion");}
+                  });
+      }
 }
