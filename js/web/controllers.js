@@ -3,7 +3,19 @@
 
 var pruebaControllers = angular.module('myControllers', []);
 
-pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $location, $sce, $rootScope) {
+pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $http, $location, $sce, $rootScope) {
+
+    
+    $scope.comprobarLogin = function(){
+        console.log("Comprobando");
+        $http.get(url + 'usuario/usuarioLogueado').success(function(data) {
+            console.log('data: ' + data);
+            if((typeof data === 'undefined' || data === "") && $location.path() !== "/web"){
+                $location.path("web/login");
+            }
+        });
+    }
+$scope.comprobarLogin();
     $scope.cargando = false;
     $scope.error = function(data, status, headers, config) {
         $rootScope.loading = false;
