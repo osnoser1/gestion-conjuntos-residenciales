@@ -3,30 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-'use strict';
-/* Controllers */
-var myApp = angular.module('myApp');
+ 'use strict';
+ /* Controllers */
+ var myApp = angular.module('myApp');
 
-myApp.controllerProvider.register('ApartamentoListarCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
+ myApp.controllerProvider.register('ApartamentoListarCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
     console.log('ApartamentoListarCtrl');
     $scope.datos = {
-        Apartamentos: [
-            {idApartamento: "A4H", TipoApartamento: "Familiar", Tamano: "250 mt2", NumHabitaciones: "3", NumBanos: "2", Sala: "Si", Comedor: "Si", Cocina: "Si", Lavandero: "Si"},
-            {idApartamento: "BpbW", TipoApartamento: "Estudio", Tamano: "150 mt2", NumHabitaciones: "1", NumBanos: "1", Sala: "Si", Comedor: "No", Cocina: "Si", Lavandero: "No"},
-            {idApartamento: "C7A", TipoApartamento: "Thomw House", Tamano: "450 mt2", NumHabitaciones: "5", NumBanos: "4", Sala: "Si", Comedor: "Si", Cocina: "Si", Lavandero: "Si"},
-            {idApartamento: "F2C", TipoApartamento: "Estudio", Tamano: "150 mt2", NumHabitaciones: "1", NumBanos: "1", Sala: "Si", Comedor: "No", Cocina: "Si", Lavandero: "No"},
-            {idApartamento: "IpbJ", TipoApartamento: "Familiar", Tamano: "250 mt2", NumHabitaciones: "3", NumBanos: "2", Sala: "Si", Comedor: "Si", Cocina: "Si", Lavandero: "Si"},
-        ],
+        apartamentos: [],
     };
 
-    if ($rootScope.activado === true) {
-        console.log($rootScope.datos);
-        $scope.datos = {
-            Apartamentos: [
-                {idApartamento: "A4H", TipoApartamento: "Familiar", Tamano: "250 mt2", NumHabitaciones: "3", NumBanos: "2", Sala: "Si", Comedor: "Si", Cocina: "Si", Lavandero: "Si"},
-                {idApartamento: "BpbW", TipoApartamento: "Estudio", Tamano: "150 mt2", NumHabitaciones: "1", NumBanos: "1", Sala: "Si", Comedor: "No", Cocina: "Si", Lavandero: "No"},
-            ],
+    $scope.apartamentoVerDetalles = function(element) {
+        $rootScope.ApartamentoListado = element;
+        $scope.showDialog({title: "Apartamento detalles", src: "'partials/apartamento-modal-listado-detalles.html'"});
+    };
+
+    
+
+    $scope.ListarApartamento = function() {
+
+        if ($rootScope.activado === true) {
+            $http.post(url + 'apartamento/listarFiltrado', $.param({idApartamento: $rootScope.datos.idApartamento, idEdificio: $rootScope.datos.idEdificio, Piso: $rootScope.datos.Piso}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+                ).success(function(data, status, headers, config) {
+                    if(typeof data !== "object" || !data.respuesta) {
+                        $scope.error(data, status, headers, config);
+                    }
+                    $scope.datos.apartamentos = data.apartamentos;
+                }).error($scope.error);
+            }
+            else{
+                $http.get(url + 'apartamento/listarFiltrado').success(function(data, status, headers, config) {
+                    console.dir("respuesta apartamento");
+                    console.dir(data.apartamentos);
+                    $scope.datos.apartamentos = data.apartamentos;
+                }).error($scope.error);
+
+            }
         };
-    }
-});
+        $scope.ListarApartamento();
+    });
 

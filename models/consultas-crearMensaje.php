@@ -59,6 +59,9 @@ if(isset($_POST['id'])){
 		case 14: 
 			 BuscarMensaje();
 			 break;
+		case 15:
+			 BuscarMensajeporFecha();
+			 break;
 		default;
 	}
 }
@@ -69,7 +72,41 @@ else{
 	}
 }
 /*echo call_user_func(array($_POST['funcion']));*/
+	function BuscarMensajeporFecha(){
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+		$desde=$_REQUEST['desde'];
+		$hasta=$_REQUEST['hasta'];
+		$desde=str_replace("/","-",$desde);
+		$hasta=str_replace("/","-",$hasta);
+		$date = new DateTime($hasta);
+		$hasta=$date->format('Y-m-d');	
+			
+		$date2 = new DateTime($desde);
+		$desde=$date2->format('Y-m-d');
 
+		/*$hasta=DateTime::createFromFormat('yyyy/m/d',	$hasta);
+			
+		
+		$desde=DateTime::createFromFormat('yyyy/m/d',	$desde);*/
+
+
+		$tupla="SELECT * FROM mensaje WHERE fecha BETWEEN '$desde' AND '$hasta'";
+		$resultado = $mysqli->query($tupla);
+		$objeto[0]['m']=$resultado->num_rows;		
+		$i=0;
+		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		{			
+			$objeto[$i]['asunto']=$db_resultado['asunto'];
+			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
+			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
+			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			$objeto[$i]['leido']=$db_resultado['leido'];
+			$i++;	
+		}		
+		$mysqli->close();
+		echo json_encode($objeto);
+
+	}
 	function BuscarMensaje(){
 		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$mensaje=$_REQUEST['mensaje'];
