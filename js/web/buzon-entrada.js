@@ -4,7 +4,7 @@ function eventos(){
 	        type: "POST",
 	        url: "models/consultas-crearMensaje.php",
 	        data: {id:6},
-	        async: false,
+	        async: true,
 	        dataType: "json",
 	        success:
 	        function (msg) 
@@ -38,7 +38,7 @@ function eventos(){
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
 		        data: {id:7, idMensaje:idMensaje},
-		        async: false,
+		        async: true,
 		        dataType: "json",
 		        success:
 		        function (msg) 
@@ -67,7 +67,7 @@ function eventos(){
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
 		        data: {id:9, idMensaje:idMensaje},
-		        async: false,
+		        async: true,
 		        dataType: "json",
 		        success:
 		        function (msg) 
@@ -128,7 +128,7 @@ function eventos(){
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
 		        data: {id:8, idMensaje:idMensajeEliminar},
-		        async: false,
+		        async: true,
 		        dataType: "json",
 		        success:
 		        function (msg) 
@@ -162,7 +162,7 @@ function eventos(){
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
 		        data: {id:13, pagina:pagina},
-		        async: false,
+		        async: true,
 		        dataType: "json",
 		        success:
 		        function (msg) 
@@ -200,16 +200,31 @@ function eventos(){
 	 
 			$('#simple').click(function(){	
 	 			console.log("click en simple");
-	 			$('#fecha').prop('checked', false);
+	 			$('#fecha').prop('checked', false);	 
+	 			$(busquedapofecha2).fadeOut();			
+	 			$(busquedapofecha).fadeOut(function(){
+	 				
+	 				$(busquedasimple).fadeIn();
+	 			});
+
 	 		});
 	 		
 	 		$('#fecha').click(function(){	
 	 			console.log("click en fecha");
 	 			$('#simple').prop('checked', false);
+	 			$(busquedasimple).fadeOut(function(){
+	 					$(busquedapofecha).fadeIn();
+	 					$(busquedapofecha2).fadeIn();
+	 			});
+	 			
+	 		});
+	 		$('#buscarporfecha').click(function(){	
+	 			console.log(fechadesde.value + "  " + fechahasta.value);
+
 	 		});
 	 		$('#buscar').click(function(){	
-	 			loading.value=true;
-	 			$.ajax
+	 		 if(tbuscar.value!=""){
+	 		 	$.ajax
 		        ({
 		        type: "POST",
 		        url: "models/consultas-crearMensaje.php",
@@ -243,11 +258,17 @@ function eventos(){
 			           }
 		           $('#paginas').append(ul);		          
 		          $('#contenido').append(listarmensajes(msg, table)); 
-		          loading.value=false;
+		          
 		        },
 		        error:
 		        function (msg) {alert( msg +"No se pudo realizar la conexion");}
 		        });
+	 		 }
+
+	 		 else{
+	 		 	show({message: {text: "¡Error Debe escribir algun titulo o descripcion!"}, type: 'danger'});
+	 		 }
+	 			
 	 			
 	 		});
 	 var idMensajeEliminar="";

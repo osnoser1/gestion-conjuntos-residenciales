@@ -6,7 +6,7 @@
 
 		<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
 		<script type="text/javascript" src="js/prettify.js"></script>
-           <script src="js/web/carteleractrl.js"></script>      
+           <script src="js/web/carteleractrl.js"></script>    
  <script type="text/javascript">
      
          $(function() {
@@ -68,8 +68,42 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                 <h4>Seleccionar restricciones de mensaje</h4>
                                                 <div class="modal-body">
+                                                  <script>
+          $('#myTab a').click(function (e) {
+      e.preventDefault()
+    $(this).tab('show')
+    })
+  </script>
+      <ul class="nav nav-tabs" id="myTab">
+      <li class="active"><a href="#messages" data-toggle="tab">Por Apartamentos</a></li>
+      <li><a href="#profile" data-toggle="tab">Por Pisos</a></li>
+    <li><a href="#home" data-toggle="tab">Por Edificios</a></li>
+  </ul>
+  <div class="tab-content">
+      <div class="tab-pane active" id="home">
+            <select id="Edificios" multiple="multiple" style="width:120px;"></select>
+                </div>
+    
+        <div class="tab-pane" id="profile">
+      <select id="Edificios2"  style="width:120px;"></select>
+      <select id="Pisos" multiple="multiple" style="width:120px; " ></select>
+        </div>
+    
+      <div class="tab-pane" id="messages">
+      <select id="Edificios3"   style="width:120px;"></select>
+      <select id="Pisos2" style="width:120px; " ></select>
+      <select id="Apartamentos" multiple="multiple" style="width:120px;" ></select>
+      </div>
+ 
+  </div>
 
-                                                  <table class="table">
+  <script>
+     $(function () {
+       $('#myTab a:last').tab('show')
+     })
+  </script>
+
+                                                  <!-- <table class="table">
                                                     <tr>
                                                       <td>Por Edificios<input type="checkbox" value="1"  id="chkEdificio" checked ></td>
                                                       <td>Por Piso<input type="checkbox" value="2"  id="ckPiso"  ></td>
@@ -87,7 +121,7 @@
                                                         </td>
                                                     </tr>
 
-                                                  </table>
+                                                  </table> -->
                                                   
 
                                                   
@@ -125,10 +159,13 @@
 
 
  <br>
-<ul class="pager">
+ <div id="paginas" style="position: relative; right: 10px;">
+			
+		</div>
+<!-- <ul class="pager">
   <li class="previous"><a href="#">&larr; Anterior</a></li>
   <li class="next"><a href="#">Siguiente &rarr;</a></li>
-</ul>
+</ul> -->
 
 </div>
 
@@ -146,21 +183,21 @@
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Eliminar</button>
+        <button id="confirmacion" type="button" class="btn btn-primary">Eliminar</button>
       </div>
     </div>
   </div>
 </div>
 
 
-<!--
+
 <script>
     $(document).ready(function() {
                     
 			 $('#Edificios').multiselect({
 			            buttonText: function(options) {
 			                if (options.length === 0) {
-			                    return 'None selected <b class="caret"></b>';
+			                    return 'Seleccionar Edificios <b class="caret"></b>';
 			                }
 			                else if (options.length > 6) {
 			                    return options.length + ' selected  <b class="caret"></b>';
@@ -188,21 +225,75 @@
 			                }
 			            }
 			        });
+
+					$('#Edificios2').multiselect({
+			            buttonText: function(options) {
+			                if (options.length === 0) {
+			                    return 'seleccione un edificio <b class="caret"></b>';
+			                }
+			                else if (options.length > 6) {
+			                    return options.length + ' selected  <b class="caret"></b>';
+			                }
+			                else {
+			                    var selected = '';
+			                    options.each(function() {
+			                        selected += $(this).text() + ', ';
+			                    });
+
+			                    return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+			                }
+			            },
+			            onChange: function(element, checked) {
+			                if(checked === true) {
+			                    //action taken here if true
+			                }
+			                else if(checked === false) {
+			                    if(confirm('¿desea deseleccionar este elemento?')) {
+			                        //action taken here
+			                    }
+			                    else {
+			                        $("#Edificios2").multiselect('select', element.val());
+			                    }
+			                }
+			            }
+			        });
                     
-                    var firstConfigurationSet = {
-                        includeSelectAllOption: false,
-                        enableFiltering: false
-                    };
-                    var secondConfigurationSet = {
-                        includeSelectAllOption: true,
-                        enableFiltering: true
-                    };
-                    
-                    var set = 1;
-                     $('#Pisos').multiselect({
+
+                    $('#Edificios3').multiselect({
+			            buttonText: function(options) {
+			                if (options.length === 0) {
+			                    return 'seleccione un edificio <b class="caret"></b>';
+			                }
+			                else if (options.length > 6) {
+			                    return options.length + ' selected  <b class="caret"></b>';
+			                }
+			                else {
+			                    var selected = '';
+			                    options.each(function() {
+			                        selected += $(this).text() + ', ';
+			                    });
+
+			                    return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+			                }
+			            },
+			            onChange: function(element, checked) {
+			                if(checked === true) {
+			                    //action taken here if true
+			                }
+			                else if(checked === false) {
+			                    if(confirm('¿desea deseleccionar este elemento?')) {
+			                        //action taken here
+			                    }
+			                    else {
+			                        $("#Edificios3").multiselect('select', element.val());
+			                    }
+			                }
+			            }
+			        });
+				$('#Pisos').multiselect({
                   buttonText: function(options) {
                       if (options.length === 0) {
-                          return 'None selected <b class="caret"></b>';
+                          return 'Seleccione los pisos <b class="caret"></b>';
                       }
                       else if (options.length > 6) {
                           return options.length + ' selected  <b class="caret"></b>';
@@ -230,14 +321,45 @@
                       }
                   }
               });
+/*
                     
-                   
+                   $('#Pisos2').multiselect({
+                  buttonText: function(options) {
+                      if (options.length === 0) {
+                          return 'seleccione un piso <b class="caret"></b>';
+                      }
+                      else if (options.length > 6) {
+                          return options.length + ' selected  <b class="caret"></b>';
+                      }
+                      else {
+                          var selected = '';
+                          options.each(function() {
+                              selected += $(this).text() + ', ';
+                          });
+
+                          return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+                      }
+                  },
+                  onChange: function(element, checked) {
+                      if(checked === true) {
+                          //action taken here if true
+                      }
+                      else if(checked === false) {
+                          if(confirm('¿desea deseleccionar este elemento?')) {
+                              //action taken here
+                          }
+                          else {
+                              $("#Pisos2").multiselect('select', element.val());
+                          }
+                      }
+                  }
+              });
                     
                    
                      $('#Apartamentos').multiselect({
                   buttonText: function(options) {
                       if (options.length === 0) {
-                          return 'None selected <b class="caret"></b>';
+                          return 'Seleccione los aptos <b class="caret"></b>';
                       }
                       else if (options.length > 6) {
                           return options.length + ' selected  <b class="caret"></b>';
@@ -264,12 +386,24 @@
                           }
                       }
                   }
-              });
+              });*/
                     
                   
                    });
+                    
+                    var firstConfigurationSet = {
+                        includeSelectAllOption: false,
+                        enableFiltering: false
+                    };
+                    var secondConfigurationSet = {
+                        includeSelectAllOption: true,
+                        enableFiltering: true
+                    };
+                    
+                    var set = 1;
+                    
 			</script>
-                    -->    
+                      
                         
                         
                         

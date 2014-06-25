@@ -32,8 +32,25 @@ class EdificioController extends GxController {
 //            var_dump($idUsuario);
             $criteria = new CDbCriteria;
             $criteria->addInCondition('idEdificio', $idUsuario);
-            Edificio::model()->deleteAll($criteria);
+
+            if (Edificio::model()->deleteAll($criteria)) {
+
+                echo $this->salida();
+            } else {
+                echo $this->salida(false, "aviso", "Error en el servidor");
+            }
+        } else {
             echo $this->salida(false, "aviso", "Error en el servidor");
+        }
+    }
+
+    public function actionDetalle() {
+        if (isset($_POST['datos'])) {
+            $idEdificio = (array) $_POST['datos'];
+//            var_dump($idUsuario);
+            $model = Edificio::model()->findByPk($idEdificio);
+            $salida["edificio"] = $model->getAttributes();
+            echo $this->salida(true, $salida);
         } else {
             echo $this->salida(false, "aviso", "Error en el servidor");
         }
@@ -70,22 +87,19 @@ class EdificioController extends GxController {
         $this->render('create', array('model' => $model));
     }
 
-    public function actionUpdate($id) {
-        $model = $this->loadModel($id, 'Usuario');
-
-        $this->performAjaxValidation($model, 'usuario-form');
-
-        if (isset($_POST['Usuario'])) {
-            $model->setAttributes($_POST['Usuario']);
-
+    public function actionUpdate() {
+        if (isset($_POST['datos'])) {
+            $edificio = $_POST['datos'];
+            $model = Edificio::model()->findByPk($edificio["idEdificio"]);
+            $model->setAttributes($edificio);
             if ($model->save()) {
-                $this->redirect(array('view', 'id' => $model->ID));
+                echo $this->salida();
+            } else {
+                echo $this->salida(false, "aviso", "Error en el servidor");
             }
+        } else {
+            echo $this->salida(false);
         }
-
-        $this->render('update', array(
-            'model' => $model,
-        ));
     }
 
     public function actionDelete($id) {
