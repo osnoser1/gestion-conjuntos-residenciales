@@ -105,7 +105,17 @@ CREATE TABLE IF NOT EXISTS `apartamento_usuario` (
   PRIMARY KEY (`idusuarioapartamento`),
   UNIQUE KEY `idapartamento` (`idapartamento`),
   UNIQUE KEY `idusuario` (`idusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `apartamento_usuario`
+--
+
+INSERT INTO `apartamento_usuario` (`idusuarioapartamento`, `idusuario`, `idapartamento`) VALUES
+(1, 3, 1),
+(2, 1, 6),
+(3, 2, 3),
+(4, 4, 4);
 
 --
 -- Restricciones para tablas volcadas

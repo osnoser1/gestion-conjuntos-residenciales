@@ -29,6 +29,10 @@ class GastoController extends GxController {
     public function actionView() {
         $gf = GastoFecha::model()->findBySql('SELECT * FROM gasto_fecha ORDER BY Fecha DESC LIMIT 1');
 //        var_dump($gf);
+        echo $this->salida(true, $this->getDatos($gf));
+    }
+
+    public function getDatos(GastoFecha $gf) {
         $gh = GastoHistorial::model()->findAll("idGastoFecha=$gf->idGastoFecha");
         $salida["datos"]["Fecha"] = $gf->Fecha;
         $salida["datos"]["Ano"] = date('Y', strtotime($gf->Fecha));
@@ -47,7 +51,7 @@ class GastoController extends GxController {
         $salida["datos"]["sitios"] = array_merge([], $this->getListado(Edificio::model()->findAll()));
         $salida["datos"]["sitios"] = array_merge($salida["datos"]["sitios"], $this->getListado(Apartamento::model()->findAll()));
         $salida["datos"]["sitios"][] = ["text" => "Todos"];
-        echo $this->salida(true, $salida);
+        return $salida;
     }
 
     public function getListado(&$array) {
@@ -173,17 +177,46 @@ class GastoController extends GxController {
             foreach ($geh as $g) {
                 $array = array_merge($array, $this->getReverseListado($g));
             }
-            var_dump($array);
+            $tAlicuota = 0;
+            foreach ($array as &$v) {
+                $tAlicuota += floatval($v->idapartamento0->idTipo0->Alicuota);
+            }
+            foreach ($array as &$v) {
+                $model = PagosUsuario::model()->findByAttributes(["idUsuario" => $v->idusuario, "idGastoFecha" => $gf->idGastoFecha]);
+                if ($model == NULL) {
+                    $model = new PagosUsuario;
+                    $model->setAttributes(["idUsuario" => $v->idusuario, "idGastoFecha" => $gf->idGastoFecha]);
+                    if (!$model->insert()) {
+                        echo $this->salida(false, "aviso", "Error en el servidor");
+                        return;
+                    }
+                }
+                $phu = new PagosHistorialUsuario;
+                $phu->setAttributes(["idPagosUsuario" => $model->idPagosUsuario, "idGastoHistorial" => $value->idGastoHistorial, "TotalAlicuota" => floatval($v->idapartamento0->idTipo0->Alicuota) / $tAlicuota * floatval($value->Precio)]);
+                if (!$phu->insert()) {
+                    echo $this->salida(false, "aviso", "Error en el servidor");
+                    return;
+                }
+            }
         }
+        $date = new DateTime($gf->Fecha);
+        $date->add(new DateInterval('P1M'));
+        $gf = new GastoFecha;
+        $gf->setAttribute("Fecha", $date->format('Y-m-d'));
+        if (!$gf->insert()) {
+            echo $this->salida(false, "aviso", "Error en el servidor");
+            return;
+        }
+        echo $this->salida();
     }
 
     public function getReverseListado($geh) {
         if ($geh->idApartamento == NULL && $geh->NroDePiso == NULL) {
-            return $geh->idEdificio == NULL ? Apartamento::model()->findAll() : Apartamento::model()->findAllByAttributes(["idEdificio" => $geh->idEdificio]);
+            return $geh->idEdificio == NULL ? ApartamentoUsuario::model()->findAll() : ApartamentoUsuario::model()->findAllBySql("SELECT * FROM " . Apartamento::model()->tableName() . "," . ApartamentoUsuario::model()->tableName() . " WHERE " . ApartamentoUsuario::model()->tableName() . '.idapartamento=' . Apartamento::model()->tableName() . '.idApartamento AND idEdificio=' . $geh->idEdificio);
         } else if ($geh->idApartamento == NULL) {
-            return Apartamento::model()->findAllByAttributes(["idEdificio" => $geh->idEdificio, "Piso" => $geh->NroDePiso]);
+            return ApartamentoUsuario::model()->findAllBySql("SELECT * FROM " . Apartamento::model()->tableName() . "," . ApartamentoUsuario::model()->tableName() . " WHERE " . ApartamentoUsuario::model()->tableName() . '.idapartamento=' . Apartamento::model()->tableName() . ".idApartamento AND idEdificio=$geh->idEdificio AND Piso=$geh->NroDePiso");
         } else {
-            return [Apartamento::model()->findByPk($geh->idApartamento)];
+            return [ApartamentoUsuario::model()->findByAttributes(["idapartamento" => $geh->idApartamento])];
         }
     }
 
