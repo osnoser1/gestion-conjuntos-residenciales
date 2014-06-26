@@ -6,7 +6,7 @@ var pruebaControllers = angular.module('myControllers', []);
 pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $http, $location, $sce, $rootScope) {
 
     
-    $scope.comprobarLogin = function(){
+  /*  $scope.comprobarLogin = function(){
         console.log("Comprobando");
         $http.get(url + 'usuario/usuarioLogueado').success(function(data) {
             console.log('data: ' + data);
@@ -15,7 +15,7 @@ pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $ht
             }
         });
     }
-$scope.comprobarLogin();
+$scope.comprobarLogin();*/
     $scope.cargando = false;
     
          $.ajax

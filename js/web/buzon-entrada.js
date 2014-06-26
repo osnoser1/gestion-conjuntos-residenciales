@@ -29,7 +29,7 @@ function eventos(){
 		$(document).on('click', '.ver', (function(e) {
         	idMensaje = $(this).attr('name');    	
         	$(document.getElementById(idMensaje)).removeClass('info');
-        	
+        	$('#panelbuscar').fadeOut();
         	$('#mensajes').fadeOut(function(){
         		
         		$.ajax
@@ -47,11 +47,9 @@ function eventos(){
 			         fecha.innerHTML=msg[0].fecha;
 			         descripcion.innerHTML=msg[0].descripcion;
 			         bodymensaje.innerHTML=msg[0].descripcion;
-			          $('#panelbuscar').fadeOut(function () {
-			          	$('#mensajeabierto').fadeIn(); 
+			          
+			          $('#mensajeabierto').fadeIn(); 
 			          	$('#paginas').fadeOut();
-
-			          });
 			          
 
 		          

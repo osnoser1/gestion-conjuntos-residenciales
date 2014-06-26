@@ -26,8 +26,8 @@ function eventos(){
 	        });
 
         $(document).on('click', '.ver', (function(e) {
-        	idMensaje = $(this).attr('name');         	
-        	console.log(idMensaje );
+        	idMensaje = $(this).attr('name');        	
+        	$('#panelbuscar').fadeOut();
         	$('#mensajes').fadeOut(function(){
         		$.ajax
 		        ({
@@ -53,8 +53,7 @@ function eventos(){
 		        });
         	});	
 		
-        }));
-      
+        }));     
 
          $('#marcar').click(function(){
          	console.log("sdassdasd: " + idMensaje);
