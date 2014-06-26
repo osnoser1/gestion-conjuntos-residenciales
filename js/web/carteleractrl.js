@@ -1,6 +1,7 @@
 function eventos (){
 
         var idpostEliminar="";
+
         $.ajax
           ({
           type: "POST",
@@ -21,7 +22,7 @@ function eventos (){
                   console.log(i);
                }
              $('#paginas').append(ul);            
-            cargarcartelera(msg);
+            cargarcartelera();
           },
           error:
           function (msg) {alert( msg +"No se pudo realizar la conexion");}
@@ -167,7 +168,7 @@ function eventos (){
                     for(i=0; i < msg[0].m; i++)
                     {
                       Pisos2.options[i+1]= new Option ("Piso " + msg[i].idPiso);
-                      Pisos2.options[i+1].text ="Piso " + msg[i].idPiso ;
+                      Pisos2.options[i+1].text ="Piso " + msg[i].idPiso;
                       Pisos2.options[i+1].value = msg[i].idPiso; 
                     } 
                       
@@ -178,25 +179,25 @@ function eventos (){
           }
   
 
-          Pisos.onchange = function () 
-          {   idPiso=Pisos.value;
+         Pisos2.onchange = function () 
+          {   idPiso=Pisos2.value;
                $('#Apartamentos').empty();
+                 console.log('´9idsadasdo0'+idPiso);
                 $.ajax
                   ({
                   type: "POST",
                   url: "models/cartelera.php",
-                  data: {id:3, idEdificio:Edificios.value, idPiso:Pisos.value},
+                  data: {id:3, idEdificio:Edificios3.value, idPiso:Pisos2.value},
                   async: false,
                   dataType: "json",
                   success:
                   function (msg) 
                   {    
-                    console.log("Piso: "+ Pisos.value + "Numero de apartamentos" + msg[0].m);
+                    console.log("Piso: "+ Pisos2.value + "Numero de apartamentos" + msg[0].m);
                     for(i=0; i < msg[0].m; i++)
                     {
                       Apartamentos.options[i]= new Option ("Apartamento" + msg[i].idapartamento);
-                      Apartamentos.options[i].text ="Apartamento" + msg[i].idapartamento ;
-                      Apartamentos.options[i].value = msg[i].idUsuario; 
+                      Apartamentos.options[i].text ="Apartamento "+ msg[i].Nombre;
                     } 
                       
                   },
@@ -222,8 +223,6 @@ function eventos (){
                   $('#myModal').modal('hide');
                    show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
                  titulo.value="";
-                  $('.sumernote').code("");
-                   $('#contenedor2').html("");
                     cargarcartelera();
                },
                 error:
@@ -273,17 +272,27 @@ function eventos (){
           });
 
 
-      function cargarcartelera(msg){
-  
-                    for (var i =msg[0].m-1; i>=0; i--) {
-                       $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4><button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:25px;" name='+msg[i].idpost+'>X</button></div>');
-                       $('#contenedor2').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div>');
-                       $('#contenedor2').append('<a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></span></a>');   
-                       //$('#contenedor2').append('<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModaleliminar">Eliminar</button>');
-                       $('#contenedor2').append('<label style="position: absolute; right:25px;">'+msg[i].fecha+'</label><br>');
+           function cargarcartelera(msg){
+                   $('.sumernote').code("");
+                   $('#contenedor2').html("");
+                $.ajax
+                  ({
+                  type: "POST",
+                  url: "models/cartelera.php",
+                  data: {id:5},
+                  async: false,
+                  dataType: "json",
+                  success:
+                  function (msg) 
+                  {      
+                    for (var i =0; i<msg[0].m; i++) {
+                        $('#contenedor2').append('<div><div><button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:25px;" name='+msg[i].idpost+'>X</button><h4><b>'+msg[i].titulo+'</b></h4></div><div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div><a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></a><span class="label label-primary" style="position: absolute; right:25px;">'+msg[i].fecha+'</span></div><div style="background-color:white;"><br></div>');
                     }
                             
-
+                  },
+                  error:
+                  function (msg) {alert( msg +"No se pudo realizar la conexion");}
+                  });
 
       }
        $('#confirmacion').click(function(){             
@@ -353,12 +362,8 @@ function eventos (){
                  }
                $('#paginas').append(ul); 
                $('#contenedor2').html("");
-               for (var i =msg[0].m-1; i>=0; i--) {
-                       $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4><button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:25px;" name='+msg[i].idpost+'>X</button></div>');
-                       $('#contenedor2').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div>');
-                       $('#contenedor2').append('<a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></span></a>');   
-                       //$('#contenedor2').append('<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModaleliminar">Eliminar</button>');
-                       $('#contenedor2').append('<label style="position: absolute; right:25px;">'+msg[i].fecha+'</label><br>');
+               for (var i =0; i<msg[0].m; i++) {
+                       $('#contenedor2').append('<div><div><button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:25px;" name='+msg[i].idpost+'>X</button><h4><b>'+msg[i].titulo+'</b></h4></div><div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div><a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></a><span class="label label-primary" style="position: absolute; right:25px;">'+msg[i].fecha+'</span></div><div style="background-color:white;"><br></div>');
                     }         
          
             },

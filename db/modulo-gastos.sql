@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `gasto_entidad_historial` (
   KEY `idGastoHistorial` (`idGastoHistorial`),
   KEY `idApartamento` (`idApartamento`),
   KEY `idEdificio` (`idEdificio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `gasto_entidad_historial`
@@ -76,8 +76,7 @@ INSERT INTO `gasto_entidad_historial` (`idEntidadHistorial`, `idGastoHistorial`,
 (2, 11, NULL, NULL, NULL),
 (3, 12, NULL, NULL, NULL),
 (4, 10, 1, 1, NULL),
-(5, 10, 1, 6, NULL),
-(6, 10, 1, NULL, 2);
+(5, 10, 1, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -174,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `pagos_usuario` (
   `idPagosUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `idUsuario` int(11) NOT NULL,
   `idGastoFecha` int(11) NOT NULL,
-  `Estado` int(11) NOT NULL,
+  `Estado` int(11) NOT NULL DEFAULT '2',
   PRIMARY KEY (`idPagosUsuario`),
   KEY `idUsuario` (`idUsuario`),
   KEY `idUsuario_2` (`idUsuario`),

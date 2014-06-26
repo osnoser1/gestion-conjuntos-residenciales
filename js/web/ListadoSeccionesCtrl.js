@@ -69,5 +69,4 @@ myApp.controllerProvider.register('ListadoSeccionesCtrl', function($scope, $http
         });
     };
     $scope.ListadoSeccion();
-
 });

@@ -3,8 +3,10 @@
 
 var myApp = angular.module('myApp');
 
-myApp.controllerProvider.register('UsuarioPerfilCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope, $location) {
+myApp.controllerProvider.register('UsuarioPerfilCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope, $location){
+    console.log("UsuarioPerfilCtrl");
     $scope.usuario = {};
+
 
 
     $scope.mostrarDatos = function(data) {
@@ -18,8 +20,15 @@ myApp.controllerProvider.register('UsuarioPerfilCtrl', function($scope, $http, $
             console.log($scope.usuario);
         }).error($scope.error);
     };
+
     $http.get(url + 'usuario/usuarioLogueado').success(function(data) {
-        if (typeof data === 'object' && data.respuesta)
+        console.log(data);
+        if(typeof data !== 'undefined'){
             $scope.mostrarDatos(data);
+        }
+    });
+
+    $http.get(url + 'usuario/cerrarSesion').success(function(data) {
+        console.log("CS");
     });
 });

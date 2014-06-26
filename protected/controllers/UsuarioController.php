@@ -5,7 +5,7 @@ class UsuarioController extends GxController {
     public function actionView($id) {
         $this->render('view', array(
             'model' => $this->loadModel($id, 'Usuario'),
-        ));
+            ));
     }
 
     function salida($respuesta = true, $key = null, $value = null) {
@@ -19,7 +19,6 @@ class UsuarioController extends GxController {
     }
 
     public function actionListar() {
-//$gf = GastoFecha::model()->findBySql('SELECT * FROM gasto_fecha ORDER BY Fecha DESC LIMIT 1');
         $usuarios = Usuario::model()->findAll();
         for ($i = 0; $i < count($usuarios); $i++) {
             $salida[$i]['ID'] = $usuarios[$i]->ID;
@@ -53,7 +52,7 @@ class UsuarioController extends GxController {
             }
             return $array;
         } else
-            return array();
+        return array();
     }
 
     public function actionEliminar() {
@@ -80,13 +79,21 @@ class UsuarioController extends GxController {
         if (isset($_POST['telefonos'])) {
             $telefonos = $_POST['telefonos'];
             $telefonos = (array) $_POST['telefonos'];
-//echo var_dump($telefonos);
             foreach ($telefonos as $telefono) {
                 $modelTelefono = new telefono;
                 $telefono['IDUsuario'] = $model->ID;
                 $modelTelefono->setAttributes($telefono);
                 $modelTelefono->insert();
             }
+        }
+        if (isset($_POST['datos']) && $model->TipoUsuario != 2 && isset($apartamento_usuario['idapartamento'])) {
+            $apartamento_usuario = $_POST['datos'];
+            $apartamento_usuario['idusuario'] = $model->ID;
+            $apartamento_usuario['idapartamento'] = $apartamento_usuario['idApartamento'];
+
+            $modelApartamentoUsuario = new ApartamentoUsuario;
+            $modelApartamentoUsuario->setAttributes($apartamento_usuario);
+            $modelApartamentoUsuario->insert();
         }
     }
 
@@ -139,7 +146,7 @@ class UsuarioController extends GxController {
 
         $this->render('update', array(
             'model' => $model,
-        ));
+            ));
     }
 
     public function actionDelete($id) {
@@ -149,14 +156,14 @@ class UsuarioController extends GxController {
             if (!Yii::app()->getRequest()->getIsAjaxRequest())
                 $this->redirect(array('admin'));
         } else
-            throw new CHttpException(400, Yii::t('app', 'Your request is invalid.'));
+        throw new CHttpException(400, Yii::t('app', 'Your request is invalid.'));
     }
 
     public function actionIndex() {
         $dataProvider = new CActiveDataProvider('Usuario');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
-        ));
+            ));
     }
 
     public function actionAdmin() {
@@ -168,7 +175,7 @@ class UsuarioController extends GxController {
 
         $this->render('admin', array(
             'model' => $model,
-        ));
+            ));
     }
 
     public function actionBuscar() {
@@ -199,7 +206,12 @@ class UsuarioController extends GxController {
         if (isset($_SESSION["ID"])) {
             echo $_SESSION["ID"];
         } else
-            echo null;
+        echo null;
+    }
+
+    public function actionCerrarSesion() {
+        session_start();
+        unset($_SESSION);
     }
 
 }

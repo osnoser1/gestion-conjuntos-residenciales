@@ -68,7 +68,7 @@ function siguientepagina(){
 		$paginas=(int)($cantidadderegistro/$tamaño);
 		
 					
-		$tupla="SELECT * FROM post LIMIT $desde,$tamaño";
+		$tupla="SELECT * FROM post order by idpost desc LIMIT $desde,$tamaño";
 		$resultado = $mysqli->query($tupla);
 		$objeto[0]['m']=$resultado->num_rows;
 		$objeto[0]['paginas']=$paginas;	
@@ -129,7 +129,7 @@ function mensajes(){
 		$paginas=(int)($cantidadderegistro/$tamaño);
 		
 					
-		$tupla="SELECT * FROM post limit $tamaño";
+		$tupla="SELECT * FROM post  order by idpost desc limit $tamaño" ;
 		$resultado = $mysqli->query($tupla);
 		$objeto[0]['m']=$resultado->num_rows;
 		$objeto[0]['paginas']=$paginas;	
@@ -141,7 +141,7 @@ function mensajes(){
 		 	$objeto[$i]['contenido']=$db_resultado['contenido'];	
 		 	$objeto[$i]['idpost']=$db_resultado['idpost'];
 		 	$objeto[$i]['fecha']=$db_resultado['fecha'];
-			/*$objeto[0]['paginasiguiente']=1;*/
+	
 
 			$i++;	
 		}		
@@ -171,7 +171,7 @@ function mensajes(){
 			$mysqli = new mysqli(Host, User, "", BasedeDatos);
 			$idPiso=$_REQUEST['idPiso'];
 			$idEdificio=$_REQUEST['idEdificio'];
-			$tupla="SELECT DISTINCT  apartamentos.idApartamento as idApartamento,  apartamentos.idUsuario  FROM  apartamentos INNER JOIN pisos on pisos.idPiso=apartamentos.idPiso INNER JOIN edificio on edificio.idEdificio=apartamentos.idEdificio where  apartamentos.idEdificio='$idEdificio' and apartamentos.idPiso='$idPiso'";
+			$tupla="SELECT  apartamento.idApartamento, apartamento.Nombre  FROM  apartamento  where  apartamento.idEdificio='$idEdificio' and apartamento.Piso='$idPiso'";
 			$resultado = $mysqli->query($tupla);
 			$objeto[0]['m']=$resultado->num_rows;	
 			$i=0;
@@ -179,7 +179,7 @@ function mensajes(){
 			{
 				
 				$objeto[$i]['idapartamento']=$db_resultado['idApartamento'];
-				$objeto[$i]['idUsuario']=$db_resultado['idUsuario'];					
+				$objeto[$i]['Nombre']=$db_resultado['Nombre'];					
 				$i++;	
 			}		
 			$mysqli->close();

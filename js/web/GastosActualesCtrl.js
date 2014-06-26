@@ -26,7 +26,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
             console.log(data);
             $rootScope.show = true;
             $scope.datos = data.datos;
-            $scope.total = parseInt(data.Total);
+            $scope.total = parseInt(data.Total === null ? "0" : data.Total);
             $scope.gastos = data.gastos;
             $scope.gastosFiltrados = [];
             angular.forEach($scope.gastos, function(key) {
@@ -232,10 +232,12 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
                 $scope.error(data, status, headers, config);
                 return;
             }
+            $rootScope.myModalAccept = false;
             console.log("Data: ");
             console.log(data);
-            $('#myModal').modal({show: false});
-            show({message: {text: "Gasto agregado exitosamente."}, type: 'success'});
+            $('#myModal').modal('hide');
+            show({message: {text: "Gastos procesados exitosamente."}, type: 'success'});
+            $scope.init();
         }).error($scope.error);
     };
 });

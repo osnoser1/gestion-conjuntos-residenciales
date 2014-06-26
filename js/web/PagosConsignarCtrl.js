@@ -60,7 +60,7 @@
 
  	$scope.addConsignacion = function(nuevo){
  		
- 		nuevo.idusuario = 2;
+ 		nuevo.idusuario = 1;
  		nuevo.fecha = $filter('date')(nuevo.fecha, $scope.datos.format);
  		$rootScope.loading = true;
         $.ajax
