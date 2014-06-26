@@ -38,28 +38,30 @@ myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http
     }).error($scope.error);
     $scope.a = function() {
         console.log($rootScope.edificio);
-        var array = $filter('filter')($scope.datos.Edificios, {id: $rootScope.edificio.id}, true);
-        console.log(array);
-        if (array.length !== 0) {
-            array[0].Nombre = $rootScope.edificio.Nombre;
-            array[0].CantidadPisos = $rootScope.edificio.CantidadPisos;
-        }
-        $http.post(url + 'edificio/listado', {datos: gasto}
+        $rootScope.myModalAccept = true;
+        $http.post(url + 'edificio/update', $.param({datos: $rootScope.edificio}), {timeout: 10000, headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
         ).success(function(data, status, headers, config) {
-            console.log(data);
-        }).error(function(data, status) { // called asynchronously if an error occurs
-            // or server returns response with an error status.
-            $scope.showDialog({message: data});
-        });
-        $('#myModal').modal('hide');
-        show({message: {text: "Edificio modificado exitosamente."}, type: 'success'});
+            if (typeof data !== "object" || !data.respuesta) {
+                $scope.error(data, status, headers, config);
+                return;
+            }
+            var array = $filter('filter')($scope.datos.Edificios, {idEdificio: $rootScope.edificio.idEdificio}, true);
+            console.log(array);
+            if (array.length !== 0) {
+                array[0].Nombre = $rootScope.edificio.Nombre;
+                array[0].NroDePisos = $rootScope.edificio.NroDePisos;
+            }
+            $rootScope.myModalAccept = false;
+            $('#myModal').modal('hide');
+            show({message: {text: "Edificio modificado exitosamente."}, type: 'success'});
+        }).error($scope.error);
 
     };
     $scope.select = function(i) {
         $scope.datos.edificio[i].select = !$scope.datos.edificio[i].select;
     }
     $scope.modificarDatosE = function(elemento) {
-        $rootScope.edificio = {id: elemento.id, Nombre: elemento.Nombre, NroDePisos: elemento.NroDePisos};
+        $rootScope.edificio = {idEdificio: elemento.idEdificio, Nombre: elemento.Nombre, NroDePisos: elemento.NroDePisos};
         $scope.showConfirmDialog({title: "Editar Edificio", src: "'partials/modificar-edificio.html'"}, $scope.a);
     };
 
@@ -104,13 +106,17 @@ myApp.controllerProvider.register('ListadoEdificiosCtrl', function($scope, $http
             console.log(data);
             angular.forEach(index, function(key, value) {
                 $scope.total -= parseInt(key.Precio);
-                $scope.datos.gastos.remove(key);
-                $scope.gastosFiltrados.push($filter('filter')($scope.gastos, {Nombre: key.Nombre}, true)[0]);
+                $scope.datos.Edificios.remove(key);
             });
             $rootScope.myModalAccept = false;
             $('#myModal').modal('hide');
             show({message: {text: "Edificios eliminados exitosamente."}, type: 'success'});
         }).error($scope.error);
+    };
+    $scope.mostrarDetallesE = function(element) {
+        $rootScope.idEdificio = element.idEdificio;
+        $scope.showDialog({src: "'partials/edificio-detalle.html'"});
+
     };
 });
 

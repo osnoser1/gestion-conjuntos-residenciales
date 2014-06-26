@@ -1,0 +1,72 @@
+<!--
+Alicuota: "0.35"
+Apellido: null
+Casillero: "1"
+Cedula: null
+Cocina: "1"
+Comedor: "1"
+Contrasena: null
+Correo: null
+ID: null
+Lavandero: "1"
+Maletero: "1"
+Nombre: null
+NombreApartamento: "1-A"
+NombreTipo: "Familiar"
+NombreUsuario: null
+Piso: "1"
+Sala: "1"
+Tamano: "200"
+TipoUsuario: null
+idApartamento: "1"
+idApartamentoTipo: "3"
+idEdificio: "1"
+idTipo: "3"
+idapartamento: null
+idusuario: null
+idusuarioapartamento: null
+numBanos: "2"
+numEst: "1"
+numHab: "3"
+--><form class="form-horizontal" role="form"><h4>
+	<div class="form-group">
+		<label class="col-lg-2 control-label">ID:</label>
+		<div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.idApartamento}}</p></div>
+	</div>
+	<div class="form-group">
+		<label class="col-lg-2 control-label">Nombre:</label>
+		<div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.NombreApartamento}}</p></div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-lg-2 control-label">Telefono:</label><p ng-show="usuario.telefonos.length == 0">Ninguno</p>
+		<div class="col-lg-10"><p class="form-control-static" ng-repeat="tel in usuario.telefonos">{{tel.Telefono}}</p></div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-lg-2 control-label">Monto</label>
+		<div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
+	</div>
+	<div class="form-group">
+		<label class="col-lg-2 control-label">Nro Referencia</label>
+		<div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
+	</div>
+	<div class="form-group">
+		<label class="col-lg-2 control-label">Tipo de pago</label>
+		<div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
+	</div>
+	<div class="form-group">
+		<label class="col-lg-2 control-label">Banco</label>
+		<div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
+	</div>
+	<div class="form-group">
+		<label class="col-lg-2 control-label">Fecha</label>
+		<div class="col-lg-10"><p class="form-control-static"> Dato</p></div>
+	</div>
+	<div class="form-group">
+		<label class="col-lg-2 control-label">Estado</label>
+		<div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
+	</div>
+
+
+</h4></form>

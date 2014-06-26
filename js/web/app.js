@@ -4,6 +4,7 @@ var myApp = angular.module('myApp', ['ui.router', 'myControllers', 'myServices',
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider',
     function($stateProvider, $urlRouterProvider, $controllerProvider, $datepickerProvider) {
+
         myApp.controllerProvider = $controllerProvider;
         var templateUrl = function(stateParams) {
             console.log(stateParams);
@@ -25,4 +26,4 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider',
         });
         //$locationProvider.html5Mode(true);
     }
-]);
+    ]);

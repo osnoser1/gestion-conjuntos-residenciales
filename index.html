@@ -1,4 +1,4 @@
-d<!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="myApp">
     <head>
         <title>Conjunto residencial</title>
@@ -42,7 +42,7 @@ d<!DOCTYPE html>
         <script src="js/web/services.js"></script>
         <script src="js/web/directives.js"></script>
         <script src="js/web/editor/summernote.js"></script>
-        <script src="js/web/editor/summernote-es-ES.js"></script>}
+        <script src="js/web/editor/summernote-es-ES.js"></script>
 
         <link rel='stylesheet' href='assets/fullcalendar/fullcalendar.css' /> <!--Principio del Script del calendario-->
         <script src='assets/fullcalendar/moment.min.js'></script>
@@ -54,12 +54,12 @@ d<!DOCTYPE html>
         </section>
         <div style="z-index: 99999999" class="notifications bottom-right"></div>
         <script type="text/javascript">
-                    $(function() {
-                        $('.summernote').summernote({
-                            height: 200,
-                            lang: 'es-ES'
-                        });
-                    });
+            $(function() {
+                $('.summernote').summernote({
+                    height: 200,
+                    lang: 'es-ES'
+                });
+            });
         </script>
         <div class="modal fade example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -67,9 +67,9 @@ d<!DOCTYPE html>
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
         <script>
-                    var n = noty({layout: 'bottom', type: 'success', text: 'Nombre base de datos: <b>"conjunto_residencial"</b>, usuario: <b>"root"</b>, clave: <b>""</b><br>Por favor revisar el archivo <b>"Orden de importación.txt"</b> dentro de la carpeta db.'});
-                    var url = location.pathname + "yii.php?r=";
-                    console.log(url);
+            var n = noty({layout: 'bottom', type: 'success', text: 'Nombre base de datos: <b>"conjunto_residencial"</b>, usuario: <b>"root"</b>, clave: <b>""</b><br>Por favor revisar el archivo <b>"Orden de importación.txt"</b> dentro de la carpeta db.'});
+            var url = location.pathname + "yii.php?r=";
+            console.log(url);
         </script>
     </body>
 </html>

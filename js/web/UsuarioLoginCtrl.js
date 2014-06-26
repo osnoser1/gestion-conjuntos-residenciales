@@ -11,8 +11,26 @@ myApp.controllerProvider.register('UsuarioLoginCtrl', function($scope, $http, $q
                 $scope.error(data, status, headers, config);
                 return;
             }
+            console.log("ok");
+            $location.path("panel/home");
+
         });
     };
+
+    $scope.comprobarUsuario = function() {
+        $http.get(url + 'usuario/usuarioLogueado').success(function(data) {
+            console.log(data);
+            console.log("data");
+            if(typeof data !== 'undefined'){
+                console.log("no esta logeado");
+            //$location.path("web/login");
+            }
+
+    });
+
+
+    };
+    $scope.comprobarUsuario();
 
 });
 

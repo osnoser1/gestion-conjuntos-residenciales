@@ -44,7 +44,7 @@ class PagosController extends GxController {
 //        $idUsuario = $_POST["ID"];
         $idUsuario = 3;
         $salida["datos"]["pagos"] = Yii::app()->db->createCommand()
-                ->select('idPagosUsuario, gasto_fecha.idGastoFecha, Fecha, IF(Estado="1", "Pagado", "No pagado") AS Estado, (SELECT SUM(TotalAlicuota) FROM pagos_historial_usuario, pagos_usuario WHERE pagos_historial_usuario.idPagosUsuario=pagos_usuario.idPagosUsuario AND gasto_fecha.idGastoFecha=pagos_usuario.idGastoFecha) AS Total')
+                ->select('idPagosUsuario, gasto_fecha.idGastoFecha, Fecha, IF(Estado="1", "Pagado", "No pagado") AS Estado, (SELECT SUM(TotalAlicuota) FROM pagos_historial_usuario WHERE pagos_historial_usuario.idPagosUsuario=pagos_usuario.idPagosUsuario AND gasto_fecha.idGastoFecha=pagos_usuario.idGastoFecha) AS Total')
                 ->from('pagos_usuario, gasto_fecha')
                 ->where("idUsuario=$idUsuario AND gasto_fecha.idGastoFecha=pagos_usuario.idGastoFecha AND Estado=2")
                 ->queryAll();
@@ -57,7 +57,7 @@ class PagosController extends GxController {
 //        $idUsuario = $_POST["ID"];
         $idUsuario = 3;
         $salida["datos"]["pagos"] = Yii::app()->db->createCommand()
-                ->select('idPagosUsuario, gasto_fecha.idGastoFecha, Fecha, IF(Estado="1", "Pagado", "No pagado") AS Estado, (SELECT SUM(TotalAlicuota) FROM pagos_historial_usuario, pagos_usuario WHERE pagos_historial_usuario.idPagosUsuario=pagos_usuario.idPagosUsuario AND gasto_fecha.idGastoFecha=pagos_usuario.idGastoFecha) AS Total')
+                ->select('idPagosUsuario, gasto_fecha.idGastoFecha, Fecha, IF(Estado="1", "Pagado", "No pagado") AS Estado, (SELECT SUM(TotalAlicuota) FROM pagos_historial_usuario WHERE pagos_historial_usuario.idPagosUsuario=pagos_usuario.idPagosUsuario AND gasto_fecha.idGastoFecha=pagos_usuario.idGastoFecha) AS Total')
                 ->from('pagos_usuario, gasto_fecha')
                 ->where("idUsuario=$idUsuario AND gasto_fecha.idGastoFecha=pagos_usuario.idGastoFecha")
                 ->queryAll();

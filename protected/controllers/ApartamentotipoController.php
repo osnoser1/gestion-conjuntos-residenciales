@@ -2,11 +2,28 @@
 
 class ApartamentotipoController extends GxController {
 
+	public function actionListar(){
+		$tipos = Apartamentotipo::model()->findAll();
+		foreach ($tipos as &$value) {
+			$salida[] = $value->getAttributes();
+		}
+		echo $this->salida(true, 'tipos', $salida);
+	}
 
+	function salida($respuesta = true, $key = null, $value = null) {
+		if ($key == null) {
+			return json_encode(array('respuesta' => $respuesta));
+		} else if ($value == null) {
+			$key["respuesta"] = $respuesta;
+			return json_encode($key);
+		}
+		return json_encode(array('respuesta' => $respuesta, $key => $value));
+	}
+	
 	public function actionView($id) {
 		$this->render('view', array(
 			'model' => $this->loadModel($id, 'Apartamentotipo'),
-		));
+			));
 	}
 
 	public function actionCreate() {
@@ -40,8 +57,8 @@ class ApartamentotipoController extends GxController {
 		}
 
 		$this->render('update', array(
-				'model' => $model,
-				));
+			'model' => $model,
+			));
 	}
 
 	public function actionDelete($id) {
@@ -51,14 +68,14 @@ class ApartamentotipoController extends GxController {
 			if (!Yii::app()->getRequest()->getIsAjaxRequest())
 				$this->redirect(array('admin'));
 		} else
-			throw new CHttpException(400, Yii::t('app', 'Your request is invalid.'));
+		throw new CHttpException(400, Yii::t('app', 'Your request is invalid.'));
 	}
 
 	public function actionIndex() {
 		$dataProvider = new CActiveDataProvider('Apartamentotipo');
 		$this->render('index', array(
 			'dataProvider' => $dataProvider,
-		));
+			));
 	}
 
 	public function actionAdmin() {
@@ -70,7 +87,7 @@ class ApartamentotipoController extends GxController {
 
 		$this->render('admin', array(
 			'model' => $model,
-		));
+			));
 	}
 
 }

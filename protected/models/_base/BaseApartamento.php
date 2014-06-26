@@ -7,22 +7,18 @@
  * property or method in class "Apartamento".
  *
  * Columns in table "apartamento" available as properties of the model,
- * and there are no model relations.
+ * followed by relations of table "apartamento" available as properties of the model.
  *
  * @property integer $idApartamento
- * @property string $Direccion
- * @property integer $Tipo
- * @property integer $Tamaño
- * @property integer $numBaños
- * @property integer $numHab
- * @property integer $Sala
- * @property integer $Cocina
- * @property integer $Comedor
- * @property integer $numEst
- * @property integer $Maletero
- * @property integer $Casillero
- * @property integer $Alícuota
+ * @property string $Nombre
+ * @property integer $Piso
+ * @property integer $idEdificio
+ * @property integer $idTipo
  *
+ * @property Apartamentotipo $idTipo0
+ * @property Edificio $idEdificio0
+ * @property ApartamentoUsuario[] $apartamentoUsuarios
+ * @property GastoEntidadHistorial[] $gastoEntidadHistorials
  */
 abstract class BaseApartamento extends GxActiveRecord {
 
@@ -39,20 +35,24 @@ abstract class BaseApartamento extends GxActiveRecord {
 	}
 
 	public static function representingColumn() {
-		return 'Direccion';
+		return 'Nombre';
 	}
 
 	public function rules() {
 		return array(
-			array('Direccion, Tipo, Tamaño, numBaños, numHab, Sala, Cocina, Comedor, numEst, Maletero, Casillero, Alícuota', 'required'),
-			array('Tipo, Tamaño, numBaños, numHab, Sala, Cocina, Comedor, numEst, Maletero, Casillero, Alícuota', 'numerical', 'integerOnly'=>true),
-			array('Direccion', 'length', 'max'=>20),
-			array('idApartamento, Direccion, Tipo, Tamaño, numBaños, numHab, Sala, Cocina, Comedor, numEst, Maletero, Casillero, Alícuota', 'safe', 'on'=>'search'),
+			array('Nombre, Piso, idEdificio, idTipo', 'required'),
+			array('Piso, idEdificio, idTipo', 'numerical', 'integerOnly'=>true),
+			array('Nombre', 'length', 'max'=>20),
+			array('idApartamento, Nombre, Piso, idEdificio, idTipo', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
+			'idTipo0' => array(self::BELONGS_TO, 'Apartamentotipo', 'idTipo'),
+			'idEdificio0' => array(self::BELONGS_TO, 'Edificio', 'idEdificio'),
+			'apartamentoUsuarios' => array(self::HAS_MANY, 'ApartamentoUsuario', 'idapartamento'),
+			'gastoEntidadHistorials' => array(self::HAS_MANY, 'GastoEntidadHistorial', 'idApartamento'),
 		);
 	}
 
@@ -64,18 +64,14 @@ abstract class BaseApartamento extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'idApartamento' => Yii::t('app', 'Id Apartamento'),
-			'Direccion' => Yii::t('app', 'Direccion'),
-			'Tipo' => Yii::t('app', 'Tipo'),
-			'Tamaño' => Yii::t('app', 'Tama�o'),
-			'numBaños' => Yii::t('app', 'Num Ba�os'),
-			'numHab' => Yii::t('app', 'Num Hab'),
-			'Sala' => Yii::t('app', 'Sala'),
-			'Cocina' => Yii::t('app', 'Cocina'),
-			'Comedor' => Yii::t('app', 'Comedor'),
-			'numEst' => Yii::t('app', 'Num Est'),
-			'Maletero' => Yii::t('app', 'Maletero'),
-			'Casillero' => Yii::t('app', 'Casillero'),
-			'Alícuota' => Yii::t('app', 'Al�cuota'),
+			'Nombre' => Yii::t('app', 'Nombre'),
+			'Piso' => Yii::t('app', 'Piso'),
+			'idEdificio' => null,
+			'idTipo' => null,
+			'idTipo0' => null,
+			'idEdificio0' => null,
+			'apartamentoUsuarios' => null,
+			'gastoEntidadHistorials' => null,
 		);
 	}
 
@@ -83,18 +79,10 @@ abstract class BaseApartamento extends GxActiveRecord {
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('idApartamento', $this->idApartamento);
-		$criteria->compare('Direccion', $this->Direccion, true);
-		$criteria->compare('Tipo', $this->Tipo);
-		$criteria->compare('Tamaño', $this->Tamaño);
-		$criteria->compare('numBaños', $this->numBaños);
-		$criteria->compare('numHab', $this->numHab);
-		$criteria->compare('Sala', $this->Sala);
-		$criteria->compare('Cocina', $this->Cocina);
-		$criteria->compare('Comedor', $this->Comedor);
-		$criteria->compare('numEst', $this->numEst);
-		$criteria->compare('Maletero', $this->Maletero);
-		$criteria->compare('Casillero', $this->Casillero);
-		$criteria->compare('Alícuota', $this->Alícuota);
+		$criteria->compare('Nombre', $this->Nombre, true);
+		$criteria->compare('Piso', $this->Piso);
+		$criteria->compare('idEdificio', $this->idEdificio);
+		$criteria->compare('idTipo', $this->idTipo);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

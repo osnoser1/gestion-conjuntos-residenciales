@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="css/estilo-mariangela.css"/>
 <div ng-controller="UsuarioCrearCtrl">
     <h1> Crear Usuario</h1>
-    <form class="form-horizontal" role="form" ng-submit="submit()">
+    <form class="form-horizontal" role="form" ng-submit="addUsuario(datos)">
         <div class="row form-group col-md-12 col-sm-12 col-xs-12 col-lg-12">
 
             Tipo de Usuario: <select class="selectpicker form-control" data-style="form-control" ng-model="datos.nuevoUsuario.TipoUsuario">
@@ -10,8 +10,8 @@
                 <option value ="2">Administrador</option>
             </select><br>
             Cedula: <input type="text"  pattern="^[0-9]+$" name="cedula" required value="" class="form-control" ng-model="datos.nuevoUsuario.Cedula"/><br>
-            Nombre: <input type="text" pattern="^[\A-Za-záéíóúñ]+$" name="nombre" required value="" class="form-control" ng-model="datos.nuevoUsuario.Nombre"/><br>
-            Apellido: <input type="text" pattern="^[\A-Za-záéíóúñ]+$" name="apellido" required value="" class="form-control" ng-model="datos.nuevoUsuario.Apellido"/><br>
+            Nombre: <input type="text" pattern="^[\A-Za-záéíóúñ ]+$" name="nombre" required value="" class="form-control" ng-model="datos.nuevoUsuario.Nombre"/><br>
+            Apellido: <input type="text" pattern="^[\A-Za-záéíóúñ ]+$" name="apellido" required value="" class="form-control" ng-model="datos.nuevoUsuario.Apellido"/><br>
             Correo: <input type="text" partern="^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$" name="correo" required value="" class="form-control" ng-model="datos.nuevoUsuario.Correo"/><br>
             Contraseña: <input type="password" partern="/(^[.]{6,30}.+$)/" name="contrasena" required class="form-control" ng-model="datos.nuevoUsuario.Contrasena"/><br>
 
@@ -23,7 +23,6 @@
             </div>
         </div>
         <div class="row form-group col-md-12 col-sm-12 col-xs-12 col-lg-12">
-
             <div class="list-group-item" style="display: flex;">
                 <p class="col-xs-2">Telefono:</p>
                 <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
@@ -39,6 +38,31 @@
                 <div class="col-xs-4">
                     <a class="btn btn-primary btn-sm btn-responsive pull-right" ng-click="addTelefono(datos)" >Agregar Número</a>
                 </div>
+            </div>
+        </div>
+        <div class="form-group" ng-show="datos.nuevoUsuario.TipoUsuario == 1">
+            <label class="col-lg-2 control-label">Torre</label>
+            <small class="requerido" ng-show="datos.error"> Debe indicar un apartamento</small>
+            <div class="col-lg-10">
+                <select ng-change="obtenerPisos()" ng-model="datos.nuevoUsuario.idEdificio" name="edificio" ng-options="edificio.idEdificio as edificio.Nombre for edificio in datos.edificios" class="form-control" data-style="form-control">
+                <option value="">-- Seleccione torre --</option>
+            </select>
+            </div>
+        </div>
+        
+        <div class="form-group" ng-show="datos.nuevoUsuario.TipoUsuario == 1">
+            <label class="col-lg-2 control-label">Piso</label>
+            <div class="col-lg-10">
+                <select ng-change="obtenerApartamentos()" ng-model="datos.nuevoUsuario.Piso" name="piso" ng-options="piso.Numero as piso.Numero for piso in datos.pisos" class="form-control" data-style="form-control">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group" ng-show="datos.nuevoUsuario.TipoUsuario == 1">
+            <label class="col-lg-2 control-label">Apartamento</label>
+            <div class="col-lg-10">
+                <select ng-model="datos.nuevoUsuario.idApartamento" name="apartamento" ng-options="apartamento.idApartamento as apartamento.Nombre for apartamento in datos.apartamentos | filter:{Piso: datos.filtroPiso, idEdificio: datos.filtroEdificio}" class="form-control" data-style="form-control">
+                </select>
             </div>
         </div>
 

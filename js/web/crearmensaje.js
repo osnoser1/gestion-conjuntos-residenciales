@@ -49,7 +49,7 @@ function eventos () {
                     for(i=0; i < msg[0].m; i++)
                     {
                       Pisos.options[i]= new Option ("Piso" + msg[i].idPiso);
-                      Pisos.options[i].text ="Piso" + msg[i].idPiso ;
+                      Pisos.options[i].text ="Piso" + msg[i].idPiso;
                       Pisos.options[i].value = msg[i].idPiso; 
                     } 
                       
@@ -75,7 +75,7 @@ function eventos () {
                     for(i=0; i < msg[0].m; i++)
                     {
                       Apartamentos.options[i]= new Option ("Apartamento" + msg[i].idapartamento);
-                      Apartamentos.options[i].text ="Apartamento" + msg[i].idapartamento ;
+                      Apartamentos.options[i].text ="Apartamento " + msg[i].Nombre ;
                       Apartamentos.options[i].value = msg[i].idUsuario; 
                     } 
                       
