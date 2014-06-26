@@ -14,12 +14,21 @@
         <ul class="nav navbar-nav navbar-right navbar-user">
             <li><a href="#/panel/home"><i class="fa fa-home"></i> Inicio</a></li>
             <li class="dropdown messages-dropdown">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Messages <span class="badge">7</span> <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li class="dropdown-header">7 New Messages</li>
-                    <li class="message-preview">
-                        <a href="">
-                            <span class="avatar"><img src="http://placehold.it/50x50"></span>
+                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i>Mensajes <span ng-model="mensajes" class="badge">{{mensajes}}</span> <b class="caret"></b></a>
+                <ul class="dropdown-menu" >
+                    <li class="dropdown-header" ng-model="mensajes">{{mensajes}} Nuevos Mensajes</li>
+                    <li class="divider"></li>
+                    <li class="message-preview" ng-repeat="element in datos">
+                        <a href="">                            
+                            <span class="name">{{element.Nombre}}</span>
+                            <span class="message">{{element.descripcion}}</span>
+                            <span class="time"><i class="fa fa-clock-o"></i>{{element.fecha}}</span>
+                        </a>
+                        <li class="divider" ng-repeat="element in datos"></li>
+                    </li>
+                    
+                    <!-- <li class="message-preview">
+                        <a href="">                            
                             <span class="name">John Smith:</span>
                             <span class="message">Hey there, I wanted to ask you something...</span>
                             <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
@@ -27,24 +36,14 @@
                     </li>
                     <li class="divider"></li>
                     <li class="message-preview">
-                        <a href="">
-                            <span class="avatar"><img src="http://placehold.it/50x50"></span>
+                        <a href="">                           
                             <span class="name">John Smith:</span>
                             <span class="message">Hey there, I wanted to ask you something...</span>
                             <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
                         </a>
                     </li>
-                    <li class="divider"></li>
-                    <li class="message-preview">
-                        <a href="">
-                            <span class="avatar"><img src="http://placehold.it/50x50"></span>
-                            <span class="name">John Smith:</span>
-                            <span class="message">Hey there, I wanted to ask you something...</span>
-                            <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="#/panel/buzon-entrada">View Inbox <span class="badge">7</span></a></li>
+                    <li class="divider"></li> -->
+                    <li><a href="#/panel/buzon-entrada">Ver Buzon de entrada  <span class="badge" ng-model="mensajes">{{mensajes}}</span></a></li>
                 </ul>
             </li>
             <li class="dropdown alerts-dropdown">

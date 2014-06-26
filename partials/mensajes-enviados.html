@@ -1,17 +1,46 @@
-
-
-
-<!-- <script type="text/javascript" src="js/bootstrap-modal.js"></script> -->
-
 <script type="text/javascript" src="js/web/mensajes-enviados.js"></script>
+<script type="text/javascript" src="js/web/mensajesenviadosctrl.js"></script>
 <script type="text/javascript">
 	eventos();
 </script>
 
-<!--<script type="text/javascript" src="js/web/buzonentradaCtrl.js"></script>-->
-<div >
 	<h1>Mensajes Enviados</h1>
-		
+	
+
+		<div class="row barra-pers2"  ng-controller="mensajesenviadostrl">
+		  <div class="col-lg-4">
+		      <div class="input-group">
+			     Simple <input type="radio" id="simple" checked="checked">
+				Fecha <input type="radio" id="fecha">
+			</div> 
+		  </div><!-- /.col-lg-6 -->
+		  <div class="col-lg-4">
+
+		   		<div  style="display: none;" id="busquedapofecha2" class="form-inline">		    	
+				   <i class="glyphicon glyphicon-calendar"></i> Desde
+				   <input ng-model="nuevo.fecha"   ng-click="Calendario(nuevo)"   type="text" class="form-control input-sm"  id="fechadesde" placeholder="Presione aqui" data-date-format="dd/MM/yyyy" bs-datepicker requiered>
+				</div>
+
+		    </div>
+		    <div class="col-lg-4">
+
+				  <div  style="display: none;" id="busquedapofecha" class="form-inline">				  
+				 	  <i class="glyphicon glyphicon-calendar"></i> Hasta
+					   <input ng-model="nuevo.fecha2"  ng-click="Calendario2(nuevo)"     type="text" class="form-control input-sm"  id="fechahasta" placeholder="Presione aqui" data-date-format="dd/MM/yyyy" bs-datepicker requiered>	
+					   <button class="btn btn-default btn-sm" type="button" id="buscarporfecha" ng-click="BuscarPorFecha(nuevo)"  data-ui-ladda="loading">Encontrar</button>			   
+			     </div> 
+
+
+			     <div class="input-group" id="busquedasimple">
+				      <input    type="text" class="form-control input-sm"  id="tbuscar" placeholder="Titulo, Descripcion y   presione encontrar">
+				      <span class="input-group-btn">
+				        <button class="btn btn-default btn-sm" type="button" id="buscar" >Encontrar</button>
+				      </span>
+			     </div>
+
+		     </div> 
+		</div>
+
 		<div id="mensajeabierto" style="display:none;">
 			<button class="btn" id="atras"  >
 				<span class="glyphicon glyphicon-hand-left"></span>Atras
@@ -29,25 +58,14 @@
 		</div>
 
 		<center id="mensajes">
-			<div class="table-responsive table-bordered"   id="contenido">
+			<div   class="table-responsive"    id="contenido">
 			 
 			</div>
 		</center>
-		<div id="paginas" style="position: relative; right: 10px;">
-			<ul class="pagination">
-			  <li><a href="#" >&laquo;</a></li>
-			  <li><a href="#" name="">1</a></li>
-			  <li><a href="#" name="">2</a></li>
-			  <li><a href="#" name="">3</a></li>
-			  <li><a href="#" name="">4</a></li>
-			  <li><a href="#" name="">5</a></li>
-			  <li><a href="#">&raquo;</a></li>
-			</ul>
+		<div id="paginas" style="position: absolute; right: 20px;">
+			
 
 		</div>
-<!-- 		 -->
-
-
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -66,14 +84,3 @@
 	  </div>
 	</div>
 </div>
-
-<!--  <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
-
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      ...
-    </div>
-  </div>
-</div>
- -->

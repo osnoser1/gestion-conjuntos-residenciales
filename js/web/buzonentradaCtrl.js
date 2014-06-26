@@ -103,7 +103,7 @@ myApp.controllerProvider.register('buzonentradaCtrl', function($scope, $http, $q
 		           	if(msg[i].leido==0)
 			           	 tr=$("<tr id="+msg[i].idMensaje+" class='info'></tr>");          	
 		           	else
-		           		 tr=$("<ts id="+msg[i].idMensaje+" ></tr>"); 
+		           		 tr=$("<tr id="+msg[i].idMensaje+" ></tr>"); 
 	       			var td1=$('<td ></td>').text(msg[i].asunto);
 		           	var td2=$('<td></td>').text("administrador");
 		           	var td3=$('<td></td>').html("<b>"+msg[i].descripcion+"</b>");

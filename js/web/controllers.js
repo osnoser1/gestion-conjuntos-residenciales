@@ -5,6 +5,26 @@ var pruebaControllers = angular.module('myControllers', []);
 
 pruebaControllers.controller('PrincipalCtrl', function($state, $scope, $http, $location, $sce, $rootScope) {
     $scope.cargando = false;
+    
+         $.ajax
+        ({
+            type: "POST",
+            url: "models/consultas-crearMensaje.php",
+            data: {id:16},
+            async: true,
+            dataType: "json",
+            success:
+            function(msg)
+            {
+                $scope.mensajes=msg[0].m;
+                $scope.datos=msg;
+            },
+         error:
+            function(msg) {
+                alert(msg + "No se pudo realizar la conexion");
+            }
+        });
+
     $scope.error = function(data, status, headers, config) {
         $rootScope.loading = false;
         $rootScope.myModalAccept = false;
@@ -99,14 +119,18 @@ pruebaControllers.controller('LoginCtrl', ['$scope', '$state', '$location', '$ht
 
 pruebaControllers.controller('PanelCtrl', function($scope, $http, $location) {
     $scope.header = "partials/panel-header.html";
+
+
 });
 
 pruebaControllers.controller('PanelHeaderCtrl', function($scope, $http) {
     $scope.header = "partials/panel-header.html";
     $scope.header = "partials/panel-header.html";
+
     $scope.CrearMensaje = function(datos) {
-        console.log($('.summernote').code());
-        if (para.value != "" && Titulo.value != "" && $('.summernote').code() != "") {
+        /*console.log($('.summernote').code());*/
+        console.log(datos.mensaje);
+        /*if (para.value != "" && Titulo.value != "" && $('.summernote').code() != "") {
             $.ajax
                     ({
                         type: "POST",
@@ -132,7 +156,7 @@ pruebaControllers.controller('PanelHeaderCtrl', function($scope, $http) {
         }
         else {
             show({message: {text: "Debe llenar todos los campos para poder enviar el mensaje"}, type: 'danger'});
-        }
+        }*/
     };
 });
 
