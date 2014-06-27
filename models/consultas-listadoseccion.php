@@ -1,4 +1,5 @@
 <?php
+    include("conector.php");
     $id=$_POST['id'];
     switch($id)
     {
@@ -9,9 +10,9 @@
     }
     
     function listarSeccion(){
-        $mysqli = new mysqli("localhost", "root", "", "conjunto-residencial");
+       $mysqli = new mysqli(Host, User, Pass, BasedeDatos);
         $tupla="Select * from publicacion";
-	$resultado = $mysqli->query($tupla);
+	    $resultado = $mysqli->query($tupla);
         $objeto[0]['m']=$resultado->num_rows;	
 		$i=0;
 		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))

@@ -1,6 +1,9 @@
-<script src="js/web/ListadoSeccionesCtrl.js"></script>
+<!-- <script src="js/web/ListadoSeccionesCtrl.js"></script> -->
+<script type="text/javascript" src="js/web/listadosecciones.js"></script>
 <link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
-
+<script type="text/javascript">
+  eventos();
+</script>
 <script type="text/javascript">
 $(function() {
   $('.summernote').summernote({
@@ -9,7 +12,7 @@ $(function() {
   });  
 });
 </script>
-<div ng-controller="ListadoSeccionesCtrl">
+<!-- <div ng-controller="ListadoSeccionesCtrl">
   <h1>Listado secciones</h1>
   <div class="list-group">
     <div class="list-group-item row no-select" ng-repeat="element in datos.seccion" >
@@ -17,4 +20,34 @@ $(function() {
       <a class="pull-right pointer" ng-click="entrarSeccion(element)"><span class="glyphicon glyphicon-pencil" title="Modificar Seccion"></span> Modificar</a> 
     </div>
   </div>
+</div> -->
+
+<div class="well well-sm" id="contenedor2">   
 </div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modificar Seccion</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <label>Titulo</label><input  type="text" id="Titulo" class="form-control" placeholder="Titulo">
+          <textarea   class="summernote form-control" rows="10" cols="50"  >
+          </textarea>
+          
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="modificar">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

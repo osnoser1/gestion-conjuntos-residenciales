@@ -23,7 +23,9 @@ myApp.controllerProvider.register('CrearSeccionesCtrl', function($scope, $http, 
             success:
             function (msg) 
             {       
-               console.log("Creado");
+               Titulo.value="";
+               $('.summernote').code("");
+               show({message: {text: "Seccion creado exitosamente"}, type: 'success'});
            },
            error:
            function (msg) {console.log( msg);}
