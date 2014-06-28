@@ -32,6 +32,11 @@ class UsuarioController extends GxController {
         echo $this->salida(true, $salida);
     }
 
+    public function actionListarConApartamento() {
+        $salida = Yii::app()->db->createCommand('SELECT usuario.*, apartamento.idEdificio, apartamento.Piso,apartamento_usuario.idapartamento, apartamento.Nombre as NombreApartamento, edificio.Nombre as NombreEdificio FROM usuario LEFT JOIN apartamento_usuario ON usuario.ID = apartamento_usuario.idusuario LEFT JOIN apartamento ON apartamento.idApartamento = apartamento_usuario.idapartamento LEFT JOIN edificio ON edificio.idEdificio = apartamento.idEdificio ORDER BY usuario.ID ASC')->queryAll();
+        echo $this->salida(true, 'usuarios', $salida);
+    }
+
     public function actionDetalle() {
         if (isset($_POST['datos'])) {
             $idUsuario = $_POST['datos'];
