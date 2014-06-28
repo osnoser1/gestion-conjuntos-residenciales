@@ -1,17 +1,16 @@
-<link rel="stylesheet" href="css/estilo-mariangela.css"/>
-<h1> Recuperar Contraseña</h1>
-<form>
-    <div class="form-group col-sm-10">
-        Ingrese Correo: <input type="text" name="correo" value="" class="form-control"/><br><br>
+<script src="js/web/UsuarioRecuperarContrasenaCtrl.js"></script>
+<div class="container" ng-controller="UsuarioRecuperarContrasenaCtrl">
+<form class="form-horizontal" role="form" ng-submit="recuperarContrasena(user)">
+    <h2 class="form-signin-heading">Recuperar Contraseña</h2>
+    <div class="form-group col-ms-8" >
+        Ingrese Correo: 
+
+        <input type="text" pattern="^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"   name="correo2" required value="" class="form-control"  ng-model="user.correo" />
     </div>
-    <table class="botonesmpu">
-        <tr>
-            <td class="celdabotones">
-                <input type="submit" value="Aceptar" class="css_buttonaceptar"/>
-            </td>
-            <td class="celdabotones">
-                <input type="submit" value="Cancelar" class="css_buttoncancelar"/>
-            </td>
-        </tr>
-    </table>
+    <div class="form-group">
+        <center>
+        <input type="submit" value="Aceptar" class="btn btn-primary"/>
+        <a href="#/web/login" class="btn btn-danger">Cancelar</a>
+    </center>
+    </div>
 </form>

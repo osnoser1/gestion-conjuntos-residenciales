@@ -26,7 +26,7 @@ switch($id)
 		Ingresar();
 		break;
 	case 5:
-		mensajes();
+		publicaciones();
 		break;
 	case 6:
 		borrarPublicacion();
@@ -97,25 +97,7 @@ function borrarPublicacion(){
 		$mysqli->close();
 		echo json_encode("true");
 }
-function mensajes(){
-		// $mysqli = new mysqli(Host, User, "", BasedeDatos);
-		// $tupla="SELECT * FROM post";
-		// $resultado = $mysqli->query($tupla);
-		// $objeto[0]['m']=$resultado->num_rows;	
-		// $i=0;
-		// while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
-		// {
-			
-		// 	$objeto[$i]['titulo']=$db_resultado['titulo'];
-		// 	$objeto[$i]['contenido']=$db_resultado['contenido'];	
-		// 	$objeto[$i]['idpost']=$db_resultado['idpost'];
-		// 	$objeto[$i]['fecha']=$db_resultado['fecha'];
-		// 	$i++;
-		// }		
-
-		
-		// $mysqli->close();
-		// echo json_encode($objeto);
+function publicaciones(){
 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
 		
 		$tamaño=5;
@@ -156,9 +138,6 @@ function mensajes(){
 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
 		$titulo=$_REQUEST['para'];
 		$contenido=$_REQUEST['contenido'];
-		// $edificio=$_REQUESt['edificio'];
-		// $apartamento=$_REQUESt["apartamento"];
-		// $piso=$_REQUEST["piso"];
 		$fecha=date("Y-m-d H:i:s");
 		$salida="todo esta bien";
 		$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`)  VALUES ('$contenido', '$titulo',  '$fecha')";

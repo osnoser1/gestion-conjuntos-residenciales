@@ -142,7 +142,7 @@ pruebaControllers.controller('PanelHeaderCtrl', function($scope, $http) {
     $scope.CrearMensaje = function(datos) {
         /*console.log($('.summernote').code());*/
         console.log(datos.mensaje);
-        /*if (para.value != "" && Titulo.value != "" && $('.summernote').code() != "") {
+        if (para.value != "" && Titulo.value != "" && $('.summernote').code() != "") {
             $.ajax
                     ({
                         type: "POST",
@@ -168,7 +168,7 @@ pruebaControllers.controller('PanelHeaderCtrl', function($scope, $http) {
         }
         else {
             show({message: {text: "Debe llenar todos los campos para poder enviar el mensaje"}, type: 'danger'});
-        }*/
+        }
     };
 });
 
