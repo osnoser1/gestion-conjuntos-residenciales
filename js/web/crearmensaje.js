@@ -215,11 +215,33 @@ function eventos () {
               enableFiltering: true
             });
 
-        para.value="";
+         para.value="";
           if ($('#porpisos').attr('class')=="active") {
               if($('#Pisos').val()!=null){
-                 /* console.log("por pisos " + $('#porpisos').attr('class'));
-                  console.log($('#Pisos').val());*/
+                 /* console.log("por pisos " + $('#porpisos').attr('class'));*/
+                  console.log("Piso : " +$('#Pisos').val());
+                   console.log("Edificio: " + $('#Edificios2').val());
+                 $.ajax
+                  ({
+                  type: "POST",
+                  url: "models/consultas-crearMensaje.php",
+                  data: {id:19, edificio:$('#Edificios2').val(), piso:$('#Pisos').val()},
+                  async: false,
+                  dataType: "json",
+                  success:
+                  function (msg) 
+                  {                        
+                   
+                   for(i=1; i < msg[0]; i++)
+                    { console.log(msg[i]);
+                      if(msg[i]!=undefined)
+                      para.value+=msg[i]+",";
+                    }                       
+                  },
+                  error:
+                  function (msg) {console.log("error");}
+                  });
+
               }
               
           }
@@ -227,6 +249,27 @@ function eventos () {
             if($('#Apartamentos').val()!=null){
               /*console.log("por apartamentos " +$('#porapartametos').attr('class'));
               console.log($('#Apartamentos').val());*/
+               $.ajax
+                  ({
+                  type: "POST",
+                  url: "models/consultas-crearMensaje.php",
+                  data: {id:20, edificio:$('#Edificios3').val(), piso:$('#Pisos2').val(), apartamentos:$('#Apartamentos').val()},
+                  async: false,
+                  dataType: "json",
+                  success:
+                  function (msg) 
+                  {                        
+                   
+                   for(i=1; i < msg[0]; i++)
+                    { console.log(msg[i]);
+                      if(msg[i]!=undefined)
+                      para.value+=msg[i]+",";
+                    }                       
+                  },
+                  error:
+                  function (msg) {console.log("error");}
+                  });
+
             }
                   
           }
@@ -246,24 +289,16 @@ function eventos () {
                   success:
                   function (msg) 
                   {                        
-                    console.log(msg[0]);
+                    
                    for(i=1; i < msg[0]; i++)
                     {
                       if(msg[i]!=undefined)
                       para.value+=msg[i]+",";
-
-                    }
-
-                   /* $('#restringir').fadeOut();
-                    $('#apartamentos').fadeOut();  */                 
-                    
+                    }                       
                   },
-
                   error:
                   function (msg) {console.log("error");}
                   });
-
-
             }
           }
         }));
