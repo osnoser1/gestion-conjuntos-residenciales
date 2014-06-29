@@ -70,17 +70,17 @@ $mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		
 		for ($i=0; $i<sizeof($edificio); $i++) { 
 			$id=$edificio[$i];
-			$tupla="";
+			$tupla="SELECT idApartamento FROM apartamento where idEdificio=$edificio";
 			$resultado = $mysqli->query($tupla);
 			
 			
 			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 			{			
-				$objeto[$j]=$db_resultado['Correo'];
+				$objeto[$j]=$db_resultado['idapartamento'];
 				$j++;	
 			}	
-			//$t=$j+$t;
 		}
+		INSERT post 
 		$objeto[0]=$j;
 		$objeto=array_unique($objeto);
 		echo json_encode($objeto);
