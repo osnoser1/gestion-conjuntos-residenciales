@@ -22,33 +22,6 @@ function eventos () {
             Edificios.options[i+1].value = msg[i].idEdificio; 
            }
            $('#Edificios').multiselect('rebuild');
-           $('#Edificios').multiselect({
-                  buttonText: function(options) {
-                      if (options.length === 0) {
-                         return 'Seleccionar Edificios <b class="caret"></b>';
-                      }
-                      else if (options.length > 6) { return options.length + ' selected  <b class="caret"></b>'; }
-                      else {
-                              var selected = '';
-                              options.each(function() { selected += $(this).text() + ', '; });
-                              return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
-                           }
-                  },
-                  onChange: function(element, checked) {
-                      if(checked === true) {
-                          //action taken here if true
-                      }
-                      else if(checked === false) {
-                          if(confirm('¿desea deseleccionar este elemento?')) {
-                              //action taken here
-                          }
-                          else {
-                              $("#Edificios").multiselect('select', element.val());
-                          }
-                      }
-                  }
-            });
-
        },
         error:
         function (msg) {alert( msg +"No se pudo realizar la conexion");}
@@ -76,34 +49,7 @@ function eventos () {
             Edificios2.options[i+1].value = msg[i].idEdificio; 
           }
           $('#Edificios2').multiselect('rebuild');
-          $('#Edificios2').multiselect({
-                  buttonText: function(options) {
-                      if (options.length === 0) {
-                          return 'Seleccione un Edificio <b class="caret"></b>';
-                      }
-                      else if (options.length > 6) {
-                          return options.length + 'Seleccionado  <b class="caret"></b>';
-                      }
-                      else {
-                            var selected = '';
-                            options.each(function() {  selected += $(this).text() + ', ';  });
-                            return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
-                      }
-                  },
-                  onChange: function(element, checked) {
-                      if(checked === true) {
-                          //action taken here if true
-                      }
-                      else if(checked === false) {
-                          if(confirm('¿desea deseleccionar este elemento?')) {
-                              //action taken here
-                          }
-                          else {
-                              $("#Edificios2").multiselect('select', element.val());
-                          }
-                      }
-                  }
-              });
+          
         },
         error:
         function (msg) {alert( msg +"No se pudo realizar la conexion");}
@@ -133,47 +79,28 @@ function eventos () {
 
           }          
            $('#Edificios3').multiselect('rebuild');
-          $('#Edificios3').multiselect({
-                  buttonText: function(options) {
-                      if (options.length === 0) {
-                          return 'seleccione un edificio <b class="caret"></b>';
-                      }
-                      else if (options.length > 6) {
-                          return options.length + ' selected  <b class="caret"></b>';
-                      }
-                      else {
-                          var selected = '';
-                          options.each(function() { selected += $(this).text() + ', '; });
-                          return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
-                      }
-                  },
-                  onChange: function(element, checked) {
-                      if(checked === true) {
-                          //action taken here if true
-                      }
-                      else if(checked === false) {
-                          if(confirm('¿desea deseleccionar este elemento?')) {
-                              //action taken here
-                          }
-                          else {
-                              $("#Edificios3").multiselect('select', element.val());
-                          }
-                      }
-                  }
-              });
+         
         },
         error:
         function (msg) {alert( msg +"No se pudo realizar la conexion");}
         });
 
-        
-       Edificios2.onchange = function () 
-          { 
-            idEdificio=Edificios2.value;
-            console.log(idEdificio);
-            $('#Pisos').empty();
-            cargarpisos();
-          };
+
+          $('#Edificios2').multiselect({
+            buttonText: function(options) {
+                  if (options.length === 0) {
+                      return 'seleccione un edificio <b class="caret"></b>';
+                  }
+            },
+            onChange: function(element, checked) {
+               idEdificio=Edificios2.value;
+              console.log(idEdificio);
+              $('#Pisos').empty();
+              cargarpisos();
+            }
+          });
+
+
            function cargarpisos(){
                 $.ajax
                   ({
@@ -186,117 +113,75 @@ function eventos () {
                   function (msg) 
                   {    
                       
-                    Pisos.options[0]= new Option ("");
-                    Pisos.options[0].text = "";
-                    Pisos.options[0].value ="-1" ; 
-                    for(i=0; i < msg[0].m; i++)
-                    {
-                      Pisos.options[i+1]= new Option ("Piso " + msg[i].idPiso);
-                      Pisos.options[i+1].text ="Piso " + msg[i].idPiso ;
-                      Pisos.options[i+1].value = msg[i].idPiso; 
-                    } 
-                    $('#Pisos').multiselect('rebuild');
-                 $('#Pisos').multiselect({
-                  buttonText: function(options) {
-                      if (options.length === 0) {
-                          return 'Seleccione los pisos <b class="caret"></b>';
-                      }
-                      else if (options.length > 6) {
-                          return options.length + ' selected  <b class="caret"></b>';
-                      }
-                      else {
-                          var selected = '';
-                          options.each(function() { selected += $(this).text() + ', '; });
-                          return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
-                      }
-                  },
-                  onChange: function(element, checked) {
-                      if(checked === true) {
-                          //action taken here if true
-                      }
-                      else if(checked === false) {
-                          if(confirm('¿desea deseleccionar este elemento?')) {
-                              //action taken here
-                          }
-                          else {
-                              $("#Pisos").multiselect('select', element.val());
-                          }
-                      }
-                  }
-              });
+                              Pisos.options[0]= new Option ("");
+                              Pisos.options[0].text = "";
+                              Pisos.options[0].value ="-1" ; 
+                              for(i=0; i < msg[0].m; i++)
+                              {
+                                Pisos.options[i+1]= new Option ("Piso " + msg[i].idPiso);
+                                Pisos.options[i+1].text ="Piso " + msg[i].idPiso ;
+                                Pisos.options[i+1].value = msg[i].idPiso; 
+                              }                              
+                           
+                          $('#Pisos').multiselect('rebuild');
                   },
                   error:
                   function (msg) {alert( msg +"No se pudo realizar la conexion");}
                   });
           }
-          Edificios3.onchange = function () 
-          { 
-            idEdificio=Edificios3.value;
-            console.log(idEdificio);
-            $('#Pisos2').empty();
-            $('#Apartamentos').empty();
-            $('#Apartamentos').multiselect('rebuild');
-            /*$('#Pisos2').multiselect('rebuild');*/
-            // $('#Apartamentos').empty();
+       
+            $('#Edificios3').multiselect({
+              buttonText: function(options) {
+                if (options.length === 0) {
+                    return 'Seleccione un Edificio<b class="caret"></b>';
+                }
+              },
+              onChange: function(element, checked) {
+                  idEdificio=Edificios3.value;
+                  console.log(idEdificio);
+                  $('#Pisos2').empty();
+                  $('#Apartamentos').empty();
+                  console.log("paso 1");
+                  $('#Apartamentos').multiselect('rebuild');
+                  console.log("paso 2");
+                  $.ajax
+                        ({
+                        type: "POST",
+                        url: "models/cartelera.php",
+                        data: {id:2, idEdificio:Edificios3.value},
+                        async: false,
+                        dataType: "json",
+                        success:
+                        function (msg) {
+                          Pisos2.options[0]= new Option ("");
+                          Pisos2.options[0].text = "";
+                          Pisos2.options[0].value ="-1" ; 
+                          for(i=0; i < msg[0].m; i++)
+                          {
+                            Pisos2.options[i+1]= new Option ("Piso " + msg[i].idPiso);
+                            Pisos2.options[i+1].text ="Piso " + msg[i].idPiso;
+                            Pisos2.options[i+1].value = msg[i].idPiso; 
+                          } 
+                      $('#Pisos2').multiselect('rebuild');
 
-
-            $.ajax
-                  ({
-                  type: "POST",
-                  url: "models/cartelera.php",
-                  data: {id:2, idEdificio:Edificios3.value},
-                  async: false,
-                  dataType: "json",
-                  success:
-                  function (msg) {
-                    Pisos2.options[0]= new Option ("");
-                    Pisos2.options[0].text = "";
-                    Pisos2.options[0].value ="-1" ; 
-                    for(i=0; i < msg[0].m; i++)
-                    {
-                      Pisos2.options[i+1]= new Option ("Piso " + msg[i].idPiso);
-                      Pisos2.options[i+1].text ="Piso " + msg[i].idPiso;
-                      Pisos2.options[i+1].value = msg[i].idPiso; 
-                    } 
-                $('#Pisos2').multiselect('rebuild');
-
-                $('#Pisos2').multiselect({
-                  buttonText: function(options) {
-                      if (options.length === 0) {
-                          return 'seleccione un piso <b class="caret"></b>';
-                      }
-                      else if (options.length > 6) {
-                          return options.length + ' selected  <b class="caret"></b>';
-                      }
-                      else {
-                          var selected = '';
-                          options.each(function() {  selected += $(this).text() + ', '; });
-                          return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
-                      }
-                  },
-                  onChange: function(element, checked) {
-                      if(checked === true) {
-                          //action taken here if true
-                      }
-                      else if(checked === false) {
-                          if(confirm('¿desea deseleccionar este elemento?')) {
-                              //action taken here
-                          }
-                          else {
-                              $("#Pisos2").multiselect('select', element.val());
-                          }
-                      }
-                  }
-              });
                   },
                   error:
                   function (msg) {alert( msg +"No se pudo realizar la conexion");}
                   });
-          };
-  
+                
 
-         Pisos2.onchange = function () 
-          {   idPiso=Pisos2.value;
+              }
+           });
+
+           
+          $('#Pisos2').multiselect({
+                buttonText: function(options) {
+                if (options.length === 0) {
+                    return 'Seleccione un Piso<b class="caret"></b>';
+                }
+              },
+              onChange: function(element, checked) {
+                idPiso=Pisos2.value;
                $('#Apartamentos').empty();
                 
                 $.ajax
@@ -316,39 +201,15 @@ function eventos () {
                       Apartamentos.options[i].text ="Apartamento "+ msg[i].Nombre;
                     } 
                     $('#Apartamentos').multiselect('rebuild');
-                    $('#Apartamentos').multiselect({
-                    buttonText: function(options) {
-                            if (options.length === 0) {
-                                return 'Seleccione los aptos <b class="caret"></b>';
-                            }
-                            else if (options.length > 6) {
-                                return options.length + ' selected  <b class="caret"></b>';
-                            }
-                            else {
-                                var selected = '';
-                                options.each(function() {  selected += $(this).text() + ', ';   });
-                                return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
-                            }
-                     },
-                  onChange: function(element, checked) {
-                        if(checked === true) {
-                            //action taken here if true
-                        }
-                        else if(checked === false) {
-                            if(confirm('¿desea deseleccionar este elemento?')) {
-                                //action taken here
-                            }
-                            else {
-                                $("#Apartamentos").multiselect('select', element.val());
-                            }
-                        }
-                     }
-                  });
+                    
                   },
                   error:
                   function (msg) {alert( msg +"No se pudo realizar la conexion");}
                   });
-          };
+              }
+            });
+
+        
        // $.ajax
        //  ({
        //  type: "POST",
