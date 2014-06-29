@@ -24,13 +24,13 @@ myApp.controllerProvider.register('UsuarioLoginCtrl', function($scope, $http, $q
             if(typeof data !== 'undefined'){
                 console.log("no esta logeado");
             //$location.path("web/login");
-            }
+        }
 
     });
-
-
     };
     $scope.comprobarUsuario();
+
+    
 
 });
 

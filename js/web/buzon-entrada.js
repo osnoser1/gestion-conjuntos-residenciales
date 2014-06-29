@@ -42,14 +42,15 @@ function eventos(){
 		        success:
 		        function (msg) 
 		        {       
-			         de.innerHTML="administrador";
+		        	console.log("fecha: "+msg[0].fecha);
+			         de.innerHTML=msg[0].de;
 			         titulo.innerHTML=msg[0].asunto;
-			         fecha.innerHTML=msg[0].fecha;
+			         fecha1.innerHTML=msg[0].fecha;
 			         descripcion.innerHTML=msg[0].descripcion;
 			         bodymensaje.innerHTML=msg[0].descripcion;
 			          
 			          $('#mensajeabierto').fadeIn(); 
-			          	$('#paginas').fadeOut();
+		          	  $('#paginas').fadeOut();
 			          
 
 		          
@@ -258,7 +259,7 @@ function eventos(){
 		           	else
 		           		 tr=$("<tr id="+msg[i].idMensaje+" ></tr>"); 
 	       			var td1=$('<td ></td>').text(msg[i].asunto);
-		           	var td2=$('<td></td>').text("administrador");
+		           	var td2=$('<td></td>').text(msg[i].de);
 		           	var td3=$('<td></td>').html("<b>"+msg[i].descripcion+"</b>");
 		           	var td4=$('<td></td>').text(msg[i].fecha);
 		           	var td5=$('<td ></td>').html('<button type="button" class="ver btn btn-default btn-xs" name="'+msg[i].idMensaje+'" data-toggle="tooltip" data-placement="top" title="Ver">	<span class="glyphicon glyphicon-eye-open"></span></button>');

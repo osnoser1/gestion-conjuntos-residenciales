@@ -59,6 +59,9 @@
 		case 16:
 			 nuevosmensajes();
 			 break;
+		case 17: 
+			 obtenerprivilegiodelusuario();
+			 break;
 		default;
 	}
 }
@@ -69,17 +72,24 @@ else{
 	}
 }
 /*echo call_user_func(array($_POST['funcion']));*/
+	function obtenerprivilegiodelusuario(){
+		session_start();
+		echo json_encode($_SESSION["TipoUsuario"]);
+
+	}
 	function nuevosmensajes(){
+		session_start();
+	    $correo=$_SESSION["Correo"];
 		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
-		$tupla="SELECT COUNT(*) as cantidad FROM mensaje WHERE  leido=0";
+		$tupla="SELECT COUNT(*) as cantidad FROM mensaje WHERE  leido=0 AND para='$correo'";
 		$resultado = $mysqli->query($tupla);
 		$objeto[0]['m']="";		
 		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 		{			
 			$objeto[0]['m']=$db_resultado['cantidad'];			
-		}		
+		}	
 
-		$tupla="SELECT mensaje.asunto, mensaje.descripcion, mensaje.idMensaje, mensaje.fecha, mensaje.leido, usuario.Nombre FROM mensaje  INNER JOIN  usuario ON mensaje.para=usuario.Correo WHERE leido=0 ORDER BY  mensaje.fecha DESC LIMIT 3";
+		$tupla="SELECT mensaje.asunto, mensaje.descripcion, mensaje.idMensaje, mensaje.fecha, mensaje.leido, usuario.Nombre FROM mensaje  INNER JOIN  usuario ON mensaje.para=usuario.Correo WHERE leido=0 AND para='$correo' ORDER BY  mensaje.fecha DESC LIMIT 3";
 		$resultado = $mysqli->query($tupla);				
 		$i=0;
 		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
@@ -87,15 +97,20 @@ else{
 			$objeto[$i]['asunto']=$db_resultado['asunto'];
 			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
 			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
-			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			
 			$objeto[$i]['leido']=$db_resultado['leido'];
 			$objeto[$i]['Nombre']=$db_resultado['Nombre'];
+			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			$date= new DateTime($objeto[$i]['fecha']);
+			$objeto[$i]['fecha']=$date->format('d-m-y H:i:s');
 			$i++;	
 		}		
 		$mysqli->close();
 		echo json_encode($objeto);
 	}
 	function BuscarMensajeporFecha(){
+		session_start();
+		$correo=$_SESSION["Correo"];
 		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$desde=$_REQUEST['desde'];
 		$hasta=$_REQUEST['hasta'];
@@ -105,7 +120,7 @@ else{
 		$hasta=$date->format('Y-m-d');			
 		$date2 = new DateTime($desde);
 		$desde=$date2->format('Y-m-d');		
-		$tupla="SELECT * FROM mensaje  WHERE fecha BETWEEN '$desde' AND '$hasta' ORDER BY idMensaje DESC";
+		$tupla="SELECT * FROM mensaje  WHERE fecha BETWEEN '$desde' AND '$hasta'  AND para='$correo' ORDER BY idMensaje DESC";
 		$resultado = $mysqli->query($tupla);
 		$objeto[0]['m']=$resultado->num_rows;		
 		$i=0;
@@ -115,16 +130,21 @@ else{
 			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
 			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
 			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			$date= new DateTime($objeto[$i]['fecha']);
+			$objeto[$i]['fecha']=$date->format('d-m-y H:i:s');
 			$objeto[$i]['leido']=$db_resultado['leido'];
+			$objeto[$i]['de']=$db_resultado['de'];
 			$i++;	
 		}		
 		$mysqli->close();
 		echo json_encode($objeto);
 	}
 	function BuscarMensaje(){
+		session_start();
+		$correo=$_SESSION["Correo"];
 		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$mensaje=$_REQUEST['mensaje'];
-		$tupla = "SELECT * FROM mensaje WHERE  asunto LIKE '%$mensaje%'  OR descripcion LIKE '%$mensaje%' ORDER BY idMensaje DESC";
+		$tupla = "SELECT * FROM mensaje WHERE  (asunto LIKE '%$mensaje%'  OR descripcion LIKE '%$mensaje%') AND para='$correo' ORDER BY idMensaje DESC";
 		$resultado = $mysqli->query($tupla);
 		$objeto[0]['m']=$resultado->num_rows;		
 		$i=0;
@@ -134,18 +154,24 @@ else{
 			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
 			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
 			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			$date= new DateTime($objeto[$i]['fecha']);
+			$objeto[$i]['fecha']=$date->format('d-m-y H:i:s');
 			$objeto[$i]['leido']=$db_resultado['leido'];
+			$objeto[$i]['de']=$db_resultado['de'];
 			$i++;	
 		}		
 		$mysqli->close();
 		echo json_encode($objeto);
 	}
 	function nuevapagina(){
+		session_start();
+		$correo=$_SESSION["Correo"];
+
 		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$pagina=$_REQUEST['pagina'];
 		$tamaño=5;
 		$desde=$pagina*$tamaño;
-		$tupla1="SELECT Count(*) as cantidad FROM mensaje";
+		$tupla1="SELECT Count(*) as cantidad FROM mensaje WHERE para='$correo'";
 		$resultado = $mysqli->query($tupla1);
 		$cantidadderegistro="";
 		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
@@ -153,7 +179,7 @@ else{
 		}		
 		$paginas=(int)($cantidadderegistro/$tamaño);
 		$objeto[0]['paginas']=$paginas;	
-		$tupla="SELECT * FROM mensaje ORDER BY idMensaje DESC LIMIT $desde,$tamaño";
+		$tupla="SELECT * FROM mensaje  WHERE para='$correo' ORDER BY idMensaje DESC LIMIT $desde,$tamaño";
 		$resultado = $mysqli->query($tupla);
 		$objeto[0]['m']=$resultado->num_rows;	
 		$objeto[0]['paginaactual']=$pagina;
@@ -164,7 +190,10 @@ else{
 			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
 			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
 			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			$date= new DateTime($objeto[$i]['fecha']);
+			$objeto[$i]['fecha']=$date->format('d-m-y H:i:s');
 			$objeto[$i]['leido']=$db_resultado['leido'];
+			$objeto[$i]['de']=$db_resultado['de'];
 			$i++;	
 		}		
 		$mysqli->close();
@@ -179,9 +208,11 @@ else{
 		echo json_encode("true");
 	}
 	function obtenerMensajeEnviado(){
+		session_start();
+		$correo=$_SESSION["Correo"];
 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
 		$idMensaje=$_REQUEST['idMensaje'];
-		$tupla="SELECT * FROM mensajesenviados WHERE idMensaje='$idMensaje'";
+		$tupla="SELECT * FROM mensajesenviados WHERE de='$correo'";
 		$resultado = $mysqli->query($tupla);
 		$objeto[0]['m']=$resultado->num_rows;			
 		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
@@ -189,8 +220,13 @@ else{
 			$objeto[0]['asunto']=$db_resultado['asunto'];
 			$objeto[0]['descripcion']=$db_resultado['descripcion'];	
 			$objeto[0]['idMensaje']=$db_resultado['idMensaje'];
+			
+			$objeto[0]['para']=$db_resultado['para'];	
+			$objeto[0]['de']=$db_resultado['de'];		
 			$objeto[0]['fecha']=$db_resultado['fecha'];
-			$objeto[0]['para']=$db_resultado['para'];			
+			$date= new DateTime($objeto[0]['fecha']);
+			$objeto[0]['fecha']=$date->format('d-m-y H:i:s');
+			$objeto[0]['de']=$db_resultado['de'];	
 		}				
 		$mysqli->close();
 		echo json_encode($objeto);
@@ -207,6 +243,9 @@ else{
 			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
 			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
 			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			$date= new DateTime($objeto[$i]['fecha']);
+			$objeto[$i]['fecha']=$date->format('d-m-y H:i:s');
+			$objeto[$i]['de']=$db_resultado['de'];
 			$i++;	
 		}		
 		$mysqli->close();
@@ -248,7 +287,11 @@ else{
 			$objeto[0]['asunto']=$db_resultado['asunto'];
 			$objeto[0]['descripcion']=$db_resultado['descripcion'];	
 			$objeto[0]['idMensaje']=$db_resultado['idMensaje'];
-			$objeto[0]['fecha']=$db_resultado['fecha'];			
+			$objeto[0]['fecha']=$db_resultado['fecha'];
+			$date= new DateTime($objeto[0]['fecha']);
+			$objeto[0]['fecha']=$date->format('d-m-y H:i:s');	
+			$objeto[0]['de']=$db_resultado['de'];	
+
 		}		
 		$tupla="UPDATE mensaje SET leido='1' WHERE idMensaje='$idMensaje'";
 		$resultado = $mysqli->query($tupla);
@@ -256,10 +299,12 @@ else{
 		echo json_encode($objeto);
 	}
 	function obtenermensaje(){
+		session_start();
+		$correo=$_SESSION["Correo"];         
 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
-		$idUsuario=1;		
+		$idUsuario= $_SESSION["ID"];		
 		$tamaño=5;
-		$tupla1="SELECT Count(*) as cantidad FROM mensaje";
+		$tupla1="SELECT Count(*) as cantidad FROM mensaje WHERE para='$correo'";
 		$resultado = $mysqli->query($tupla1);
 		$cantidadderegistro="";
 		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
@@ -277,25 +322,31 @@ else{
 			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
 			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
 			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			$date= new DateTime($objeto[$i]['fecha']);
+			$objeto[$i]['fecha']=$date->format('d-m-y H:i:s');
 			$objeto[$i]['leido']=$db_resultado['leido'];
+			$objeto[$i]['de']=$db_resultado['de'];
+
 			$i++;	
 		}		
 		$mysqli->close();
 		echo json_encode($objeto);
 	}
 	function enviarmensaje(){
+		session_start();    
 		date_default_timezone_set('America/Caracas');
 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
 		$para=explode(",", $_REQUEST['para']);
 		$titulo=$_REQUEST['titulo'];
 		$mensaje=$_REQUEST['mensaje'];
 		$fecha=date("Y-m-d H:i:s");
+		$correo=$_SESSION["Correo"];
 		for($i=0; $i<sizeof($para); $i++){
 			$usuario=$para[$i];
 			if(strlen($usuario)>4){
-				$tupla="INSERT INTO mensaje (para, asunto, descripcion, fecha, leido) VALUES ('$usuario', '$titulo', '$mensaje', '$fecha', 'false')";
+				$tupla="INSERT INTO mensaje (para, asunto, descripcion, fecha, leido, de) VALUES ('$usuario', '$titulo', '$mensaje', '$fecha', 'false', '$correo')";
 				$resultado = $mysqli->query($tupla);
-				$tupla2="INSERT INTO mensajesenviados (para, asunto, descripcion, fecha) VALUES ('$usuario', '$titulo', '$mensaje', '$fecha')";
+				$tupla2="INSERT INTO mensajesenviados (para, asunto, descripcion, fecha, de) VALUES ('$usuario', '$titulo', '$mensaje', '$fecha', '$correo')";
 				$resultado2 = $mysqli->query($tupla2);
 			}
 		}
