@@ -5,7 +5,7 @@ class UsuarioController extends GxController {
     public function actionView($id) {
         $this->render('view', array(
             'model' => $this->loadModel($id, 'Usuario'),
-            ));
+        ));
     }
 
     function salida($respuesta = true, $key = null, $value = null) {
@@ -57,7 +57,7 @@ class UsuarioController extends GxController {
             }
             return $array;
         } else
-        return array();
+            return array();
     }
 
     public function actionEliminar() {
@@ -117,6 +117,25 @@ class UsuarioController extends GxController {
         }
     }
 
+    public function actionModificarClave() {
+        session_start();
+        if (isset($_SESSION["ID"]) && isset($_POST['datos'])) {
+            $clavemodificado = $_POST['datos'];
+            $identificador = $_SESSION["ID"];
+            $u = Usuario::model()->findByAttributes(["ID" => $identificador, "Contrasena" => $clavemodificado["Contrasena"]]);
+            if ($u == null) {
+                echo $this->salida(false, "aviso", "Contraseña invalida");
+                return;
+            }
+            $u->setAttributes(["Contrasena" => $clavemodificado["Nueva"]]);
+            if (($bandera = $u->update()))
+                echo $this->salida(true, "aviso", "Contraseña Modificada Exitosamente");
+            else
+                echo $this->salida(false, "aviso", "Error al cambiar contraseña");
+        } else
+            echo $this->salida(false, "aviso", "Error en el servidor");
+    }
+
     public function actionCreate() {
         $model = new Usuario;
 
@@ -151,7 +170,7 @@ class UsuarioController extends GxController {
 
         $this->render('update', array(
             'model' => $model,
-            ));
+        ));
     }
 
     public function actionDelete($id) {
@@ -161,14 +180,14 @@ class UsuarioController extends GxController {
             if (!Yii::app()->getRequest()->getIsAjaxRequest())
                 $this->redirect(array('admin'));
         } else
-        throw new CHttpException(400, Yii::t('app', 'Your request is invalid.'));
+            throw new CHttpException(400, Yii::t('app', 'Your request is invalid.'));
     }
 
     public function actionIndex() {
         $dataProvider = new CActiveDataProvider('Usuario');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
-            ));
+        ));
     }
 
     public function actionAdmin() {
@@ -180,7 +199,7 @@ class UsuarioController extends GxController {
 
         $this->render('admin', array(
             'model' => $model,
-            ));
+        ));
     }
 
     public function actionBuscar() {
@@ -214,7 +233,7 @@ class UsuarioController extends GxController {
         if (isset($_SESSION["ID"])) {
             echo $_SESSION["ID"];
         } else
-        echo null;
+            echo null;
     }
 
     public function actionCerrarSesion() {

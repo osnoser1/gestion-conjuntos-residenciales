@@ -7,15 +7,15 @@
 	{
 		case 1:
 			ObtenerEdificios();
-		break;
+			break;
 
 		case 2:
 			ObtenerPisosdeunEdificio();
-		break;
+			break;
 
 		case 3:
 			ObtenerApartamentosdePisosdeunEdificio();
-		break;
+			break;
 
 		case 4:
 			ObtenerUsuario();
@@ -62,6 +62,9 @@
 		case 17: 
 			 obtenerprivilegiodelusuario();
 			 break;
+		case 18:
+			 obtenercorreosdeunedificio();
+			 break;
 		default;
 	}
 }
@@ -72,6 +75,33 @@ else{
 	}
 }
 /*echo call_user_func(array($_POST['funcion']));*/
+	function obtenercorreosdeunedificio(){
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+
+		$edificio=$_REQUEST['edificios'];
+		$tupla="";
+		
+		$t=0;
+		$j=1;
+		
+		for ($i=0; $i<sizeof($edificio); $i++) { 
+			$id=$edificio[$i];
+			$tupla="SELECT DISTINCT usuario.Correo FROM apartamento INNER JOIN  usuario_apartamento ON apartamento.idApartamento=usuario_apartamento.idapartamento  INNER JOIN  usuario ON usuario_apartamento.idusuario=usuario.ID WHERE   apartamento.idEdificio='$id'";
+			$resultado = $mysqli->query($tupla);
+			
+			
+			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+			{			
+				$objeto[$j]=$db_resultado['Correo'];
+				$j++;	
+			}	
+			//$t=$j+$t;
+		}
+		$objeto[0]=$j;
+		$objeto=array_unique($objeto);
+		echo json_encode($objeto);
+
+	}
 	function obtenerprivilegiodelusuario(){
 		session_start();
 		echo json_encode($_SESSION["TipoUsuario"]);
@@ -119,7 +149,7 @@ else{
 		$date = new DateTime($hasta);
 		$hasta=$date->format('Y-m-d');			
 		$date2 = new DateTime($desde);
-		$desde=$date2->format('Y-m-d');		
+		$desde=$date2->format('Y-m-d')	;		
 		$tupla="SELECT * FROM mensaje  WHERE fecha BETWEEN '$desde' AND '$hasta'  AND para='$correo' ORDER BY idMensaje DESC";
 		$resultado = $mysqli->query($tupla);
 		$objeto[0]['m']=$resultado->num_rows;		
