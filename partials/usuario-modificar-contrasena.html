@@ -1,19 +1,17 @@
+<script src="js/web/UsuarioModificarContrasenaCtrl.js"></script>
 <link rel="stylesheet" href="css/estilo-mariangela.css"/>
 <h1>Modificar Contraseña</h1>
 <div ng-include src="'partials/usuario-configuracion-menu.html'"></div>
-<form class="form-horizontal" role="form">
+<form class="form-horizontal" role="form" ng-submit="ModificarContrasena(claveModificado)" ng-controller="UsuarioModificarContrasenaCtrl">
     <div class="form-group col-sm-10">
-        Contraseña Actual: <input type="password" name="claveactual" class="form-control"/><br>
-        Contraseña Nueva: <input type="password" name="clavenueva" class="form-control"/><br>
-        Confirmacion Contraseña Nueva: <input type="password" name="clavenueva" class="form-control"/><br>
+        Contraseña Actual: <input type="password" name="claveactual" class="form-control" ng-model="claveModificado.Contrasena"/><br>
+        Contraseña Nueva: <input type="password" name="clavenueva" class="form-control" ng-model="claveModificado.Nueva"/><br>
+        Confirmacion Contraseña Nueva: <input type="password" name="clavecomprobar" class="form-control" ng-model="claveModificado.Comprobando"/><br>
     </div>
     <table class="botonesmpu">
         <tr>
             <td class="celdabotones">
-                <input type="submit" value="Aceptar" class="css_buttonaceptar"/>
-            </td>
-            <td class="celdabotones">
-                <input type="submit" value="Cancelar" class="css_buttoncancelar"/>
+                <input type="submit" value="Aceptar" class="css_buttonaceptar" />
             </td>
         </tr>
     </table>
