@@ -65,6 +65,12 @@
 		case 18:
 			 obtenercorreosdeunedificio();
 			 break;
+		case 19:
+			obtenercorreosdeunPiso();
+			break;
+		case 20:
+			 obtenercorreosdeunApartamento();
+			 break;
 		default;
 	}
 }
@@ -75,27 +81,64 @@ else{
 	}
 }
 /*echo call_user_func(array($_POST['funcion']));*/
-	function obtenercorreosdeunedificio(){
+	function obtenercorreosdeunApartamento(){
 		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
-
-		$edificio=$_REQUEST['edificios'];
-		$tupla="";
-		
+		$edificio=$_REQUEST['edificio'];
+		$piso=$_REQUEST['piso'];
+		$apartamentos=$_REQUEST['apartamentos'];
+		$tupla="";		
 		$t=0;
-		$j=1;
-		
-		for ($i=0; $i<sizeof($edificio); $i++) { 
-			$id=$edificio[$i];
-			$tupla="SELECT DISTINCT usuario.Correo FROM apartamento INNER JOIN  usuario_apartamento ON apartamento.idApartamento=usuario_apartamento.idapartamento  INNER JOIN  usuario ON usuario_apartamento.idusuario=usuario.ID WHERE   apartamento.idEdificio='$id'";
-			$resultado = $mysqli->query($tupla);
-			
-			
+		$j=1;	
+		for ($i=0; $i<sizeof($apartamentos); $i++) { 
+			$idapartamentos=$apartamentos[$i];
+			$tupla="SELECT DISTINCT usuario.Correo FROM apartamento INNER JOIN  apartamento_usuario ON apartamento.idApartamento=apartamento_usuario.idapartamento  INNER JOIN  usuario ON apartamento_usuario.idusuario=usuario.ID WHERE   apartamento.idEdificio='$edificio' AND apartamento.Piso='$piso' AND apartamento.idApartamento='$idapartamentos' ";
+			$resultado = $mysqli->query($tupla);			
 			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 			{			
 				$objeto[$j]=$db_resultado['Correo'];
 				$j++;	
 			}	
-			//$t=$j+$t;
+		}
+		$objeto[0]=$j;
+		$objeto=array_unique($objeto);
+		echo json_encode($objeto);
+	}
+	function obtenercorreosdeunPiso(){
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+		$edificio=$_REQUEST['edificio'];
+		$piso=$_REQUEST['piso'];
+		$tupla="";		
+		$t=0;
+		$j=1;	
+		for ($i=0; $i<sizeof($piso); $i++) { 
+			$idpiso=$piso[$i];
+			$tupla="SELECT DISTINCT usuario.Correo FROM apartamento INNER JOIN  apartamento_usuario ON apartamento.idApartamento=apartamento_usuario.idapartamento  INNER JOIN  usuario ON apartamento_usuario.idusuario=usuario.ID WHERE   apartamento.idEdificio='$edificio' AND apartamento.Piso='$idpiso'";
+			$resultado = $mysqli->query($tupla);			
+			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+			{			
+				$objeto[$j]=$db_resultado['Correo'];
+				$j++;	
+			}	
+		}
+		$objeto[0]=$j;
+		$objeto=array_unique($objeto);
+		echo json_encode($objeto);
+	}
+	function obtenercorreosdeunedificio(){
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+		$edificio=$_REQUEST['edificios'];
+		$tupla="";		
+		$t=0;
+		$j=1;		
+		for ($i=0; $i<sizeof($edificio); $i++) { 
+			$id=$edificio[$i];
+			$tupla="SELECT DISTINCT usuario.Correo FROM apartamento INNER JOIN  apartamento_usuario ON apartamento.idApartamento=apartamento_usuario.idapartamento  INNER JOIN  usuario ON apartamento_usuario.idusuario=usuario.ID WHERE   apartamento.idEdificio='$id'";
+			$resultado = $mysqli->query($tupla);			
+			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+			{			
+				$objeto[$j]=$db_resultado['Correo'];
+				$j++;	
+			}	
 		}
 		$objeto[0]=$j;
 		$objeto=array_unique($objeto);
