@@ -91,7 +91,7 @@ else{
 		$j=1;	
 		for ($i=0; $i<sizeof($apartamentos); $i++) { 
 			$idapartamentos=$apartamentos[$i];
-			$tupla="SELECT DISTINCT usuario.Correo FROM apartamento INNER JOIN  usuario_apartamento ON apartamento.idApartamento=apartamento_usuario.idapartamento  INNER JOIN  usuario ON apartamento_usuario.idusuario=usuario.ID WHERE   apartamento.idEdificio='$edificio' AND apartamento.Piso='$piso' AND apartamento.idApartamento='$idapartamentos' ";
+			$tupla="SELECT DISTINCT usuario.Correo FROM apartamento INNER JOIN  apartamento_usuario ON apartamento.idApartamento=apartamento_usuario.idapartamento  INNER JOIN  usuario ON apartamento_usuario.idusuario=usuario.ID WHERE   apartamento.idEdificio='$edificio' AND apartamento.Piso='$piso' AND apartamento.idApartamento='$idapartamentos' ";
 			$resultado = $mysqli->query($tupla);			
 			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 			{			
@@ -112,7 +112,7 @@ else{
 		$j=1;	
 		for ($i=0; $i<sizeof($piso); $i++) { 
 			$idpiso=$piso[$i];
-			$tupla="SELECT DISTINCT usuario.Correo FROM apartamento INNER JOIN  usuario_apartamento ON apartamento.idApartamento=apartamento_usuario.idapartamento  INNER JOIN  usuario ON apartamento_usuario.idusuario=usuario.ID WHERE   apartamento.idEdificio='$edificio' AND apartamento.Piso='$idpiso'";
+			$tupla="SELECT DISTINCT usuario.Correo FROM apartamento INNER JOIN  apartamento_usuario ON apartamento.idApartamento=apartamento_usuario.idapartamento  INNER JOIN  usuario ON apartamento_usuario.idusuario=usuario.ID WHERE   apartamento.idEdificio='$edificio' AND apartamento.Piso='$idpiso'";
 			$resultado = $mysqli->query($tupla);			
 			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 			{			
@@ -132,7 +132,7 @@ else{
 		$j=1;		
 		for ($i=0; $i<sizeof($edificio); $i++) { 
 			$id=$edificio[$i];
-			$tupla="SELECT DISTINCT usuario.Correo FROM apartamento INNER JOIN  usuario_apartamento ON apartamento.idApartamento=apartamento_usuario.idapartamento  INNER JOIN  usuario ON apartamento_usuario.idusuario=usuario.ID WHERE   apartamento.idEdificio='$id'";
+			$tupla="SELECT DISTINCT usuario.Correo FROM apartamento INNER JOIN  apartamento_usuario ON apartamento.idApartamento=apartamento_usuario.idapartamento  INNER JOIN  usuario ON apartamento_usuario.idusuario=usuario.ID WHERE   apartamento.idEdificio='$id'";
 			$resultado = $mysqli->query($tupla);			
 			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 			{			
