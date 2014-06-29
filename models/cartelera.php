@@ -40,7 +40,7 @@ switch($id)
 		restringir();
 		break;
 		case 10:
-		NombreUsuario();
+		RestringirdeEdificio();
 		break;
 	default;
 
@@ -59,7 +59,33 @@ function restringir(){
 		echo json_encode($_SESSION["TipoUsuario"]);
 
 }
+function RestringirdeEdificio(){
+$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 
+		$edificio=$_REQUEST['edificios'];
+		$tupla="";
+		
+		$t=0;
+		$j=1;
+		
+		for ($i=0; $i<sizeof($edificio); $i++) { 
+			$id=$edificio[$i];
+			$tupla="";
+			$resultado = $mysqli->query($tupla);
+			
+			
+			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+			{			
+				$objeto[$j]=$db_resultado['Correo'];
+				$j++;	
+			}	
+			//$t=$j+$t;
+		}
+		$objeto[0]=$j;
+		$objeto=array_unique($objeto);
+		echo json_encode($objeto);
+
+}
 function seleccionaraptosdeedif(){
 	$mysqli = new mysqli(Host, User, "", BasedeDatos);
 	$idEdificio=$_REQUEST['idEdificio'];
