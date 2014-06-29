@@ -215,25 +215,55 @@ function eventos () {
               enableFiltering: true
             });
 
-        
+        para.value="";
           if ($('#porpisos').attr('class')=="active") {
               if($('#Pisos').val()!=null){
-                  console.log("por pisos " + $('#porpisos').attr('class'));
-                  console.log($('#Pisos').val());
+                 /* console.log("por pisos " + $('#porpisos').attr('class'));
+                  console.log($('#Pisos').val());*/
               }
               
           }
           if($('#porapartametos').attr('class')=="active"){
             if($('#Apartamentos').val()!=null){
-              console.log("por apartamentos " +$('#porapartametos').attr('class'));
-              console.log($('#Apartamentos').val());
+              /*console.log("por apartamentos " +$('#porapartametos').attr('class'));
+              console.log($('#Apartamentos').val());*/
             }
                   
           }
           if($('#poredificios').attr('class')=="active"){
              if($('#Edificios').val()!=null){
-              console.log("por edificios " + $('#poredificios').attr('class'));
+              /*console.log("por edificios " + $('#poredificios').attr('class'));*/
                console.log($('#Edificios').val());
+
+               
+                $.ajax
+                  ({
+                  type: "POST",
+                  url: "models/consultas-crearMensaje.php",
+                  data: {id:18, edificios:$('#Edificios').val()},
+                  async: false,
+                  dataType: "json",
+                  success:
+                  function (msg) 
+                  {                        
+                    console.log(msg[0]);
+                   for(i=1; i < msg[0]; i++)
+                    {
+                      if(msg[i]!=undefined)
+                      para.value+=msg[i]+",";
+
+                    }
+
+                   /* $('#restringir').fadeOut();
+                    $('#apartamentos').fadeOut();  */                 
+                    
+                  },
+
+                  error:
+                  function (msg) {console.log("error");}
+                  });
+
+
             }
           }
         }));
