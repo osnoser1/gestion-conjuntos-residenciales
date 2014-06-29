@@ -23,9 +23,158 @@
         eventos();   
 </script>
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('.multiselect').multiselect();
-  });
+
+  $(document).ready(function() {  
+  	$('#Edificios2').multiselect('rebuild');
+
+     $('#Edificios').multiselect({
+      buttonText: function(options) {
+		if (options.length === 0) {
+		   return 'Seleccionar Edificios <b class="caret"></b>';
+		}
+		else if (options.length > 6) {
+                        return options.length + ' selected  <b class="caret"></b>';
+                    }
+                    else {
+                        var selected = '';
+			options.each(function() {
+                            selected += $(this).text() + ', ';
+			});
+                        return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+			}
+			},
+
+			            
+    });  
+     $('#Edificios2').multiselect({
+      buttonText: function(options) {
+		if (options.length === 0) {
+		   return 'Seleccionar Edificios <b class="caret"></b>';
+		}
+		else if (options.length > 6) {
+                        return options.length + ' selected  <b class="caret"></b>';
+                    }
+                    else {
+                        var selected = '';
+			options.each(function() {
+                            selected += $(this).text() + ', ';
+			});
+                        return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+			}
+			},
+			            
+    });  
+     $('#Edificios3').multiselect({
+      buttonText: function(options) {
+		if (options.length === 0) {
+		   return 'Seleccione un Edificio <b class="caret"></b>';
+		}
+		else if (options.length > 6) {
+                        return options.length + ' selected  <b class="caret"></b>';
+                    }
+                    else {
+                        var selected = '';
+			options.each(function() {
+                            selected += $(this).text() + ', ';
+			});
+                        return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+			}
+			},
+			            
+    });  
+      $('#Edificios4').multiselect({
+      buttonText: function(options) {
+		if (options.length === 0) {
+		   return 'Seleccione un Edificio <b class="caret"></b>';
+		}
+		else if (options.length > 6) {
+                        return options.length + ' selected  <b class="caret"></b>';
+                    }
+                    else {
+                        var selected = '';
+			options.each(function() {
+                            selected += $(this).text() + ', ';
+			});
+                        return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+			}
+			},
+			            
+    });  
+	     $('#Pisos').multiselect({
+	      buttonText: function(options) {
+			if (options.length === 0) {
+			   return 'Seleccionar Pisos <b class="caret"></b>';
+			}
+			else if (options.length > 6) {
+	                        return options.length + ' selected  <b class="caret"></b>';
+	                    }
+	                    else {
+	                        var selected = '';
+				options.each(function() {
+	                            selected += $(this).text() + ', ';
+				});
+	                        return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+				}
+				},
+				            
+	    });  
+	     $('#Pisos2').multiselect({
+      buttonText: function(options) {
+		if (options.length === 0) {
+		   return 'Seleccionar Pisos <b class="caret"></b>';
+		}
+		else if (options.length > 6) {
+                        return options.length + ' selected  <b class="caret"></b>';
+                    }
+                    else {
+                        var selected = '';
+			options.each(function() {
+                            selected += $(this).text() + ', ';
+			});
+                        return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+			}
+			},
+			            
+    });  
+
+	    $('#Apartamentos').multiselect({
+      buttonText: function(options) {
+		if (options.length === 0) {
+		   return 'Seleccionar Aptos <b class="caret"></b>';
+		}
+		else if (options.length > 6) {
+                        return options.length + ' selected  <b class="caret"></b>';
+                    }
+                    else {
+                        var selected = '';
+			options.each(function() {
+                            selected += $(this).text() + ', ';
+			});
+                        return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+			}
+			},
+			            
+    });  
+	     $('#Apartamentos2').multiselect({
+      buttonText: function(options) {
+		if (options.length === 0) {
+		   return 'Seleccionar Aptos <b class="caret"></b>';
+		}
+		else if (options.length > 6) {
+                        return options.length + ' selected  <b class="caret"></b>';
+                    }
+                    else {
+                        var selected = '';
+			options.each(function() {
+                            selected += $(this).text() + ', ';
+			});
+                        return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+			}
+			},
+			            
+    });  
+     });
+
 </script>
 
 
@@ -33,7 +182,7 @@
 <h1>Cartelera</h1>
 <!--Division entre crear el mensaje y los mensajes publicados-->
 
-<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+<div id="restringir" style="display:none;" class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
    <div class="accordion" id="accordion2">
         <div class="accordion-group">
             <div class="accordion-heading">
@@ -73,26 +222,42 @@
       e.preventDefault()
     $(this).tab('show')
     })
+          $('#myTab2 a').click(function (e) {
+      e.preventDefault()
+    $(this).tab('show')
+    })
   </script>
       <ul class="nav nav-tabs" id="myTab">
-      <li class="active"><a href="#messages" data-toggle="tab">Por Apartamentos</a></li>
-      <li><a href="#profile" data-toggle="tab">Por Pisos</a></li>
-    <li><a href="#home" data-toggle="tab">Por Edificios</a></li>
+      <li class="active"><a href="#poraptos" data-toggle="tab">Por Apartamentos</a></li>
+      <li><a href="#porpisos" data-toggle="tab">Por Pisos</a></li>
+    <li><a href="#poredif" data-toggle="tab">Por Edificios</a></li>
   </ul>
   <div class="tab-content">
-      <div class="tab-pane active" id="home">
+      <div class="tab-pane active" id="poredif">
             <select id="Edificios" multiple="multiple" style="width:120px;"></select>
                 </div>
     
-        <div class="tab-pane" id="profile">
+        <div class="tab-pane" id="porpisos">
       <select id="Edificios2"  style="width:120px;"></select>
       <select id="Pisos" multiple="multiple" style="width:120px; " ></select>
         </div>
     
-      <div class="tab-pane" id="messages">
-      <select id="Edificios3"   style="width:120px;"></select>
+      <div class="tab-pane" id="poraptos">
+      <ul class="nav nav-tabs" id="myTab2">
+      <li class="active"><a href="#aptosporpisos" data-toggle="tab">Segun el piso</a></li>
+      <li><a href="#aptosporedif" data-toggle="tab">Todos los pisos</a></li>
+  </ul>
+  		<div class="tab-content">
+      <div class="tab-pane active" id="aptosporpisos">
+            <select id="Edificios3"   style="width:120px;"></select>
       <select id="Pisos2" style="width:120px; " ></select>
       <select id="Apartamentos" multiple="multiple" style="width:120px;" ></select>
+                </div>
+                <div class="tab-pane" id="aptosporedif">
+     <select id="Edificios4"   style="width:120px;"></select>
+      <select id="Apartamentos2" multiple="multiple" style="width:120px;" ></select>
+        </div>
+      
       </div>
  
   </div>
@@ -121,13 +286,10 @@
 
             </div>
         </div>
-    </div>
+    </div><br></div>
 
+	<div  id="contenedor2"></div>
 
-<div class="well well-sm" id="contenedor2">
-     
-    
-</div>
 
 
 

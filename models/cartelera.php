@@ -11,15 +11,15 @@ switch($id)
 {
 	
 	case 1:
-		ObtenerEdificios();
+		seleccionarEdificios();
 		break;
 
 	case 2:
-		ObtenerPisosdeunEdificio();
+		Seleccionarpisos();
 		break;
 
 	case 3:
-		ObtenerApartamentosdePisosdeunEdificio();
+		seleccionaraptos();
 		break;
 
 	case 4: 
@@ -34,6 +34,14 @@ switch($id)
 	case 7:
 		siguientepagina();
 		break;
+	case 8:
+		seleccionaraptosdeedif();
+		case 9:
+		restringir();
+		break;
+		case 10:
+		NombreUsuario();
+		break;
 	default;
 
 
@@ -46,6 +54,30 @@ else{
 		echo call_user_func($input->funcion);
 	}
 }
+function restringir(){
+	session_start();
+		echo json_encode($_SESSION["TipoUsuario"]);
+
+}
+
+function seleccionaraptosdeedif(){
+	$mysqli = new mysqli(Host, User, "", BasedeDatos);
+	$idEdificio=$_REQUEST['idEdificio'];
+	$tupla="SELECT  apartamento.idApartamento, apartamento.Nombre  FROM  apartamento  where  apartamento.idEdificio='$idEdificio'";
+	$resultado = $mysqli->query($tupla);
+	$objeto[0]['m']=$resultado->num_rows;	
+	$i=0;
+	while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		{
+				
+		$objeto[$i]['idapartamento']=$db_resultado['idApartamento'];
+		$objeto[$i]['Nombre']=$db_resultado['Nombre'];					
+		$i++;	
+		}		
+		$mysqli->close();
+		echo json_encode($objeto);
+
+}
 function siguientepagina(){
 		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$pagina=$_REQUEST['pagina'];
@@ -55,7 +87,7 @@ function siguientepagina(){
 		
 
 
-		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		
 		
 		$tupla1="SELECT Count(*) as cantidad FROM post";
@@ -81,7 +113,7 @@ function siguientepagina(){
 		 	$objeto[$i]['contenido']=$db_resultado['contenido'];	
 		 	$objeto[$i]['idpost']=$db_resultado['idpost'];
 		 	$objeto[$i]['fecha']=$db_resultado['fecha'];
-			/*$objeto[0]['paginasiguiente']=1;*/
+			$objeto[$i]['usuario']=$db_resultado['usuario'];
 
 			$i++;	
 		}		
@@ -123,6 +155,7 @@ function publicaciones(){
 		 	$objeto[$i]['contenido']=$db_resultado['contenido'];	
 		 	$objeto[$i]['idpost']=$db_resultado['idpost'];
 		 	$objeto[$i]['fecha']=$db_resultado['fecha'];
+		 	$objeto[$i]['usuario']=$db_resultado['usuario'];
 	
 
 			$i++;	
@@ -135,18 +168,20 @@ function publicaciones(){
 
 	function Ingresar(){
 		
-		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+		session_start();
+		$nombre=$_SESSION["Nombre"];
 		$titulo=$_REQUEST['para'];
 		$contenido=$_REQUEST['contenido'];
 		$fecha=date("Y-m-d H:i:s");
 		$salida="todo esta bien";
-		$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`)  VALUES ('$contenido', '$titulo',  '$fecha')";
+		$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`, `usuario`)  VALUES ('$contenido', '$titulo',  '$fecha', '$nombre')";
 		$resultado = $mysqli->query($tupla) or $salida=$mysqli->error;
 		$mysqli->close();
 		echo json_encode($salida);
 	}
 
-	function ObtenerApartamentosdePisosdeunEdificio(){
+	function seleccionaraptos(){
 			$mysqli = new mysqli(Host, User, "", BasedeDatos);
 			$idPiso=$_REQUEST['idPiso'];
 			$idEdificio=$_REQUEST['idEdificio'];
@@ -164,7 +199,7 @@ function publicaciones(){
 			$mysqli->close();
 			echo json_encode($objeto);
 	}
-	function ObtenerEdificios(){
+	function seleccionarEdificios(){
 			$mysqli = new mysqli(Host, User, "", BasedeDatos);
 			$tupla="SELECT nombre, idEdificio FROM  edificio";
 			$resultado = $mysqli->query($tupla);
@@ -181,7 +216,7 @@ function publicaciones(){
 			echo json_encode($objeto);
 	}
 
-	function ObtenerPisosdeunEdificio(){
+	function Seleccionarpisos(){
 			$mysqli = new mysqli(Host, User, "", BasedeDatos);
 			$idEdificio=$_REQUEST['idEdificio'];
 			$tupla="SELECT DISTINCT Piso FROM  apartamento where  idEdificio='$idEdificio'";
