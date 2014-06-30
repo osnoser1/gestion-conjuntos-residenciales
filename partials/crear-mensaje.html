@@ -1,12 +1,12 @@
  
  <link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
  <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css">
-    <link rel="stylesheet" href="css/prettify.css" type="text/css">
+<link rel="stylesheet" href="css/prettify.css" type="text/css">
+<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/web/crearmensaje.js"></script>
 
-    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-    <script type="text/javascript" src="js/prettify.js"></script>
-    <script type="text/javascript" src="js/web/crearmensaje.js"></script>
-  <script type="text/javascript">
+<script type="text/javascript">
           
          $(function() {
             $('.summernote').summernote({
@@ -15,6 +15,7 @@
               });  
          });      
         eventos(); 
+
   </script>
 <script type="text/javascript">
   $(document).ready(function() {  
@@ -106,6 +107,7 @@
 
             if(msg=="1"){
                 $('#restringir2').fadeIn();
+                alerta.innerHTML='<div class="alert alert-info">¡Seleccione un Administrador para enviarle un mensaje!</div>';
                   $.ajax
                 ({
                 type: "POST",
@@ -123,6 +125,7 @@
                       administradores.options[i].text = msg[i].correo;
                       administradores.options[i].value = msg[i].correo; 
                     }
+
                     $('#administradores').multiselect('rebuild');
                     $('#seleccionar2').fadeIn();
                     $('#seleccionar').fadeOut();
@@ -145,26 +148,28 @@
  </script>
     <div id="restringir" style="display:none;"> 
         <ul class="nav nav-tabs" id="myTab">
-            <li class="active" id="porapartametos"><a href="#messages" data-toggle="tab">Por Apartamentos</a></li>
+            <li  id="porapartametos" class="active" ><a href="#messages" data-toggle="tab">Por Apartamentos</a></li>
             <li id="porpisos"><a href="#profile" data-toggle="tab">Por Pisos</a></li>
-            <li id="poredificios"><a href="#home" data-toggle="tab">Por Edificios</a></li>
+            <li id="poredificios" ><a href="#home" data-toggle="tab">Por Edificios</a></li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane " id="home">
-              <select id="Edificios" multiple="multiple" style="width:120px;" ></select>
-            </div>        
-            <div class="tab-pane" id="profile">
-
-              <select id="Edificios2"  style="width:120px;" ></select>
-              <select id="Pisos" multiple="multiple" style="width:120px;"></select>
-            </div>        
-            <div class="tab-pane active" id="messages">
+        <div class="tab-pane active" id="messages">
               <div class="row">
                 <div class="col-xs-4 col-sm-4"><select id="Edificios3"   style="width:120px;" ></select></div>
                 <div class="col-xs-4 col-sm-4"><select id="Pisos2" style="width:120px; " ></select></div>
                 <div class="col-xs-4 col-sm-4"><select id="Apartamentos" multiple="multiple" style="width:120px;" ></select></div>
               </div>            
-            </div>     
+            </div> 
+
+                 
+            <div class="tab-pane" id="profile">
+
+              <select id="Edificios2"  style="width:120px;" ></select>
+              <select id="Pisos" multiple="multiple" style="width:120px;"></select>
+            </div>        
+            <div class="tab-pane " id="home">
+              <select id="Edificios" multiple="multiple" style="width:120px;" ></select>
+            </div>   
         </div>
      </div>
     

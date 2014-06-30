@@ -138,12 +138,12 @@ function eventos () {
               },
               onChange: function(element, checked) {
                   idEdificio=Edificios3.value;
-                  console.log(idEdificio);
+                  //console.log(idEdificio);
                   $('#Pisos2').empty();
                   $('#Apartamentos').empty();
-                  console.log("paso 1");
+                  //console.log("paso 1");
                   $('#Apartamentos').multiselect('rebuild');
-                  console.log("paso 2");
+                  //console.log("paso 2");
                   $.ajax
                         ({
                         type: "POST",
@@ -218,9 +218,9 @@ function eventos () {
          para.value="";
           if ($('#porpisos').attr('class')=="active") {
               if($('#Pisos').val()!=null){
-                  console.log("por pisos " + $('#porpisos').attr('class'));
+                /*  console.log("por pisos " + $('#porpisos').attr('class'));
                   console.log("Piso : " +$('#Pisos').val());
-                   console.log("Edificio: " + $('#Edificios2').val());
+                   console.log("Edificio: " + $('#Edificios2').val());*/
                  $.ajax
                   ({
                   type: "POST",
@@ -233,7 +233,7 @@ function eventos () {
                   {                        
                    
                    for(i=1; i < msg[0]; i++)
-                    { console.log(msg[i]);
+                    { //console.log(msg[i]);
                       if(msg[i]!=undefined)
                       para.value+=msg[i]+",";
                     }         
@@ -253,7 +253,7 @@ function eventos () {
           if($('#porapartametos').attr('class')=="active"){
             if($('#Apartamentos').val()!=null){
               /*console.log("por apartamentos " +$('#porapartametos').attr('class'));*/
-              console.log($('#Apartamentos').val());
+             // console.log($('#Apartamentos').val());
                $.ajax
                   ({
                   type: "POST",
@@ -266,7 +266,7 @@ function eventos () {
                   {                        
                    
                    for(i=1; i < msg[0]; i++)
-                    { console.log(msg[i]);
+                    { //console.log(msg[i]);
                       if(msg[i]!=undefined)
                       para.value+=msg[i]+",";
                     }          
@@ -286,7 +286,7 @@ function eventos () {
           if($('#poredificios').attr('class')=="active"){
              if($('#Edificios').val()!=null){
               /*console.log("por edificios " + $('#poredificios').attr('class'));*/
-               console.log($('#Edificios').val());
+              // console.log($('#Edificios').val());
 
                
                 $.ajax
@@ -338,7 +338,7 @@ function eventos () {
             dataType: "json",
             success:
             function (msg) 
-            {       console.log("privilegio: "+msg);
+            {     //  console.log("privilegio: "+msg);
 
             if(msg=="1"){
                 $('#restringir2').fadeIn();
