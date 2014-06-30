@@ -1,52 +1,20 @@
 <!--modulo Cartelera mensajes publicados por el admin unicamente-->
 <link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
-
-		<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css">
-		<link rel="stylesheet" href="css/prettify.css" type="text/css">
-
-		<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-		<script type="text/javascript" src="js/prettify.js"></script>
-           <script src="js/web/carteleractrl.js"></script>    
- <script type="text/javascript">
-     
-         $(function() {
-            $('.summernote').summernote({
-                height: 200,
-                lang: 'es-ES'
-              });  
-         });   
-
-         function publicar(){
-
-            console.log($('.summernote').code(""));
-         }  
-        eventos();   
-</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('.multiselect').multiselect();
-  });
-</script>
-
-
-
+<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css">
+<link rel="stylesheet" href="css/prettify.css" type="text/css">
+<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script src="js/web/carteleractrl.js"></script> 
+<script src="js/web/cartelerascript.js"></script>   
 <h1>Cartelera</h1>
-<!--Division entre crear el mensaje y los mensajes publicados-->
-
-<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+<!--Acordion para publicar mensajes en la cartelera solo habilitado para el administrador-->
+<div id="restringir" style="display:none;" class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
    <div class="accordion" id="accordion2">
         <div class="accordion-group">
             <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
                     Publicar un nuevo Anuncio
                 </a>
-                <script>
-                    $('.accordion-toggle').on('click', function(event) {
-                        event.preventDefault();
-                    });
-                </script>
-
-
             </div>
             <div id="collapseOne" class="accordion-body collapse">
                 <div class="accordion-inner">
@@ -59,7 +27,6 @@
                                         <textarea class="summernote form-control" rows="10" cols="50" placeholder="Haga un anuncio aqui"></textarea>
                                     </div>
                                 </div>
-                               
                                 <button class="btn btn-info" data-toggle="modal" data-target="#myModal">Restringir Publicacion</button>
                                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -68,97 +35,76 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                 <h4>Seleccionar restricciones de mensaje</h4>
                                                 <div class="modal-body">
-                                                  <script>
-          $('#myTab a').click(function (e) {
-      e.preventDefault()
-    $(this).tab('show')
-    })
-  </script>
-      <ul class="nav nav-tabs" id="myTab">
-      <li class="active"><a href="#messages" data-toggle="tab">Por Apartamentos</a></li>
-      <li><a href="#profile" data-toggle="tab">Por Pisos</a></li>
-    <li><a href="#home" data-toggle="tab">Por Edificios</a></li>
-  </ul>
-  <div class="tab-content">
-      <div class="tab-pane active" id="home">
-            <select id="Edificios" multiple="multiple" style="width:120px;"></select>
-                </div>
-    
-        <div class="tab-pane" id="profile">
-      <select id="Edificios2"  style="width:120px;"></select>
-      <select id="Pisos" multiple="multiple" style="width:120px; " ></select>
-        </div>
-    
-      <div class="tab-pane" id="messages">
-      <select id="Edificios3"   style="width:120px;"></select>
-      <select id="Pisos2" style="width:120px; " ></select>
-      <select id="Apartamentos" multiple="multiple" style="width:120px;" ></select>
-      </div>
- 
-  </div>
-
-  <script>
-     $(function () {
-       $('#myTab a:last').tab('show')
-     })
-  </script>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary" id="publicar">Publicar </button>
-                                                    <button type="button" class="btn btn-info " data-dismiss="modal"> Cancelar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                              
-                               
-                            </fieldset>
+  												    <ul class="nav nav-tabs" id="myTab">
+      													<li id="Selectapartametos" class="active"><a href="#poraptos" data-toggle="tab">Por Apartamentos</a></li>
+      													<li id="selectPisos"><a href="#porpisos" data-toggle="tab">Por Pisos</a></li>
+    													<li id="poredificios"><a  href="#poredif" data-toggle="tab">Por Edificios</a></li>
+  													</ul>
+  													<div class="tab-content">
+      													<div class="tab-pane active" id="poredif">
+            												<select id="Edificios" multiple="multiple" style="width:120px;"></select>
+                										</div>
+        												<div class="tab-pane" id="porpisos">
+      														<select id="Edificios2"  style="width:120px;"></select>
+      														<select id="Pisos" multiple="multiple" style="width:120px; " ></select>
+        												</div>
+      													<div class="tab-pane" id="poraptos">
+      														<ul class="nav nav-tabs" id="myTab2">
+     															<li id="aptos1" class="active"><a href="#aptosporpisos" data-toggle="tab">Segun el piso</a></li>
+      															<li id="aptos2"><a href="#aptosporedif" data-toggle="tab">Todos los pisos</a></li>
+  															</ul>
+  															<div class="tab-content">
+      															<div class="tab-pane active" id="aptosporpisos">
+            														<select id="Edificios3"   style="width:120px;"></select>
+      																<select id="Pisos2" style="width:120px; " ></select>
+     																<select id="Apartamentos" multiple="multiple" style="width:120px;" ></select>
+           													    </div>
+                												<div class="tab-pane" id="aptosporedif">
+    																<select id="Edificios4"   style="width:120px;"></select>
+    																<select id="Apartamentos2" multiple="multiple" style="width:120px;" ></select>
+   															    </div>
+      														</div>
+      													</div>
+      													<br>
+      													<br>
+                                             		</div>
+                                                	<div class="modal-footer">
+                                                    	<button type="submit" class="btn btn-primary" id="publicar">Publicar </button>
+	                                                    <button type="button" class="btn btn-info " data-dismiss="modal"> Cancelar</button>
+    	                                            </div>
+                                           		</div>
+                                       		</div>
+                                    	</div>
+                                	</div>   
+                                </div>	   
+                           	</fieldset>
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-
-
-<div class="well well-sm" id="contenedor2">
-     
-    
+    <br>
 </div>
-
-
-
-
- <br>
- <div id="paginas" style="position: relative; right: 10px;">
-			
-		</div>
-<!-- <ul class="pager">
-  <li class="previous"><a href="#">&larr; Anterior</a></li>
-  <li class="next"><a href="#">Siguiente &rarr;</a></li>
-</ul> -->
-
-</div>
-
-
-
- <div class="modal fade" id="myModaleliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel"><b>Aviso</b></h4>
-      </div>
-      <div class="modal-body">
-        Esta seguro de querer eliminar el mensaje
-        </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button id="confirmacion" type="button" class="btn btn-primary">Eliminar</button>
-      </div>
+<br>
+<!--Contenedor de mensajes-->
+<div class="well well-sm" id="contenedor2"></div>
+<br>
+<div id="paginas" style="position: relative;"></div>
+<div class="modal fade" id="myModaleliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        	<h4 class="modal-title" id="myModalLabel"><b>Aviso</b></h4>
+      		</div>
+      		<div class="modal-body">
+        	Esta seguro de querer eliminar el mensaje
+      		</div>
+      		<div class="modal-footer">
+       		<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+       		<button id="confirmacion" type="button" class="btn btn-primary">Eliminar</button>
+      		</div>
+    	</div>
     </div>
-  </div>
 </div>

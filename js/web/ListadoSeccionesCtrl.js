@@ -2,7 +2,7 @@
 /* Controllers */
 var myApp = angular.module('myApp');
 
-myApp.controllerProvider.register('ListadoSeccionesCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
+myApp.controllerProvider.register('PaginaPrincipalListadoSeccionesCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
 
     $scope.datos = {
         seccion: [],
