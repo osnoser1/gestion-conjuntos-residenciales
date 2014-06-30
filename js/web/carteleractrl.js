@@ -106,15 +106,11 @@ function eventos (){
         $('#Edificios').multiselect('rebuild');
         $('#Edificios').multiselect({
           onChange: function(element, checked) {
-            idEdificio=Edificios2.value;
-            $('#Pisos').empty();
-            cargarpisos();
           }
         });
       },
       error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
     });
-
     $.ajax({
       type: "POST",
       url: "models/cartelera.php",
@@ -135,164 +131,108 @@ function eventos (){
       },
       error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
     });
-    $.ajax
-          ({
-          type: "POST",
-          url: "models/cartelera.php",
-          data: {id:1},
-          async: true,
-          dataType: "json",
-          success:
-          function (msg) 
-          {       
-            Edificios3.options[0]= new Option ("");
-              Edificios3.options[0].text = "seleccione un edificio";
-              Edificios3.options[0].value ="" ; 
-            for(i=0; i < msg[0].m; i++)
-            {
+    $.ajax({
+      type: "POST",
+      url: "models/cartelera.php",
+      data: {id:1},
+      async: true,
+      dataType: "json",
+      success:
+      function (msg) {
+        Edificios3.options[0]= new Option ("");
+        Edificios3.options[0].text = "seleccione un edificio";
+        Edificios3.options[0].value ="" ; 
+        for(i=0; i < msg[0].m; i++){
+          Edificios3.options[i+1]= new Option (msg[i].nombre);
+          Edificios3.options[i+1].text = msg[i].nombre;
+          Edificios3.options[i+1].value = msg[i].idEdificio; 
+        }
+        $('#Edificios3').multiselect('rebuild');
+      },
+      error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
+    });
 
-              Edificios3.options[i+1]= new Option (msg[i].nombre);
-              Edificios3.options[i+1].text = msg[i].nombre;
-              Edificios3.options[i+1].value = msg[i].idEdificio; 
-
-            }         
-            $('#Edificios3').multiselect('rebuild'); 
-            
-          },
-          error:
-          function (msg) {alert( msg +"No se pudo realizar la conexion");}
-          });
-
-           $.ajax
-          ({
-          type: "POST",
-          url: "models/cartelera.php",
-          data: {id:1},
-          async: true,
-          dataType: "json",
-          success:
-          function (msg) 
-          {
-               Edificios4.options[0]= new Option ("");
-              Edificios4.options[0].text = "seleccione un edificio";
-              Edificios4.options[0].value ="" ; 
-            for(i=0; i < msg[0].m; i++)
-            {
-
-              Edificios4.options[i]= new Option (msg[i].nombre);
-              Edificios4.options[i].text = msg[i].nombre;
-              Edificios4.options[i].value = msg[i].idEdificio; 
-             }
-             $('#Edificios4').multiselect('rebuild');
-
-         },
-          error:
-          function (msg) {alert( msg +"No se pudo realizar la conexion");}
-          });
+    $.ajax({
+      type: "POST",
+      url: "models/cartelera.php",
+      data: {id:1},
+      async: true,
+      dataType: "json",
+      success:
+      function (msg) {
+        Edificios4.options[0]= new Option ("");
+        Edificios4.options[0].text = "seleccione un edificio";
+        Edificios4.options[0].value ="" ; 
+        for(i=0; i < msg[0].m; i++){
+          Edificios4.options[i+1]= new Option (msg[i].nombre);
+          Edificios4.options[i+1].text = msg[i].nombre;
+          Edificios4.options[i+1].value = msg[i].idEdificio; 
+        }
+        $('#Edificios4').multiselect('rebuild');
+      },
+      error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
+    });
   }
-  
-
-
-
-         Edificios2.onchange = function () 
-            { 
-              idEdificio=Edificios2.value;
-              console.log(idEdificio);
-              $('#Pisos').empty();
-              cargarpisos();
-            };
-             function cargarpisos(){
-                  $.ajax
-                    ({
-                    type: "POST",
-                    url: "models/cartelera.php",
-                    data: {id:2, idEdificio:Edificios2.value},
-                    async: true,
-                    dataType: "json",
-                    success:
-                    function (msg) 
-                    {    
-                        
-                      
-                      for(i=0; i < msg[0].m; i++)
-                      {
-                        Pisos.options[i]= new Option ("Piso " + msg[i].idPiso);
-                        Pisos.options[i].text ="Piso " + msg[i].idPiso ;
-                        Pisos.options[i].value = msg[i].idPiso; 
-                      } 
-                      $('#Pisos').multiselect('rebuild');
-                    },
-                    error:
-                    function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                    });
-            }
-            Edificios3.onchange = function () 
-            { 
-              idEdificio=Edificios3.value;
-              console.log(idEdificio);
-              $('#Pisos2').empty();
-              $('#Apartamentos').empty();
-              $.ajax
-                    ({
-                    type: "POST",
-                    url: "models/cartelera.php",
-                    data: {id:2, idEdificio:Edificios3.value},
-                    async: false,
-                    dataType: "json",
-                    success:
-                    function (msg) {
-                     Pisos2.options[0]= new Option ("");
-              Pisos2.options[0].text = "seleccione un Piso";
-              Pisos2.options[0].value ="" ; 
-                      for(i=0; i < msg[0].m; i++)
-                      {
-                        Pisos2.options[i+1]= new Option ("Piso " + msg[i].idPiso);
-                        Pisos2.options[i+1].text ="Piso " + msg[i].idPiso;
-                        Pisos2.options[i+1].value = msg[i].idPiso; 
-                      } 
-                      $('#Pisos2').multiselect('rebuild');
-  $('#Pisos2').multiselect({
-                    buttonText: function(options) {
-                        if (options.length === 0) {
-                            return 'seleccione un piso <b class="caret"></b>';
-                        }
-                        else if (options.length > 6) {
-                            return options.length + ' selected  <b class="caret"></b>';
-                        }
-                        else {
-                            var selected = '';
-                            options.each(function() {
-                                selected += $(this).text() + ', ';
-                            });
-
-                            return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
-                        }
-                    },
-                    onChange: function(element, checked) {
-                        if(checked === true) {
-                            //action taken here if true
-                        }
-                        else if(checked === false) {
-                            if(confirm('¿desea deseleccionar este elemento?')) {
-                                //action taken here
-                            }
-                            else {
-                                $("#Pisos2").multiselect('select', element.val());
-                            }
-                        }
-                    }
-                });
-                    },
-                    error:
-                    function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                    });
-            };
-    
-
+  $('#Edificios2').multiselect({
+    onChange: function(element, checked) {
+      idEdificio=Edificios2.value;
+      // console.log(idEdificio);
+      $('#Pisos').empty();
+      cargarpisos();
+    }
+  });
+  function cargarpisos(){
+    $.ajax({
+      type: "POST",
+      url: "models/cartelera.php",
+      data: {id:2, idEdificio:Edificios2.value},
+      async: true,
+      dataType: "json",
+      success:
+      function (msg) {    
+        for(i=0; i < msg[0].m; i++){
+          Pisos.options[i]= new Option ("Piso " + msg[i].idPiso);
+          Pisos.options[i].text ="Piso " + msg[i].idPiso ;
+          Pisos.options[i].value = msg[i].idPiso; 
+        } 
+        $('#Pisos').multiselect('rebuild');
+      },
+      error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
+    });  
+  }
+ $('#Edificios3').multiselect({
+    onChange: function(element, checked) {
+      idEdificio=Edificios3.value;
+      $('#Pisos2').empty();
+      $('#Apartamentos').empty();
+      $('#Apartamentos').multiselect('rebuild');
+      $.ajax({
+        type: "POST",
+        url: "models/cartelera.php",
+        data: {id:2, idEdificio:Edificios3.value},
+        async: false,
+        dataType: "json",
+        success:
+        function (msg) {
+          Pisos2.options[0]= new Option ("");
+          Pisos2.options[0].text = "seleccione un piso";
+          Pisos2.options[0].value ="-1" ; 
+          for(i=0; i < msg[0].m; i++)
+          {
+            Pisos2.options[i+1]= new Option ("Piso " + msg[i].idPiso);
+            Pisos2.options[i+1].text ="Piso " + msg[i].idPiso;
+            Pisos2.options[i+1].value = msg[i].idPiso; 
+          } 
+          $('#Pisos2').multiselect('rebuild');
+        },
+        error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
+      });
+    }
+  });
            Pisos2.onchange = function () 
             {   idPiso=Pisos2.value;
                  $('#Apartamentos').empty();
-                   console.log('´9idsadasdo0'+idPiso);
+                   console.log('helysonpiso'+idPiso);
                   $.ajax
                     ({
                     type: "POST",
