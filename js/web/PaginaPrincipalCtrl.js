@@ -30,7 +30,7 @@ myApp.controllerProvider.register('PaginaPrincipalCtrl', function($scope, $http,
       error:
       function (msg) {alert( msg +"No se pudo realizar la conexion");}
       });
-    $.ajax
+/*    $.ajax
     ({
         type: "POST",
         url: "models/consultas-crearseccion.php",
@@ -44,7 +44,7 @@ myApp.controllerProvider.register('PaginaPrincipalCtrl', function($scope, $http,
       },
       error:
       function (msg) {alert( msg +"No se pudo realizar la conexion");}
-      });
+      });*/
  
 
     $scope.ListadoSeccion = function() {
