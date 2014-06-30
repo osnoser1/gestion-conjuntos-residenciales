@@ -15,7 +15,7 @@ pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $ht
             }
         });
     }
-$scope.comprobarLogin();
+    //$scope.comprobarLogin();
     $scope.cargando = false;
     
          $.ajax
