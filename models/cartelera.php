@@ -39,9 +39,12 @@ switch($id)
 		case 9:
 		restringir();
 		break;
-		case 10:
-		RestringirdeEdificio();
+	case 10: 
+		IngresarPorpiso();
 		break;
+	case 11: 
+		IngresarporApartamento();
+		break;	
 	default;
 
 
@@ -61,47 +64,70 @@ function restringir(){
 		echo json_encode($_SESSION["TipoUsuario"]);
 
 }
-function RestringirdeEdificio(){
-$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
-		$objeto=array();
-		$edificio=$_REQUEST['edificios'];
-		$tupla="";
+function IngresarporApartamento(){
+	$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+	$apartamentos=$_REQUEST['apartamentos'];
+	$apartamentos=serialize($apartamentos);
+	session_start();
+	$nombre=$_SESSION["Nombre"];
+	$titulo=$_REQUEST['para'];
+	$contenido=$_REQUEST['contenido'];
+	$fecha=date("Y-m-d H:i:s");
+	$salida="todo esta bien";
+	$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`, `usuario`, `aptos`)  VALUES ('$contenido', '$titulo',  '$fecha', '$nombre', '$apartamentos')";
+	$resultado = $mysqli->query($tupla) or $salida=$mysqli->error;
+	$mysqli->close();
+	echo json_encode($salida);	
 		
-		$t=0;
-		$j=1;
+	}
+function IngresarPorpiso(){
 		
-		for ($i=0; $i<sizeof($edificio); $i++) { 
-			$id=$edificio[$i];
-			$tupla="SELECT idApartamento FROM apartamento where idEdificio=$edificio";
-			$resultado = $mysqli->query($tupla);
-			
-			
-			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
-			{			
-				$objeto[$j]=$db_resultado['idapartamento'];
-				$j++;	
-			}	
-		}
-		echo json_encode($objeto);
+	$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+	$objeto=array();
+	$edificio=$_REQUEST['edificios'];
+	$piso=$_REQUEST['piso'];
+	$tupla="";		
+	$t=0;
+	$j=1;	
+	for ($i=0; $i<sizeof($piso); $i++) { 
+		$idpiso=$piso[$i];
+		$tupla="SELECT idApartamento FROM apartamento where idPiso='$idpiso' and idEdificio='$edificio'";
+		$resultado = $mysqli->query($tupla);		
+		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){			
+			$objeto[$j]=$db_resultado['idApartamento'];
+			$j++;	
+		}	
+	} 
+	$objeto=serialize($objeto);
+	session_start();
+	$nombre=$_SESSION["Nombre"];
+	$titulo=$_REQUEST['para'];
+	$contenido=$_REQUEST['contenido'];
+	$fecha=date("Y-m-d H:i:s");
+	$salida="todo esta bien";
+	$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`, `usuario`, `aptos`)  VALUES ('$contenido', '$titulo',  '$fecha', '$nombre', '$objeto')";
+	$resultado = $mysqli->query($tupla) or $salida=$mysqli->error;
+	$mysqli->close();
+	echo json_encode($salida);
 }
-function seleccionaraptosdeedif(){
-	$mysqli = new mysqli(Host, User, "", BasedeDatos);
-	$idEdificio=$_REQUEST['idEdificio'];
-	$tupla="SELECT  apartamento.idApartamento, apartamento.Nombre  FROM  apartamento  where  apartamento.idEdificio='$idEdificio'";
-	$resultado = $mysqli->query($tupla);
-	$objeto[0]['m']=$resultado->num_rows;	
-	$i=0;
-	while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
-		{
-				
-		$objeto[$i]['idapartamento']=$db_resultado['idApartamento'];
-		$objeto[$i]['Nombre']=$db_resultado['Nombre'];					
-		$i++;	
-		}		
-		$mysqli->close();
-		echo json_encode($objeto);
 
-}
+function seleccionaraptosdeedif(){
+
+			$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+			$idEdificio=$_REQUEST['idEdificio'];
+			$tupla="SELECT idApartamento, Nombre FROM apartamento WHERE idEdificio='$idEdificio'";
+			$resultado = $mysqli->query($tupla);
+			$objeto[0]['m']=$resultado->num_rows;	
+			$i=0;
+			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+			{
+				$objeto[$i]['idApartamento']=$db_resultado['idApartamento'];
+				$objeto[$i]['Nombre']=$db_resultado['Nombre'];					
+				$i++;	
+			}		
+			$mysqli->close();
+			echo json_encode($objeto);
+		}
 function siguientepagina(){
 		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$pagina=$_REQUEST['pagina'];
@@ -229,7 +255,7 @@ function publicaciones(){
 			$mysqli = new mysqli(Host, User, "", BasedeDatos);
 			$idPiso=$_REQUEST['idPiso'];
 			$idEdificio=$_REQUEST['idEdificio'];
-			$tupla="SELECT  apartamento.idApartamento, apartamento.Nombre  FROM  apartamento  where  apartamento.idEdificio='$idEdificio' and apartamento.Piso='$idPiso'";
+			$tupla="SELECT  apartamento.idApartamento, apartamento.Nombre  FROM  apartamento  WHERE  apartamento.idEdificio='$idEdificio' and apartamento.Piso='$idPiso'";
 			$resultado = $mysqli->query($tupla);
 			$objeto[0]['m']=$resultado->num_rows;	
 			$i=0;

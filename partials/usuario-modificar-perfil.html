@@ -1,22 +1,18 @@
+<script src="js/web/UsuarioModificarPerfilCtrl.js"></script>
+
 <link rel="stylesheet" href="css/estilo-mariangela.css"/>
 <h1>Modificar Perfil</h1>
 <div ng-include src="'partials/usuario-configuracion-menu.html'"></div>
-<form class="form-horizontal" role="form">
+<form class="form-horizontal" role="form" ng-submit="ModificarPerfil(datosmodificados)" ng-controller="UsuarioModificarPerfilCtrl">
     <div class="form-group col-sm-10">
-        Correo:<input type="text" name="correo" value="" class="form-control"/><br>
+        Correo:<input type="text" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" name="correo" value="" class="form-control" ng-model="datosmodificados.Nuevo"/><br>
         <div class="col-lg-10">
             <input class="form-control-static" ng-repeat="tel in usuario.telefonos" ng-model="tel.Telefono"/>
         </div>
-
     </div>
-    <table class="botonesmpu">
-        <tr>
-            <td class="celdabotones">
-                <input  type="submit" value="Aceptar" class="css_buttonaceptar"/>
-            </td>
-            <td class="celdabotones">
-                <input type="submit" value="Cancelar" class="css_buttoncancelar"/>
-            </td>
-        </tr>
-    </table>
+    <div class="form-group col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <center>
+            <input type="submit" value="Aceptar" class="btn btn-primary"/>
+        </center>
+    </div>
 </form>

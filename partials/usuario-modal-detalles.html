@@ -1,39 +1,18 @@
 <script src="js/web/UsuarioDetalleCtrl.js"></script>
 <form class="form-horizontal" role="form" ng-controller="UsuarioDetalleCtrl"><h4>
         <div class="form-group">
-            <label class="col-lg-2 control-label">Nombre:</label>
-            <div class="col-lg-10"><p class="form-control-static"> {{usuario.Nombre}} </p></div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-lg-2 control-label">Telefono:</label><p ng-show="usuario.telefonos.length == 0">Ninguno</p>
-            <div class="col-lg-10"><p class="form-control-static" ng-repeat="tel in usuario.telefonos">{{tel.Telefono}}</p></div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-lg-2 control-label">Tipo de Usuario</label>
-            <div class="col-lg-10">
+            <label class="col-lg-4 control-label element">Tipo de Usuario</label>
+            <div class="col-lg-5">
                 <p class="form-control-static" ng-show="usuario.TipoUsuario == 1">Propietario</p>
-            <p class="form-control-static" ng-show="usuario.TipoUsuario == 2">Administrador</p></div>
+                <p class="form-control-static" ng-show="usuario.TipoUsuario == 2">Administrador</p></div>
         </div>
         <div class="form-group">
-            <label class="col-lg-2 control-label">Nro Referencia</label>
-            <div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
+            <label class="col-lg-4 control-label element">Nombre</label>
+            <div class="col-lg-5"><p class="form-control-static"> {{usuario.Nombre}} </p></div>
         </div>
         <div class="form-group">
-            <label class="col-lg-2 control-label">Tipo de pago</label>
-            <div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
+            <label class="col-lg-4 control-label element">Telefono</label><p ng-show="usuario.telefonos.length == 0">Ninguno</p>
+            <div class="col-lg-5"><p class="form-control-static" ng-repeat="tel in usuario.telefonos">{{tel.Telefono}}</p></div>
         </div>
-        <div class="form-group">
-            <label class="col-lg-2 control-label">Banco</label>
-            <div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-2 control-label">Fecha</label>
-            <div class="col-lg-10"><p class="form-control-static"> Dato</p></div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-2 control-label">Estado</label>
-            <div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
-        </div>
+
     </h4></form>

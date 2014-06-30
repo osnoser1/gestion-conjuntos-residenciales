@@ -210,7 +210,7 @@ function eventos (){
         type: "POST",
         url: "models/cartelera.php",
         data: {id:2, idEdificio:Edificios3.value},
-        async: false,
+        async: true,
         dataType: "json",
         success:
         function (msg) {
@@ -223,132 +223,178 @@ function eventos (){
             Pisos2.options[i+1].text ="Piso " + msg[i].idPiso;
             Pisos2.options[i+1].value = msg[i].idPiso; 
           } 
-          $('#Pisos2').multiselect('rebuild');
+          $('#Pisos2').multiselect('rebuild'); 
         },
         error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
       });
     }
   });
-           Pisos2.onchange = function () 
-            {   idPiso=Pisos2.value;
-                 $('#Apartamentos').empty();
-                   console.log('helysonpiso'+idPiso);
-                  $.ajax
-                    ({
-                    type: "POST",
-                    url: "models/cartelera.php",
-                    data: {id:3, idEdificio:Edificios3.value, idPiso:Pisos2.value},
-                    async: false,
-                    dataType: "json",
-                    success:
-                    function (msg) 
-                    {    
-                      console.log("Piso: "+ Pisos2.value + "Numero de apartamentos" + msg[0].m);
-                      for(i=0; i < msg[0].m; i++)
-                      {
-                        Apartamentos.options[i]= new Option ("Apartamento" + msg[i].idapartamento);
-                        Apartamentos.options[i].text ="Apartamento "+ msg[i].Nombre;
-                      } 
-                      $('#Apartamentos').multiselect('rebuild');
-                      
-                    },
-                    error:
-                    function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                    });
-            };
-            Edificios4.onchange = function () 
-            {   idEdificio=Edificios4.value;
-                 $('#Apartamentos').empty();
-                   console.log('´9idsadasdo0'+idEdificio);
-                  $.ajax
-                    ({
-                    type: "POST",
-                    url: "models/cartelera.php",
-                    data: {id:8, idEdificio:Edificios4.value},
-                    async: true,
-                    dataType: "json",
-                    success:
-                    function (msg) 
-                    {    
-                      for(i=0; i < msg[0].m; i++)
-                      {
-                        Apartamentos2.options[i]= new Option ("Apartamento" + msg[i].idapartamento);
-                        Apartamentos2.options[i].text ="Apartamento "+ msg[i].Nombre;
-                        console.log(msg[i].nombre);
-                      }
-                       $('#Apartamentos2').multiselect('rebuild');   
-                    },
-                    error:
-                    function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                    });
-            };
-
-
-            $('#publicar').click(function(){
-
-              if(titulo.value!==''&& $('.sumernote').code()!==""){
-                         $('#Apartamentos').multiselect({
-                enableFiltering: true
-              });
-
-            if ($('#porpisos').attr('class')=="active") {
-                if($('#Pisos').val()!=null){
-                   /* console.log("por pisos " + $('#porpisos').attr('class'));*/
-                    console.log("Piso : " +$('#Pisos').val());
-                     console.log("Edificio: " + $('#Edificios2').val());
-                   
-
-                }
-                
-            }
-            if($('#porapartametos').attr('class')=="active"){
-              if($('#Apartamentos').val()!=null){
-                /*console.log("por apartamentos " +$('#porapartametos').attr('class'));
-                console.log($('#Apartamentos').val());*/
-                 
-
-              }
-                    
-            }
-            if($('#poredificios').attr('class')=="active"){
-              console.log('jhjg');
-               if($('#Edificios').val()!=null){
-                /*console.log("por edificios " + $('#poredificios').attr('class'));*/
-                 console.log($('#Edificios').val());
-                 $.ajax
-                  ({
-                  type: "POST",
-                  url: "models/cartelera.php",
-                  data: {id:4, para:titulo.value,contenido:$('.summernote').code(),edificios:$('#Edificios').val()},
-                  async: true,
-                  dataType: "json",
-                  success:
-                  function () 
-                  {       
-                             
-                    $('#myModal').modal('hide');
-                     show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
-                   titulo.value="";
-                      inicio();},
-                  error:
-                  function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                  });
-                 
-                 
-              }
-            }
-                  
-              }
-              else
-              {
-               $('#myModal').modal('hide');
-                 show({message: {text: "Debe rellenar titulo y contenido"}, type: 'danger'});
-              }
-
-
+  $('#Pisos2').multiselect({              
+    onChange: function(element, checked) {
+      idPiso=Pisos2.value;
+      $('#Apartamentos').empty();
+      $.ajax({
+        type: "POST",
+        url: "models/cartelera.php",
+        data: {id:3, idEdificio:Edificios3.value, idPiso:Pisos2.value},
+        async: true,
+        dataType: "json",
+        success:
+        function (msg) {    
+          for(i=0; i < msg[0].m; i++){
+            Apartamentos.options[i]= new Option ("Apartamento" + msg[i].idapartamento);
+            Apartamentos.options[i].text ="Apartamento "+ msg[i].Nombre;
+            Apartamentos.options[i].value = msg[i].idapartamento;
+          } 
+          $('#Apartamentos').multiselect('rebuild');
+        },
+        error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
+      });
+    }
+  }); 
+  $('#Edificios4').multiselect({
+    onChange: function(element, checked) {
+      idEdificio=Edificios4.value;
+      console.log(idEdificio+'estoy en el evento onChange');
+      $('#Apartamentos2').empty();
+      console.log('entre aquiaquiiii cargarAptos');
+    $.ajax({
+      type: "POST",
+      url: "models/cartelera.php",
+      data: {id:8, idEdificio:Edificios4.value},
+      async: true,
+      dataType: "json",
+      success:
+      function (msg) {    
+         console.log('entre en fuction');
+          for(i=0; i < msg[0].m; i++){
+            Apartamentos2.options[i]= new Option ("Apartamento" + msg[i].idapartamento);
+            Apartamentos2.options[i].text ="Apartamento "+ msg[i].Nombre;
+            Apartamentos2.options[i].value = msg[i].idapartamento;
+            console.log('entre aquiaquiiii en el for');
+          } 
+           console.log('entre');
+          $('#Apartamentos2').multiselect('rebuild');
+        },
+        error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
+    });    
+     console.log('entre xd');
+    }
+  });
+  $('#publicar').click(function(){
+    if(titulo.value!==''&& $('.sumernote').code()!==""){
+      $('#Apartamentos').multiselect({
+      enableFiltering: true
+      });
+      if($('#poredificios').attr('class')=="active"){
+        if($('#Edificios').val()!=null){
+        /*console.log("por edificios " + $('#poredificios').attr('class'));*/
+         console.log($('#Edificios').val());
+          $.ajax({
+            type: "POST",
+            url: "models/cartelera.php",
+            data: {id:4, para:titulo.value,contenido:$('.summernote').code(),edificios:$('#Edificios').val()},
+            async: true,
+            dataType: "json",
+            success:
+            function () {                 
+              $('#myModal').modal('hide');
+              show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
+              titulo.value="";
+               $('.sumernote').code("");
+               inicio();},
+            error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
+          });
+        }
+        else{
+          $('#myModal').modal('hide');
+          show({message: {text: "Debe elejir una restriccion"}, type: 'danger'});
+        }
+      }
+      console.log('aqui voy');
+      if ($('#selectPisos').attr('class')=="active") {
+        console.log('aqui voy otra vez');
+         console.log("Piso : " +$('#Pisos').val());
+                   console.log("Edificio: " + $('#Edificios2').val());
+        if($('#Pisos').val()!=null){
+          $.ajax({
+            type: "POST",
+            url: "models/cartelera.php",
+            data: {id:10, para:titulo.value,contenido:$('.summernote').code(),edificios:$('#Edificios2').val(),piso:$('#Pisos').val()},
+            async: true,
+            dataType: "json",
+            success:
+            function () {                 
+              $('#myModal').modal('hide');
+              show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
+              titulo.value="";
+              $('.sumernote').code("");
+               inicio();},
+            error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
+          });
+        }
+      }
+      if($('#Selectapartametos').attr('class')=="active"){
+        console.log("Selectapartametos")
+        if($('#aptos1').attr('class')=="active"){
+          console.log("aptos1")
+          if($('#Apartamentos').val()!=null){
+            console.log("apartamentos")
+            $.ajax({
+              type: "POST",
+              url: "models/cartelera.php",
+              data: {id:11, para:titulo.value,contenido:$('.summernote').code(),apartamentos:$('#Apartamentos').val()},
+              async: true,
+              dataType: "json",
+              success:
+              function () {                 
+                $('#myModal').modal('hide');
+                show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
+                titulo.value="";
+                 $('.sumernote').code("");
+                 inicio();},
+              error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
             });
-            function cargarcartelera(){
-                     $('#contenedor2').html("");
+          }
+          else{
+            $('#myModal').modal('hide');
+            show({message: {text: "Debe elejir una restriccion"}, type: 'danger'});
+          }
+        }
+        if($('#aptos2').attr('class')=="active"){
+          console.log("aptos1")
+          if($('#Apartamentos').val()!=null){
+            console.log("apartamentos")
+            $.ajax({
+              type: "POST",
+              url: "models/cartelera.php",
+              data: {id:11, para:titulo.value,contenido:$('.summernote').code(),apartamentos:$('#Apartamentos2').val()},
+              async: true,
+              dataType: "json",
+              success:
+              function () {                 
+                $('#myModal').modal('hide');
+                show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
+                titulo.value="";
+                 $('.sumernote').code("");
+                 inicio();},
+              error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
+            });
+          }
+          else{
+            $('#myModal').modal('hide');
+            show({message: {text: "Debe elejir una restriccion"}, type: 'danger'});
+          }
+        }
+      }
+    }
+    else{
+      $('#myModal').modal('hide');
+      show({message: {text: "Debe rellenar titulo y contenido"}, type: 'danger'});
+      }
+  });
+  function cargarcartelera(){
+   $('#contenedor2').html("");
 
                   $.ajax
                     ({

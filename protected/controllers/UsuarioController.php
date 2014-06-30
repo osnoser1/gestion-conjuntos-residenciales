@@ -136,6 +136,21 @@ class UsuarioController extends GxController {
             echo $this->salida(false, "aviso", "Error en el servidor");
     }
 
+    public function actionModificarPerfil() {
+        session_start();
+        if (isset($_SESSION["ID"]) && isset($_POST['datos'])) {
+            $datosmodificados = $_POST['datos'];
+            $identificador = $_SESSION["ID"];
+            $u = Usuario::model()->findByAttributes(["ID" => $identificador, "Correo" => $datosmodificados["Correo"]]);
+            $u->setAttributes(["Correo" => $datosmodificados["Nuevo"]]);
+            if (($bandera = $u->update()))
+                echo $this->salida(true, "aviso", "Correo Modificado Exitosamente");
+            else
+                echo $this->salida(false, "aviso", "Error ingrese un correo");
+        } else
+            echo $this->salida(false, "aviso", "Error en el servidor");
+    }
+
     public function actionCreate() {
         $model = new Usuario;
 

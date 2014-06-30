@@ -12,8 +12,8 @@
             Cedula: <input type="text"  pattern="^[0-9]+$" name="cedula" required value="" class="form-control" ng-model="datos.nuevoUsuario.Cedula"/><br>
             Nombre: <input type="text" pattern="^[\A-Za-záéíóúñ ]+$" name="nombre" required value="" class="form-control" ng-model="datos.nuevoUsuario.Nombre"/><br>
             Apellido: <input type="text" pattern="^[\A-Za-záéíóúñ ]+$" name="apellido" required value="" class="form-control" ng-model="datos.nuevoUsuario.Apellido"/><br>
-            Correo: <input type="text" pattern="^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$" name="correo" required value="" class="form-control" ng-model="datos.nuevoUsuario.Correo"/><br>
-            Contraseña: <input type="password" pattern="/(^[.]{6,30}.+$)/" name="contrasena" required class="form-control" ng-model="datos.nuevoUsuario.Contrasena"/><br>
+            Correo: <input type="text" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" name="correo" required value="" class="form-control" ng-model="datos.nuevoUsuario.Correo"/><br>
+            Contraseña: <input type="password" name="contrasena" required class="form-control" ng-model="datos.nuevoUsuario.Contrasena"/><br>
 
         </div>
         <div class="row form-group col-md-12 col-sm-12 col-xs-12 col-lg-12 list-group">
@@ -45,11 +45,11 @@
             <small class="requerido" ng-show="datos.error"> Debe indicar un apartamento</small>
             <div class="col-lg-10">
                 <select ng-change="obtenerPisos()" ng-model="datos.nuevoUsuario.idEdificio" name="edificio" ng-options="edificio.idEdificio as edificio.Nombre for edificio in datos.edificios" class="form-control" data-style="form-control">
-                <option value="">-- Seleccione torre --</option>
-            </select>
+                    <option value="">-- Seleccione torre --</option>
+                </select>
             </div>
         </div>
-        
+
         <div class="form-group" ng-show="datos.nuevoUsuario.TipoUsuario == 1">
             <label class="col-lg-2 control-label">Piso</label>
             <div class="col-lg-10">
