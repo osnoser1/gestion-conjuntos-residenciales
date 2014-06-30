@@ -36,6 +36,7 @@ switch($id)
 		break;
 	case 8:
 		seleccionaraptosdeedif();
+		break;
 		case 9:
 		restringir();
 		break;
@@ -91,9 +92,9 @@ function IngresarPorpiso(){
 	$j=1;	
 	for ($i=0; $i<sizeof($piso); $i++) { 
 		$idpiso=$piso[$i];
-		$tupla="SELECT idApartamento FROM apartamento where idPiso='$idpiso' and idEdificio='$edificio'";
-		$resultado = $mysqli->query($tupla);		
-		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){			
+		$tupla="SELECT idApartamento FROM apartamento where Piso='$idpiso' and idEdificio='$edificio'";
+		$resultado=$mysqli->query($tupla);		
+		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){			
 			$objeto[$j]=$db_resultado['idApartamento'];
 			$j++;	
 		}	
@@ -121,8 +122,9 @@ function seleccionaraptosdeedif(){
 			$i=0;
 			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 			{
-				$objeto[$i]['idApartamento']=$db_resultado['idApartamento'];
-				$objeto[$i]['Nombre']=$db_resultado['Nombre'];					
+				
+				$objeto[$i]['Nombre']=$db_resultado['Nombre'];	
+				$objeto[$i]['idApartamento']=$db_resultado['idApartamento'];				
 				$i++;	
 			}		
 			$mysqli->close();

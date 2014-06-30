@@ -13,6 +13,7 @@ function eventos(){
        
         	$('.summernote').code(msg[0].footer);
         	Titulo.value=msg[0].titulo;
+        	
       },
       error:
       function (msg) {alert( msg +"No se pudo realizar la conexion");}
