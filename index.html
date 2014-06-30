@@ -47,6 +47,15 @@
         <link rel='stylesheet' href='assets/fullcalendar/fullcalendar.css' /> <!--Principio del Script del calendario-->
         <script src='assets/fullcalendar/moment.min.js'></script>
         <script src='assets/fullcalendar/fullcalendar.js'></script><!--Fin del Script del calendario-->
+
+
+        <!--principio del script del multiselect -->
+        <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css">
+        <link rel="stylesheet" href="css/prettify.css" type="text/css">
+        <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+        <script type="text/javascript" src="js/prettify.js"></script>
+         <!--fin del script del multiselect -->
+
     </head>
     <body ng-controller="PrincipalCtrl">
         <section ui-view>
@@ -67,14 +76,9 @@
             </div>
 
         </div> 
-         <script>
-          //  var n = noty({layout: 'bottom', type: 'success', text: 'Nombre base de datos: <b>"conjunto_residencial"</b>, usuario: <b>"root"</b>, clave: <b>""</b><br>Por favor revisar el archivo <b>"Orden de importación.txt"</b> dentro de la carpeta db.'});
-             var url = location.pathname + "yii.php?r=";
-            console.log(url);
 
-        </script>
         <script>
-             //var n = noty({layout: 'bottom', type: 'success', text: 'Nombre base de datos: <b>"conjunto_residencial"</b>, usuario: <b>"root"</b>, clave: <b>""</b><br>Por favor revisar el archivo <b>"Orden de importación.txt"</b> dentro de la carpeta db.'});
+             var n = noty({layout: 'bottom', type: 'success', text: 'Nombre base de datos: <b>"conjunto_residencial"</b>, usuario: <b>"root"</b>, clave: <b>""</b><br>Por favor revisar el archivo <b>"Orden de importación.txt"</b> dentro de la carpeta db.'});
              var url = location.pathname + "yii.php?r=";
 
          </script>
