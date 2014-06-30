@@ -54,6 +54,8 @@ else{
 		echo call_user_func($input->funcion);
 	}
 }
+// $nueva=a:8:{i:0;s:1:"2";i:1;s:1:"4";i:2;s:1:"6";i:3;s:1:"8";i:4;s:2:"10";i:5;s:2:"12";i:6;s:2:"14";i:7;s:2:"19";};
+// $nueva=unserialize($nueva);
 function restringir(){
 	session_start();
 		echo json_encode($_SESSION["TipoUsuario"]);
@@ -61,7 +63,7 @@ function restringir(){
 }
 function RestringirdeEdificio(){
 $mysqli = new mysqli(Host, User, Pass, BasedeDatos);
-
+		$objeto=array();
 		$edificio=$_REQUEST['edificios'];
 		$tupla="";
 		
@@ -80,11 +82,7 @@ $mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 				$j++;	
 			}	
 		}
-		INSERT post 
-		$objeto[0]=$j;
-		$objeto=array_unique($objeto);
 		echo json_encode($objeto);
-
 }
 function seleccionaraptosdeedif(){
 	$mysqli = new mysqli(Host, User, "", BasedeDatos);
@@ -195,13 +193,33 @@ function publicaciones(){
 	function Ingresar(){
 		
 		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+		$objeto=array();
+		$edificio=$_REQUEST['edificios'];
+		$tupla="";
+		
+		$t=0;
+		$j=0;
+		
+		for ($i=0; $i<sizeof($edificio); $i++) { 
+			$id=$edificio[$i];
+			$tupla="SELECT idApartamento FROM apartamento where idEdificio=$id";
+			$resultado = $mysqli->query($tupla);
+			
+			
+			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+			{			
+				$objeto[$j]=$db_resultado['idApartamento'];
+				$j++;	
+			}	
+		} 
+		$objeto=serialize($objeto);
 		session_start();
 		$nombre=$_SESSION["Nombre"];
 		$titulo=$_REQUEST['para'];
 		$contenido=$_REQUEST['contenido'];
 		$fecha=date("Y-m-d H:i:s");
 		$salida="todo esta bien";
-		$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`, `usuario`)  VALUES ('$contenido', '$titulo',  '$fecha', '$nombre')";
+		$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`, `usuario`, `aptos`)  VALUES ('$contenido', '$titulo',  '$fecha', '$nombre', '$objeto')";
 		$resultado = $mysqli->query($tupla) or $salida=$mysqli->error;
 		$mysqli->close();
 		echo json_encode($salida);
