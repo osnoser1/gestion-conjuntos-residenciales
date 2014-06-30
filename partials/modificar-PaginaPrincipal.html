@@ -1,5 +1,8 @@
 <link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
-
+<script type="text/javascript" src="js/web/modificarpaginaprincipal.js"></script>
+<script type="text/javascript">
+	eventos();
+</script>
 <script type="text/javascript">
 $(function() {
   $('.summernote').summernote({
@@ -7,19 +10,31 @@ $(function() {
     lang: 'es-ES'
   });  
 });
+
 </script>
 
 <h1>Modificar Pagina Principal</h1>
 
+<div id="alertaTitulo">
+      <div class="alert alert-info">
+        Cambiar Titulo
+      </div>
+</div>
 
+ <label>Titulo</label><input type="text" id="Titulo" class="form-control" placeholder="Titulo">
+ <button class="btn btn-primary" id="actualizartitulo"  style="position:absolute; right: 15px;">Actualizar Titulo</button>
+
+ <br><br>
 <div id="alerta">
       <div class="alert alert-info">
         Cambiar imagen de fondo
       </div>
 </div>
+<img src="models/consultas-crearseccion.php?id=1" class="img-responsive img-thumbnail" />
 
-
-
+<input id="archivos"  name="archivos[]" type="file"  />
+<button class="btn btn-primary" id="actualizarimagen"  style="position:absolute; right: 15px;">Actualizar imagen</button>
+ <br><br>
 
 <div id="alerta">
       <div class="alert alert-info">
@@ -28,4 +43,5 @@ $(function() {
 </div>
 
  <textarea  class="summernote form-control" rows="10" cols="50" placeholder="Descripcion del footer" >
-      </textarea>
+ </textarea>
+ <button class="btn btn-primary" id="actualizarfootter" style="position:absolute; right: 15px;" >Actualiza Footer</button>
