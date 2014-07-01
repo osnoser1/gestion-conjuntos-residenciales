@@ -17,7 +17,7 @@ pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $ht
     $scope.comprobarLogin();
     $scope.cargando = false;
     
-         $.ajax
+        $.ajax
         ({
             type: "POST",
             url: "models/consultas-crearMensaje.php",
@@ -29,6 +29,7 @@ pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $ht
             {
                 $scope.mensajes=msg[0].m;
                 $scope.datos=msg;
+                console.log("estoy aqui");
             },
          error:
             function(msg) {
@@ -47,7 +48,7 @@ pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $ht
             function(msg)
             {
                 $scope.nombre=msg;
-                $
+                console.log("estoy aqui2");
             },
          error:
             function(msg) {
@@ -154,55 +155,7 @@ pruebaControllers.controller('PanelCtrl', function($scope, $http, $location) {
 
 });
 
-pruebaControllers.controller('buzonentradaCtrl', function($scope, $http, $location) {
-     $.ajax
-        ({
-            type: "POST",
-            url: "models/consultas-crearMensaje.php",
-            data: {id:16},
-            async: true,
-            dataType: "json",
-            success:
-            function(msg)
-            {
-                $scope.mensajes=msg[0].m;
-                $scope.datos=msg;
-                console.log("actualizado barra")
-            },
-         error:
-            function(msg) {
-                console.log(msg + "No se pudo realizar la conexion en controller linea 36");
-            }
-        });
-
-
-});
-pruebaControllers.controller('mensajesenviadostrl', function($scope, $http, $location) {
-     $.ajax
-        ({
-            type: "POST",
-            url: "models/consultas-crearMensaje.php",
-            data: {id:16},
-            async: true,
-            dataType: "json",
-            success:
-            function(msg)
-            {
-                $scope.mensajes=msg[0].m;
-                $scope.datos=msg;
-                console.log("actualizado barra")
-            },
-         error:
-            function(msg) {
-                console.log(msg + "No se pudo realizar la conexion en controller linea 36");
-            }
-        });
-
-
-});
-
-
-pruebaControllers.controller('PanelHeaderCtrl', function($scope, $http) {
+pruebaControllers.controller('PanelHeaderCtrl', function(Auth, $state, $scope, $http, $location, $sce, $rootScope) {
     $scope.header = "partials/panel-header.html";
     $scope.header = "partials/panel-header.html";
     $.ajax
@@ -217,7 +170,7 @@ pruebaControllers.controller('PanelHeaderCtrl', function($scope, $http) {
             {
                 $scope.mensajes=msg[0].m;
                 $scope.datos=msg;
-                console.log("actualizado barra")
+                console.log("actualizado barra3")
             },
          error:
             function(msg) {
@@ -225,7 +178,34 @@ pruebaControllers.controller('PanelHeaderCtrl', function($scope, $http) {
             }
         });
 
+        $(document).on('click', '.correo', (function(e) {
+               var  idmensaje=$(this).attr('name');
+              console.log("idmensaje"+id);
+                $.ajax
+                ({
+                    type: "POST",
+                    url: "models/consultas-crearMensaje.php",
+                    data: {id:23, ID:idmensaje},
+                    async: true,
+                    dataType: "json",
+                    success:
+                    function(msg)
+                    {
+                        de.innerHTML=msg[0].de;
+                         titulo2.innerHTML=msg[0].asunto;
+                         fecha1.innerHTML=msg[0].fecha;
+                        descripcion.innerHTML=msg[0].descripcion;
+                    },
+                 error:
+                    function(msg) {
+                        console.log(msg + "No se pudo realizar la conexion en controller linea 36");
+                    }
+                });
+
+                $('#vercorreo').modal('show');
+         }));
     $scope.CrearMensaje = function(datos) {
+
         /*console.log($('.summernote').code());*/
         console.log(datos.mensaje);
         if (para.value != "" && Titulo.value != "" && $('.summernote').code() != "") {
