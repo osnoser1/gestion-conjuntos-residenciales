@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Modificar Apartamento</title>
+
+    <form>
+        <div class="row">
+
+            <div class="form-group col-sm-10">
+                NombreTipo: <input type="text" name="nombre" value="" class="form-control" ng-model="ApartamentoModificado.Nombre"/><br>
+                Tamano: <input type="text" name="Tamano" value="" class="form-control" ng-model="ApartamentoModificado.Tamano"/><br>
+                numHab: <input type="text" name="numHab" value="" class="form-control" ng-model="ApartamentoModificado.numHab"/>
+                numBanos: <input type="text" name="numBanos" value="" class="form-control" ng-model="ApartamentoModificado.numBanos"/><br>
+                Sala: <input type="text" name="Sala" value="" class="form-control" ng-model="ApartamentoModificado.Sala"/><br>
+                Cocina: <input type="text" name="Cocina" value="" class="form-control" ng-model="ApartamentoModificado.Cocina"/><br>
+                Comedor: <input type="text" name="Comedor" value="" class="form-control" ng-model="ApartamentoModificado.Comedor"/><br>
+                numEst: <input type="text" name="numEst" value="" class="form-control" ng-model="ApartamentoModificado.numEst"/><br>
+                Maletero: <input type="text" name="Maletero" value="" class="form-control" ng-model="ApartamentoModificado.Maletero"/><br>
+                Lavandeto: <input type="text" name="Lavadero" value="" class="form-control" ng-model="ApartamentoModificado.Lavadero"/><br>
+                Casillero: <input type="text" name="Casillero" value="" class="form-control" ng-model="ApartamentoModificado.Casillero"/><br>
+                Alicuota: <input type="text" name="Alicuota" value="" class="form-control" ng-model="ApartamentoModificado.Alicuota"/><br>
+            </div>
+        </div>
+        <table class="botones">
+            <tr>
+                <td class="celdabotones">
+                    <input type="submit" value="Aceptar" class="css_buttonaceptar" ng-click="usuarioModificar(usuarioModificado)" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</html>
