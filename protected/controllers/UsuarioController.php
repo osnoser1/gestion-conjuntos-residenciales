@@ -32,6 +32,14 @@ class UsuarioController extends GxController {
         echo $this->salida(true, $salida);
     }
 
+    public function actionDetalleConApartamento() {
+        if (isset($_POST['datos'])) {
+            $idUsuario = $_POST['datos'];
+            $salida = Yii::app()->db->createCommand('SELECT usuario.*, apartamento.idEdificio, apartamento.Piso,apartamento_usuario.idapartamento, apartamento.Nombre as NombreApartamento, edificio.Nombre as NombreEdificio FROM usuario LEFT JOIN apartamento_usuario ON usuario.ID = apartamento_usuario.idusuario LEFT JOIN apartamento ON apartamento.idApartamento = apartamento_usuario.idapartamento LEFT JOIN edificio ON edificio.idEdificio = apartamento.idEdificio LEFT JOIN telefono ON usuario.ID = telefono.IDUsuario WHERE usuario.ID = ' . $idUsuario . '')->queryAll();
+            echo $this->salida(true, $salida);
+        }
+    }
+
     public function actionListarConApartamento() {
         $salida = Yii::app()->db->createCommand('SELECT usuario.*, apartamento.idEdificio, apartamento.Piso,apartamento_usuario.idapartamento, apartamento.Nombre as NombreApartamento, edificio.Nombre as NombreEdificio FROM usuario LEFT JOIN apartamento_usuario ON usuario.ID = apartamento_usuario.idusuario LEFT JOIN apartamento ON apartamento.idApartamento = apartamento_usuario.idapartamento LEFT JOIN edificio ON edificio.idEdificio = apartamento.idEdificio ORDER BY usuario.ID ASC')->queryAll();
         echo $this->salida(true, 'usuarios', $salida);
@@ -43,7 +51,9 @@ class UsuarioController extends GxController {
             $u = Usuario::model()->find("ID=$idUsuario");
             $array['datos'] = $u->getAttributes();
             $array['datos']["telefonos"] = $this->modelToArray($u->telefonos);
-//            var_dump($array);
+            $salida = Yii::app()->db->createCommand('SELECT apartamento.idEdificio, apartamento.Piso,apartamento_usuario.idapartamento, apartamento.Nombre as NombreApartamento, edificio.Nombre as NombreEdificio FROM usuario LEFT JOIN apartamento_usuario ON usuario.ID = apartamento_usuario.idusuario LEFT JOIN apartamento ON apartamento.idApartamento = apartamento_usuario.idapartamento LEFT JOIN edificio ON edificio.idEdificio = apartamento.idEdificio WHERE usuario.ID = ' . $idUsuario . '')->queryAll();
+            //var_dump($this->modelToArray($u->telefonos));
+            $array['datos']["apartamento"] = $salida;
             echo $this->salida(true, $array);
         } else {
             echo $this->salida(false, "aviso", "Error en el servidor");
@@ -141,12 +151,37 @@ class UsuarioController extends GxController {
         if (isset($_SESSION["ID"]) && isset($_POST['datos'])) {
             $datosmodificados = $_POST['datos'];
             $identificador = $_SESSION["ID"];
-            $u = Usuario::model()->findByAttributes(["ID" => $identificador, "Correo" => $datosmodificados["Correo"]]);
-            $u->setAttributes(["Correo" => $datosmodificados["Nuevo"]]);
-            if (($bandera = $u->update()))
-                echo $this->salida(true, "aviso", "Correo Modificado Exitosamente");
+            $uCorreo = Usuario::model()->findByAttributes(["Correo" => $datosmodificados["Correo"]]);
+            if ($uCorreo != null && $uCorreo->ID != $identificador) {
+                echo $this->salida(false, "aviso", "El correo ya existe");
+                return;
+            }
+            $u = Usuario::model()->findByPk($identificador);
+            if ($u == null) {
+                echo $this->salida(false, "aviso", "El usuario no existe");
+                return;
+            }
+            //$u->setAttributes($datosmodificados);
+            $u->setAttributes(["Correo" => $datosmodificados["Correo"]]);
+            foreach ($datosmodificados["telefonos"] as $value) {
+                $tel = null;
+                if (isset($value["IDTelefono"]))
+                    $tel = Telefono::model()->findByPk($value["IDTelefono"]);
+                if ($tel != null) {
+                    $tel->setAttributes($value);
+                    if (!($bandera2 = $tel->update()))
+                        echo $this->salida(true, "aviso", "Error al guardar el telefono");
+                }else {
+                    $modelTelefono = new telefono;
+                    $value['IDUsuario'] = $u->ID;
+                    $modelTelefono->setAttributes($value);
+                    $modelTelefono->insert();
+                }
+            }
+            if ($bandera = $u->update())
+                echo $this->salida(true, "aviso", "Perfil modificado exitosamente");
             else
-                echo $this->salida(false, "aviso", "Error ingrese un correo");
+                echo $this->salida(false, "aviso", "Error actualizando perfil");
         } else
             echo $this->salida(false, "aviso", "Error en el servidor");
     }

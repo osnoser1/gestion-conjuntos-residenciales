@@ -37,6 +37,25 @@ $scope.comprobarLogin();
             }
         });
 
+         $.ajax
+        ({
+            type: "POST",
+            url: "models/consultas-crearMensaje.php",
+            data: {id:22},
+            async: true,
+            dataType: "json",
+            success:
+            function(msg)
+            {
+                $scope.nombre=msg;
+                $
+            },
+         error:
+            function(msg) {
+                alert(msg + "No se pudo realizar la conexion");
+            }
+        });
+
     $scope.error = function(data, status, headers, config) {
         $rootScope.loading = false;
         $rootScope.myModalAccept = false;

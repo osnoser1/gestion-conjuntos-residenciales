@@ -3,7 +3,7 @@
 
 var myApp = angular.module('myApp');
 
-myApp.controllerProvider.register('UsuarioPerfilCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope, $location){
+myApp.controllerProvider.register('UsuarioPerfilCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope, $location) {
     console.log("UsuarioPerfilCtrl");
     $scope.usuario = {};
 
@@ -12,7 +12,8 @@ myApp.controllerProvider.register('UsuarioPerfilCtrl', function($scope, $http, $
     $scope.mostrarDatos = function(data) {
         $http.post(url + 'usuario/detalle', $.param({datos: data}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
         ).success(function(data, status, headers, config) {
-            console.log(data);
+            console.log("Data: " + data);
+            console.dir(data);
             if (typeof data !== 'object' || !data.respuesta) {
                 $scope.error(data, status, headers, config);
             }
@@ -23,7 +24,7 @@ myApp.controllerProvider.register('UsuarioPerfilCtrl', function($scope, $http, $
 
     $http.get(url + 'usuario/usuarioLogueado').success(function(data) {
         console.log(data);
-        if(typeof data !== 'undefined'){
+        if (typeof data !== 'undefined') {
             $scope.mostrarDatos(data);
         }
     });

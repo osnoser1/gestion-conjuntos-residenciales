@@ -13,6 +13,7 @@ function eventos() {
 
                             $('.summernote').code(msg[0].footer);
                             Titulo.value = msg[0].titulo;
+
                         },
                 error:
                         function(msg) {
@@ -95,8 +96,23 @@ function eventos() {
     }));
 }
 
+'use strict';
+/* Controllers */
+
 var myApp = angular.module('myApp');
 
 myApp.controllerProvider.register('modificarpaginaprincipal', function($scope, $http, $q, $filter, $timeout, $rootScope, $location) {
-    console.log("1");
+    console.log("DTG");
+    $scope.DatosPreview = {};
+    $scope.abrirPreview = function() {
+        console.log("footer:");
+        //console.log($('.summernote').code());
+        $rootScope.DatosPreview = {};
+        $rootScope.DatosPreview.footer = $('.summernote').code();
+        $rootScope.DatosPreview.titulo = Titulo.value;
+        console.dir($rootScope.DatosPreview);
+
+        $location.path("web/pagina-principal-preview");
+    }
+
 });

@@ -46,7 +46,7 @@
                     <li><a href="#/panel/buzon-entrada">Ver Buzon de entrada  <span class="badge" ng-model="mensajes">{{mensajes}}</span></a></li>
                 </ul>
             </li>
-            <li class="dropdown alerts-dropdown">
+<!--             <li class="dropdown alerts-dropdown">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Alerts <span class="badge">3</span> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="#">Default <span class="label label-default">Default</span></a></li>
@@ -58,13 +58,13 @@
                     <li class="divider"></li>
                     <li><a href="#">View All</a></li>
                 </ul>
-            </li>
+            </li> -->
             <li class="dropdown user-dropdown">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" ng-model="nombre"><i class="fa fa-user"></i> {{nombre}} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#/panel/modificar-perfil"><i class="fa fa-user"></i> Perfil</a></li>
-                    <li><a href="#/panel/buzon-entrada"><i class="fa fa-envelope"></i> Bandeja de entrada <span class="badge">7</span></a></li>
-                    <li><a href="#/panel/usuario-configuracion"><i class="fa fa-gear"></i> Configuración</a></li>
+                    <!-- <li><a href="#/panel/usuario-listado"><i class="fa fa-user"></i> Perfil</a></li> -->
+                    <li><a href="#/panel/buzon-entrada"><i class="fa fa-envelope"></i> Bandeja de entrada <span class="badge" ng-model="mensajes">{{mensajes}}</span></a></li>
+                    <!-- <li><a href="#/panel/usuario-configuracion"><i class="fa fa-gear"></i> Configuración</a></li> -->
                     <li class="divider"></li>
                     <li><a href="" ng-click="logout()"><i class="fa fa-power-off"></i> Cerrar sesión</a></li>
                 </ul>

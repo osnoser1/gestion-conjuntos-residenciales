@@ -74,6 +74,9 @@
 		case 21: 
 			 obtenerAdministradores();
 			 break;
+		case 22:
+			obtenernombredelusuariologueado();
+			break;
 		default;
 	}
 }
@@ -84,6 +87,10 @@ else{
 	}
 }
 /*echo call_user_func(array($_POST['funcion']));*/
+	function obtenernombredelusuariologueado(){
+		session_start();
+		echo json_encode($_SESSION["Nombre"]);
+	}
 	function obtenerAdministradores(){
 		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$tupla="SELECT Correo FROM usuario  WHERE  TipoUsuario='2'";

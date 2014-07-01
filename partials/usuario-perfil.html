@@ -17,8 +17,25 @@
                 <div class="col-lg-10"><p class="form-control-static"> {{usuario.Correo}}</p></div>
             </div>
             <div class="form-group">
-                <label class="col-lg-2 control-label element">Telefono:</label><p ng-show="usuario.telefonos.length == 0">Ninguno</p>
-                <div class="col-lg-10"><p class="form-control-static" ng-repeat="tel in usuario.telefonos">{{tel.Telefono}}</p></div>
+                <label class="col-lg-2 control-label element">Telefono:</label>
+                <div class="col-lg-10">
+                    <p class="form-control-static" ng-show="usuario.telefonos.length == 0">Ninguno</p>
+                    <p class="form-control-static" ng-repeat="tel in usuario.telefonos">{{tel.Telefono}}</p>
+                </div>
+            </div>
+            <div ng-show="usuario.TipoUsuario == 1">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label element">Edificio:</label>
+                    <div class="col-lg-10"><p class="form-control-static"> {{usuario.apartamento[0].NombreEdificio}}</p></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label element">Piso:</label>
+                    <div class="col-lg-10"><p class="form-control-static"> {{usuario.apartamento[0].Piso}}</p></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label element">Apartamento:</label>
+                    <div class="col-lg-10"><p class="form-control-static"> {{usuario.apartamento[0].NombreApartamento}}</p></div>
+                </div>
             </div>
         </h4></form>
 </div>
