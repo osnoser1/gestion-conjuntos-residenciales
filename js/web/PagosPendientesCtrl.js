@@ -88,24 +88,24 @@
     $rootScope.loading = true;
     $.ajax
     ({
-        type: "POST",
-        url: "models/pagos-consultas.php",
-        data: {id:3, idPago: pago.id, estado: 3},
-        async: false,
-        success:
-        function (msg) 
-        {       
-         show({message: {text: "Pago rechazado"}, type: 'success'});
-         console.dir(pago);
-         $scope.datos.pagos.remove(pago);
-         $rootScope.loading = false;
-     },
-     error:
-     function (msg) {
-        show({message: {text: "Error rechazando pago "}, type: 'danger'});
-        $rootScope.loading = false;
-    }
-});
+      type: "POST",
+      url: "models/pagos-consultas.php",
+      data: {id:3, idPago: pago.id, estado: 3},
+      async: false,
+      success:
+      function (msg) 
+      {       
+       show({message: {text: "Pago rechazado"}, type: 'success'});
+       console.dir(pago);
+       $scope.datos.pagos.remove(pago);
+       $rootScope.loading = false;
+      },
+       error:
+       function (msg) {
+          show({message: {text: "Error rechazando pago "}, type: 'danger'});
+          $rootScope.loading = false;
+        }
+    });
     $('#myModal').modal('hide');
 };
 
@@ -113,11 +113,12 @@ $scope.listarPendientes = function(){
 
     var permiso = 1;
     var idusuario = "1";
+    
     $.ajax
     ({
         type: "POST",
         url: "models/pagos-consultas.php",
-        data: {id: 2, permiso: permiso, idusuario: idusuario},
+        data: {id: 2},
         async: false,
         dataType: "json",
         success:
@@ -135,6 +136,7 @@ $scope.listarPendientes = function(){
             console.dir(msg);
         }
     });
+
 };
 $scope.listarPendientes();
 

@@ -7,15 +7,14 @@ pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $ht
 
     
     $scope.comprobarLogin = function(){
-        console.log("Comprobando");
         $http.get(url + 'usuario/usuarioLogueado').success(function(data) {
-            console.log('data: ' + data);
+            console.log('IDUsuario logeado: ' + data);
             if((typeof data === 'undefined' || data === "") && $location.path() !== "/web"){
                 $location.path("web/login");
             }
         });
     }
-$scope.comprobarLogin();
+    $scope.comprobarLogin();
     $scope.cargando = false;
     
          $.ajax
