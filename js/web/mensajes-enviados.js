@@ -89,7 +89,7 @@ function eventos(){
 		        success:
 		        function (msg) 
 		        {       
-					$('#myModal').modal('hide');
+					$('#eliminarmensaje').modal('hide');
 					if(msg=="true"){
 						$('#mensajeabierto').fadeOut(function(){
 							$('#mensajes').fadeIn();
@@ -109,7 +109,7 @@ function eventos(){
 	        	id=$(this).attr('name');
 	        	idMensajeEliminar=id;
 	        	//console.log("click en boton" + id);
-	        	$('#myModal').modal('show');
+	        	$('#eliminarmensaje').modal('show');
 
 	        }));
 		 	var idMensajeEliminar="";

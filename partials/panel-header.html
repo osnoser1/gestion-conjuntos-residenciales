@@ -1,3 +1,4 @@
+<script type="text/javascript" src="js/web/controllers.js"></script>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="PanelHeaderCtrl">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -19,13 +20,13 @@
                     <li class="dropdown-header" ng-model="mensajes">{{mensajes}} Nuevos Mensajes</li>
                     <li class="divider"></li>
                     <li class="message-preview" ng-repeat="element in datos">
-                        <a href="">
+                        <a  class="correo" name="{{element.idMensaje}}">
                             <span class="name">{{element.Nombre}}</span>
                             <span class="message">{{element.descripcion}}</span>
                             <span class="time"><i class="fa fa-clock-o"></i>{{element.fecha}}</span>
                         </a>
                     <li class="divider"></li>
-            </li>
+                    </li>
 
             <!-- <li class="message-preview">
                 <a href="">
@@ -72,3 +73,31 @@
         </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
+
+<div class="modal fade" id="vercorreo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Ver Correo</h4>
+      </div>
+      <div class="modal-body">
+            <h6>De: <label id="de"></label></h6>
+            <h6>Titulo: <label id="titulo2"></label></h6>
+            <h6>Fecha: <label id="fecha1"></label> </h6>            
+            <form role="form">
+                <div class="form-control" style="height:300px; overflow: auto; " placeholder="Descripcion" id="descripcion">                
+                </div>
+            <form>
+
+            <br>
+            
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="modificar">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>

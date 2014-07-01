@@ -77,6 +77,10 @@
 		case 22:
 			obtenernombredelusuariologueado();
 			break;
+		case 23:
+			obtenermensajesEspecifico();
+			break;
+
 		default;
 	}
 }
@@ -87,6 +91,32 @@ else{
 	}
 }
 /*echo call_user_func(array($_POST['funcion']));*/
+	function obtenermensajesEspecifico(){
+		session_start();
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);		
+		$idMensaje= $_REQUEST["ID"];								
+		$tupla="SELECT * FROM mensaje WHERE idMensaje='$idMensaje'";
+		$resultado = $mysqli->query($tupla);
+		$objeto[0]['m']=$resultado->num_rows;
+		$i=0;
+		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		{			
+			$objeto[$i]['asunto']=$db_resultado['asunto'];
+			$objeto[$i]['descripcion']=$db_resultado['descripcion'];	
+			$objeto[$i]['idMensaje']=$db_resultado['idMensaje'];
+			$objeto[$i]['fecha']=$db_resultado['fecha'];
+			$date= new DateTime($objeto[$i]['fecha']);
+			$objeto[$i]['fecha']=$date->format('d-m-y H:i:s');
+			$objeto[$i]['leido']=$db_resultado['leido'];
+			$objeto[$i]['de']=$db_resultado['de'];
+			$i++;	
+		}		
+		$tupla="UPDATE mensaje SET leido='1' WHERE idMensaje='$idMensaje'";
+		$resultado = $mysqli->query($tupla);
+
+		$mysqli->close();
+		echo json_encode($objeto);
+	}
 	function obtenernombredelusuariologueado(){
 		session_start();
 		echo json_encode($_SESSION["Nombre"]);
@@ -302,7 +332,7 @@ else{
 		echo json_encode($objeto);
 	}
 	function borrarMensajeEnviado(){
-		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$idMensaje=$_REQUEST['idMensaje'];
 		$tupla="DELETE FROM mensajesenviados WHERE idMensaje='$idMensaje'";
 		$resultado = $mysqli->query($tupla);
@@ -312,7 +342,7 @@ else{
 	function obtenerMensajeEnviado(){
 		session_start();
 		$correo=$_SESSION["Correo"];
-		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$idMensaje=$_REQUEST['idMensaje'];
 		$tupla="SELECT * FROM mensajesenviados WHERE de='$correo'";
 		$resultado = $mysqli->query($tupla);
@@ -334,7 +364,7 @@ else{
 		echo json_encode($objeto);
 	}
 	function obtenertodoslosmensajesenviados(){
-		$mysqli = new mysqli(Host, User, "", BasedeDatos);		
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);	
 		$tupla="SELECT * FROM mensajesenviados";
 		$resultado = $mysqli->query($tupla);
 		$objeto[0]['m']=$resultado->num_rows;	
@@ -354,7 +384,7 @@ else{
 		echo json_encode($objeto);
 	}
 	function marcarnoleido(){
-		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$idMensaje=$_REQUEST['idMensaje'];
 		$tupla="UPDATE mensaje SET leido='0' WHERE idMensaje='$idMensaje'";
 		$resultado = $mysqli->query($tupla);
@@ -362,7 +392,7 @@ else{
 		echo json_encode("true");
 	}
 	function borrarMensaje(){
-		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$idMensaje=$_REQUEST['idMensaje'];
 		$tupla="DELETE FROM mensaje WHERE idMensaje='$idMensaje'";
 		$resultado = $mysqli->query($tupla);
@@ -379,7 +409,7 @@ else{
 		echo json_encode($objeto);
 	}
 	function leermensaje(){
-		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$idMensaje=$_REQUEST['idMensaje'];
 		$tupla="SELECT * FROM mensaje WHERE idMensaje='$idMensaje'";
 		$resultado = $mysqli->query($tupla);
@@ -403,7 +433,7 @@ else{
 	function obtenermensaje(){
 		session_start();
 		$correo=$_SESSION["Correo"];         
-		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$idUsuario= $_SESSION["ID"];		
 		$tamaño=5;
 		$tupla1="SELECT Count(*) as cantidad FROM mensaje WHERE para='$correo'";
@@ -437,7 +467,7 @@ else{
 	function enviarmensaje(){
 		session_start();    
 		date_default_timezone_set('America/Caracas');
-		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$para=explode(",", $_REQUEST['para']);
 		$titulo=$_REQUEST['titulo'];
 		$mensaje=$_REQUEST['mensaje'];
@@ -456,7 +486,7 @@ else{
 		echo json_encode("true");
 	}
 	function ObtenerUsuario(){
-		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$idUsuario=$_REQUEST['idUsuario'];		
 		$tupla="SELECT Correo  FROM  usuario  where ID='$idUsuario'";
 		$resultado = $mysqli->query($tupla);
@@ -469,7 +499,7 @@ else{
 		echo json_encode($objeto);
 	}
 	function ObtenerApartamentosdePisosdeunEdificio(){
-			$mysqli = new mysqli(Host, User, "", BasedeDatos);
+			$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 			$idPiso=$_REQUEST['idPiso'];
 			$idEdificio=$_REQUEST['idEdificio'];
 			$tupla="SELECT  apartamento.idApartamento, apartamento.idUsuario, apartamento.Nombre  FROM  apartamento INNER JOIN usuario ON apartamento.idUsuario=usuario.ID where  apartamento.idEdificio='$idEdificio' and apartamento.Piso='$idPiso'";
@@ -488,7 +518,7 @@ else{
 	}
 
 	function ObtenerEdificios(){
-			$mysqli = new mysqli(Host, User, "", BasedeDatos);
+			$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 			$tupla="SELECT Nombre, idEdificio FROM  edificio";
 			$resultado = $mysqli->query($tupla);
 			$objeto[0]['m']=$resultado->num_rows;	

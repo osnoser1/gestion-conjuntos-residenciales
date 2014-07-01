@@ -233,7 +233,7 @@ function eventos () {
                   {                        
                    
                    for(i=1; i < msg[0]; i++)
-                    { //console.log(msg[i]);
+                    { console.log(msg[i]);
                       if(msg[i]!=undefined)
                       para.value+=msg[i]+",";
                     }         
@@ -264,14 +264,17 @@ function eventos () {
                   success:
                   function (msg) 
                   {                        
-                   
+                   if(msg[0]>1){
                    for(i=1; i < msg[0]; i++)
-                    { //console.log(msg[i]);
+                    { console.log(msg[i]);
                       if(msg[i]!=undefined)
                       para.value+=msg[i]+",";
                     }          
                     $('#restringir').fadeOut();   
-                    $('#seleccionar').fadeOut();            
+                    $('#seleccionar').fadeOut(); }  
+                    else{ 
+                      show({message: {text: "El apartamento no tiene propietario"}, type: 'danger'});
+                    }      
                   },
                   error:
                   function (msg) {console.log("error");}
@@ -301,7 +304,7 @@ function eventos () {
                   {                        
                     
                    for(i=1; i < msg[0]; i++)
-                    {
+                    {console.log(msg[i]);
                       if(msg[i]!=undefined)
                       para.value+=msg[i]+",";
                     } 
