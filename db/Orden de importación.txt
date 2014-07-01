@@ -8,3 +8,6 @@ modulo-gastos.sql,depende de edificio,apartamento y usuario.
 publicacion.sql,no tiene dependencia
 cartelera.sql,depende de edificio,apartamentos
 modulo.servicios.sql, depende de usuario
+
+modulo-paginaprincipal.sql, no depende de nada
+modulo-paginaprincipal publicacion.sql, no depende de nada

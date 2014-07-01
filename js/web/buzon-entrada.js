@@ -16,7 +16,7 @@ function eventos(){
 			           	var li=$('<li></li>');
 			           	li.html("<a  name="+i+" class='enlaces' >"+i+"</a>");
 			           	ul.append(li);
-			           	console.log(i);
+			           //	console.log(i);
 		           }
 	           $('#paginas').append(ul);	          
 	           $('#contenido').append(listarmensajes(msg, table));
@@ -42,7 +42,7 @@ function eventos(){
 		        success:
 		        function (msg) 
 		        {       
-		        	console.log("fecha: "+msg[0].fecha);
+		        	//console.log("fecha: "+msg[0].fecha);
 			         de.innerHTML=msg[0].de;
 			         titulo.innerHTML=msg[0].asunto;
 			         fecha1.innerHTML=msg[0].fecha;
@@ -61,7 +61,7 @@ function eventos(){
         	});
         }));
          $('#marcar').click(function(){
-         	console.log("sdassdasd: " + idMensaje);
+         	//console.log("sdassdasd: " + idMensaje);
          	$.ajax
 		        ({
 		        type: "POST",
@@ -111,7 +111,7 @@ function eventos(){
 				           	var li=$('<li></li>');
 				           	li.html("<a  name="+i+" class='enlaces' >"+i+"</a>");
 				           	ul.append(li);
-				           	console.log(i);
+				           	//console.log(i);
 			           }
 		           $('#paginas').append(ul);	     
 
@@ -133,7 +133,7 @@ function eventos(){
 	        $(document).on('click', '.enlaces', (function(e) {
 	     //   $('a.enlaces').click(function(){
 	        	pagina=$(this).attr('name');
-	        	console.log(pagina);
+	        	//console.log(pagina);
 	        	$.ajax
 		        ({
 		        type: "POST",
@@ -149,7 +149,7 @@ function eventos(){
 
 
 		           $('#paginas').empty();
-		           console.log("Paginas " + msg[0].paginas);
+		           //console.log("Paginas " + msg[0].paginas);
 		            var ul=$('<ul class="pagination" ></ul>');
 		   	           for(i=0; i<=msg[0].paginas; i++){
 				           	var li; 
@@ -164,7 +164,7 @@ function eventos(){
 				           }
 				           	
 				           	ul.append(li);
-				           	console.log("pagina actual " + msg[0].paginaactual);
+				           //	console.log("pagina actual " + msg[0].paginaactual);
 			           }
 		           $('#paginas').append(ul);		          
 		          $('#contenido').append(listarmensajes(msg, table)); 
@@ -176,7 +176,7 @@ function eventos(){
 	        }));
 	 
 			$('#simple').click(function(){	
-	 			console.log("click en simple");
+	 			//console.log("click en simple");
 	 			$('#fecha').prop('checked', false);	 
 	 			$(busquedapofecha2).fadeOut();			
 	 			$(busquedapofecha).fadeOut(function(){
@@ -187,7 +187,7 @@ function eventos(){
 	 		});
 	 		
 	 		$('#fecha').click(function(){	
-	 			console.log("click en fecha");
+	 			//console.log("click en fecha");
 	 			$('#simple').prop('checked', false);
 	 			$(busquedasimple).fadeOut(function(){
 	 					$(busquedapofecha).fadeIn();
@@ -216,7 +216,7 @@ function eventos(){
 
 
 		           $('#paginas').empty();
-		           console.log("Paginas " + msg[0].paginas);
+		          // console.log("Paginas " + msg[0].paginas);
 		            var ul=$('<ul class="pagination" ></ul>');
 		   	           for(i=0; i<=msg[0].paginas; i++){
 				           	var li; 
@@ -231,7 +231,7 @@ function eventos(){
 				           }
 				           	
 				           	ul.append(li);
-				           	console.log("pagina actual " + msg[0].paginaactual);
+				           	//console.log("pagina actual " + msg[0].paginaactual);
 			           }
 		           $('#paginas').append(ul);		          
 		          $('#contenido').append(listarmensajes(msg, table)); 

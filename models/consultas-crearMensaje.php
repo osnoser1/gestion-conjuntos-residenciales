@@ -71,6 +71,12 @@
 		case 20:
 			 obtenercorreosdeunApartamento();
 			 break;
+		case 21: 
+			 obtenerAdministradores();
+			 break;
+		case 22:
+			obtenernombredelusuariologueado();
+			break;
 		default;
 	}
 }
@@ -81,6 +87,26 @@ else{
 	}
 }
 /*echo call_user_func(array($_POST['funcion']));*/
+	function obtenernombredelusuariologueado(){
+		session_start();
+		echo json_encode($_SESSION["Nombre"]);
+	}
+	function obtenerAdministradores(){
+		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+		$tupla="SELECT Correo FROM usuario  WHERE  TipoUsuario='2'";
+		$resultado = $mysqli->query($tupla);	
+		$objeto[0]['m']=$resultado->num_rows;		
+		$i=0;	
+			while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+			{			
+				$objeto[$i]['correo']=$db_resultado['Correo'];
+				$i++;	
+			}	
+		
+		$mysqli->close();
+		echo json_encode($objeto);
+
+	}
 	function obtenercorreosdeunApartamento(){
 		$mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 		$edificio=$_REQUEST['edificio'];
@@ -101,6 +127,7 @@ else{
 		}
 		$objeto[0]=$j;
 		$objeto=array_unique($objeto);
+		$mysqli->close();
 		echo json_encode($objeto);
 	}
 	function obtenercorreosdeunPiso(){
@@ -122,6 +149,7 @@ else{
 		}
 		$objeto[0]=$j;
 		$objeto=array_unique($objeto);
+		$mysqli->close();
 		echo json_encode($objeto);
 	}
 	function obtenercorreosdeunedificio(){
@@ -142,6 +170,7 @@ else{
 		}
 		$objeto[0]=$j;
 		$objeto=array_unique($objeto);
+		$mysqli->close();
 		echo json_encode($objeto);
 
 	}

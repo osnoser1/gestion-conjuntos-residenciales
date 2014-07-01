@@ -266,17 +266,17 @@ function eventos (){
       dataType: "json",
       success:
       function (msg) {    
-         console.log('entre en fuction');
+         console.log('entre en fuction  tamano  '+ msg[0].m);
           for(i=0; i < msg[0].m; i++){
-            Apartamentos2.options[i]= new Option ("Apartamento" + msg[i].idapartamento);
+            Apartamentos2.options[i]= new Option ("Apartamento" + msg[i].idApartamento);
             Apartamentos2.options[i].text ="Apartamento "+ msg[i].Nombre;
-            Apartamentos2.options[i].value = msg[i].idapartamento;
+            Apartamentos2.options[i].value = msg[i].idApartamento;
             console.log('entre aquiaquiiii en el for');
           } 
            console.log('entre');
           $('#Apartamentos2').multiselect('rebuild');
         },
-        error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
+        error: function (msg) {console.log( msg +"error");}
     });    
      console.log('entre xd');
     }

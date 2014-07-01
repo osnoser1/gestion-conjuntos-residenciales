@@ -33,6 +33,7 @@
  		
  		if(ValidarFecha(fechadesde.value)&&ValidarFecha(fechahasta.value)){
  			$rootScope.loading = true;
+ 			$('#paginas').fadeOut();
 	 		$.ajax
 		        ({
 		        type: "POST",

@@ -73,6 +73,7 @@ myApp.controllerProvider.register('buzonentradaCtrl', function($scope, $http, $q
  		
  		if(ValidarFecha(fechadesde.value)&&ValidarFecha(fechahasta.value)){
  			$rootScope.loading = true;
+ 			$('#paginas').fadeOut();
 	 		$.ajax
 		        ({
 		        type: "POST",
@@ -86,7 +87,7 @@ myApp.controllerProvider.register('buzonentradaCtrl', function($scope, $http, $q
 					$('#contenido').html("");
 					var table=$('<table class="table table-hover" ></table>');
 					$('#contenido').append(listarmensajes(msg, table)); 
-					console.log(msg);
+					//console.log(msg);
 		        },
 		        error:
 		        function (msg) {alert( msg +"No se pudo realizar la conexion");}
