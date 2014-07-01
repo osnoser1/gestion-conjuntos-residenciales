@@ -289,6 +289,9 @@ class UsuarioController extends GxController {
     public function actionCerrarSesion() {
         session_start();
         unset($_SESSION);
+//        $_SESSION = [];
+//        session_destroy();
+//        return json_encode(array("respuesta" => true));
     }
 
 }
