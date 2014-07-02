@@ -7,6 +7,4 @@ modulo-pagos.sql,depende de usuario
 modulo-gastos.sql,depende de edificio,apartamento y usuario.
 cartelera.sql,depende de edificio,apartamentos
 modulo.servicios.sql, depende de usuario
-
-modulo-paginaprincipal.sql, no depende de nada
-modulo-paginaprincipal publicacion.sql, no depende de nada
+modulo-paginaprincipal.sql,no tiene dependencia
