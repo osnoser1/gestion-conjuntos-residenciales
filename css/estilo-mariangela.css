@@ -13,6 +13,12 @@ form{font-family:Arial,Helvetica,sans-serif;
      margin-left: 80px;
 }
 
+.element
+{
+    color: #0099ff;
+    font-size: 18px;
+}
+
 table.cu {position: relative;
           top: 20px;
 }

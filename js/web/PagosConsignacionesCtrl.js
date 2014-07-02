@@ -13,32 +13,32 @@ myApp.controllerProvider.register('PagosConsignacionesCtrl', function($scope, $h
     };
 
     $scope.listarHistorial = function() {
-
-        var permiso = 0;
+        console.log("lista");
         var idusuario = "1";
-        $.ajax
-                ({
-                    type: "POST",
-                    url: "models/pagos-consultas.php",
-                    data: {id: 2, permiso: permiso, idusuario: idusuario},
-                    async: false,
-                    dataType: "json",
-                    success:
-                            function(msg)
-                            {
-                                for (var i = 0; i < msg.length; i++)
-                                {
+          $.ajax
+            ({
+            type: "POST",
+            url: "models/pagos-consultas.php",
+            data: {id:2},
+            async: true,
+            dataType: "json",
+            success:
+            function (msg) 
+            {       
+                for (var i = 0; i < msg.length; i++)
+                {
 
-                                    msg[i].fecha = $filter('date')(msg[i].fecha, 'dd/MM/yyyy');
-                                    $scope.datos.pagos.push(msg[i]);
-                                }
-                            },
-                    error:
-                            function(msg) {
-                                console.log("error");
-                                console.dir(msg);
-                            }
-                });
+                    msg[i].fecha = $filter('date')(msg[i].fecha, 'dd/MM/yyyy');
+                    $scope.datos.pagos.push(msg[i]);
+                }
+              
+            },
+            error:
+            function (msg) {
+                console.log("error");
+                console.dir(msg);
+                }
+        });
     };
     $scope.listarHistorial();
 

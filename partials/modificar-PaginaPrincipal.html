@@ -1,0 +1,53 @@
+<link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
+<script type="text/javascript" src="js/web/modificarpaginaprincipal.js"></script>
+<script type="text/javascript">
+    eventos();
+</script>
+<script type="text/javascript">
+    $(function() {
+        $('.summernote').summernote({
+            height: 200,
+            lang: 'es-ES'
+        });
+    });
+
+</script>
+
+<h1>Modificar Pagina Principal</h1>
+<div ng-controller="modificarpaginaprincipal">
+    <form class="form-horizontal" role="form" ng-submit="abrirPreview()" >
+        <div id="alertaTitulo">
+            <div class="alert alert-info">
+                Cambiar Titulo
+            </div>
+        </div>
+
+        <label>Titulo</label><input type="text" id="Titulo" class="form-control" placeholder="Titulo">
+        <button class="btn btn-primary pull-right" id="actualizartitulo" >Actualizar Titulo</button>
+
+        <br><br>
+        <div id="alerta">
+            <div class="alert alert-info">
+                Cambiar imagen de fondo
+            </div>
+        </div>
+        <img src="models/consultas-crearseccion.php?id=1" class="img-responsive img-thumbnail" />
+
+        <input id="archivos"  name="archivos[]" type="file"  />
+        <button class="btn btn-primary" id="actualizarimagen"  style="position:absolute; right: 15px;">Actualizar imagen</button>
+        <br><br>
+
+        <div id="alerta">
+            <div class="alert alert-info">
+                Cambiar Footer
+            </div>
+        </div>
+
+        <textarea  class="summernote form-control" rows="10" cols="50" placeholder="Descripcion del footer" >
+        </textarea>
+        <button class="btn btn-primary pull-right" id="actualizarfootter" >Actualiza Footer</button>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary pull-right" id="abrirPreview" value="Abrir Preview"/>
+        </div>
+    </form>
+</div>

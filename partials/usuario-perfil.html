@@ -1,41 +1,41 @@
 <script src="js/web/UsuarioPerfilCtrl.js"></script>
+<link rel="stylesheet" href="css/estilo-mariangela.css"/>
 <h1>Perfil</h1>
 <div ng-include src="'partials/usuario-configuracion-menu.html'"></div>
 <div class="container">
-    <form class="form-horizontal" role="form" ng-controller="UsuarioPerfilCtrl"><h4>
+    <form class="form-horizontal " role="form" ng-controller="UsuarioPerfilCtrl"><h4>
             <div class="form-group">
-                <label class="col-lg-2 control-label">Usuario</label>
-                <div class="col-lg-10"><p class="form-control-static"> {{usuario.Nombre + " " + usuario.Apellido}} </p></div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Telefono:</label><p ng-show="usuario.telefonos.length == 0">Ninguno</p>
-                <div class="col-lg-10"><p class="form-control-static" ng-repeat="tel in usuario.telefonos">{{tel.Telefono}}</p></div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Monto</label>
-                <div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
+                <label class="col-lg-2 control-label element">Usuario:</label>
+                <div class="col-lg-10"><p class="form-control-static"> {{usuario.Nombre + " " + usuario.Apellido}}</p></div>
             </div>
             <div class="form-group">
-                <label class="col-lg-2 control-label">Nro Referencia</label>
-                <div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
+                <label class="col-lg-2 control-label element">Cedula:</label>
+                <div class="col-lg-10"><p class="form-control-static"> {{usuario.Cedula}}</p></div>
             </div>
             <div class="form-group">
-                <label class="col-lg-2 control-label">Tipo de pago</label>
-                <div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
+                <label class="col-lg-2 control-label element">Correo:</label>
+                <div class="col-lg-10"><p class="form-control-static"> {{usuario.Correo}}</p></div>
             </div>
             <div class="form-group">
-                <label class="col-lg-2 control-label">Banco</label>
-                <div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
+                <label class="col-lg-2 control-label element">Telefono:</label>
+                <div class="col-lg-10">
+                    <p class="form-control-static" ng-show="usuario.telefonos.length == 0">Ninguno</p>
+                    <p class="form-control-static" ng-repeat="tel in usuario.telefonos">{{tel.Telefono}}</p>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Fecha</label>
-                <div class="col-lg-10"><p class="form-control-static"> Dato</p></div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Estado</label>
-                <div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
+            <div ng-show="usuario.TipoUsuario == 1">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label element">Edificio:</label>
+                    <div class="col-lg-10"><p class="form-control-static"> {{usuario.apartamento[0].NombreEdificio}}</p></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label element">Piso:</label>
+                    <div class="col-lg-10"><p class="form-control-static"> {{usuario.apartamento[0].Piso}}</p></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label element">Apartamento:</label>
+                    <div class="col-lg-10"><p class="form-control-static"> {{usuario.apartamento[0].NombreApartamento}}</p></div>
+                </div>
             </div>
         </h4></form>
 </div>
