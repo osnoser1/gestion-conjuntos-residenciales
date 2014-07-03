@@ -27,6 +27,15 @@
         case 8: 
             obtenerimagen();
             break;
+        case 9: 
+            actualizartituloPreview();
+            break;
+        case 10: 
+            actualizarfooterPreview();
+            break;
+        case 11:
+            obtenerValoresPaginaPrincipalPreview();
+            break;
         default;
     }
    }
@@ -47,15 +56,14 @@
         }*/
     if(isset($_GET['id'])){
         $mysqli = new mysqli(Host, User, Pass, BasedeDatos);
-        $tupla="SELECT imagenfondo FROM  paginaprincipal WHERE id='1'";
+        $idParametro = $_GET['id'];
+        $tupla="SELECT imagenfondo FROM  paginaprincipal WHERE id='$idParametro'";
         $resultado = $mysqli->query($tupla);
         $objeto[0]['m']=$resultado->num_rows;
         if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
             $objeto[0]['imagenfondo'] = $db_resultado['imagenfondo'];                 
         }
-
         echo $objeto[0]['imagenfondo'];
-
     }
    function obtenerimagen(){
         $mysqli = new mysqli(Host, User, Pass, BasedeDatos);
@@ -74,7 +82,14 @@
         $titulo=$_REQUEST['titulo'];
         $tupla="UPDATE `paginaprincipal` SET `titulo`='$titulo' WHERE id='1'";
         $resultado = $mysqli->query($tupla);       
-        echo json_encode("true");
+        echo json_encode(true);
+    }
+    function actualizartituloPreview(){
+        $mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+        $titulo=$_REQUEST['titulo'];
+        $tupla="UPDATE `paginaprincipal` SET `titulo`='$titulo' WHERE id='2'";
+        $resultado = $mysqli->query($tupla);
+        echo json_encode($resultado);
     }
     function obtenerfootter(){
         $mysqli = new mysqli(Host, User, Pass, BasedeDatos);
@@ -88,10 +103,31 @@
 
         echo json_encode($objeto);
     }
+
+    function obtenerValoresPaginaPrincipalPreview(){
+        $mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+        $tupla="SELECT footer,titulo, imagenfondo FROM  `paginaprincipal` WHERE id='2'";
+         $resultado = $mysqli->query($tupla);
+         $objeto[0]['m']=$resultado->num_rows;
+        if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
+            $objeto[0]['footer'] = $db_resultado['footer']; 
+            $objeto[0]['titulo'] = $db_resultado['titulo'];         
+        }
+
+        echo json_encode($objeto);
+    }
     function actualizarfooter(){
         $mysqli = new mysqli(Host, User, Pass, BasedeDatos);
         $footer=$_REQUEST['footer'];
         $tupla="UPDATE `paginaprincipal` SET `footer`='$footer' WHERE id='1'";
+        $resultado = $mysqli->query($tupla);       
+        echo json_encode("true");
+
+    }
+    function actualizarfooterPreview(){
+        $mysqli = new mysqli(Host, User, Pass, BasedeDatos);
+        $footer=$_REQUEST['footer'];
+        $tupla="UPDATE `paginaprincipal` SET `footer`='$footer' WHERE id='2'";
         $resultado = $mysqli->query($tupla);       
         echo json_encode("true");
 

@@ -1,10 +1,10 @@
-<script src="js/web/PaginaPrincipalCtrl.js"></script>
+<script src="js/web/PaginaPrincipalPreviewCtrl.js"></script>
 <style type="text/css">
     /* Space out content a bit */
     body {
         padding-top: 20px;
         padding-bottom: 20px;
-        background-image: url(models/consultas-crearseccion.php?id=1)
+        background-image: url(models/consultas-crearseccion.php?id=2);
     }
 
     /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -81,7 +81,8 @@
         }
     }
 </style>
-<div class="container" ng-controller="PaginaPrincipalCtrl">
+
+<div class="container" ng-controller="PaginaPrincipalPreviewCtrl">
     <div class="header">
         <ul class="nav nav-pills pull-right">
             <li class="active"><a href="#/web/login">Iniciar Sessión</a></li>
@@ -104,7 +105,6 @@
     <div class="footer" id="footer">
 
     </div>
+
+    <a href="#/panel/modificar-PaginaPrincipal" class="btn btn-primary">Regresar</a>
 </div>
-
-
-
