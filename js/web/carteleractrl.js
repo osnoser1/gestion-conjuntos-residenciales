@@ -1,10 +1,41 @@
 function eventos (){  
   var idpostEliminar="";
   var tipousuario="";
-  inicio();
+ 
+ 
   obtenerUsuario();
-  cargardatosEdificios();
+  
   function inicio(){
+    $.ajax({
+      type: "POST",
+      url: "models/cartelera.php",
+      data: {id:12},
+      async: true,
+      dataType: "json",
+      success:
+      function (msg){
+        
+        if(msg[0].paginas>0){
+            $('#paginas').empty();
+            var ul=$('<ul class="pagination" ></ul>');
+
+            for(i=0; i<=msg[0].paginas; i++){
+                var li=$('<li></li>');
+                li.html("<a  name="+i+" class='enlaces'>"+i+"</a>");
+                ul.append(li);
+            }
+            $('#paginas').append(ul);
+            
+        }
+       /* console.log("")*/
+        if(msg[0].m>0)
+        cargarcartelera(msg);
+       
+      },
+      error: function (msg) {console.log( msg +"No se pudo realizar la conexion");}
+    });
+  }
+    function inicio2(){
     $.ajax({
       type: "POST",
       url: "models/cartelera.php",
@@ -13,19 +44,29 @@ function eventos (){
       dataType: "json",
       success:
       function (msg){
-        $('#paginas').empty();
-        var ul=$('<ul class="pagination" ></ul>');
-        for(i=0; i<=msg[0].paginas; i++){
-          var li=$('<li></li>');
-          li.html("<a  name="+i+" class='enlaces'>"+i+"</a>");
-          ul.append(li);
+        
+        if(msg[0].paginas>0){
+            $('#paginas').empty();
+            var ul=$('<ul class="pagination" ></ul>');
+
+            for(i=0; i<=msg[0].paginas; i++){
+                var li=$('<li></li>');
+                li.html("<a  name="+i+" class='enlaces'>"+i+"</a>");
+                ul.append(li);
+            }
+            $('#paginas').append(ul);
+            
         }
-        $('#paginas').append(ul);
-        cargarcartelera();
+       /* console.log("")*/
+        if(msg[0].m>0)
+        cargarcartelera(msg);
+       
       },
-      error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
+      error: function (msg) {console.log( msg +"No se pudo realizar la conexion");}
     });
-  };
+  }
+
+
   function obtenerUsuario(){
     $.ajax({
       type: "POST",
@@ -39,6 +80,11 @@ function eventos (){
         tipousuario=msg;
         if(msg==="2"){
           $('#restringir').fadeIn();
+           inicio2();
+           cargardatosEdificios();
+        }
+        else{
+          inicio();
         }
       },
       error:
@@ -393,38 +439,26 @@ function eventos (){
       show({message: {text: "Debe rellenar titulo y contenido"}, type: 'danger'});
       }
   });
-  function cargarcartelera(){
-   $('#contenedor2').html("");
+  function cargarcartelera(msg){
+                       $('#contenedor2').html("");
 
-                  $.ajax
-                    ({
-                    type: "POST",
-                    url: "models/cartelera.php",
-                    data: {id:5},
-                    async: true,
-                    dataType: "json",
-                    success:
-                    function (msg) 
-                    {      
+     
                       for (var i =0; i<msg[0].m; i++) {
-                        $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4>');
-                        if(tipousuario==2){
-                          $('#contenedor2').append('<button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:25px;" name='+msg[i].idpost+'>X</button><div>');
+                          $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4>');
+                            if(tipousuario==2){
+                              $('#contenedor2').append('<button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:25px;" name='+msg[i].idpost+'>X</button><div>');
 
-                        }
-                           
+                            }                           
                            $('#contenedor2').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div>');
                            if(tipousuario==1)
                              $('#contenedor2').append('<a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></a>');
                           $('#contenedor2').append('<span class="label label-primary">Publicado por: '+msg[i].usuario+' '+msg[i].Apellido+'</span>');
                            $('#contenedor2').append('<span class="label label-primary" style="position: absolute; right:25px;">'+msg[i].fecha+'</span>');
                            $('#contenedor2').append('<div><hr style="border: 0; height: 0; box-shadow: 0 1px 5px 1px black;"><br></div>');
+                          console.log("lleno");
                       }
                               
-                    },
-                    error:
-                    function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                    });
+                
                     
 
         }
