@@ -5,7 +5,7 @@
  	define('BasedeDatos','conjunto_residencial');
 
 if(isset($_POST['id'])){
-$id=$_POST['id'];
+    $id=$_POST['id'];
 
 switch($id)
 {
@@ -37,7 +37,7 @@ switch($id)
 	case 8:
 		seleccionaraptosdeedif();
 		break;
-		case 9:
+	case 9:
 		restringir();
 		break;
 	case 10: 
@@ -70,14 +70,15 @@ function IngresarporApartamento(){
 	$apartamentos=$_REQUEST['apartamentos'];
 	$apartamentos=serialize($apartamentos);
 	session_start();
-	$nombre=$_SESSION["Nombre"];
-	$titulo=$_REQUEST['para'];
-	$contenido=$_REQUEST['contenido'];
-	$fecha=date("Y-m-d H:i:s");
-	$salida="todo esta bien";
-	$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`, `usuario`, `aptos`)  VALUES ('$contenido', '$titulo',  '$fecha', '$nombre', '$apartamentos')";
-	$resultado = $mysqli->query($tupla) or $salida=$mysqli->error;
-	$mysqli->close();
+		$nombre=$_SESSION["Nombre"];
+                $apellido=$_SESSION["Apellido"];
+		$titulo=$_REQUEST['para'];
+		$contenido=$_REQUEST['contenido'];
+		$fecha=date("Y-m-d H:i:s");
+		$salida="todo esta bien";
+		$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`, `usuario`, `Apellido`, `aptos`)  VALUES ('$contenido', '$titulo',  '$fecha', '$nombre', '$apellido', '$apartamentos')";
+		$resultado = $mysqli->query($tupla) or $salida=$mysqli->error;
+		$mysqli->close();
 	echo json_encode($salida);	
 		
 	}
@@ -101,14 +102,15 @@ function IngresarPorpiso(){
 	} 
 	$objeto=serialize($objeto);
 	session_start();
-	$nombre=$_SESSION["Nombre"];
-	$titulo=$_REQUEST['para'];
-	$contenido=$_REQUEST['contenido'];
-	$fecha=date("Y-m-d H:i:s");
-	$salida="todo esta bien";
-	$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`, `usuario`, `aptos`)  VALUES ('$contenido', '$titulo',  '$fecha', '$nombre', '$objeto')";
-	$resultado = $mysqli->query($tupla) or $salida=$mysqli->error;
-	$mysqli->close();
+		$nombre=$_SESSION["Nombre"];
+                $apellido=$_SESSION["Apellido"];
+		$titulo=$_REQUEST['para'];
+		$contenido=$_REQUEST['contenido'];
+		$fecha=date("Y-m-d H:i:s");
+		$salida="todo esta bien";
+		$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`, `usuario`, `Apellido`, `aptos`)  VALUES ('$contenido', '$titulo',  '$fecha', '$nombre', '$apellido', '$objeto')";
+		$resultado = $mysqli->query($tupla) or $salida=$mysqli->error;
+		$mysqli->close();
 	echo json_encode($salida);
 }
 
@@ -166,7 +168,7 @@ function siguientepagina(){
 		 	$objeto[$i]['idpost']=$db_resultado['idpost'];
 		 	$objeto[$i]['fecha']=$db_resultado['fecha'];
 			$objeto[$i]['usuario']=$db_resultado['usuario'];
-
+                        $objeto[$i]['Apellido']=$db_resultado['Apellido'];
 			$i++;	
 		}		
 
@@ -208,7 +210,7 @@ function publicaciones(){
 		 	$objeto[$i]['idpost']=$db_resultado['idpost'];
 		 	$objeto[$i]['fecha']=$db_resultado['fecha'];
 		 	$objeto[$i]['usuario']=$db_resultado['usuario'];
-	
+                        $objeto[$i]['Apellido']=$db_resultado['Apellido'];
 
 			$i++;	
 		}		
@@ -243,11 +245,12 @@ function publicaciones(){
 		$objeto=serialize($objeto);
 		session_start();
 		$nombre=$_SESSION["Nombre"];
+                $apellido=$_SESSION["Apellido"];
 		$titulo=$_REQUEST['para'];
 		$contenido=$_REQUEST['contenido'];
 		$fecha=date("Y-m-d H:i:s");
 		$salida="todo esta bien";
-		$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`, `usuario`, `aptos`)  VALUES ('$contenido', '$titulo',  '$fecha', '$nombre', '$objeto')";
+		$tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`, `usuario`, `Apellido`, `aptos`)  VALUES ('$contenido', '$titulo',  '$fecha', '$nombre', '$apellido', '$objeto')";
 		$resultado = $mysqli->query($tupla) or $salida=$mysqli->error;
 		$mysqli->close();
 		echo json_encode($salida);
