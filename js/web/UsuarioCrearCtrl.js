@@ -30,6 +30,7 @@ myApp.controllerProvider.register('UsuarioCrearCtrl', function($scope, $http, $q
         datos.nuevoTelefono = {};
     };
     $scope.addUsuario = function(usuario) {
+        console.log(url);
         $scope.datos.error = false;
         if(typeof $scope.datos.nuevoUsuario.idApartamento === 'undefined' && $scope.datos.nuevoUsuario.TipoUsuario != 2){
             $scope.datos.error = true;
