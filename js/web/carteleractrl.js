@@ -77,11 +77,11 @@ function eventos (){
         for (var i =0; i<msg[0].m; i++) {
           $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4>');
           if(tipousuario==2)
-            $('#contenedor2').append('<button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:15px;" name='+msg[i].idpost+'>X</button><div>');
+            $('#contenedor2').append('<button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:25px;" name='+msg[i].idpost+'>X</button><div>');
           $('#contenedor2').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div>');
           if(tipousuario==1)
             $('#contenedor2').append('<a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></a>');
-          $('#contenedor2').append('<span class="label label-primary">Publicado por:'+msg[i].usuario+'</span>');
+          $('#contenedor2').append('<span class="label label-primary">Publicado por: '+msg[i].usuario+' '+msg[i].Apellido+'</span>');
           $('#contenedor2').append('<span class="label label-primary" style="position: absolute; right:25px;">'+msg[i].fecha+'</span>');
           $('#contenedor2').append('<div><hr style="border: 0; height: 0; box-shadow: 0 1px 5px 1px black;"><br></div>');
         }               
@@ -282,7 +282,7 @@ function eventos (){
     }
   });
   $('#publicar').click(function(){
-    if(titulo.value!==''&& $('.sumernote').code()!==""){
+    if(titulo.value!==''&& $('.summernote').code()!==""){
       $('#Apartamentos').multiselect({
       enableFiltering: true
       });
@@ -351,7 +351,7 @@ function eventos (){
                 $('#myModal').modal('hide');
                 show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
                 titulo.value="";
-                 $('.sumernote').code("");
+                 $('.summernote').code()==='';
                  inicio();},
               error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
             });
@@ -376,7 +376,7 @@ function eventos (){
                 $('#myModal').modal('hide');
                 show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
                 titulo.value="";
-                 $('.sumernote').code("");
+                 $('.summernote').code("");
                  inicio();},
               error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
             });
@@ -409,14 +409,14 @@ function eventos (){
                       for (var i =0; i<msg[0].m; i++) {
                         $('#contenedor2').append('<div><h4><b>'+msg[i].titulo+'</b></h4>');
                         if(tipousuario==2){
-                          $('#contenedor2').append('<button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:15px;" name='+msg[i].idpost+'>X</button><div>');
+                          $('#contenedor2').append('<button class="eliminar btn btn-primary btn-xs" data-toggle="modal" data-target="#myModaleliminar" style="position: absolute; right:25px;" name='+msg[i].idpost+'>X</button><div>');
 
                         }
                            
                            $('#contenedor2').append('<div style="height:120px;  overflow: auto; border:1px solid #ccc; border-top-left-radius: 4px;     border-bottom-left-radius: 4px;     border-top-right-radius: 4px border-bottom-right-radius: 4px;" class="form-control">'+msg[i].contenido+'</div>');
                            if(tipousuario==1)
                              $('#contenedor2').append('<a class="btn btn-default btn-xs" href="#/panel/crear-mensaje"><span class="glyphicon glyphicon-envelope"></a>');
-                          $('#contenedor2').append('<span class="label label-primary">Publicado por: '+msg[i].usuario+'</span>');
+                          $('#contenedor2').append('<span class="label label-primary">Publicado por: '+msg[i].usuario+' '+msg[i].Apellido+'</span>');
                            $('#contenedor2').append('<span class="label label-primary" style="position: absolute; right:25px;">'+msg[i].fecha+'</span>');
                            $('#contenedor2').append('<div><hr style="border: 0; height: 0; box-shadow: 0 1px 5px 1px black;"><br></div>');
                       }
