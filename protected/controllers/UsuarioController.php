@@ -83,6 +83,18 @@ class UsuarioController extends GxController {
         }
     }
 
+    public function actionEliminarTelefono() {
+        if (isset($_POST['datos'])) {
+            $idTelefono = (array) $_POST['datos'];
+            $criteria = new CDbCriteria;
+            $criteria->addInCondition('IDTelefono', array($idTelefono['IDTelefono']));
+            Telefono::model()->deleteAll($criteria);
+            echo $this->salida(true, "aviso", "Telefono eliminado");
+        } else {
+            echo $this->salida(false, "aviso", "Error en el servidor");
+        }
+    }
+
     public function actionInsertar() {
         if (isset($_POST['datos'])) {
             $usuario = $_POST['datos'];
@@ -290,7 +302,7 @@ class UsuarioController extends GxController {
         session_start();
         unset($_SESSION);
 //        $_SESSION = [];
-//        session_destroy();
+        session_destroy();
 //        return json_encode(array("respuesta" => true));
     }
 

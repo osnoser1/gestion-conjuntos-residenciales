@@ -5,56 +5,47 @@ var pruebaControllers = angular.module('myControllers', []);
 
 pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $http, $location, $sce, $rootScope) {
 
-    
-    $scope.comprobarLogin = function(){
-        $http.get(url + 'usuario/usuarioLogueado').success(function(data) {
-            console.log('IDUsuario logeado: ' + data);
-            if((typeof data === 'undefined' || data === "") && $location.path() !== "/web"){
-                $location.path("web/login");
-            }
-        });
-    }
-    $scope.comprobarLogin();
-    $scope.cargando = false;
-    
-        $.ajax
-        ({
-            type: "POST",
-            url: "models/consultas-crearMensaje.php",
-            data: {id:16},
-            async: true,
-            dataType: "json",
-            success:
-            function(msg)
-            {
-                $scope.mensajes=msg[0].m;
-                $scope.datos=msg;
-                console.log("estoy aqui");
-            },
-         error:
-            function(msg) {
-                alert(msg + "No se pudo realizar la conexion");
-            }
-        });
 
-         $.ajax
-        ({
-            type: "POST",
-            url: "models/consultas-crearMensaje.php",
-            data: {id:22},
-            async: true,
-            dataType: "json",
-            success:
-            function(msg)
-            {
-                $scope.nombre=msg;
-                console.log("estoy aqui2");
-            },
-         error:
-            function(msg) {
-                alert(msg + "No se pudo realizar la conexion");
-            }
-        });
+
+    $scope.cargando = false;
+
+    $.ajax
+            ({
+                type: "POST",
+                url: "models/consultas-crearMensaje.php",
+                data: {id: 16},
+                async: true,
+                dataType: "json",
+                success:
+                        function(msg)
+                        {
+                            $scope.mensajes = msg[0].m;
+                            $scope.datos = msg;
+                        },
+                error:
+                        function(msg) {
+                            alert(msg + "No se pudo realizar la conexion");
+                        }
+            });
+
+    $.ajax
+            ({
+                type: "POST",
+                url: "models/consultas-crearMensaje.php",
+                data: {id: 22},
+                async: true,
+                dataType: "json",
+                success:
+                        function(msg)
+                        {
+                            $scope.nombre = msg;
+                            console.log("estoy aqui2");
+                        },
+                error:
+                        function(msg) {
+                            alert(msg + "No se pudo realizar la conexion");
+                        }
+            });
 
     $scope.error = function(data, status, headers, config) {
         $rootScope.loading = false;
@@ -146,7 +137,7 @@ pruebaControllers.controller('LoginCtrl', ['$scope', '$state', '$location', '$ht
         $scope.login = function(user) {
             $state.go('panel');
         };
-       
+
     }]);
 
 pruebaControllers.controller('PanelCtrl', function($scope, $http, $location) {
@@ -159,51 +150,51 @@ pruebaControllers.controller('PanelHeaderCtrl', function(Auth, $state, $scope, $
     $scope.header = "partials/panel-header.html";
     $scope.header = "partials/panel-header.html";
     $.ajax
-        ({
-            type: "POST",
-            url: "models/consultas-crearMensaje.php",
-            data: {id:16},
-            async: true,
-            dataType: "json",
-            success:
-            function(msg)
-            {
-                $scope.mensajes=msg[0].m;
-                $scope.datos=msg;
-                console.log("actualizado barra3")
-            },
-         error:
-            function(msg) {
-                console.log(msg + "No se pudo realizar la conexion en controller linea 36");
-            }
-        });
+            ({
+                type: "POST",
+                url: "models/consultas-crearMensaje.php",
+                data: {id: 16},
+                async: true,
+                dataType: "json",
+                success:
+                        function(msg)
+                        {
+                            $scope.mensajes = msg[0].m;
+                            $scope.datos = msg;
+                            console.log("actualizado barra3")
+                        },
+                error:
+                        function(msg) {
+                            console.log(msg + "No se pudo realizar la conexion en controller linea 36");
+                        }
+            });
 
-        $(document).on('click', '.correo', (function(e) {
-               var  idmensaje=$(this).attr('name');
-              console.log("idmensaje"+id);
-                $.ajax
+    $(document).on('click', '.correo', (function(e) {
+        var idmensaje = $(this).attr('name');
+        console.log("idmensaje" + id);
+        $.ajax
                 ({
                     type: "POST",
                     url: "models/consultas-crearMensaje.php",
-                    data: {id:23, ID:idmensaje},
+                    data: {id: 23, ID: idmensaje},
                     async: true,
                     dataType: "json",
                     success:
-                    function(msg)
-                    {
-                        de.innerHTML=msg[0].de;
-                         titulo2.innerHTML=msg[0].asunto;
-                         fecha1.innerHTML=msg[0].fecha;
-                        descripcion.innerHTML=msg[0].descripcion;
-                    },
-                 error:
-                    function(msg) {
-                        console.log(msg + "No se pudo realizar la conexion en controller linea 36");
-                    }
+                            function(msg)
+                            {
+                                de.innerHTML = msg[0].de;
+                                titulo2.innerHTML = msg[0].asunto;
+                                fecha1.innerHTML = msg[0].fecha;
+                                descripcion.innerHTML = msg[0].descripcion;
+                            },
+                    error:
+                            function(msg) {
+                                console.log(msg + "No se pudo realizar la conexion en controller linea 36");
+                            }
                 });
 
-                $('#vercorreo').modal('show');
-         }));
+        $('#vercorreo').modal('show');
+    }));
     $scope.CrearMensaje = function(datos) {
 
         /*console.log($('.summernote').code());*/
@@ -225,55 +216,60 @@ pruebaControllers.controller('PanelHeaderCtrl', function(Auth, $state, $scope, $
                                     titulo:Titulo.value = "";
                                     $('.summernote').code("");
                                     $.ajax
-                                    ({
-                                    type: "POST",
-                                    url: "models/consultas-crearMensaje.php",
-                                    data: {id:17},
-                                    async: true,
-                                    dataType: "json",
-                                    success:
-                                    function (msg) 
-                                    {       console.log("privilegio: "+msg);
+                                            ({
+                                                type: "POST",
+                                                url: "models/consultas-crearMensaje.php",
+                                                data: {id: 17},
+                                                async: true,
+                                                dataType: "json",
+                                                success:
+                                                        function(msg)
+                                                        {
+                                                            console.log("privilegio: " + msg);
 
-                                    if(msg=="1"){
-                                        $('#restringir2').fadeIn();
-                                        $('#seleccionar').fadeOut();
-                                          $.ajax
-                                        ({
-                                        type: "POST",
-                                        url: "models/consultas-crearMensaje.php",
-                                        data: {id:21},
-                                        async: true,
-                                        dataType: "json",
-                                        success:
-                                        function (msg) 
-                                        {      
-                                          for(i=0; i < msg[0].m; i++)
-                                            {
+                                                            if (msg == "1") {
+                                                                $('#restringir2').fadeIn();
+                                                                $('#seleccionar').fadeOut();
+                                                                $.ajax
+                                                                        ({
+                                                                            type: "POST",
+                                                                            url: "models/consultas-crearMensaje.php",
+                                                                            data: {id: 21},
+                                                                            async: true,
+                                                                            dataType: "json",
+                                                                            success:
+                                                                                    function(msg)
+                                                                                    {
+                                                                                        for (i = 0; i < msg[0].m; i++)
+                                                                                        {
 
-                                              administradores.options[i]= new Option (msg[i].correo);
-                                              administradores.options[i].text = msg[i].correo;
-                                              administradores.options[i].value = msg[i].correo; 
-                                            }
-                                            $('#administradores').multiselect('rebuild');
-                                            $('#seleccionar2').fadeIn();
-                                            
-                                        },
-                                        error:
-                                        function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                                        });
-                                      }
+                                                                                            administradores.options[i] = new Option(msg[i].correo);
+                                                                                            administradores.options[i].text = msg[i].correo;
+                                                                                            administradores.options[i].value = msg[i].correo;
+                                                                                        }
+                                                                                        $('#administradores').multiselect('rebuild');
+                                                                                        $('#seleccionar2').fadeIn();
+
+                                                                                    },
+                                                                            error:
+                                                                                    function(msg) {
+                                                                                        alert(msg + "No se pudo realizar la conexion");
+                                                                                    }
+                                                                        });
+                                                            }
 
 
-                                     
-                                      if(msg=="2")
-                                        $('#restringir').fadeIn();
-                                        $('#seleccionar').fadeIn();
-                                      
-                                    },
-                                    error:
-                                    function (msg) {alert( msg +"No se pudo realizar la conexion");}
-                                    });
+
+                                                            if (msg == "2")
+                                                                $('#restringir').fadeIn();
+                                                            $('#seleccionar').fadeIn();
+
+                                                        },
+                                                error:
+                                                        function(msg) {
+                                                            alert(msg + "No se pudo realizar la conexion");
+                                                        }
+                                            });
                                 },
                         error:
                                 function(msg) {
