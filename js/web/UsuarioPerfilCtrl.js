@@ -28,8 +28,4 @@ myApp.controllerProvider.register('UsuarioPerfilCtrl', function($scope, $http, $
             $scope.mostrarDatos(data);
         }
     });
-
-    $http.get(url + 'usuario/cerrarSesion').success(function(data) {
-        console.log("CS");
-    });
 });

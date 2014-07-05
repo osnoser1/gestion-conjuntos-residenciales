@@ -11,6 +11,24 @@
                 Apellido: <input type="text" name="apellido" pattern="^[\A-Za-záéíóúñ ]+$" value="" class="form-control" ng-model="usuarioModificado.Apellido"/><br>
                 Correo: <input type="text" name="correo" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" value="" class="form-control" ng-model="usuarioModificado.Correo"/>
             </div>
+            <div class="form-group col-sm-10">
+                <label>Edificio</label>
+                <select ng-change="obtenerPisos()" ng-model="datos.query.idEdificio" name="edificio" ng-options="edificio.idEdificio as edificio.Nombre for edificio in datos.edificios" class="form-control" data-style="form-control">
+                    <option value="">-- Seleccione edificio --</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-10">
+                <label>Piso</label>
+                <select ng-change="obtenerApartamentos()" ng-model="datos.query.Piso" name="piso" ng-options="piso.Numero as piso.Numero for piso in datos.pisos" class="form-control" data-style="form-control">
+                </select>
+
+            </div>
+            <div class="form-group col-sm-10">
+                <label>Apartamento</label>
+                <select ng-model="datos.query.idapartamento" name="apartamento" ng-options="apartamento.idApartamento as apartamento.Nombre for apartamento in datos.apartamentos | filter:{Piso: datos.query.Piso, idEdificio: datos.query.idEdificio}" class="form-control" data-style="form-control">
+                </select>
+            </div>
+
         </div>
         <div class="form-group">
             <center>
