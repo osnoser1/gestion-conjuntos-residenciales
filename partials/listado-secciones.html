@@ -34,12 +34,19 @@ $(function() {
         <h4 class="modal-title" id="myModalLabel">Modificar Seccion</h4>
       </div>
       <div class="modal-body">
-        <form role="form">
-          <label>Titulo</label><input  type="text" id="Titulo" class="form-control" placeholder="Titulo">
-          <textarea   class="summernote form-control" rows="10" cols="50"  >
-          </textarea>
-          
-        </form>
+        <h6>De: <label id="de"></label></h6>
+      <h6>Titulo: <label id="titulo"></label></h6>
+      <h6>Fecha: <label id="fecha1"></label> </h6>      
+      <form role="form">
+        <div class="form-control" style="height:300px; overflow: auto; " placeholder="Descripcion" id="descripcion">        
+        </div>
+      <form>
+
+      <br>
+      <footer>
+
+         <button type="submit" class="btn" id="marcar">Marcar Como no Leido </button>
+      </footer>
 
       </div>
       <div class="modal-footer">
