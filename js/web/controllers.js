@@ -47,6 +47,33 @@ pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $ht
                         }
             });
 
+    $(document).on('click', '.correo', (function(e) {
+        var idmensaje = $(this).attr('name');
+        console.log("idmensaje" + idmensaje);
+        $.ajax
+                ({
+                    type: "POST",
+                    url: "models/consultas-crearMensaje.php",
+                    data: {id: 23, ID: idmensaje},
+                    async: true,
+                    dataType: "json",
+                    success:
+                            function(msg)
+                            {
+                                de2.innerHTML = msg[0].de;
+                                titulo2.innerHTML = msg[0].asunto;
+                                fecha2.innerHTML = msg[0].fecha;
+                                descripcion2.innerHTML = msg[0].descripcion;
+                            },
+                    error:
+                            function(msg) {
+                                console.log(msg + "No se pudo realizar la conexion en controller linea 36");
+                            }
+                });
+
+        $('#vercorreo').modal('show');
+    }));
+
     $scope.error = function(data, status, headers, config) {
         $rootScope.loading = false;
         $rootScope.myModalAccept = false;
@@ -169,32 +196,7 @@ pruebaControllers.controller('PanelHeaderCtrl', function(Auth, $state, $scope, $
                         }
             });
 
-    $(document).on('click', '.correo', (function(e) {
-        var idmensaje = $(this).attr('name');
-        console.log("idmensaje" + id);
-        $.ajax
-                ({
-                    type: "POST",
-                    url: "models/consultas-crearMensaje.php",
-                    data: {id: 23, ID: idmensaje},
-                    async: true,
-                    dataType: "json",
-                    success:
-                            function(msg)
-                            {
-                                de.innerHTML = msg[0].de;
-                                titulo2.innerHTML = msg[0].asunto;
-                                fecha1.innerHTML = msg[0].fecha;
-                                descripcion.innerHTML = msg[0].descripcion;
-                            },
-                    error:
-                            function(msg) {
-                                console.log(msg + "No se pudo realizar la conexion en controller linea 36");
-                            }
-                });
 
-        $('#vercorreo').modal('show');
-    }));
     $scope.CrearMensaje = function(datos) {
 
         /*console.log($('.summernote').code());*/
@@ -313,3 +315,5 @@ Array.prototype.remove = function() {
     }
     return this;
 };
+
+

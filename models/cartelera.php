@@ -46,6 +46,9 @@ switch($id)
 	case 11: 
 		IngresarporApartamento();
 		break;	
+	case 12:
+		restringirPublicacion();
+		break;
 	default;
 
 
@@ -60,6 +63,69 @@ else{
 }
 // $nueva=a:8:{i:0;s:1:"2";i:1;s:1:"4";i:2;s:1:"6";i:3;s:1:"8";i:4;s:2:"10";i:5;s:2:"12";i:6;s:2:"14";i:7;s:2:"19";};
 // $nueva=unserialize($nueva);
+
+function restringirPublicacion(){
+		session_start();
+		$mysqli = new mysqli(Host, User, "", BasedeDatos);
+		
+		$tamaño=5;
+		$tupla1="SELECT Count(*) as cantidad FROM post";
+		$usuario=$_SESSION["ID"];
+
+		$resultado = $mysqli->query($tupla1);
+		$cantidadderegistro="";
+		if($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
+			$cantidadderegistro=$db_resultado['cantidad'];
+		}
+		
+		$paginas=(int)($cantidadderegistro/$tamaño);
+		
+					
+		$tupla="SELECT * FROM post  order by idpost desc limit $tamaño" ;
+		$resultado = $mysqli->query($tupla);
+		
+		$objeto[0]['paginas']=$paginas;	
+	
+
+		$tupla2="SELECT idApartamento FROM apartamento WHERE idUsuario='$usuario'";
+		$resultado2 = $mysqli->query($tupla2);
+		$idApartamento="";
+		if($db_resultado = mysqli_fetch_array($resultado2, MYSQLI_ASSOC))
+		{		
+			$idApartamento=$db_resultado['idApartamento'];	
+			
+		}	
+
+
+
+		$tupla="SELECT * FROM post";
+		$resultado = $mysqli->query($tupla);
+			
+		$i=0;
+		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
+		{
+			$apartamentos=unserialize($db_resultado['aptos']);
+			for ($x=0; $x <sizeof($apartamentos) ; $x++) {
+					if($idApartamento==$apartamentos[$x]){
+							$objeto[$i]['titulo']=$db_resultado['titulo'];
+							$objeto[$i]['contenido']=$db_resultado['contenido'];	
+							$objeto[$i]['idpost']=$db_resultado['idpost'];
+							$objeto[$i]['fecha']=$db_resultado['fecha'];
+							$objeto[$i]['usuario']=$db_resultado['usuario'];
+							$i++;							
+					}
+
+			}	
+			/*echo "<br>";*/		
+				
+		}	
+		$objeto[0]['m']=$i;	
+		$mysqli->close();
+	
+	echo json_encode($objeto);
+
+}
+
 function restringir(){
 	session_start();
 		echo json_encode($_SESSION["TipoUsuario"]);
