@@ -1,6 +1,7 @@
 <?php
 	include("conector.php");
-
+	include "Mensajes.php";
+	
 
 	if(isset($_POST['id'])){
 		$id=$_POST['id'];

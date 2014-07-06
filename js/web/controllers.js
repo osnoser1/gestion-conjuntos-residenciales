@@ -8,7 +8,7 @@ pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $ht
 
 
     $scope.cargando = false;
-
+     console.log("entrando a controller");
     $.ajax
             ({
                 type: "POST",
@@ -47,32 +47,6 @@ pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $ht
                         }
             });
 
-    $(document).on('click', '.correo', (function(e) {
-        var idmensaje = $(this).attr('name');
-        console.log("idmensaje" + idmensaje);
-        $.ajax
-                ({
-                    type: "POST",
-                    url: "models/consultas-crearMensaje.php",
-                    data: {id: 23, ID: idmensaje},
-                    async: true,
-                    dataType: "json",
-                    success:
-                            function(msg)
-                            {
-                                de2.innerHTML = msg[0].de;
-                                titulo2.innerHTML = msg[0].asunto;
-                                fecha2.innerHTML = msg[0].fecha;
-                                descripcion2.innerHTML = msg[0].descripcion;
-                            },
-                    error:
-                            function(msg) {
-                                console.log(msg + "No se pudo realizar la conexion en controller linea 36");
-                            }
-                });
-
-        $('#vercorreo').modal('show');
-    }));
 
     $scope.error = function(data, status, headers, config) {
         $rootScope.loading = false;
@@ -176,25 +150,7 @@ pruebaControllers.controller('PanelCtrl', function($scope, $http, $location) {
 pruebaControllers.controller('PanelHeaderCtrl', function(Auth, $state, $scope, $http, $location, $sce, $rootScope) {
     $scope.header = "partials/panel-header.html";
     $scope.header = "partials/panel-header.html";
-    $.ajax
-            ({
-                type: "POST",
-                url: "models/consultas-crearMensaje.php",
-                data: {id: 16},
-                async: true,
-                dataType: "json",
-                success:
-                        function(msg)
-                        {
-                            $scope.mensajes = msg[0].m;
-                            $scope.datos = msg;
-                            console.log("actualizado barra3")
-                        },
-                error:
-                        function(msg) {
-                            console.log(msg + "No se pudo realizar la conexion en controller linea 36");
-                        }
-            });
+
 
 
     $scope.CrearMensaje = function(datos) {
