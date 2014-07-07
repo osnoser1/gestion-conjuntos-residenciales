@@ -87,12 +87,12 @@ function restringirPublicacion(){
 		$objeto[0]['paginas']=$paginas;	
 	
 
-		$tupla2="SELECT idApartamento FROM apartamento WHERE idUsuario='$usuario'";
+		$tupla2="SELECT idapartamento FROM apartamento_usuario WHERE idusuario='$usuario'";
 		$resultado2 = $mysqli->query($tupla2);
 		$idApartamento="";
 		if($db_resultado = mysqli_fetch_array($resultado2, MYSQLI_ASSOC))
 		{		
-			$idApartamento=$db_resultado['idApartamento'];	
+			$idApartamento=$db_resultado['idapartamento'];	
 			
 		}	
 
@@ -105,7 +105,7 @@ function restringirPublicacion(){
 		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 		{
 			$apartamentos=unserialize($db_resultado['aptos']);
-			for ($x=0; $x <sizeof($apartamentos) ; $x++) {
+			for ($x=0; $x <sizeof($apartamentos); $x++) {
 					if($idApartamento==$apartamentos[$x]){
 							$objeto[$i]['titulo']=$db_resultado['titulo'];
 							$objeto[$i]['contenido']=$db_resultado['contenido'];	
