@@ -347,7 +347,7 @@ function eventos (){
             success:
             function () {                 
               $('#myModal').modal('hide');
-              show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
+              show({message: {text: "Su anuncio ha sido publicado"}, type: 'success'});
               titulo.value="";
                 console.log("cargar inicio");
                $('.summernote').code('');
@@ -357,7 +357,7 @@ function eventos (){
         }
         else{
           $('#myModal').modal('hide');
-          show({message: {text: "Debe elejir una restriccion"}, type: 'danger'});
+          show({message: {text: "Debe elejir una restricción"}, type: 'danger'});
         }
       }
       console.log('aqui voy');
@@ -375,12 +375,16 @@ function eventos (){
             success:
             function () {                 
               $('#myModal').modal('hide');
-              show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
+              show({message: {text: "Su anuncio ha sido publicado"}, type: 'success'});
               titulo.value="";
               $('.sumernote').code("");
                inicio2();},
             error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
           });
+        }
+         else{
+          $('#myModal').modal('hide');
+          show({message: {text: "Debe elejir una restricción"}, type: 'danger'});
         }
       }
       if($('#Selectapartametos').attr('class')=="active"){
@@ -398,7 +402,7 @@ function eventos (){
               success:
               function () {                 
                 $('#myModal').modal('hide');
-                show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
+                show({message: {text: "Su anuncio ha sido publicado"}, type: 'success'});
                 titulo.value="";
                  $('.summernote').code()==='';
                 inicio2();},
@@ -407,7 +411,7 @@ function eventos (){
           }
           else{
             $('#myModal').modal('hide');
-            show({message: {text: "Debe elejir una restriccion"}, type: 'danger'});
+            show({message: {text: "Debe elejir una restricción"}, type: 'danger'});
           }
         }
         if($('#aptos2').attr('class')=="active"){
@@ -423,7 +427,7 @@ function eventos (){
               success:
               function () {                 
                 $('#myModal').modal('hide');
-                show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
+                show({message: {text: "Su anuncio ha sido publicado"}, type: 'success'});
                 titulo.value="";
                  $('.summernote').code("");
                  inicio2();},
@@ -432,7 +436,7 @@ function eventos (){
           }
           else{
             $('#myModal').modal('hide');
-            show({message: {text: "Debe elejir una restriccion"}, type: 'danger'});
+            show({message: {text: "Debe elejir una restricción"}, type: 'danger'});
           }
         }
       }
@@ -485,6 +489,9 @@ function eventos (){
                       inicio2();
               
               }   
+              else{
+                  show({message: {text: "error al tratar de eliminar la publicación"}, type: 'warning'});
+              }
               },
               error:
               function (msg) {alert( msg +"No se pudo realizar la conexion");}

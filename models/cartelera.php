@@ -98,7 +98,7 @@ function restringirPublicacion(){
 
 
 
-		$tupla="SELECT * FROM post";
+		$tupla="SELECT * FROM post order by idpost desc";
 		$resultado = $mysqli->query($tupla);
 			
 		$i=0;
@@ -112,6 +112,7 @@ function restringirPublicacion(){
 							$objeto[$i]['idpost']=$db_resultado['idpost'];
 							$objeto[$i]['fecha']=$db_resultado['fecha'];
 							$objeto[$i]['usuario']=$db_resultado['usuario'];
+                                                        $objeto[$i]['Apellido']=$db_resultado['Apellido'];
 							$i++;							
 					}
 
