@@ -148,12 +148,12 @@
  </script>
     <div id="restringir" style="display:none;"> 
         <ul class="nav nav-tabs" id="myTab">
-            <li  id="porapartametos" class="active" ><a href="#messages" data-toggle="tab">Por Apartamentos</a></li>
+            <li  id="porapartametos"  ><a href="#messages" data-toggle="tab">Por Apartamentos</a></li>
             <li id="porpisos"><a href="#profile" data-toggle="tab">Por Pisos</a></li>
-            <li id="poredificios" ><a href="#home" data-toggle="tab">Por Edificios</a></li>
+            <li id="poredificios" class="active" ><a href="#home" data-toggle="tab">Por Edificios</a></li>
         </ul>
         <div class="tab-content">
-        <div class="tab-pane active" id="messages">
+        <div class="tab-pane " id="messages">
               <div class="row">
                 <div class="col-xs-4 col-sm-4"><select id="Edificios3"   style="width:120px;" ></select></div>
                 <div class="col-xs-4 col-sm-4"><select id="Pisos2" style="width:120px; " ></select></div>
@@ -167,7 +167,7 @@
               <select id="Edificios2"  style="width:120px;" ></select>
               <select id="Pisos" multiple="multiple" style="width:120px;"></select>
             </div>        
-            <div class="tab-pane " id="home">
+            <div class="tab-pane active" id="home">
               <select id="Edificios" multiple="multiple" style="width:120px;" ></select>
             </div>   
         </div>
@@ -182,13 +182,13 @@
       <br> 
      
       <form role="form">
-        <label>Para</label><input ng-model="datos.para" type="text" id="para" class="form-control" placeholder="Para" readonly>
-        <label>Titulo</label><input ng-model="datos.titulo" type="text" id="Titulo" class="form-control" placeholder="Asunto del Mensaje">
+        <label>Para</label><input  type="text" id="para" class="form-control" placeholder="Para" readonly>
+        <label>Titulo</label><input  type="text" id="Titulo" class="form-control" placeholder="Asunto del Mensaje">
 
-        <textarea  ng-model="datos.mensaje" class="summernote form-control" rows="10" cols="50" placeholder="Descripcion">
+        <textarea   class="summernote form-control" rows="10" cols="50" placeholder="Descripcion">
           
         </textarea>
-         <button class="btn btn-danger" id="cancelar">Cancelar</button> <button class="btn btn-primary" ng-click="CrearMensaje(datos)">Enviar</button>
+         <button class="btn btn-danger" id="cancelar">Cancelar</button> <button class="btn btn-primary" id="enviarmensaje" >Enviar</button>
         
       <form>
   </div>

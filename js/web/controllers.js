@@ -8,44 +8,6 @@ pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $ht
 
 
     $scope.cargando = false;
-     console.log("entrando a controller");
-    $.ajax
-            ({
-                type: "POST",
-                url: "models/consultas-crearMensaje.php",
-                data: {id: 16},
-                async: true,
-                dataType: "json",
-                success:
-                        function(msg)
-                        {
-                            $scope.mensajes = msg[0].m;
-                            $scope.datos = msg;
-                        },
-                error:
-                        function(msg) {
-                            alert(msg + "No se pudo realizar la conexion");
-                        }
-            });
-
-    $.ajax
-            ({
-                type: "POST",
-                url: "models/consultas-crearMensaje.php",
-                data: {id: 22},
-                async: true,
-                dataType: "json",
-                success:
-                        function(msg)
-                        {
-                            $scope.nombre = msg;
-                            console.log("estoy aqui2");
-                        },
-                error:
-                        function(msg) {
-                            alert(msg + "No se pudo realizar la conexion");
-                        }
-            });
 
 
     $scope.error = function(data, status, headers, config) {
@@ -156,89 +118,8 @@ pruebaControllers.controller('PanelHeaderCtrl', function(Auth, $state, $scope, $
     $scope.CrearMensaje = function(datos) {
 
         /*console.log($('.summernote').code());*/
-        console.log(datos.mensaje);
-        if (para.value != "" && Titulo.value != "" && $('.summernote').code() != "") {
-            $.ajax
-                    ({
-                        type: "POST",
-                        url: "models/consultas-crearMensaje.php",
-                        data: {id: 5, para: para.value, titulo: Titulo.value, mensaje: $('.summernote').code()},
-                        async: false,
-                        dataType: "json",
-                        success:
-                                function(msg)
-                                {
-                                    console.log(msg);
-                                    show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
-                                    para.value = "";
-                                    titulo:Titulo.value = "";
-                                    $('.summernote').code("");
-                                    $.ajax
-                                            ({
-                                                type: "POST",
-                                                url: "models/consultas-crearMensaje.php",
-                                                data: {id: 17},
-                                                async: true,
-                                                dataType: "json",
-                                                success:
-                                                        function(msg)
-                                                        {
-                                                            console.log("privilegio: " + msg);
-
-                                                            if (msg == "1") {
-                                                                $('#restringir2').fadeIn();
-                                                                $('#seleccionar').fadeOut();
-                                                                $.ajax
-                                                                        ({
-                                                                            type: "POST",
-                                                                            url: "models/consultas-crearMensaje.php",
-                                                                            data: {id: 21},
-                                                                            async: true,
-                                                                            dataType: "json",
-                                                                            success:
-                                                                                    function(msg)
-                                                                                    {
-                                                                                        for (i = 0; i < msg[0].m; i++)
-                                                                                        {
-
-                                                                                            administradores.options[i] = new Option(msg[i].correo);
-                                                                                            administradores.options[i].text = msg[i].correo;
-                                                                                            administradores.options[i].value = msg[i].correo;
-                                                                                        }
-                                                                                        $('#administradores').multiselect('rebuild');
-                                                                                        $('#seleccionar2').fadeIn();
-
-                                                                                    },
-                                                                            error:
-                                                                                    function(msg) {
-                                                                                        alert(msg + "No se pudo realizar la conexion");
-                                                                                    }
-                                                                        });
-                                                            }
-
-
-
-                                                            if (msg == "2")
-                                                                $('#restringir').fadeIn();
-                                                            $('#seleccionar').fadeIn();
-
-                                                        },
-                                                error:
-                                                        function(msg) {
-                                                            alert(msg + "No se pudo realizar la conexion");
-                                                        }
-                                            });
-                                },
-                        error:
-                                function(msg) {
-                                    alert(msg + "No se pudo realizar la conexion");
-                                }
-                    });
-
-        }
-        else {
-            show({message: {text: "Debe llenar todos los campos para poder enviar el mensaje"}, type: 'danger'});
-        }
+        console.log(para.value + ":"+Titulo.value+":"+$('.summernote').code());
+        
     };
 });
 

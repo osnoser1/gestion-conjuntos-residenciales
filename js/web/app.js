@@ -56,5 +56,10 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider',
             templateUrl: templateUrl
         });
         //$locationProvider.html5Mode(true);
+
+    /*    myApp.controllerProvider.register('PanelHeaderCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope, $location) {
+    console.log("desde app.js");
+
+});*/
     }
 ]);
