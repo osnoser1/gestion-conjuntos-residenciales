@@ -6,17 +6,6 @@ var myApp = angular.module('myApp');
 myApp.controllerProvider.register('PanelHeaderCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope, $location) {
     console.log("PanelHeaderCtrl");
     //$scope.usuario = {};
-    $scope.safeApply = function(fn) {
-        var phase = this.$root.$$phase;
-        if(phase == '$apply' || phase == '$digest') {
-            if(fn && (typeof(fn) === 'function')) {
-                fn();
-            }
-        } else {
-            this.$apply(fn);
-        }
-    };
-
     $scope.logout = function() {
         console.log("Deslogear");
         $http.get(url + 'usuario/cerrarSesion').success(function(data) {
@@ -28,11 +17,6 @@ myApp.controllerProvider.register('PanelHeaderCtrl', function($scope, $http, $q,
             }
         });
     };
-
-    $scope.safeApply(function(){
-//Aquí colocarías el código para actualizar los datos del modelo
-
-
       $.ajax
             ({
                 type: "POST",
@@ -43,15 +27,17 @@ myApp.controllerProvider.register('PanelHeaderCtrl', function($scope, $http, $q,
                 success:
                         function(msg)
                         {
-                            $scope.mensajes = msg[0].m;
-                            $scope.datos = msg;
+                            console.log("actualizando panel de notificacion");
+                            $scope.$apply(function() {
+                                $scope.mensajes = msg[0].m;
+                                $scope.datos = msg;
+                             });
                         },
                 error:
                         function(msg) {
                             alert(msg + "No se pudo realizar la conexion");
                         }
             });
-
     $.ajax
             ({
                 type: "POST",
@@ -62,15 +48,17 @@ myApp.controllerProvider.register('PanelHeaderCtrl', function($scope, $http, $q,
                 success:
                         function(msg)
                         {
+                            $scope.$apply(function() {
                             $scope.nombre = msg;
-                            console.log("estoy aqui2");
+                            });
+                            console.log("actualizando panel de notificacion2");
                         },
                 error:
                         function(msg) {
                             alert(msg + "No se pudo realizar la conexion");
                         }
             });
-});
+
     $(document).on('click', '.correo', (function(e) {
         var idmensaje = $(this).attr('name');
         console.log("idmensaje" + idmensaje);
