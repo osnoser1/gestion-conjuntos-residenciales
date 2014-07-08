@@ -105,7 +105,7 @@ function eventos (){
       success:
       function (msg) {    
         $('#paginas').empty();
-        //console.log("Paginas " + msg[0].paginas);
+       console.log("Paginas " + msg[0].paginas);
         var ul=$('<ul class="pagination" ></ul>');
         for(i=0; i<=msg[0].paginas; i++){
           var li; 
@@ -284,7 +284,7 @@ function eventos (){
       $.ajax({
         type: "POST",
         url: "models/cartelera.php",
-        data: {id:3, idEdificio:Edificios3.value, idPiso:Pisos2.value},
+        data: {id:3, idPiso:Pisos2.value, idEdificio:Edificios3.value},
         async: true,
         dataType: "json",
         success:
@@ -341,7 +341,7 @@ function eventos (){
           $.ajax({
             type: "POST",
             url: "models/cartelera.php",
-            data: {id:4, para:titulo.value,contenido:$('.summernote').code(),edificios:$('#Edificios').val()},
+            data: {id:4,edificios:$('#Edificios').val(),para:titulo.value,contenido:$('.summernote').code()},
             async: true,
             dataType: "json",
             success:
@@ -369,7 +369,7 @@ function eventos (){
           $.ajax({
             type: "POST",
             url: "models/cartelera.php",
-            data: {id:10, para:titulo.value,contenido:$('.summernote').code(),edificios:$('#Edificios2').val(),piso:$('#Pisos').val()},
+            data: {id:10,edificios:$('#Edificios2').val(),piso:$('#Pisos').val(), para:titulo.value,contenido:$('.summernote').code()},
             async: true,
             dataType: "json",
             success:
@@ -377,7 +377,7 @@ function eventos (){
               $('#myModal').modal('hide');
               show({message: {text: "Su anuncio ha sido publicado"}, type: 'success'});
               titulo.value="";
-              $('.sumernote').code("");
+               $('.summernote').code('');
                inicio2();},
             error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
           });
@@ -387,12 +387,12 @@ function eventos (){
           show({message: {text: "Debe elejir una restricción"}, type: 'danger'});
         }
       }
-      if($('#Selectapartametos').attr('class')=="active"){
-        console.log("Selectapartametos")
-        if($('#aptos1').attr('class')=="active"){
-          console.log("aptos1")
-          if($('#Apartamentos').val()!=null){
-            console.log("apartamentos")
+      if($('#Selectapartametos').attr('class')==="active"){
+        console.log("Selectapartametos");
+        if($('#aptos1').attr('class')==="active"){
+          console.log("aptos1");
+          if($('#Apartamentos').val()!==null){
+            console.log("apartamentos");
             $.ajax({
               type: "POST",
               url: "models/cartelera.php",
@@ -404,7 +404,7 @@ function eventos (){
                 $('#myModal').modal('hide');
                 show({message: {text: "Su anuncio ha sido publicado"}, type: 'success'});
                 titulo.value="";
-                 $('.summernote').code()==='';
+                  $('.summernote').code('');
                 inicio2();},
               error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
             });
@@ -414,10 +414,10 @@ function eventos (){
             show({message: {text: "Debe elejir una restricción"}, type: 'danger'});
           }
         }
-        if($('#aptos2').attr('class')=="active"){
-          console.log("aptos1")
-          if($('#Apartamentos').val()!=null){
-            console.log("apartamentos")
+        if($('#aptos2').attr('class')==="active"){
+          console.log("aptos1");
+          if($('#Apartamentos').val()!==null){
+            console.log("apartamentos");
             $.ajax({
               type: "POST",
               url: "models/cartelera.php",
@@ -429,7 +429,7 @@ function eventos (){
                 $('#myModal').modal('hide');
                 show({message: {text: "Su anuncio ha sido publicado"}, type: 'success'});
                 titulo.value="";
-                 $('.summernote').code("");
+                 $('.summernote').code('');
                  inicio2();},
               error: function (msg) {alert( msg +"No se pudo realizar la conexion");}
             });
@@ -447,6 +447,7 @@ function eventos (){
       }
   });
   function cargarcartelera(msg){
+      
                        $('#contenedor2').html("");
 
      

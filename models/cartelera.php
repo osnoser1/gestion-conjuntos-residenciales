@@ -1,69 +1,75 @@
 <?php
- 	define('Host', 'localhost');
-	define('User', 'root');
-	define('Pass', '');
- 	define('BasedeDatos','conjunto_residencial');
+    include("conector.php");
+    include "Restricciones.php";
+    include "CarteleraClass.php";
 
 if(isset($_POST['id'])){
     $id=$_POST['id'];
 
-switch($id)
-{
-	
+    switch($id){
 	case 1:
-		seleccionarEdificios();
+                $e=new Restricciones();
+		echo $e->SeleccionarEdificio();
 		break;
 
 	case 2:
-		Seleccionarpisos();
+		$e=new Restricciones();
+                echo $e->SeleccionarPïsos($_REQUEST['idEdificio']);
 		break;
 
 	case 3:
-		seleccionaraptos();
+		$e=new Restricciones();
+                echo $e->SeleccionarApartamento($_REQUEST['idPiso'], $_REQUEST['idEdificio']);
 		break;
 
 	case 4: 
-		Ingresar();
+		$c=new CarteleraClass();
+                echo  $c->IngresarPorEdificio($_REQUEST['edificios'],$_REQUEST['para'], $_REQUEST['contenido']);
 		break;
 	case 5:
-		publicaciones();
+                $c=new CarteleraClass();
+                echo $c->publicaciones();
 		break;
 	case 6:
-		borrarPublicacion();
+                $c=new CarteleraClass();
+                echo $c->borrarPublicacion($_REQUEST['idpost']);
 		break;
 	case 7:
-		siguientepagina();
-		break;
+                 $c=new CarteleraClass();
+                 echo $c->siguientepagina($_REQUEST['pagina']);
+		 break;
 	case 8:
-		seleccionaraptosdeedif();
+                $e=new Restricciones();
+                echo $e->SeleccionarApartamentoEdificio($_REQUEST['idEdificio']);
 		break;
 	case 9:
-		restringir();
-		break;
+                 $e=new Restricciones();
+                 echo $e->restringir();
+	         break;
 	case 10: 
-		IngresarPorpiso();
+                 $c=new CarteleraClass();
+                 echo $c->IngresarPorpiso($_REQUEST['edificios'],$_REQUEST['piso'], $_REQUEST['para'],$_REQUEST['contenido']);
 		break;
 	case 11: 
-		IngresarporApartamento();
+                $c=new CarteleraClass();
+		echo $c->IngresarporApartamento($_REQUEST['apartamentos'],$_REQUEST['para'],$_REQUEST['contenido']);
 		break;	
 	case 12:
-		restringirPublicacion();
+                $c=new CarteleraClass();
+                echo $c->restringirPublicacion();
 		break;
 	default;
-
-
-
-}
-}
-else{
+        }
+    }
+    else{
 	$input = json_decode(file_get_contents("php://input"));
 	if ($input != null) {
 		echo call_user_func($input->funcion);
-	}
+    }
 }
 // $nueva=a:8:{i:0;s:1:"2";i:1;s:1:"4";i:2;s:1:"6";i:3;s:1:"8";i:4;s:2:"10";i:5;s:2:"12";i:6;s:2:"14";i:7;s:2:"19";};
 // $nueva=unserialize($nueva);
-
+/*
 function restringirPublicacion(){
 		session_start();
 		$mysqli = new mysqli(Host, User, "", BasedeDatos);
@@ -117,7 +123,7 @@ function restringirPublicacion(){
 					}
 
 			}	
-			/*echo "<br>";*/		
+					
 				
 		}	
 		$objeto[0]['m']=$i;	
@@ -375,5 +381,5 @@ function publicaciones(){
 			}		
 			$mysqli->close();
 			echo json_encode($objeto);
-	}
+	}*/
 ?>
