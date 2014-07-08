@@ -104,6 +104,20 @@ SELECT * FROM apartamento INNER JOIN apartamentotipo ON apartamento.idTipo = idA
 		$this->render('create', array( 'model' => $model));
 	}
 
+	public function actionActualizar() {
+		if (isset($_POST['Apartamento'])) {
+			$apartamento = $_POST['Apartamento'];
+			$model = $this->loadModel($apartamento['idApartamento'], 'Apartamento');
+			$model->setAttributes($apartamento);
+
+			if ($model->save()) {
+				 echo $this->salida(true, "aviso", "Apartamento actualizado exitosamente");
+				 return;
+			}
+		}
+		echo $this->salida(false, "aviso", "Error en el servidor");
+	}
+
 	public function actionUpdate($id) {
 		$model = $this->loadModel($id, 'Apartamento');
 
