@@ -5,10 +5,7 @@ var pruebaControllers = angular.module('myControllers', []);
 
 pruebaControllers.controller('PrincipalCtrl', function(Auth, $state, $scope, $http, $location, $sce, $rootScope) {
 
-
-
     $scope.cargando = false;
-
 
     $scope.error = function(data, status, headers, config) {
         $rootScope.loading = false;
