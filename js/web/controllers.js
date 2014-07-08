@@ -106,7 +106,7 @@ pruebaControllers.controller('LoginCtrl', ['$scope', '$state', '$location', '$ht
 pruebaControllers.controller('PanelCtrl', function($scope, $http, $location) {
     $scope.header = "partials/panel-header.html";
 
-
+    $scope.variable = 1;
 });
 
 pruebaControllers.controller('PanelHeaderCtrl', function(Auth, $state, $scope, $http, $location, $sce, $rootScope) {
@@ -118,8 +118,8 @@ pruebaControllers.controller('PanelHeaderCtrl', function(Auth, $state, $scope, $
     $scope.CrearMensaje = function(datos) {
 
         /*console.log($('.summernote').code());*/
-        console.log(para.value + ":"+Titulo.value+":"+$('.summernote').code());
-        
+        console.log(para.value + ":" + Titulo.value + ":" + $('.summernote').code());
+
     };
 });
 
