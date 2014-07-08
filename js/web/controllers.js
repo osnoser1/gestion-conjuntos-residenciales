@@ -102,8 +102,17 @@ pruebaControllers.controller('LoginCtrl', ['$scope', '$state', '$location', '$ht
 
 pruebaControllers.controller('PanelCtrl', function($scope, $http, $location) {
     $scope.header = "partials/panel-header.html";
+    $scope.tipousuario = 1;
 
-    $scope.variable = 1;
+    $http.get(url + 'usuario/tipoUsuario').success(function(data, status, headers, config) {
+        console.log("Get11");
+        console.dir(data);
+        if (data === null){
+            $scope.error(data, status, headers, config);
+            return;
+        }
+        $scope.tipousuario = data;
+    }).error($scope.error);
 });
 
 pruebaControllers.controller('PanelHeaderCtrl', function(Auth, $state, $scope, $http, $location, $sce, $rootScope) {

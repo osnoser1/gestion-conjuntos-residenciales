@@ -15,21 +15,21 @@
             <li class="dropdown">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-money"></i> Pagos <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#/panel/pagos-consignar">Consignar Pago (Usuario)</a></li>
-                    <li><a href="#/panel/pagos-consignaciones">Historial de Consignaciones (Usuario)</a></li>
-                    <li><a href="#/panel/pagos-pendientes">Pagos Pendientes (Admin)</a></li>
-                    <li><a href="#/panel/pagos-pendientes-user">Pagos Pendientes (User)</a></li>
-                    <li><a href="#/panel/pagos-historial">Historial Pagos (User)</a></li>
+                    <li><a href="#/panel/pagos-consignar" ng-show="tipousuario == 1">Consignar Pago</a></li>
+                    <li><a href="#/panel/pagos-consignaciones" ng-show="tipousuario == 1">Historial de Consignaciones</a></li>
+                    <li><a href="#/panel/pagos-pendientes" ng-show="tipousuario == 2">Pagos Pendientes</a></li>
+                    <li><a href="#/panel/pagos-pendientes-user" ng-show="tipousuario == 1">Pagos Pendientes</a></li>
+                    <li><a href="#/panel/pagos-historial" ng-show="tipousuario == 1">Historial Pagos</a></li>
                 </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown" ng-show="tipousuario == 2">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> Usuarios <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#/panel/usuario-crear">Crear</a></li>
-                    <li><a href="#/panel/usuario-listado">Listado</a></li>
+                    <li><a href="#/panel/usuario-crear" ng-show="tipousuario == 2">Crear</a></li>
+                    <li><a href="#/panel/usuario-listado" ng-show="tipousuario == 2">Listado</a></li>
                 </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown" ng-show="tipousuario == 2">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-usd"></i> Gastos <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="#/panel/gastos-actuales">Actuales (Administrador)</a></li>
@@ -40,13 +40,13 @@
             <li class="dropdown">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cogs"></i> Servicios <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#/panel/solicitudes-servicios">Solicitudes</a></li>
-                    <li><a href="#/panel/historial-servicios">Historial</a></li>
-                    <li><a href="#/panel/administrar-servicios">Administrar Servicios(A)</a></li>
-                    <li><a href="#/panel/gestionar-servicios">Gestionar Servicios(A)</a></li>
+                    <li><a href="#/panel/solicitudes-servicios" ng-show="tipousuario == 1">Solicitudes</a></li>
+                    <li><a href="#/panel/historial-servicios" ng-show="tipousuario == 1">Historial</a></li>
+                    <li><a href="#/panel/administrar-servicios" ng-show="tipousuario == 2">Administrar Servicios(A)</a></li>
+                    <li><a href="#/panel/gestionar-servicios" ng-show="tipousuario == 2">Gestionar Servicios(A)</a></li>
                 </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown" ng-show="tipousuario == 2">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cogs"></i> Página principal <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="#/panel/crear-seccion">Crear sección</a></li>
@@ -54,14 +54,14 @@
                     <li><a href="#/panel/modificar-PaginaPrincipal">Modificar Página Principal</a></li>
                 </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown" ng-show="tipousuario == 2">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-tower"></i> Edificios <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="#/panel/agregar-edificio">Agregar</a></li>
                     <li><a href="#/panel/listado-edificios">Listado</a></li>
                 </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown" ng-show="tipousuario == 2">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-tags"></i> Apartamentos <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="#/panel/inicio-apartamento">Inicio</a></li>
@@ -72,12 +72,11 @@
         </ul>
     </aside>
     <section id="page-wrapper">
-        {{variable}}
         <div id="contenedor" class="col-sm-12" ui-view>
-            <h1>Blank Page <small>A Blank Slate</small></h1>
+            <h1>Seleccione una opción del menú. <small>Para navegar por la web</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#/panel/login"><i class="icon-dashboard"></i> Dashboard</a></li>
-                <li class="active"><i class="icon-file-alt"></i> Blank Page</li>
+                <li><a href="#/panel/login"><i class="icon-dashboard"></i> Regresar al login</a></li>
+                <li class="active"><i class="icon-file-alt"></i> Conjunto Residencial</li>
             </ol>
         </div>
     </section><!-- /#page-wrapper -->
