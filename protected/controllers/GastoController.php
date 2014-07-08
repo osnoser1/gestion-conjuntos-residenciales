@@ -17,11 +17,11 @@ class GastoController extends GxController {
         if ($o instanceof Edificio) {
             $array[] = ["text" => "Edif. $o->Nombre", "idEdificio" => $o->idEdificio];
             for ($index = 1; $index <= $o->NroDePisos; $index++) {
-                $array[] = ["text" => "Piso $index - Edif. $o->Nombre", "idEdificio" => $o->idEdificio, "NroDePiso" => $index];
+                $array[] = ["text" => "Piso $index - Edif. $o->Nombre", "idEdificio" => $o->idEdificio, "NroDePiso" => $index + ""];
             }
         } else {
             $nombre = $o->idEdificio0->Nombre;
-            $array[] = ["text" => "Apto. $o->Nombre - Edif. $nombre", "idEdificio" => $o->idEdificio, "idApartamento" => $o->idApartamento, "NroDePiso" => $o->Piso];
+            $array[] = ["text" => "Apto. $o->Nombre - Edif. $nombre", "idEdificio" => $o->idEdificio, "idApartamento" => $o->idApartamento, "NroDePiso" => $o->Piso + ""];
         }
         return $array;
     }
@@ -37,10 +37,13 @@ class GastoController extends GxController {
         $salida["datos"]["Fecha"] = $gf->Fecha;
         $salida["datos"]["Ano"] = date('Y', strtotime($gf->Fecha));
         $salida["datos"]["Mes"] = date('M', strtotime($gf->Fecha));
+        $salida["datos"]["GEH"] = [];
         foreach ($gh as $value) {
             $el = $value->getAttributes();
             $el['Nombre'] = $value->idGasto0->Nombre;
             $salida["datos"]["gastos"][] = $el;
+            $gehs = GastoEntidadHistorial::model()->findAllByAttributes(["idGastoHistorial" => $value->idGastoHistorial]);
+            $salida["datos"]["GEH"] = array_merge($salida["datos"]["GEH"], $this->modelToArray($gehs));
         }
         $salida["gastos"] = $this->modelToArray(Gasto::model()->findAll());
         $salida["Total"] = Yii::app()->db->createCommand()
@@ -48,8 +51,10 @@ class GastoController extends GxController {
                         ->from('gasto_historial')
                         ->where("idGastoFecha=$gf->idGastoFecha")
                         ->queryRow()["Total"];
-        $salida["datos"]["sitios"] = array_merge([], $this->getListado(Edificio::model()->findAll()));
-        $salida["datos"]["sitios"] = array_merge($salida["datos"]["sitios"], $this->getListado(Apartamento::model()->findAll()));
+        $edificios = Edificio::model()->findAll();
+        $salida["datos"]["sitios"] = array_merge([], $this->getListado($edificios));
+        $aptos = Apartamento::model()->findAll();
+        $salida["datos"]["sitios"] = array_merge($salida["datos"]["sitios"], $this->getListado($aptos));
         $salida["datos"]["sitios"][] = ["text" => "Todos"];
         return $salida;
     }
@@ -152,16 +157,24 @@ class GastoController extends GxController {
             $salida["datos"]["Fecha"] = $gf->Fecha;
             $salida["datos"]["Ano"] = date('Y', strtotime($gf->Fecha));
             $salida["datos"]["Mes"] = date('M', strtotime($gf->Fecha));
+            $salida["datos"]["GEH"] = [];
             foreach ($gh as $value) {
                 $el = $value->getAttributes();
                 $el['Nombre'] = $value->idGasto0->Nombre;
                 $salida["datos"]["gastos"][] = $el;
+                $gehs = GastoEntidadHistorial::model()->findAllByAttributes(["idGastoHistorial" => $value->idGastoHistorial]);
+                $salida["datos"]["GEH"] = array_merge($salida["datos"]["GEH"], $this->modelToArray($gehs));
             }
             $salida["Total"] = Yii::app()->db->createCommand()
                             ->select('SUM(Precio) as Total')
                             ->from('gasto_historial')
                             ->where("idGastoFecha=$id")
                             ->queryRow()["Total"];
+            $edificios = Edificio::model()->findAll();
+            $salida["datos"]["sitios"] = array_merge([], $this->getListado($edificios));
+            $aptos = Apartamento::model()->findAll();
+            $salida["datos"]["sitios"] = array_merge($salida["datos"]["sitios"], $this->getListado($aptos));
+            $salida["datos"]["sitios"][] = ["text" => "Todos"];
             echo $this->salida(true, $salida);
         } else {
             echo $this->salida(false, "aviso", "Error en el servidor");
@@ -221,6 +234,9 @@ class GastoController extends GxController {
     }
 
     public function modelToArray($models) {
+        if (is_null($models) || count($models) == 0) {
+            return [];
+        }
         foreach ($models as $value) {
             $array[] = $value->getAttributes();
         }

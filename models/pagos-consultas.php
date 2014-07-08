@@ -82,10 +82,10 @@ function ModificarEstadoPago(){
     $mysqli->query("SET NAMES 'utf8'");
     $idPago=$_REQUEST['idPago'];
     $estado=$_REQUEST['estado'];
-    echo $estado;
-
-
+    $idUsuario=$_REQUEST['idUsuario'];
+    $monto=$_REQUEST['monto'];
     $tupla="UPDATE pagos SET idEstado='$estado' WHERE id=$idPago";
     $resultado = $mysqli->query($tupla);
-
+    $tupla="UPDATE usuario SET Abono = Abono + $monto WHERE usuario.ID = $idUsuario";
+    $resultado = $mysqli->query($tupla);
 }

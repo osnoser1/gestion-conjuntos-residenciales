@@ -50,7 +50,7 @@ INSERT INTO `publicacion` (`id`, `titulo`, `contenido`) VALUES
 
 CREATE TABLE IF NOT EXISTS `paginaprincipal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(20) NOT NULL,
+  `titulo` varchar(90) NOT NULL,
   `imagenfondo` mediumblob NOT NULL,
   `footer` text NOT NULL,
   PRIMARY KEY (`id`)

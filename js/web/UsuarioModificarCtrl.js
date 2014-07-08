@@ -10,10 +10,21 @@ myApp.controllerProvider.register('UsuarioModificarCtrl', function($scope, $http
         query: {},
     };
     console.log($rootScope.usuarioModificado);
-
+    if(typeof $rootScope.usuarioModificado === "undefined"){
+        $location.path("panel/usuario-listado");
+        return;
+    }
     $scope.usuarioModificar = function(element)
     {
+        if(typeof $scope.datos.query.idEdificio == "undefined" || typeof $scope.datos.query.Piso == "undefined" || typeof $scope.datos.query.idapartamento == "undefined" ){
+            show({message: {text: "Indique edificio, apartamento y/o piso"}, type: 'danger'});
+            return;
+        }
+        element.Piso = $scope.datos.query.Piso;
+        element.idEdificio = $scope.datos.query.idEdificio;
+        element.idapartamento = $scope.datos.query.idapartamento;
         console.dir(element);
+
         $http.post(url + 'usuario/modificar', $.param({datos: element}), {timeout: 10000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
         ).success(function(data, status, headers, config) {
             console.log("data");
@@ -58,8 +69,6 @@ myApp.controllerProvider.register('UsuarioModificarCtrl', function($scope, $http
                 $scope.AsignarUbicacionUsuario();
             }).error($scope.error);
         }).error($scope.error);
-
-
     };
     $scope.ListarEdificiosyApartamentos();
 
@@ -68,7 +77,7 @@ myApp.controllerProvider.register('UsuarioModificarCtrl', function($scope, $http
         $scope.obtenerPisos();
         $scope.datos.query.Piso = $rootScope.usuarioModificado.Piso;
         $scope.obtenerApartamentos();
-        $scope.datos.query.idApartamento = $rootScope.usuarioModificado.idApartamento;
+        $scope.datos.query.idApartamento = $rootScope.usuarioModificado.idapartamento;
     };
 
 

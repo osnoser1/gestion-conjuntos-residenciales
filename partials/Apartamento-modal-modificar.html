@@ -1,20 +1,25 @@
-<form class="form-horizontal" role="form" ><h4>
+    <form class="form-horizontal" role="form" ><h4>
+
         <div class="form-group ">
-            Nombre: <input type="text" name="nombreApto" value="" class="form-control" ng-model="ApartamentoModificado.Nombre"/>
+            ID: <p class="badge">{{ApartamentoModificado.idApartamento}}</p>
+        </div>
+        <div class="form-group ">
+            Nombre Apto: <input type="text" name="nombreApto" value="" class="form-control" ng-model="ApartamentoModificado.NombreApartamento"/>
         </div>
         <div class="form-group">
             Tipo: <select ng-model="ApartamentoModificado.idTipo" name="tipo" class="form-control"
-                          ng-options="tipo.idApartamentoTipo as tipo.Nombre for tipo in datos.tipos"
-                          required>
-            </select>
-        </div>
-        <div class="form-group">
-            Edificio: <select ng-change="obtenerPisos()" ng-model="datos.query.idEdificio" name="edificio" ng-options="edificio.idEdificio as edificio.Nombre for edificio in datos.edificios" class="form-control" data-style="form-control">
-                <option value="">-- Seleccione torre --</option>
-            </select>
-        </div>
-        <div class="form-group">
-            Piso: <select ng-change="obtenerApartamentos()" ng-model="datos.query.Piso" name="piso" ng-options="piso.Numero as piso.Numero for piso in datos.pisos" class="form-control" data-style="form-control">
-            </select>
-        </div>
-</form>
+            ng-options="tipo.idApartamentoTipo as tipo.Nombre for tipo in datos2.tipos"
+            required>
+        </select>
+    </div>
+    <div class="form-group">
+        Edificio: <select ng-change="obtenerPisos()" ng-model="datos2.query.idEdificio" name="edificio" ng-options="edificio.idEdificio as edificio.Nombre for edificio in datos2.edificios" class="form-control" data-style="form-control">
+        <option value="">-- Seleccione torre --</option>
+    </select>
+    </div>
+    <div class="form-group">
+        Piso: <select ng-model="datos2.query.Piso" name="piso" ng-options="piso.Numero as piso.Numero for piso in datos2.pisos" class="form-control" data-style="form-control">
+    </select>
+    </div>
+    </form>
+

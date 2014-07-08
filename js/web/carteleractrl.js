@@ -33,7 +33,9 @@ function eventos (){
         cargarcartelera(msg);
        
       },
-      error: function (msg) {console.log( msg +"No se pudo realizar la conexion");}
+      error: function (msg) {
+        console.dir(msg);
+        console.log( msg +"No se pudo realizar la conexion1");}
     });
   }
     function inicio2(){

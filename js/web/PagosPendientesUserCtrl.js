@@ -14,9 +14,6 @@ myApp.controllerProvider.register('PagosPendientesUserCtrl', function($scope, $h
     var temp;
     $rootScope.show = false;
     $scope.desactivado = true;
-    $scope.tags = [];
-    $scope.nuevo = {};
-    $scope.datos = {pagos: []};
     $scope.totalSeleccionado = 0;
     $http.get(url + 'pagos/viewPendientes').success(function(data, status, headers, config) {
         if (!data.respuesta) {
@@ -30,7 +27,7 @@ myApp.controllerProvider.register('PagosPendientesUserCtrl', function($scope, $h
             console.log(value);
             $scope.datos.Total += parseFloat(value.Total);
         });
-        $scope.datos.Abono = 55000;
+//        $scope.datos.Abono = 55000;
         $scope.datos.TotalAPagar = $scope.datos.Total - $scope.datos.Abono < 0 ? $scope.datos.Total : $scope.datos.Total - $scope.datos.Abono;
         $rootScope.show = true;
     }).error($scope.error);
@@ -76,7 +73,7 @@ myApp.controllerProvider.register('PagosPendientesUserCtrl', function($scope, $h
         }
         $http.post(url + 'pagos/pagoPendientes', $.param({datos: ids}), {timeout: 5000, headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
         ).success(function(data, status, headers, config) {
-            if (!data.respuesta) {
+            if (typeof data !== "object" || !data.respuesta) {
                 $scope.error(data, status, headers, config);
                 return;
             }

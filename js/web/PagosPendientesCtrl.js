@@ -20,7 +20,7 @@
         ({
             type: "POST",
             url: "models/pagos-consultas.php",
-            data: {id:3, idPago: pago.id, estado: "2"},
+            data: {id:3, idPago: pago.id, estado: "2", idUsuario: pago.idusuario, monto: pago.monto},
             async: false,
             success:
             function (msg) 
