@@ -24,10 +24,11 @@ SELECT * FROM apartamento INNER JOIN apartamentotipo ON apartamento.idTipo = idA
         public function actionListarFiltrado(){
         	if (isset($_POST['idApartamento']) && $_POST['idApartamento'] != null) {
         		$idApartamento = $_POST['idApartamento'];
-        		$apartamentos = Yii::app()->db->createCommand('SELECT  *, apartamento.Nombre as NombreApartamento, apartamentotipo.Nombre as NombreTipo,  usuario.Nombre as NombreUsuario FROM apartamento
+        		$apartamentos = Yii::app()->db->createCommand('SELECT  *, apartamento.Nombre as NombreApartamento, apartamentotipo.Nombre as NombreTipo,  usuario.Nombre as NombreUsuario, edificio.Nombre as NombreEdificio FROM apartamento
         			INNER JOIN apartamentotipo ON apartamento.idTipo = idApartamentoTipo 
         			LEFT JOIN apartamento_usuario on apartamento.idApartamento = apartamento_usuario.idapartamento 
-        			LEFT JOIN usuario ON apartamento_usuario.idusuario = usuario.ID 
+        			LEFT JOIN usuario ON apartamento_usuario.idusuario = usuario.ID
+        			LEFT JOIN edificio ON apartamento.idEdificio = edificio.idEdificio
         			WHERE apartamento.idApartamento = '.$idApartamento.'
         			ORDER BY apartamento.idApartamento ASC')->queryAll();
 	            echo $this->salida(true, 'apartamentos', $apartamentos);
@@ -35,10 +36,11 @@ SELECT * FROM apartamento INNER JOIN apartamentotipo ON apartamento.idTipo = idA
         	}
         	if (isset($_POST['idEdificio']) && $_POST['idEdificio'] != null && isset($_POST['Piso']) && $_POST['Piso'] == null) {
         		$idEdificio = $_POST['idEdificio'];
-        		$apartamentos = Yii::app()->db->createCommand('SELECT  *, apartamento.Nombre as NombreApartamento, apartamentotipo.Nombre as NombreTipo,  usuario.Nombre as NombreUsuario FROM apartamento
+        		$apartamentos = Yii::app()->db->createCommand('SELECT  *, apartamento.Nombre as NombreApartamento, apartamentotipo.Nombre as NombreTipo,  usuario.Nombre as NombreUsuario, edificio.Nombre as NombreEdificio FROM apartamento
         			INNER JOIN apartamentotipo ON apartamento.idTipo = idApartamentoTipo 
         			LEFT JOIN apartamento_usuario on apartamento.idApartamento = apartamento_usuario.idapartamento 
         			LEFT JOIN usuario ON apartamento_usuario.idusuario = usuario.ID 
+        			LEFT JOIN edificio ON apartamento.idEdificio = edificio.idEdificio
         			WHERE apartamento.idEdificio = '.$idEdificio.'
         			ORDER BY apartamento.idApartamento ASC')->queryAll();
 	            echo $this->salida(true, 'apartamentos', $apartamentos);
@@ -47,20 +49,22 @@ SELECT * FROM apartamento INNER JOIN apartamentotipo ON apartamento.idTipo = idA
         	if (isset($_POST['Piso']) && $_POST['Piso'] != null && isset($_POST['idEdificio']) && $_POST['idEdificio'] != null) {
         		$Piso = $_POST['Piso'];
 				$idEdificio = $_POST['idEdificio'];
-        		$apartamentos = Yii::app()->db->createCommand('SELECT  *, apartamento.Nombre as NombreApartamento, apartamentotipo.Nombre as NombreTipo,  usuario.Nombre as NombreUsuario FROM apartamento
+        		$apartamentos = Yii::app()->db->createCommand('SELECT  *, apartamento.Nombre as NombreApartamento, apartamentotipo.Nombre as NombreTipo,  usuario.Nombre as NombreUsuario, edificio.Nombre as NombreEdificio FROM apartamento
         			INNER JOIN apartamentotipo ON apartamento.idTipo = idApartamentoTipo 
         			LEFT JOIN apartamento_usuario on apartamento.idApartamento = apartamento_usuario.idapartamento 
         			LEFT JOIN usuario ON apartamento_usuario.idusuario = usuario.ID 
+        			LEFT JOIN edificio ON apartamento.idEdificio = edificio.idEdificio
         			WHERE apartamento.idEdificio = '.$idEdificio.' AND apartamento.Piso = '.$Piso.'
         			ORDER BY apartamento.idApartamento ASC')->queryAll();
 	            echo $this->salida(true, 'apartamentos', $apartamentos);
 	            return;
         	}
         	if (!isset($_POST['Piso']) && !isset($_POST['idEdificio']) && !isset($_POST['idApartamento'])) {
-        		$apartamentos = Yii::app()->db->createCommand('SELECT  *, apartamento.Nombre as NombreApartamento, apartamentotipo.Nombre as NombreTipo,  usuario.Nombre as NombreUsuario FROM apartamento
+        		$apartamentos = Yii::app()->db->createCommand('SELECT  *, apartamento.Nombre as NombreApartamento, apartamentotipo.Nombre as NombreTipo,  usuario.Nombre as NombreUsuario, edificio.Nombre as NombreEdificio FROM apartamento
         			INNER JOIN apartamentotipo ON apartamento.idTipo = idApartamentoTipo 
         			LEFT JOIN apartamento_usuario on apartamento.idApartamento = apartamento_usuario.idapartamento 
         			LEFT JOIN usuario ON apartamento_usuario.idusuario = usuario.ID 
+        			LEFT JOIN edificio ON apartamento.idEdificio = edificio.idEdificio
         			ORDER BY apartamento.idApartamento ASC')->queryAll();
 	            echo $this->salida(true, 'apartamentos', $apartamentos);
 	            return;

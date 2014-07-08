@@ -57,7 +57,7 @@ myApp.controllerProvider.register('ApartamentoListarCtrl', function($scope, $htt
     $scope.ListarApartamento = function() {
 
         if ($rootScope.activado === true) {
-            $http.post(url + 'apartamento/listarFiltrado', $.param({idApartamento: $rootScope.datos.idApartamento, idEdificio: $rootScope.datos.idEdificio, Piso: $rootScope.datos.Piso}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+            $http.post(url + 'apartamento/listarFiltrado', $.param({idApartamento: $rootScope.datos.idApartamento, idEdificio: $rootScope.datos.idEdificio, Piso: $rootScope.datos.Piso}), {timeout: 10000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
             ).success(function(data, status, headers, config) {
                 if (typeof data !== "object" || !data.respuesta) {
                     $scope.error(data, status, headers, config);
