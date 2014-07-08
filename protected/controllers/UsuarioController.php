@@ -303,6 +303,17 @@ class UsuarioController extends GxController {
         }
     }
 
+    public function actionTipoUsuario() {
+        session_start();
+        if (isset($_SESSION["ID"])) {
+            $model = $this->loadModel($_SESSION["ID"], 'Usuario');
+            echo $model->TipoUsuario;
+            //$this->salida(true, 'TipoUsuario', $model->TipoUsuario);
+            return;
+        } else
+            echo null;
+    }
+
     public function actionUsuarioLogueado() {
         session_start();
         if (isset($_SESSION["ID"])) {
