@@ -18,16 +18,28 @@ class CarteleraClass {
     }
     public function IngresarporApartamento($apartamentos,$titulo,$contenido){
 	session_start();
+        $this->objeto=array();
         date_default_timezone_set('America/Caracas');
+        $this->j=1;
+        $this->apartamento=$apartamentos;
         $this->mysqli = new mysqli(Host, User, Pass, BasedeDatos);
-	$this->apartamentos=serialize($apartamentos);
+	for ($this->i=0; $this->i<sizeof($this->apartamento); $this->i++) { 
+                $this->idApto=$this->apartamento[$this->i];
+		$this->tupla="SELECT idApartamento FROM apartamento where idApartamento=$this->idApto";
+		$this->resultado=$this->mysqli->query($this->tupla);
+		if($this->db_resultado = mysqli_fetch_array($this->resultado, MYSQLI_ASSOC)){			
+			$this->objeto[$this->j]=$this->db_resultado['idApartamento'];
+			$this->j++;	
+		}	
+	} 
+        $this->objeto=serialize($this->objeto);
 	$this->nombre=$_SESSION["Nombre"];
         $this->apellido=$_SESSION["Apellido"];
 	$this->fecha=date("Y-m-d H:i:s");
         $this->titulo=$titulo;
         $this->contenido=$contenido;
 	$this->salida="todo esta bien";
-	$this->tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`, `usuario`, `Apellido`, `aptos`)  VALUES ('$this->contenido', '$this->titulo', '$this->fecha', '$this->nombre', '$this->apellido', '$this->apartamentos')";
+	$this->tupla="INSERT INTO `post` (`contenido`, `titulo`, `fecha`, `usuario`, `Apellido`, `aptos`)  VALUES ('$this->contenido', '$this->titulo', '$this->fecha', '$this->nombre', '$this->apellido', '$this->objeto')";
 	$this->resultado = $this->mysqli->query($this->tupla) or $this->salida=$this->mysqli->error;
 	$this->mysqli->close();
 	return json_encode($this->salida);	
@@ -70,7 +82,7 @@ class CarteleraClass {
 	$this->objeto=array();
 	$this->tupla="";
 	$this->t=0;
-	$this->j=0;
+	$this->j=1;
         $this->edificio=$idEdificio;
         $this->titulo=$titulo;
         $this->contenido=$contenido;
