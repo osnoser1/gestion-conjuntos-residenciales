@@ -1,6 +1,9 @@
-<script src="js/web/ListadoSeccionesCtrl.js"></script>
+<!-- <script src="js/web/PaginaPrincipalListadoSeccionesCtrl.js"></script> -->
+<script type="text/javascript" src="js/web/ListadoSecciones.js"></script>
 <link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
-
+<script type="text/javascript">
+  eventos();
+</script>
 <script type="text/javascript">
 $(function() {
   $('.summernote').summernote({
@@ -9,7 +12,7 @@ $(function() {
   });  
 });
 </script>
-<div ng-controller="ListadoSeccionesCtrl">
+<!-- <div ng-controller="PaginaPrincipalListadoSeccionesCtrl">
   <h1>Listado secciones</h1>
   <div class="list-group">
     <div class="list-group-item row no-select" ng-repeat="element in datos.seccion" >
@@ -17,4 +20,41 @@ $(function() {
       <a class="pull-right pointer" ng-click="entrarSeccion(element)"><span class="glyphicon glyphicon-pencil" title="Modificar Seccion"></span> Modificar</a> 
     </div>
   </div>
+</div> -->
+
+<div class="well well-sm" id="contenedor2">   
 </div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modificar Seccion</h4>
+      </div>
+      <div class="modal-body">
+        <h6>De: <label id="de"></label></h6>
+      <h6>Titulo: <label id="titulo"></label></h6>
+      <h6>Fecha: <label id="fecha1"></label> </h6>      
+      <form role="form">
+        <div class="form-control" style="height:300px; overflow: auto; " placeholder="Descripcion" id="descripcion">        
+        </div>
+      <form>
+
+      <br>
+      <footer>
+
+         <button type="submit" class="btn" id="marcar">Marcar Como no Leido </button>
+      </footer>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="modificar">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

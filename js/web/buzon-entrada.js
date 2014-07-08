@@ -16,7 +16,7 @@ function eventos(){
 			           	var li=$('<li></li>');
 			           	li.html("<a  name="+i+" class='enlaces' >"+i+"</a>");
 			           	ul.append(li);
-			           	console.log(i);
+			           //	console.log(i);
 		           }
 	           $('#paginas').append(ul);	          
 	           $('#contenido').append(listarmensajes(msg, table));
@@ -27,12 +27,11 @@ function eventos(){
 
 
 		$(document).on('click', '.ver', (function(e) {
-      
-
-      //  $('.ver').click(function(){
         	idMensaje = $(this).attr('name');    	
         	$(document.getElementById(idMensaje)).removeClass('info');
+        	$('#panelbuscar').fadeOut();
         	$('#mensajes').fadeOut(function(){
+        		
         		$.ajax
 		        ({
 		        type: "POST",
@@ -43,25 +42,26 @@ function eventos(){
 		        success:
 		        function (msg) 
 		        {       
-			         de.innerHTML="administrador";
+		        	//console.log("fecha: "+msg[0].fecha);
+			         de.innerHTML=msg[0].de;
 			         titulo.innerHTML=msg[0].asunto;
-			         fecha.innerHTML=msg[0].fecha;
+			         fecha1.innerHTML=msg[0].fecha;
 			         descripcion.innerHTML=msg[0].descripcion;
 			         bodymensaje.innerHTML=msg[0].descripcion;
+			          
 			          $('#mensajeabierto').fadeIn(); 
+		          	  $('#paginas').fadeOut();
+			          
+
 		          
 		        },
 		        error:
 		        function (msg) {alert( msg +"No se pudo realizar la conexion");}
 		        });
         	});
-        	
-		
         }));
-      
-
          $('#marcar').click(function(){
-         	console.log("sdassdasd: " + idMensaje);
+         	//console.log("sdassdasd: " + idMensaje);
          	$.ajax
 		        ({
 		        type: "POST",
@@ -83,41 +83,8 @@ function eventos(){
           $('#atras').click(function(){
 
         	$('#mensajeabierto').fadeOut(function(){
-        /*		$.ajax
-	        ({
-	        type: "POST",
-	        url: "models/consultas-crearMensaje.php",
-	        data: {id:6},
-	        async: false,
-	        dataType: "json",
-	        success:
-	        function (msg) 
-	        {       
-	         contenido.innerHTML="";
-	           var table=$('<table class="table table-hover" ></table>');
-
-	           for(i=0; i<msg[0].m; i++){
-	               	var tr="";
-		           	if(msg[i].leido==0)
-			           	 tr=$("<tr id="+msg[i].idMensaje+" class='info'></tr>");          	
-		           	else
-		           		 tr=$("<tr id="+msg[i].idMensaje+" ></tr>"); 
-	       			var td1=$('<td ></td>').text(msg[i].asunto);
-		           	var td2=$('<td></td>').text("administrador");
-		           	var td3=$('<td></td>').html("<b>"+msg[i].descripcion+"</b>");
-		           	var td4=$('<td></td>').text(msg[i].fecha);
-		           	tr.append(td1);
-		           	tr.append(td2);
-		           	tr.append(td3);
-		           	tr.append(td4);
-		           	table.append(tr);           
-	           }
-	          
-	          $('#contenido').append(table);
-	        },
-	        error:
-	        function (msg) {alert( msg +"No se pudo realizar la conexion");}
-	        });*/
+        		$('#panelbuscar').fadeIn();
+       			$('#paginas').fadeIn();
         		$('#mensajes').fadeIn();
         	});
         });
@@ -134,11 +101,21 @@ function eventos(){
 		        function (msg) 
 		        {       
 					$('#myModal').modal('hide');
-					if(msg=="true"){
+					
 						
-						show({message: {text: "El Mensaje ha sido eliminado exitosamente"}, type: 'success'});
-						$('#' + id).remove();
-					}  
+					show({message: {text: "El Mensaje ha sido eliminado exitosamente"}, type: 'success'});
+					$('#' + id).remove();
+					$('#paginas').html("");
+					 var ul=$('<ul class="pagination" ></ul>');
+		   	           for(i=0; i<=msg[0].paginas; i++){
+				           	var li=$('<li></li>');
+				           	li.html("<a  name="+i+" class='enlaces' >"+i+"</a>");
+				           	ul.append(li);
+				           	//console.log(i);
+			           }
+		           $('#paginas').append(ul);	     
+
+					  
 		        },
 		        error:
 		        function (msg) {alert( msg +"No se pudo realizar la conexion");}
@@ -156,7 +133,7 @@ function eventos(){
 	        $(document).on('click', '.enlaces', (function(e) {
 	     //   $('a.enlaces').click(function(){
 	        	pagina=$(this).attr('name');
-	        	console.log(pagina);
+	        	//console.log(pagina);
 	        	$.ajax
 		        ({
 		        type: "POST",
@@ -172,7 +149,7 @@ function eventos(){
 
 
 		           $('#paginas').empty();
-		           console.log("Paginas " + msg[0].paginas);
+		           //console.log("Paginas " + msg[0].paginas);
 		            var ul=$('<ul class="pagination" ></ul>');
 		   	           for(i=0; i<=msg[0].paginas; i++){
 				           	var li; 
@@ -187,7 +164,7 @@ function eventos(){
 				           }
 				           	
 				           	ul.append(li);
-				           	console.log("pagina actual " + msg[0].paginaactual);
+				           //	console.log("pagina actual " + msg[0].paginaactual);
 			           }
 		           $('#paginas').append(ul);		          
 		          $('#contenido').append(listarmensajes(msg, table)); 
@@ -199,7 +176,7 @@ function eventos(){
 	        }));
 	 
 			$('#simple').click(function(){	
-	 			console.log("click en simple");
+	 			//console.log("click en simple");
 	 			$('#fecha').prop('checked', false);	 
 	 			$(busquedapofecha2).fadeOut();			
 	 			$(busquedapofecha).fadeOut(function(){
@@ -210,7 +187,7 @@ function eventos(){
 	 		});
 	 		
 	 		$('#fecha').click(function(){	
-	 			console.log("click en fecha");
+	 			//console.log("click en fecha");
 	 			$('#simple').prop('checked', false);
 	 			$(busquedasimple).fadeOut(function(){
 	 					$(busquedapofecha).fadeIn();
@@ -218,10 +195,10 @@ function eventos(){
 	 			});
 	 			
 	 		});
-	 		$('#buscarporfecha').click(function(){	
+	 		/*$('#buscarporfecha').click(function(){	
 	 			console.log(fechadesde.value + "  " + fechahasta.value);
 
-	 		});
+	 		});*/
 	 		$('#buscar').click(function(){	
 	 		 if(tbuscar.value!=""){
 	 		 	$.ajax
@@ -239,7 +216,7 @@ function eventos(){
 
 
 		           $('#paginas').empty();
-		           console.log("Paginas " + msg[0].paginas);
+		          // console.log("Paginas " + msg[0].paginas);
 		            var ul=$('<ul class="pagination" ></ul>');
 		   	           for(i=0; i<=msg[0].paginas; i++){
 				           	var li; 
@@ -254,7 +231,7 @@ function eventos(){
 				           }
 				           	
 				           	ul.append(li);
-				           	console.log("pagina actual " + msg[0].paginaactual);
+				           	//console.log("pagina actual " + msg[0].paginaactual);
 			           }
 		           $('#paginas').append(ul);		          
 		          $('#contenido').append(listarmensajes(msg, table)); 
@@ -282,7 +259,7 @@ function eventos(){
 		           	else
 		           		 tr=$("<tr id="+msg[i].idMensaje+" ></tr>"); 
 	       			var td1=$('<td ></td>').text(msg[i].asunto);
-		           	var td2=$('<td></td>').text("administrador");
+		           	var td2=$('<td></td>').text(msg[i].de);
 		           	var td3=$('<td></td>').html("<b>"+msg[i].descripcion+"</b>");
 		           	var td4=$('<td></td>').text(msg[i].fecha);
 		           	var td5=$('<td ></td>').html('<button type="button" class="ver btn btn-default btn-xs" name="'+msg[i].idMensaje+'" data-toggle="tooltip" data-placement="top" title="Ver">	<span class="glyphicon glyphicon-eye-open"></span></button>');

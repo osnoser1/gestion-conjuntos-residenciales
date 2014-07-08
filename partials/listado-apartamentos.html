@@ -2,25 +2,25 @@
 <link rel="stylesheet" href="assets/checkd-list-group-bootstrap/cheked-list-group.css"/>
 <div ng-controller="ApartamentoListarCtrl">
     <form class="form-horizontal" role="form">
-    <h1> Lista Apartamento</h1>
-     <div class="list-group text-center">
-        <div class="list-group-item row no-select active cabecera">
-            <span class="badge pull-left">#</span>
-            <p ng-dblclick="" class="col-xs-2">Nombre</p>
-            <p ng-dblclick="" class="col-xs-2">Tipo</p>
-            <p ng-dblclick="" class="col-xs-3">Propietario</p>
-            <p ng-dblclick="" class="col-xs-1"></p>
-
-        </div>
-        <div class="list-group">
-            <div class="list-group-item row no-select" ng-repeat="element in datos.apartamentos" >
-                <p class="badge pull-left">{{element.idApartamento}}</p>
-                <p class="col-xs-2">{{element.NombreApartamento}}</p>
-                <p class="col-xs-2 pointer">{{element.NombreTipo}}</p>
-                <p class="col-xs-3">{{element.NombreUsuario}} {{element.Apellido}}</p>
-                <a class="col-xs-1 pointer" ng-click="apartamentoVerDetalles(element)"><span class="glyphicon glyphicon-search" title="Ver detalles"></span></a>
+        <h1> Lista Apartamento</h1>
+        <div class="list-group text-center">
+            <div class="list-group-item row no-select active cabecera">
+                <span class="badge pull-left">#</span>
+                <p ng-dblclick="" class="col-xs-2">Nombre</p>
+                <p ng-dblclick="" class="col-xs-2">Tipo</p>
+                <p ng-dblclick="" class="col-xs-3">Propietario</p>
+                <p ng-dblclick="" class="col-xs-1"></p>
+            </div>
+            <div class="list-group">
+                <div class="list-group-item row no-select" ng-repeat="element in datos.apartamentos" >
+                    <p class="badge pull-left">{{element.idApartamento}}</p>
+                    <p class="col-xs-2">{{element.NombreApartamento}}</p>
+                    <p class="col-xs-2 pointer">{{element.NombreTipo}}</p>
+                    <p class="col-xs-3">{{element.NombreUsuario}} {{element.Apellido}}</p>
+                    <a class="col-xs-1 pointer" ng-click="apartamentoVerDetalles(element)"><span class="glyphicon glyphicon-search" title="Ver detalles"></span></a>
+                    <a class="pointer" ng-click="EditarApartamento(element)"><span class="glyphicon glyphicon-pencil" title="Modificar"></span></a>
+                </div>
             </div>
         </div>
-    </div>
-    </form>    
+    </form>
 </div>

@@ -18,14 +18,19 @@ myApp.controllerProvider.register('UsuarioLoginCtrl', function($scope, $http, $q
     };
 
     $scope.comprobarUsuario = function() {
-        console.log("hola enfermero")
         $http.get(url + 'usuario/usuarioLogueado').success(function(data) {
             console.log(data);
             console.log("data");
-        });
+            if(typeof data !== 'undefined'){
+                console.log("no esta logeado");
+            //$location.path("web/login");
+        }
 
+    });
     };
     $scope.comprobarUsuario();
+
+    
 
 });
 

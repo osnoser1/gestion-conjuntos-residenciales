@@ -61,6 +61,12 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
+INSERT INTO `usuario` (`TipoUsuario`, `Nombre`, `Apellido`, `Cedula`, `Correo`, `Contrasena`) VALUES
+(1, 'Ricardo', 'Felicce', '20448909', 'exosymmetry@hotmail.com', '123'),
+(1, 'Jenny', 'Gonzales', '9831876', 'exosymmetry@hotmail.com', '321'),
+(1, 'Alfonso Andrés', 'López Molina', '20503457', 'osnoser_12@hotmail.com', 'osnoser1'),
+(1, 'Mariangela', 'Cermeño', '19169037', 'mariangeladiaz@gmail.com', 'macarena'),
+(2, 'admin', 'admin', '111111', 'admin@admin.com', 'admin');
 INSERT INTO `usuario` (`ID`, `TipoUsuario`, `Nombre`, `Apellido`, `Cedula`, `Correo`, `Contrasena`, `Abono`) VALUES
 (1, 1, 'Ricardo', 'Felicce', '20448909', 'exosymmetry@hotmail.com', '123', 1023),
 (2, 1, 'Jenny', 'Gonzales', '9831876', 'exosymmetry@hotmail.com', '321', 2000),

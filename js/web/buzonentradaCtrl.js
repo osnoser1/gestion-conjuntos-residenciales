@@ -73,6 +73,7 @@ myApp.controllerProvider.register('buzonentradaCtrl', function($scope, $http, $q
  		
  		if(ValidarFecha(fechadesde.value)&&ValidarFecha(fechahasta.value)){
  			$rootScope.loading = true;
+ 			$('#paginas').fadeOut();
 	 		$.ajax
 		        ({
 		        type: "POST",
@@ -86,7 +87,7 @@ myApp.controllerProvider.register('buzonentradaCtrl', function($scope, $http, $q
 					$('#contenido').html("");
 					var table=$('<table class="table table-hover" ></table>');
 					$('#contenido').append(listarmensajes(msg, table)); 
-					console.log(msg);
+					//console.log(msg);
 		        },
 		        error:
 		        function (msg) {alert( msg +"No se pudo realizar la conexion");}
@@ -103,9 +104,9 @@ myApp.controllerProvider.register('buzonentradaCtrl', function($scope, $http, $q
 		           	if(msg[i].leido==0)
 			           	 tr=$("<tr id="+msg[i].idMensaje+" class='info'></tr>");          	
 		           	else
-		           		 tr=$("<ts id="+msg[i].idMensaje+" ></tr>"); 
+		           		 tr=$("<tr id="+msg[i].idMensaje+" ></tr>"); 
 	       			var td1=$('<td ></td>').text(msg[i].asunto);
-		           	var td2=$('<td></td>').text("administrador");
+		           	var td2=$('<td></td>').text(msg[i].de);
 		           	var td3=$('<td></td>').html("<b>"+msg[i].descripcion+"</b>");
 		           	var td4=$('<td></td>').text(msg[i].fecha);
 		           	var td5=$('<td ></td>').html('<button type="button" class="ver btn btn-default btn-xs" name="'+msg[i].idMensaje+'" data-toggle="tooltip" data-placement="top" title="Ver">	<span class="glyphicon glyphicon-eye-open"></span></button>');

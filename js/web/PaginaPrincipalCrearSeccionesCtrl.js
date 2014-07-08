@@ -2,7 +2,7 @@
 /* Controllers */
 var myApp = angular.module('myApp');
 
-myApp.controllerProvider.register('CrearSeccionesCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
+myApp.controllerProvider.register('PaginaPrincipalCrearSeccionesCtrl', function($scope, $http, $q, $filter, $timeout, $rootScope) {
     /*$scope.datos = {
        nuevaSeccion: [
                     {"id": "1", "Titulo": "Informacion", "Contenido":"hola mucho gusto"},
@@ -23,7 +23,9 @@ myApp.controllerProvider.register('CrearSeccionesCtrl', function($scope, $http, 
             success:
             function (msg) 
             {       
-               console.log("Creado");
+               Titulo.value="";
+               $('.summernote').code("");
+               show({message: {text: "Seccion creado exitosamente"}, type: 'success'});
            },
            error:
            function (msg) {console.log( msg);}

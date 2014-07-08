@@ -1,72 +1,102 @@
 <!--
-Alicuota: "0.35"
 Apellido: null
-Casillero: "1"
 Cedula: null
-Cocina: "1"
-Comedor: "1"
-Contrasena: null
 Correo: null
 ID: null
-Lavandero: "1"
-Maletero: "1"
 Nombre: null
 NombreApartamento: "1-A"
-NombreTipo: "Familiar"
-NombreUsuario: null
 Piso: "1"
-Sala: "1"
-Tamano: "200"
-TipoUsuario: null
-idApartamento: "1"
 idApartamentoTipo: "3"
 idEdificio: "1"
-idTipo: "3"
 idapartamento: null
 idusuario: null
 idusuarioapartamento: null
-numBanos: "2"
-numEst: "1"
-numHab: "3"
+
 --><form class="form-horizontal" role="form"><h4>
-	<div class="form-group">
-		<label class="col-lg-2 control-label">ID:</label>
-		<div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.idApartamento}}</p></div>
-	</div>
-	<div class="form-group">
-		<label class="col-lg-2 control-label">Nombre:</label>
-		<div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.NombreApartamento}}</p></div>
-	</div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">ID:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.idApartamento}}</p></div>
+        </div>
 
-	<div class="form-group">
-		<label class="col-lg-2 control-label">Telefono:</label><p ng-show="usuario.telefonos.length == 0">Ninguno</p>
-		<div class="col-lg-10"><p class="form-control-static" ng-repeat="tel in usuario.telefonos">{{tel.Telefono}}</p></div>
-	</div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">NombreUsuario:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{usuario.NombreUsuario}}</p></div>
+        </div>
 
-	<div class="form-group">
-		<label class="col-lg-2 control-label">Monto</label>
-		<div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
-	</div>
-	<div class="form-group">
-		<label class="col-lg-2 control-label">Nro Referencia</label>
-		<div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
-	</div>
-	<div class="form-group">
-		<label class="col-lg-2 control-label">Tipo de pago</label>
-		<div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
-	</div>
-	<div class="form-group">
-		<label class="col-lg-2 control-label">Banco</label>
-		<div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
-	</div>
-	<div class="form-group">
-		<label class="col-lg-2 control-label">Fecha</label>
-		<div class="col-lg-10"><p class="form-control-static"> Dato</p></div>
-	</div>
-	<div class="form-group">
-		<label class="col-lg-2 control-label">Estado</label>
-		<div class="col-lg-10"><p class="form-control-static"> Dato </p></div>
-	</div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Telefono:</label><p ng-show="usuario.telefonos.length == 0">Ninguno</p>
+            <div class="col-lg-10"><p class="form-control-static" ng-repeat="tel in usuario.telefonos">{{tel.Telefono}}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Nombre de Edificio:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.NombreEdificio}}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Nombre:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.NombreApartamento}}</p></div>
+        </div>
 
 
-</h4></form>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Tipo:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.NombreTipo}}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Tamaño:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.Tamano}}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Numero de Habitacion:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.numHab}}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Numero de Baños:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.numBanos}}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Cocina:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.Cocina}}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Comedor:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.Comedor}}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Sala:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.Sala}}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Lavandero:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.Lavandero}}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Casillero:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.Casillero}}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Maletero:</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.Maletero}}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Puesto de estacionamiento</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.numEst}}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Alicuota</label>
+            <div class="col-lg-10"><p class="form-control-static">{{ApartamentoListado.Alicuota}}</p></div>
+        </div>
+
+    </h4></form>

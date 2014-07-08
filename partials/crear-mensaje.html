@@ -1,64 +1,194 @@
- <script src="js/web/crearmensaje.js"></script>
-<link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
+ 
+ <link rel="stylesheet" type="text/css" href="css/editor/summernote.css">
+ <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css">
+<link rel="stylesheet" href="css/prettify.css" type="text/css">
+<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+<script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/web/crearmensaje.js"></script>
 
- <script type="text/javascript">
+<script type="text/javascript">
+          
          $(function() {
             $('.summernote').summernote({
                 height: 200,
                 lang: 'es-ES'
               });  
-         });
-         
-      
-     eventos();
-   
+         });      
+        eventos(); 
 
+  </script>
+<script type="text/javascript">
+  $(document).ready(function() {  
+    $('#administradores').multiselect({
+      buttonText: function(options) {
+          if (options.length === 0) {
+              return 'Seleccione un Administrador<b class="caret"></b>';
+          }
+        }
+    });  
+     $('#Edificios').multiselect({
+      buttonText: function(options) {
+          if (options.length === 0) {
+              return 'Seleccione un Edificio<b class="caret"></b>';
+          }
+        }
+    });  
+
+     $('#Edificios2').multiselect({
+      buttonText: function(options) {
+          if (options.length === 0) {
+              return 'Seleccione un Edificio<b class="caret"></b>';
+          }
+        }
+    });  
+    $('#Edificios3').multiselect({
+      buttonText: function(options) {
+          if (options.length === 0) {
+              return 'Seleccione un Edificio<b class="caret"></b>';
+          }
+        }
+    });  
+    $('#Pisos').multiselect({
+            buttonText: function(options) {
+                if (options.length === 0) {
+                    return 'Seleccione un Piso<b class="caret"></b>';
+                }
+              }
+    });
+    $('#Pisos2').multiselect({
+            buttonText: function(options) {
+                if (options.length === 0) {
+                    return 'Seleccione un Piso<b class="caret"></b>';
+                }
+              }
+    });
+    $('#Apartamentos').multiselect({
+          buttonText: function(options) {
+              if (options.length === 0) {
+                  return 'Seleccione un Apartamento<b class="caret"></b>';
+              }
+            }
+    });
+  });
+
+  $('#myTab a').click(function (e) {
+      e.preventDefault()
+    $(this).tab('show')
+    })
 </script>
+
+  <script>
+     $(function () {
+       $('#myTab a:last').tab('show')
+     })
+  </script>
 
     <h1>Crear mensaje</h1>
 
     <div ng-controller="PanelHeaderCtrl">
-    <div class="alert alert-info">
-      ¡Seleccione un Apartamento, piso o Edificio para enviar el mensaje!
+    <div id="alerta">
+      <div class="alert alert-info">
+        ¡Seleccione un Apartamento, piso o Edificio para enviar el mensaje!
+      </div>
     </div>
+    
+     <script type="text/javascript">
+
+         $.ajax
+            ({
+            type: "POST",
+            url: "models/consultas-crearMensaje.php",
+            data: {id:17},
+            async: true,
+            dataType: "json",
+            success:
+            function (msg) 
+            {      
+
+            if(msg=="1"){
+                $('#restringir2').fadeIn();
+                alerta.innerHTML='<div class="alert alert-info">¡Seleccione un Administrador para enviarle un mensaje!</div>';
+                  $.ajax
+                ({
+                type: "POST",
+                url: "models/consultas-crearMensaje.php",
+                data: {id:21},
+                async: true,
+                dataType: "json",
+                success:
+                function (msg) 
+                {      
+                  for(i=0; i < msg[0].m; i++)
+                    {
+
+                      administradores.options[i]= new Option (msg[i].correo);
+                      administradores.options[i].text = msg[i].correo;
+                      administradores.options[i].value = msg[i].correo; 
+                    }
+
+                    $('#administradores').multiselect('rebuild');
+                    $('#seleccionar2').fadeIn();
+                    $('#seleccionar').fadeOut();
+
+                },
+                error:
+                function (msg) {alert( msg +"No se pudo realizar la conexion");}
+                });
+              }
 
 
+             
+              if(msg=="2")
+                $('#restringir').fadeIn();
+              
+            },
+            error:
+            function (msg) {alert( msg +"No se pudo realizar la conexion");}
+            });
+ </script>
+    <div id="restringir" style="display:none;"> 
+        <ul class="nav nav-tabs" id="myTab">
+            <li  id="porapartametos"  ><a href="#messages" data-toggle="tab">Por Apartamentos</a></li>
+            <li id="porpisos"><a href="#profile" data-toggle="tab">Por Pisos</a></li>
+            <li id="poredificios" class="active" ><a href="#home" data-toggle="tab">Por Edificios</a></li>
+        </ul>
+        <div class="tab-content">
+        <div class="tab-pane " id="messages">
+              <div class="row">
+                <div class="col-xs-4 col-sm-4"><select id="Edificios3"   style="width:120px;" ></select></div>
+                <div class="col-xs-4 col-sm-4"><select id="Pisos2" style="width:120px; " ></select></div>
+                <div class="col-xs-4 col-sm-4"><select id="Apartamentos" multiple="multiple" style="width:120px;" ></select></div>
+              </div>            
+            </div> 
 
-      <table class="table">
-        <thead>
-          <th>Edificios</th>
-          <th>Pisos</th>
-          <th>Apartamentos</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <select id="Edificios">
-            </select>
-            Todos <input type="checkbox">
-            </td>
-            <td>
-              <select id="Pisos" multiple>
-            </select>
-            Todos <input type="checkbox">
-            </td>
-            <td>
-              <select id="Apartamentos" multiple>
-            </select>
-            Todos <input type="checkbox">
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                 
+            <div class="tab-pane" id="profile">
 
+              <select id="Edificios2"  style="width:120px;" ></select>
+              <select id="Pisos" multiple="multiple" style="width:120px;"></select>
+            </div>        
+            <div class="tab-pane active" id="home">
+              <select id="Edificios" multiple="multiple" style="width:120px;" ></select>
+            </div>   
+        </div>
+     </div>
+    
+     <div id="restringir2" style="display:none;"> 
+         <select id="administradores"  style="width:120px;" ></select>
+      </div>
+      <button class="btn btn-primary" style="position:absolute; right: 10px; "id="seleccionar">Seleccionar</button>
+      <button class="btn btn-primary" style="position:absolute; right: 10px; display:none; "id="seleccionar2">Seleccionar</button>
+      <br>  
+      <br> 
+     
       <form role="form">
-        <label>Para</label><input ng-model="datos.para" type="text" id="para" class="form-control" placeholder="Para">
-        <label>Titulo</label><input ng-model="datos.titulo" type="text" id="Titulo" class="form-control" placeholder="Asunto del Mensaje">
+        <label>Para</label><input  type="text" id="para" class="form-control" placeholder="Para" readonly>
+        <label>Titulo</label><input  type="text" id="Titulo" class="form-control" placeholder="Asunto del Mensaje">
 
-        <textarea  ng-model="mensaje" class="summernote form-control" rows="10" cols="50" placeholder="Descripcion" >
+        <textarea   class="summernote form-control" rows="10" cols="50" placeholder="Descripcion">
           
         </textarea>
-        <button class="btn btn-primary" ng-click="CrearMensaje(datos)">Enviar</button>
+         <button class="btn btn-danger" id="cancelar">Cancelar</button> <button class="btn btn-primary" id="enviarmensaje" >Enviar</button>
         
       <form>
   </div>

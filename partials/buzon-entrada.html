@@ -7,7 +7,7 @@
 
 <h1>Buzón de entrada</h1>
 
-<div class="row barra-pers2"  ng-controller="buzonentradaCtrl">
+<div class="row barra-pers2"  ng-controller="buzonentradaCtrl" id="panelbuscar">
   <div class="col-lg-4">
       <div class="input-group">
 	     Simple <input type="radio" id="simple" checked="checked">
@@ -46,7 +46,7 @@
 			</button>	
 			<h6>De: <label id="de"></label></h6>
 			<h6>Titulo: <label id="titulo"></label></h6>
-			<h6>Fecha: <label id="fecha"></label> </h6>			
+			<h6>Fecha: <label id="fecha1"></label> </h6>			
 			<form role="form">
 				<div class="form-control" style="height:300px; overflow: auto; " placeholder="Descripcion" id="descripcion">				
 				</div>
@@ -60,7 +60,7 @@
 		</div>
 
 		<center id="mensajes">
-			<div class="table-responsive table-bordered list-group"   id="contenido">
+			<div   class="table-responsive"  id="contenido">
 			 
 			</div>
 			
