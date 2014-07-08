@@ -127,13 +127,26 @@ class UsuarioController extends GxController {
     public function actionModificar() {
         if (isset($_POST['datos'])) {
             $usuario = (array) $_POST['datos'];
-            echo var_dump($usuario);
             $model = Usuario::model()->findByPk($usuario['ID']);
             $model->setAttributes($usuario);
-            if (($bandera = $model->update()))
-                echo $this->salida();
-            else
+            if (($bandera = $model->update())){}
+                //echo $this->salida();
+            else{
                 echo $this->salida(false, "aviso", "Error al actualizar usuario");
+                return;
+            }
+
+            $AU = ApartamentoUsuario::model()->findByAttributes(["idusuario" => $usuario['ID']]);
+            $AU->setAttributes($usuario);
+            if (($bandera = $AU->update()))
+                echo $this->salida();
+            else{
+                echo $this->salida(false, "aviso", "Error al actualizar usuario");
+                return;
+            }
+
+
+
         } else {
             echo $this->salida(false, "aviso", "Error en el servidor");
         }
