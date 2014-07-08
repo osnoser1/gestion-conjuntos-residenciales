@@ -87,31 +87,32 @@ function restringirPublicacion(){
 		$objeto[0]['paginas']=$paginas;	
 	
 
-		$tupla2="SELECT idApartamento FROM apartamento WHERE idUsuario='$usuario'";
+		$tupla2="SELECT idapartamento FROM apartamento_usuario WHERE idusuario='$usuario'";
 		$resultado2 = $mysqli->query($tupla2);
 		$idApartamento="";
 		if($db_resultado = mysqli_fetch_array($resultado2, MYSQLI_ASSOC))
 		{		
-			$idApartamento=$db_resultado['idApartamento'];	
+			$idApartamento=$db_resultado['idapartamento'];	
 			
 		}	
 
 
 
-		$tupla="SELECT * FROM post";
+		$tupla="SELECT * FROM post order by idpost desc";
 		$resultado = $mysqli->query($tupla);
 			
 		$i=0;
 		while($db_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC))
 		{
 			$apartamentos=unserialize($db_resultado['aptos']);
-			for ($x=0; $x <sizeof($apartamentos) ; $x++) {
+			for ($x=0; $x <sizeof($apartamentos); $x++) {
 					if($idApartamento==$apartamentos[$x]){
 							$objeto[$i]['titulo']=$db_resultado['titulo'];
 							$objeto[$i]['contenido']=$db_resultado['contenido'];	
 							$objeto[$i]['idpost']=$db_resultado['idpost'];
 							$objeto[$i]['fecha']=$db_resultado['fecha'];
 							$objeto[$i]['usuario']=$db_resultado['usuario'];
+                                                        $objeto[$i]['Apellido']=$db_resultado['Apellido'];
 							$i++;							
 					}
 

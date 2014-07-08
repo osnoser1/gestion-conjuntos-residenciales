@@ -210,17 +210,21 @@ function eventos () {
             });
 
         
-        $(document).on('click', '#seleccionar', (function(e) {
-          $('#Apartamentos').multiselect({
-              enableFiltering: true
-            });
+     /*   $(document).on('click', '#seleccionar', (function(e) {
+          console.log("Click en seleccionar ");
 
-         para.value="";
+         
+
+        }));*/
+
+         $('#seleccionar').click(function(){
+             para.value="";
           if ($('#porpisos').attr('class')=="active") {
               if($('#Pisos').val()!=null){
                 /*  console.log("por pisos " + $('#porpisos').attr('class'));
                   console.log("Piso : " +$('#Pisos').val());
                    console.log("Edificio: " + $('#Edificios2').val());*/
+                    console.log("Por pisos");
                  $.ajax
                   ({
                   type: "POST",
@@ -254,6 +258,7 @@ function eventos () {
             if($('#Apartamentos').val()!=null){
               /*console.log("por apartamentos " +$('#porapartametos').attr('class'));*/
              // console.log($('#Apartamentos').val());
+              console.log("Por Apartamentos");
                $.ajax
                   ({
                   type: "POST",
@@ -289,7 +294,7 @@ function eventos () {
           if($('#poredificios').attr('class')=="active"){
              if($('#Edificios').val()!=null){
               /*console.log("por edificios " + $('#poredificios').attr('class'));*/
-              // console.log($('#Edificios').val());
+               console.log("Por edificios");
 
                
                 $.ajax
@@ -320,15 +325,99 @@ function eventos () {
                 alerta.innerHTML='<div class="alert alert-danger">¡Seleccione un  Edificio para enviar mensaje a todos sus apartamentos!</div>';
             }
           }
+         });
 
-        }));
-         $(document).on('click', '#seleccionar2', (function(e) {
+          $('#seleccionar2').click(function(){
             para.value=$('#administradores').val()+",";
             $('#restringir2').fadeOut(); 
             $('#seleccionar2').fadeOut(); 
 
-          }));
-        $(document).on('click', '#cancelar', (function(e) {
+          });
+         $('#enviarmensaje').click(function(){
+         if (para.value != "" && Titulo.value != "" && $('.summernote').code() != "") {
+            $.ajax
+                    ({
+                        type: "POST",
+                        url: "models/consultas-crearMensaje.php",
+                        data: {id: 5, para: para.value, titulo: Titulo.value, mensaje: $('.summernote').code()},
+                        async: false,
+                        dataType: "json",
+                        success:
+                                function(msg)
+                                {
+                                    console.log(msg);
+                                    show({message: {text: "El Mensaje ha sido enviado exitosamente"}, type: 'success'});
+                                    para.value = "";
+                                    titulo:Titulo.value = "";
+                                    $('.summernote').code("");
+                                    $.ajax
+                                            ({
+                                                type: "POST",
+                                                url: "models/consultas-crearMensaje.php",
+                                                data: {id: 17},
+                                                async: true,
+                                                dataType: "json",
+                                                success:
+                                                        function(msg)
+                                                        {
+                                                            console.log("privilegio: " + msg);
+
+                                                            if (msg == "1") {
+                                                                $('#restringir2').fadeIn();
+                                                                $('#seleccionar').fadeOut();
+                                                                $.ajax
+                                                                        ({
+                                                                            type: "POST",
+                                                                            url: "models/consultas-crearMensaje.php",
+                                                                            data: {id: 21},
+                                                                            async: true,
+                                                                            dataType: "json",
+                                                                            success:
+                                                                                    function(msg)
+                                                                                    {
+                                                                                        for (i = 0; i < msg[0].m; i++)
+                                                                                        {
+
+                                                                                            administradores.options[i] = new Option(msg[i].correo);
+                                                                                            administradores.options[i].text = msg[i].correo;
+                                                                                            administradores.options[i].value = msg[i].correo;
+                                                                                        }
+                                                                                        $('#administradores').multiselect('rebuild');
+                                                                                        $('#seleccionar2').fadeIn();
+
+                                                                                    },
+                                                                            error:
+                                                                                    function(msg) {
+                                                                                        alert(msg + "No se pudo realizar la conexion");
+                                                                                    }
+                                                                        });
+                                                            }
+
+
+
+                                                            if (msg == "2")
+                                                                $('#restringir').fadeIn();
+                                                            $('#seleccionar').fadeIn();
+
+                                                        },
+                                                error:
+                                                        function(msg) {
+                                                            alert(msg + "No se pudo realizar la conexion");
+                                                        }
+                                            });
+                                },
+                        error:
+                                function(msg) {
+                                    alert(msg + "No se pudo realizar la conexion");
+                                }
+                    });
+
+        }
+        else {
+            show({message: {text: "Debe llenar todos los campos para poder enviar el mensaje"}, type: 'danger'});
+        }
+     });
+        $('#cancelar').click(function(){
               para.value="";
               Titulo.value = "";
               $('.summernote').code("");
@@ -383,5 +472,5 @@ function eventos () {
             function (msg) {alert( msg +"No se pudo realizar la conexion");}
             });
 
-        }));
+        });
 }
