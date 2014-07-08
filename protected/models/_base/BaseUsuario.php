@@ -16,6 +16,7 @@
  * @property string $Cedula
  * @property string $Correo
  * @property string $Contrasena
+ * @property double $Abono
  *
  * @property ApartamentoUsuario[] $apartamentoUsuarios
  * @property Pagos[] $pagoses
@@ -44,11 +45,13 @@ abstract class BaseUsuario extends GxActiveRecord {
 		return array(
 			array('TipoUsuario, Nombre, Apellido, Cedula, Correo, Contrasena', 'required'),
 			array('TipoUsuario', 'numerical', 'integerOnly'=>true),
+			array('Abono', 'numerical'),
 			array('Nombre, Apellido', 'length', 'max'=>30),
 			array('Cedula', 'length', 'max'=>8),
 			array('Correo', 'length', 'max'=>40),
 			array('Contrasena', 'length', 'max'=>60),
-			array('ID, TipoUsuario, Nombre, Apellido, Cedula, Correo, Contrasena', 'safe', 'on'=>'search'),
+			array('Abono', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('ID, TipoUsuario, Nombre, Apellido, Cedula, Correo, Contrasena, Abono', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,6 +78,7 @@ abstract class BaseUsuario extends GxActiveRecord {
 			'Cedula' => Yii::t('app', 'Cedula'),
 			'Correo' => Yii::t('app', 'Correo'),
 			'Contrasena' => Yii::t('app', 'Contrasena'),
+			'Abono' => Yii::t('app', 'Abono'),
 			'apartamentoUsuarios' => null,
 			'pagoses' => null,
 			'pagosUsuarios' => null,
@@ -92,6 +96,7 @@ abstract class BaseUsuario extends GxActiveRecord {
 		$criteria->compare('Cedula', $this->Cedula, true);
 		$criteria->compare('Correo', $this->Correo, true);
 		$criteria->compare('Contrasena', $this->Contrasena, true);
+		$criteria->compare('Abono', $this->Abono);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

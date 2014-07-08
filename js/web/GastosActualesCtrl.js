@@ -14,26 +14,59 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     $scope.init = function() {
         $rootScope.show = false;
         $scope.desactivado = false;
-//        $scope.tags = [];
-//        $scope.sitios = [];
-//        $scope.nuevo = {};
-//        $scope.datos = {gastos: []};
         $http.get(url + 'gasto/view').success(function(data, status, headers, config) {
             if (!data.respuesta) {
                 $scope.error(data, status, headers, config);
                 return;
             }
             console.log(data);
-            $rootScope.show = true;
             $scope.datos = data.datos;
             $scope.total = parseInt(data.Total === null ? "0" : data.Total);
             $scope.gastos = data.gastos;
             $scope.gastosFiltrados = [];
             angular.forEach($scope.gastos, function(key) {
-                if ($filter('filter')($scope.datos.gastos, {idGasto: key.idGasto}, true).length === 0) {
+                var f = $filter('filter')($scope.datos.gastos, {idGasto: key.idGasto}, true);
+                console.log(f);
+                if (typeof f === "undefined" || f.length === 0) {
                     $scope.gastosFiltrados.push(key);
                 }
             });
+            var entro = function(bandera, key, key1) {
+                bandera = true;
+                var r = $filter('filter')($scope.datos.gastos, {idGastoHistorial: key.idGastoHistorial}, true);
+                console.log(r);
+                if (typeof r[0].sitios === "undefined") {
+                    r[0].sitios = [];
+                }
+                r[0].sitios.push(key1);
+            };
+            angular.forEach($scope.datos.GEH, function(key) {
+                var bandera = false;
+                console.log(key);
+                angular.forEach($scope.datos.sitios, function(key1) {
+                    if (bandera)
+                        return;
+                    if (key.idEdificio !== null) {
+                        if (key.NroDePiso === null) {
+                            if (key.idEdificio == key1.idEdificio && typeof key1.NroDePiso === "undefined") {
+                                entro(bandera, key, key1);
+                            }
+                        } else {
+                            if (key.idApartamento === null) {
+                                if (key.idEdificio == key1.idEdificio && key.NroDePiso == key1.NroDePiso && typeof key1.idApartamento === "undefined") {
+                                    entro(bandera, key, key1);
+                                }
+                            } else if (key.idEdificio == key1.idEdificio && key.NroDePiso == key1.NroDePiso && key.idApartamento == key1.idApartamento) {
+                                entro(bandera, key, key1);
+                            }
+                        }
+                    } else if (key1.text == "Todos") {
+                        entro(bandera, key, key1);
+                    }
+                });
+                console.log("--------------------------");
+            });
+            $rootScope.show = true;
         }).error($scope.error);
 //        $http.get('pruebas/sitios.json').success(function(data) {
 //            $scope.sitios = data;
@@ -41,6 +74,8 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     };
     $scope.init();
     $scope.update = function(tag, element) {
+//        if (typeof element.sitios2 === "undefined")
+//            element.sitios2 = [];
         console.log(tag);
         $http.post(url + 'gasto/create', $.param({datos: {tag: tag, id: element.idGastoHistorial}}), {timeout: 10000, headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
         ).success(function(data, status, headers, config) {
@@ -49,6 +84,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
                 return;
             }
             tag.idEntidadHistorial = data.id;
+//            element.sitios2.push({idEntidadHistorial: data.id});
             console.log($scope.datos.sitios);
         }).error(function(data, status, headers, config) {
             $scope.error(data, status, headers, config);
@@ -144,7 +180,7 @@ myApp.controllerProvider.register('GastosActualesCtrl', function($scope, $http, 
     $scope.addGasto = function(gasto) {
         $rootScope.loading = true;
         var obj = $filter('filter')($scope.datos.gastos, {idGasto: gasto.idGasto}, true);
-        if (obj.length !== 0) {
+        if (typeof obj !== "undefined" && obj.length !== 0) {
             show({message: {text: "Gasto ya existe, no se puede agregar."}, type: 'danger'});
             $rootScope.loading = false;
             return;

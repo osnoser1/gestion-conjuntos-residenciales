@@ -13,10 +13,6 @@ myApp.controllerProvider.register('GastosDetalleCtrl', function($scope, $http, $
     var temp;
     $rootScope.showGastosDetalle = false;
     $scope.desactivado = false;
-    $scope.tags = [];
-    $scope.sitios = [];
-    $scope.nuevo = {};
-    $scope.datos = {gastos: []};
     $http.post(url + 'gasto/detalle', $.param({datos: $rootScope.idGastoFecha}), {timeout: 5000, responseType: "json", headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
     ).success(function(data, status, headers, config) {
         if (!data.respuesta) {
@@ -24,17 +20,49 @@ myApp.controllerProvider.register('GastosDetalleCtrl', function($scope, $http, $
             return;
         }
         console.log(data);
-        $rootScope.showGastosDetalle = true;
         $scope.datos = data.datos;
         $scope.total = parseInt(data.Total);
+        var entro = function(bandera, key, key1) {
+            bandera = true;
+            var r = $filter('filter')($scope.datos.gastos, {idGastoHistorial: key.idGastoHistorial}, true);
+            console.log(r);
+            if (typeof r[0].sitios === "undefined") {
+                r[0].sitios = [];
+            }
+            r[0].sitios.push(key1);
+        };
+        angular.forEach($scope.datos.GEH, function(key) {
+            var bandera = false;
+            console.log(key);
+            angular.forEach($scope.datos.sitios, function(key1) {
+                if (bandera)
+                    return;
+                if (key.idEdificio !== null) {
+                    if (key.NroDePiso === null) {
+                        if (key.idEdificio == key1.idEdificio && typeof key1.NroDePiso === "undefined") {
+                            entro(bandera, key, key1);
+                        }
+                    } else {
+                        if (key.idApartamento === null) {
+                            if (key.idEdificio == key1.idEdificio && key.NroDePiso == key1.NroDePiso && typeof key1.idApartamento === "undefined") {
+                                entro(bandera, key, key1);
+                            }
+                        } else if (key.idEdificio == key1.idEdificio && key.NroDePiso == key1.NroDePiso && key.idApartamento == key1.idApartamento) {
+                            entro(bandera, key, key1);
+                        }
+                    }
+                } else if (key1.text == "Todos") {
+                    entro(bandera, key, key1);
+                }
+            });
+            console.log("--------------------------");
+        });
+        $rootScope.showGastosDetalle = true;
     }).error($scope.error);
-    $http.get('pruebas/sitios.json').success(function(data) {
-        $scope.sitios = data;
-    });
     $scope.loadTags = function(query) {
         console.log(query);
         var _p = $q.defer();
-        var array = $filter('filter')($scope.sitios, {$: query}, false);
+        var array = $filter('filter')($scope.datos.sitios, {$: query}, false);
 //        console.log(array);
         _p.resolve(array);
 //        return $http.get('/tags?query=' + query);

@@ -1,10 +1,11 @@
--- version 4.1.6
+-- phpMyAdmin SQL Dump
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generaciÃ³n: 15-06-2014 a las 09:11:36
--- VersiÃ³n del servidor: 5.6.16
--- VersiÃ³n de PHP: 5.5.9
+-- Tiempo de generación: 08-07-2014 a las 04:01:29
+-- Versión del servidor: 5.6.17
+-- Versión de PHP: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -34,7 +35,9 @@ CREATE TABLE IF NOT EXISTS `apartamento` (
   `Piso` int(11) NOT NULL,
   `idEdificio` int(11) NOT NULL,
   `idTipo` int(11) NOT NULL,
-  PRIMARY KEY (`idApartamento`)
+  PRIMARY KEY (`idApartamento`),
+  KEY `apartamento_ibfk_2` (`idTipo`),
+  KEY `apartamento_ibfk_1` (`idEdificio`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
 
 --
@@ -58,6 +61,7 @@ INSERT INTO `apartamento` (`idApartamento`, `Nombre`, `Piso`, `idEdificio`, `idT
 (14, '7-B', 7, 2, 4),
 (18, '8-A', 8, 1, 3),
 (19, '8-B', 8, 2, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -97,6 +101,7 @@ INSERT INTO `apartamentotipo` (`idApartamentoTipo`, `Nombre`, `Tamano`, `numBano
 -- Estructura de tabla para la tabla `apartamento_usuario`
 --
 
+DROP TABLE IF EXISTS `apartamento_usuario`;
 CREATE TABLE IF NOT EXISTS `apartamento_usuario` (
   `idusuarioapartamento` int(11) NOT NULL AUTO_INCREMENT,
   `idusuario` int(11) NOT NULL,
@@ -104,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `apartamento_usuario` (
   PRIMARY KEY (`idusuarioapartamento`),
   UNIQUE KEY `idapartamento` (`idapartamento`),
   UNIQUE KEY `idusuario` (`idusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5;
 
 --
 -- Volcado de datos para la tabla `apartamento_usuario`
@@ -127,6 +132,9 @@ ALTER TABLE `apartamento`
   ADD CONSTRAINT `apartamento_ibfk_2` FOREIGN KEY (`idTipo`) REFERENCES `apartamentotipo` (`idApartamentoTipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `apartamento_ibfk_1` FOREIGN KEY (`idEdificio`) REFERENCES `edificio` (`idEdificio`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+--
+-- Filtros para la tabla `apartamento_usuario`
+--
 ALTER TABLE `apartamento_usuario`
   ADD CONSTRAINT `fk_apartamento_usuario_apartamento` FOREIGN KEY (`idapartamento`) REFERENCES `apartamento` (`idApartamento`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `apartamento_usuario_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
