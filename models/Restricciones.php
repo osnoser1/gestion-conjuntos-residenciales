@@ -77,7 +77,7 @@
                 public function SeleccionarApartamentoEdificio($idEdificio){
 			$this->mysqli = new mysqli(Host, User, Pass, BasedeDatos);
 			$this->idEdificio=$idEdificio;
-			$this->tupla="SELECT idApartamento, Nombre FROM apartamento WHERE idEdificio=$this->idEdificio";
+			$this->tupla="SELECT  apartamento.idApartamento, apartamento.Nombre  FROM  apartamento  WHERE  apartamento.idEdificio=$this->idEdificio";
 			$this->resultado = $this->mysqli->query($this->tupla);
 			$this->objeto[0]['m']=$this->resultado->num_rows;	
 			$this->i=0;
@@ -85,7 +85,7 @@
 			{				
 				$this->objeto[$this->i]['idapartamento']=$this->db_resultado['idApartamento'];
 				$this->objeto[$this->i]['Nombre']=$this->db_resultado['Nombre'];					
-				$this->i++;
+				$this->i++;	
 			}		
 			$this->mysqli->close();
 			return json_encode($this->objeto);
