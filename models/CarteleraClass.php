@@ -19,6 +19,7 @@ class CarteleraClass {
     public function IngresarporApartamento($apartamentos,$titulo,$contenido){
 	session_start();
         date_default_timezone_set('America/Caracas');
+        $this->mysqli = new mysqli(Host, User, Pass, BasedeDatos);
         $this->apartamentos=serialize($apartamentos);
 	$this->nombre=$_SESSION["Nombre"];
         $this->apellido=$_SESSION["Apellido"];
