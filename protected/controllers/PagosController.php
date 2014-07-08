@@ -60,8 +60,8 @@ class PagosController extends GxController {
 
     public function actionViewPendientes() {
         session_start();
-//        $idUsuario = $_POST["ID"];
-        $idUsuario = 3;
+        $idUsuario = $_SESSION["ID"];
+//        $idUsuario = 3;
         $user = Usuario::model()->findByPk($idUsuario);
         $salida["datos"]["pagos"] = Yii::app()->db->createCommand()
                 ->select('idPagosUsuario, gasto_fecha.idGastoFecha, Fecha, IF(Estado="1", "Pagado", "No pagado") AS Estado, (SELECT SUM(TotalAlicuota) FROM pagos_historial_usuario WHERE pagos_historial_usuario.idPagosUsuario=pagos_usuario.idPagosUsuario AND gasto_fecha.idGastoFecha=pagos_usuario.idGastoFecha) AS Total')
@@ -74,8 +74,8 @@ class PagosController extends GxController {
 
     public function actionViewTodosPendientes() {
         session_start();
-//        $idUsuario = $_POST["ID"];
-        $idUsuario = 3;
+        $idUsuario = $_SESSION["ID"];
+//        $idUsuario = 3;
         $user = Usuario::model()->findByPk($idUsuario);
         $salida["datos"]["pagos"] = Yii::app()->db->createCommand()
                 ->select('idPagosUsuario, gasto_fecha.idGastoFecha, Fecha, IF(Estado="1", "Pagado", "No pagado") AS Estado, (SELECT SUM(TotalAlicuota) FROM pagos_historial_usuario WHERE pagos_historial_usuario.idPagosUsuario=pagos_usuario.idPagosUsuario AND gasto_fecha.idGastoFecha=pagos_usuario.idGastoFecha) AS Total')

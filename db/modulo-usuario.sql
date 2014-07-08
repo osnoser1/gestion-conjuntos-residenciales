@@ -55,23 +55,18 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `Contrasena` varchar(60) NOT NULL,
   `Abono` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`TipoUsuario`, `Nombre`, `Apellido`, `Cedula`, `Correo`, `Contrasena`) VALUES
-(1, 'Ricardo', 'Felicce', '20448909', 'exosymmetry@hotmail.com', '123'),
-(1, 'Jenny', 'Gonzales', '9831876', 'exosymmetry@hotmail.com', '321'),
-(1, 'Alfonso Andrés', 'López Molina', '20503457', 'osnoser_12@hotmail.com', 'osnoser1'),
-(1, 'Mariangela', 'Cermeño', '19169037', 'mariangeladiaz@gmail.com', 'macarena'),
-(2, 'admin', 'admin', '111111', 'admin@admin.com', 'admin');
 INSERT INTO `usuario` (`ID`, `TipoUsuario`, `Nombre`, `Apellido`, `Cedula`, `Correo`, `Contrasena`, `Abono`) VALUES
 (1, 1, 'Ricardo', 'Felicce', '20448909', 'exosymmetry@hotmail.com', '123', 1023),
 (2, 1, 'Jenny', 'Gonzales', '9831876', 'exosymmetry@hotmail.com', '321', 2000),
 (3, 1, 'Alfonso Andrés', 'López Molina', '20503457', 'osnoser_12@hotmail.com', 'osnoser1', 23500),
-(4, 1, 'Mariangela', 'Cermeño', '19169037', 'mariangeladiaz@gmail.com', 'macarena', 450);
+(4, 1, 'Mariangela', 'Cermeño', '19169037', 'mariangeladiaz@gmail.com', 'macarena', 450),
+(5, 2, 'admin', 'admin', '111111', 'admin@admin.com', 'admin', 0);
 
 --
 -- Restricciones para tablas volcadas
